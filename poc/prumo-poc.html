@@ -319,14 +319,17 @@ function exemplos(){
 }
 function simular(cen){
   const b=base(), c={}; for(const [k,v] of Object.entries(b)) c[k]={...v};
-  const avisos=[]; let fpIncerto=0;
+  const avisos=[]; let fpIncerto=0; const saldo={};
   for(const d of cen.decisoes){
     const cp=c[d.campus]; if(!cp){ avisos.push('Unidade sem dados em '+ANO+': '+curto(d.campus)); continue; }
     const n=Number(d.n)||0;
-    if(d.tipo=='docentes'){ cp.rap_p+=n; continue; }
+    if(d.tipo=='docentes'){ if(cp.rap_p+n<0){ avisos.push(curto(d.campus)+': redução de docentes limitada ao quadro existente.'); cp.rap_p=0; } else cp.rap_p+=n; continue; }
     const x=b[d.campus].cursos.find(z=>idCurso(z)==d.curso);
     if(!x||!x.matriculas){ avisos.push(curto(d.campus)+': curso não encontrado em '+ANO+'.'); continue; }
-    let q=n; if(d.tipo=='reduzir'){ if(q>x.matriculas){ avisos.push(curto(d.campus)+': redução limitada às '+x.matriculas+' matrículas do curso.'); q=x.matriculas; } q=-q; }
+    if(n<0){ avisos.push(curto(d.campus)+': quantidade negativa ignorada; use o tipo de decisão para indicar ampliação ou redução.'); continue; }
+    const chave=d.campus+'|'+d.curso; if(!(chave in saldo)) saldo[chave]=x.matriculas;
+    let q=n; if(d.tipo=='reduzir'){ if(q>saldo[chave]){ avisos.push(curto(d.campus)+': redução limitada às '+saldo[chave]+' matrículas restantes do curso.'); q=saldo[chave]; } q=-q; }
+    saldo[chave]+=q;
     const dme=q*x.me/x.matriculas; cp.meq+=dme;
     if(x.tipo=='Técnico'){ cp.ct+=dme; if(x.oferta.includes('PROEJA')) cp.eja+=dme; }
     else fpIncerto+=dme; // pode ou não ser formação de professores
@@ -369,7 +372,7 @@ function renderEditor(){
         <label>Decisão<select data-d="${di}" data-f="tipo"><option value="ampliar" ${d.tipo=='ampliar'?'selected':''}>Ampliar curso técnico</option><option value="reduzir" ${d.tipo=='reduzir'?'selected':''}>Reduzir oferta</option><option value="docentes" ${d.tipo=='docentes'?'selected':''}>Ajustar docentes</option></select></label>
         <label>Unidade<select data-d="${di}" data-f="campus">${campi.map(x=>`<option value="${esc(x)}" ${x==d.campus?'selected':''}>${curto(x)}</option>`).join('')}</select></label>
         ${d.tipo=='docentes'?'':`<label class="full">Curso<select data-d="${di}" data-f="curso">${opcoesCurso(d.campus,d.tipo,d.curso)}</select></label>`}
-        <label>${d.tipo=='docentes'?'Professores-equivalentes (±)':'Matrículas'}<input type="number" step="1" value="${d.n}" data-d="${di}" data-f="n"></label>
+        <label>${d.tipo=='docentes'?'Professores-equivalentes (±)':'Matrículas'}<input type="number" step="1" ${d.tipo=='docentes'?'':'min="0"'} value="${d.n}" data-d="${di}" data-f="n"></label>
         <div class="row" style="align-items:end;justify-content:flex-end"><button type="button" class="ghost mini" data-rm="${di}">Remover</button></div>
       </div></details></li>`).join('')}</ol>
     <div class="row"><button type="button" class="ghost mini" id="add-dec">Adicionar decisão</button>${CEN.length>1?'<button type="button" class="ghost mini" id="del-cen">Excluir cenário</button>':''}</div>`;
