@@ -8,3 +8,5 @@ __pycache__/
 /LIVRO-MATRIZ-NOVA-CONFIGURACAO.pdf
 /tests/auditoria_matriz/ro_mt_casos.json
 /tests/auditoria_matriz/referencias.json
+/dados-pnp/
+/indicadores-gestao/

@@ -25,6 +25,14 @@
       "sha256": "bcb54f357be56841ee90e714b110cbb526235184c739a7e2c9a13aca4d0bd9a9",
       "bytes": 61708,
       "condicao": "Baixada em 09/11/2026; extrato em distribuicao-interna-ifes-2026.json. A página descreve o método (piso e teto) sem fórmulas ou parâmetros."
+    },
+    {
+      "id": "C9",
+      "arquivo": "pnp-guia-referencia-metodologica-2018.pdf",
+      "url": "https://www.audit.cefetmg.br/wp-content/uploads/sites/169/2022/07/GuiaPNP.pdf",
+      "sha256": "6f3cd9737ba11637d212c7cc930790a47610c4de626ad82c4855eb7b09dbb491",
+      "bytes": 3541603,
+      "condicao": "Guia de Referência Metodológica da PNP (documento de 2018, 98 p.), cópia em repositório institucional do Cefet-MG. Usado para as definições de Meq (M×FECH×FEC×FENC), MeqCT e fator de nível de curso. Pode estar desatualizado em relação à edição 2025."
     }
   ],
   "limites": [

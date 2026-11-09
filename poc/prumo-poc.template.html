@@ -1,0 +1,442 @@
+<title>Prumo 50% Técnico</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@85..100,500..800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: coluna de leitura com faixa de etapas fixa; o "fio de prumo" vertical marca metas e limiares em todas as réguas. */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --ink:#14272a; --muted:#56696b; --line:#d5dddc;
+  --teal:#1f6b66; --teal-soft:#dcebe8; --brass:#a5761b; --brass-soft:#f3e7cc;
+  --good:#2f7d4f; --warn:#a86a0c; --bad:#b03a2e; --dot:#9aaaa9;
+  --f-display:"Archivo",system-ui,sans-serif; --f-body:"Source Sans 3",system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1a1b; --surface:#152325; --ink:#e3ecea; --muted:#9db0ae; --line:#2a3b3d;
+  --teal:#5fb3ab; --teal-soft:#1d3634; --brass:#d9a849; --brass-soft:#3a2f17;
+  --good:#6cc28f; --warn:#e0a443; --bad:#e8786b; --dot:#5c6e6d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1a1b; --surface:#152325; --ink:#e3ecea; --muted:#9db0ae; --line:#2a3b3d;
+  --teal:#5fb3ab; --teal-soft:#1d3634; --brass:#d9a849; --brass-soft:#3a2f17;
+  --good:#6cc28f; --warn:#e0a443; --bad:#e8786b; --dot:#5c6e6d; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--f-body)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 56px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:88%;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:700}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font:600 .74rem/1 var(--f-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+header.top{display:grid;gap:10px;border-left:3px solid var(--brass);padding-left:16px}
+header.top .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px}
+nav.steps{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;flex-wrap:wrap;padding-block:8px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav.steps a{font:600 .92rem var(--f-body);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+nav.steps a[aria-current="true"]{background:var(--teal);border-color:var(--teal);color:var(--surface)}
+nav.steps a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+section.step{display:grid;gap:18px}
+section.step[hidden]{display:none!important}
+.lead{display:grid;gap:6px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;min-width:0}
+.kpi{display:grid;gap:6px}
+.kpi .v{font:600 1.9rem/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 .76rem/1 var(--f-body);padding:5px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--bg)}
+.chip.good{color:var(--good);border-color:currentColor}
+.chip.warn{color:var(--warn);border-color:currentColor}
+.chip.bad{color:var(--bad);border-color:currentColor}
+.chip.brass{color:var(--brass);border-color:currentColor}
+.strip{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--muted)}
+.legend i{display:inline-block;width:16px;height:0;border-top:2px solid var(--ink);vertical-align:middle;margin-right:6px}
+.legend i.dash{border-top:2px dashed var(--brass)}
+.legend i.band{height:10px;border:none;background:var(--teal-soft)}
+.legend i.me{width:10px;height:10px;border:none;border-radius:50%;background:var(--brass)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:.8rem;letter-spacing:.03em}
+td.r,th.r{text-align:right}
+.bar{height:10px;border-radius:2px;background:var(--line);position:relative;overflow:hidden;min-width:60px}
+.bar span{position:absolute;inset:0 auto 0 0;background:var(--teal)}
+.callout{border-left:3px solid var(--brass);background:var(--brass-soft);padding:12px 14px;border-radius:0 8px 8px 0;display:grid;gap:6px}
+.alts{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.alt{display:grid;gap:12px}
+.alt input.name{font:700 1.05rem var(--f-display);border:none;border-bottom:1px dashed var(--line);background:transparent;color:var(--ink);padding:2px 0;width:100%}
+.dec{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.dec .full{grid-column:1/-1}
+.dec label{display:grid;gap:2px;font-size:.78rem;color:var(--muted);min-width:0}
+select,input[type=number],input[type=text],textarea{font:inherit;font-size:.9rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 8px;width:100%;min-width:0}
+textarea{min-height:80px;font-family:var(--f-mono);font-size:.78rem}
+button{font:600 .88rem var(--f-body);border-radius:6px;border:1px solid var(--teal);background:var(--teal);color:var(--surface);padding:8px 12px;cursor:pointer}
+button.ghost{background:transparent;color:var(--teal)}
+button.mini{padding:4px 8px;font-size:.78rem}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.premissa{font-size:.78rem;color:var(--muted)}
+.res{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.res div{display:grid;gap:2px}
+.res b{font:600 1.15rem var(--f-mono);font-variant-numeric:tabular-nums}
+.delta.up{color:var(--good)} .delta.down{color:var(--bad)}
+.badge-ex{font:600 .7rem/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--brass)}
+footer{font-size:.82rem;color:var(--muted);display:grid;gap:6px;border-top:1px solid var(--line);padding-top:14px}
+@media (max-width:520px){.dec{grid-template-columns:1fr}.res{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:no-preference){.panel{transition:border-color .15s}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">Prumo · prova de conceito · Ifes</span>
+    <h1>Como os campi levam o Ifes a 50% de formação técnica?</h1>
+    <p class="muted">Compare o Ifes com a Rede Federal, simule decisões de oferta em alguns campi e componha uma estratégia. Dados oficiais da Plataforma Nilo Peçanha; valores em reais são opcionais e condicionais.</p>
+    <div class="controls">
+      <label class="small" for="ano">Ano-base dos dados</label>
+      <select id="ano" style="width:auto">
+        <option value="2024">2024 (usado na matriz 2026)</option>
+        <option value="2025">2025 (mais recente)</option>
+      </select>
+    </div>
+  </header>
+
+  <nav class="steps" aria-label="Etapas">
+    <a href="#comparar" data-step="comparar">1 · Onde estamos</a>
+    <a href="#simular" data-step="simular">2 · Simular alternativas</a>
+    <a href="#compor" data-step="compor">3 · Compor a estratégia</a>
+  </nav>
+
+  <!-- ETAPA 1 -->
+  <section class="step" id="s-comparar">
+    <div class="lead">
+      <h2>Onde o Ifes está</h2>
+      <p class="muted">Três réguas para cada indicador: a meta legal, o limiar que muda a pontuação na Matriz Orçamentária e a posição das demais instituições. Elas não são a mesma coisa.</p>
+    </div>
+    <div class="grid" id="kpis"></div>
+    <div class="panel">
+      <div class="row" style="justify-content:space-between">
+        <h3 id="strip-title">Formação técnica na Rede Federal</h3>
+        <div class="row">
+          <select id="ind" style="width:auto" aria-label="Indicador">
+            <option value="ct">Formação técnica</option>
+            <option value="fp">Formação de professores</option>
+            <option value="eja">EJA (PROEJA)</option>
+            <option value="rap">Relação aluno-professor</option>
+          </select>
+          <select id="pares" style="width:auto" aria-label="Comparação">
+            <option value="porte">Pares por porte (IFs de 0,6× a 1,6× o Ifes)</option>
+            <option value="ifs">Todos os Institutos Federais</option>
+          </select>
+        </div>
+      </div>
+      <div id="strip"></div>
+      <div class="legend"><span><i></i>Meta legal</span><span><i class="dash"></i>Limiar da matriz</span><span><i class="band"></i>Faixa adequada PNP</span><span><i class="me"></i>Ifes</span></div>
+      <p class="small muted" id="pares-txt"></p>
+    </div>
+    <div class="panel">
+      <h3>De onde vem o percentual técnico do Ifes</h3>
+      <p class="small muted">Matrícula equivalente por unidade: parte técnica em cor. O indicador institucional é a soma das unidades, não a média dos percentuais.</p>
+      <div class="tablewrap"><table id="campi"></table></div>
+      <div class="callout" id="achado"></div>
+    </div>
+    <div class="row"><button type="button" data-go="simular">Simular alternativas para a meta de 50%</button></div>
+  </section>
+
+  <!-- ETAPA 2 -->
+  <section class="step" id="s-simular" hidden>
+    <div class="lead">
+      <h2>Simular alternativas</h2>
+      <p class="muted">Cada alternativa é um conjunto de decisões em campi específicos. O efeito usa a matrícula equivalente por estudante do próprio curso no ano escolhido. Edite, acrescente ou remova decisões. As três alternativas abaixo são exemplos.</p>
+    </div>
+    <div class="alts" id="alts"></div>
+    <div class="row"><button type="button" class="ghost" id="add-alt">Adicionar alternativa</button><button type="button" data-go="compor">Comparar e compor</button></div>
+  </section>
+
+  <!-- ETAPA 3 -->
+  <section class="step" id="s-compor" hidden>
+    <div class="lead">
+      <h2>Compor a estratégia</h2>
+      <p class="muted">Compare as alternativas lado a lado, veja quanto cada campus contribui para o indicador do Ifes e salve uma proposta com premissas e limitações.</p>
+    </div>
+    <div class="panel"><div class="tablewrap"><table id="comp"></table></div>
+      <label class="row small"><input type="checkbox" id="reais" style="width:auto"> Mostrar referência orçamentária condicional (regime da matriz 2026, demais instituições constantes)</label>
+    </div>
+    <div class="panel"><h3>Contribuição de cada campus (pontos percentuais no indicador técnico do Ifes)</h3><div class="tablewrap"><table id="contrib"></table></div>
+      <p class="premissa">Decomposição exata: variação do Ifes = Σ (Δ técnica do campus − percentual atual × Δ total do campus) ÷ total novo.</p></div>
+    <div class="panel">
+      <h3>Salvar proposta</h3>
+      <div class="grid">
+        <label class="small">Alternativa<select id="sv-alt"></select></label>
+        <label class="small">Nome da proposta<input type="text" id="sv-nome" placeholder="Ex.: Pacto técnico 2027"></label>
+        <label class="small">Autor<input type="text" id="sv-autor" placeholder="Nome e unidade"></label>
+      </div>
+      <label class="small">Justificativa e premissas a validar<textarea id="sv-just" placeholder="Por que esta combinação? Quais premissas precisam ser confirmadas com os campi?"></textarea></label>
+      <div class="row"><button type="button" id="sv-btn">Salvar proposta neste navegador</button><button type="button" class="ghost" id="sv-copy">Copiar como JSON</button><span class="small muted" id="sv-msg" role="status"></span></div>
+      <div id="sv-list" class="small"></div>
+      <textarea id="sv-json" readonly aria-label="Proposta em JSON"></textarea>
+    </div>
+    <div class="callout">
+      <strong>O que este protótipo não calcula</strong>
+      <p class="small">Evolução plurianual de turmas, evasão e conclusão; custos; capacidade física; eficiência acadêmica (só comparação); o numerador da RAP usado pela matriz (a RAP da matriz é ajustada em proporção à da PNP, como premissa). A classificação de cursos como formação de professores é aproximada pela proporção de cada campus.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Fontes: Plataforma Nilo Peçanha, Indicadores de Gestão (matrícula equivalente por campus, RAP, cursos), anos-base 2024 e 2025; demonstrativo IFMT da Matriz 2026 (indicadores e submontantes de Qualidade); Portaria MEC nº 243/2026 (faixas); Lei nº 11.892/2008 e Decreto nº 5.840/2006 (metas legais); guia PNP (faixa adequada).</span>
+    <span>Conciliação: a soma dos campi reproduz os valores do Ifes usados na matriz 2026 (técnico 0,4403; formação de professores 0,1206; EJA 0,0186; professor-equivalente 1.520 × 1.517,5). O numerador da RAP da matriz (27.539) difere do da PNP (30.574) e não foi reconciliado.</span>
+  </footer>
+</div>
+
+<script id="dados" type="application/json">/*DADOS*/</script>
+<script>
+(function(){
+const D = JSON.parse(document.getElementById('dados').textContent);
+const fmt = (x,d=1)=> (x==null||isNaN(x))?'–':x.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct = (x,d=1)=> fmt(100*x,d)+'%';
+const brl = x=> 'R$ '+Math.round(x).toLocaleString('pt-BR');
+const $ = s=>document.querySelector(s);
+let ANO = '2024';
+const CEFOR = 'Centro de Referência em Formação e Educação a Distância';
+const curto = n=> n==CEFOR?'Cefor (EAD)':n.replace('Campus ','');
+
+const IND = {
+  ct:{nome:'Formação técnica', legal:.50, limiares:[.50,.60], banda:[.45,.55], fmt:v=>pct(v), max:1, sentido:'Meta legal: mínimo de 50% (Lei 11.892/2008, art. 8º).'},
+  fp:{nome:'Formação de professores', legal:.20, limiares:[.10,.15,.20], banda:null, fmt:v=>pct(v), max:.6, sentido:'Meta legal: mínimo de 20% (Lei 11.892/2008, art. 8º).'},
+  eja:{nome:'EJA (PROEJA)', legal:.10, limiares:[.025,.05,.10], banda:null, fmt:v=>pct(v,2), max:.15, sentido:'Meta legal: 10% (Decreto 5.840/2006). Os limiares da matriz começam em 2,5%.'},
+  rap:{nome:'Relação aluno-professor', legal:20, limiares:[18,20,22], banda:null, fmt:v=>fmt(v,2), max:40, sentido:'Referência: 20 (PNE, estratégia 11.11). Valor maior não é sempre melhor: pode indicar turmas cheias demais.'}
+};
+function valor(o,k){ if(k=='rap') return o.rap_p? o.rap_m/o.rap_p : null; return o.meq? o[k]/o.meq : null; }
+
+// ---------- dados por ano ----------
+function campiBase(){ return D.ifes_campi[ANO]; }
+function totais(c){ const t={meq:0,ct:0,fp:0,eja:0,rap_m:0,rap_p:0}; for(const v of Object.values(c)) for(const k in t) t[k]+=v[k]||0; return t; }
+function instAno(){ return D.instituicoes[ANO]; }
+
+// ---------- etapa 1 ----------
+function pares(){
+  const ifs = instAno().filter(i=>i.org=='Instituto Federal');
+  const me = ifs.find(i=>i.sigla=='IFES');
+  if($('#pares').value=='ifs') return ifs;
+  return ifs.filter(i=> i.meq>=0.6*me.meq && i.meq<=1.6*me.meq);
+}
+function mediana(a){ const s=a.filter(x=>x!=null).sort((x,y)=>x-y); if(!s.length) return null; const m=Math.floor(s.length/2); return s.length%2?s[m]:(s[m-1]+s[m])/2; }
+function chipsPara(k,v){
+  const I=IND[k], out=[];
+  out.push(v>=I.legal?['good',k=='rap'?'Na referência de 20':'Cumpre a meta legal']:['bad',k=='rap'?'Abaixo de 20':'Abaixo da meta legal']);
+  const lim=I.limiares; let f=0; lim.forEach(l=>{ if(v>=l) f++; });
+  if(f==0) out.push(['bad','Peso zero na matriz (abaixo de '+(k=='rap'?fmt(lim[0],0):pct(lim[0],1))+')']);
+  else out.push(['brass','Faixa '+f+' de '+lim.length+' na matriz']);
+  if(I.banda && v>I.banda[1]) out.push(['warn','Acima da faixa adequada da PNP']);
+  return out.map(([c,t])=>`<span class="chip ${c}">${t}</span>`).join('');
+}
+function renderKpis(){
+  const t=totais(campiBase()), ps=pares();
+  $('#kpis').innerHTML = Object.keys(IND).map(k=>{
+    const I=IND[k], v=valor(t,k), med=mediana(ps.map(i=>valor(i,k)));
+    return `<div class="panel kpi"><span class="eyebrow">${I.nome}</span><span class="v">${I.fmt(v)}</span>
+      <span class="small muted">Mediana dos pares: <span class="num">${I.fmt(med)}</span></span>
+      <div class="chips">${chipsPara(k,v)}</div><span class="premissa">${I.sentido}</span></div>`;
+  }).join('');
+}
+function renderStrip(){
+  const k=$('#ind').value, I=IND[k], ps=pares(), ifes=instAno().find(i=>i.sigla=='IFES');
+  $('#strip-title').textContent = I.nome+' na Rede Federal';
+  const W=760,H=118,L=24,R=24, vals=ps.map(i=>valor(i,k)).filter(v=>v!=null);
+  const max=Math.max(I.max, ...vals, valor(ifes,k)||0)*1.02;
+  const x=v=>L+(W-L-R)*Math.min(v,max)/max;
+  let s=`<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="${I.nome}: distribuição das instituições comparadas">`;
+  if(I.banda) s+=`<rect x="${x(I.banda[0])}" y="18" width="${x(I.banda[1])-x(I.banda[0])}" height="58" fill="var(--teal-soft)"/>`;
+  s+=`<line x1="${L}" x2="${W-R}" y1="47" y2="47" stroke="var(--line)"/>`;
+  I.limiares.forEach(l=>{ s+=`<line x1="${x(l)}" x2="${x(l)}" y1="14" y2="80" stroke="var(--brass)" stroke-dasharray="4 3" stroke-width="1.5"/>`; });
+  s+=`<line x1="${x(I.legal)}" x2="${x(I.legal)}" y1="8" y2="86" stroke="var(--ink)" stroke-width="2"/>`;
+  ps.forEach((i,n)=>{ const v=valor(i,k); if(v==null||i.sigla=='IFES') return; s+=`<circle cx="${x(v)}" cy="${47+((n%5)-2)*6}" r="4.5" fill="var(--dot)"><title>${i.sigla}: ${I.fmt(v)}</title></circle>`; });
+  const vi=valor(ifes,k); s+=`<circle cx="${x(vi)}" cy="47" r="7.5" fill="var(--brass)" stroke="var(--surface)" stroke-width="2"><title>Ifes: ${I.fmt(vi)}</title></circle>`;
+  s+=`<text x="${x(vi)}" y="${H-14}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)" font-family="var(--f-body)">Ifes ${I.fmt(vi)}</text>`;
+  [0, max/2, max].forEach(t=>{ s+=`<text x="${x(t)}" y="${H-1}" text-anchor="${t==0?'start':t==max?'end':'middle'}" font-size="10" fill="var(--muted)" font-family="var(--f-mono)">${I.fmt(t)}</text>`; });
+  s+='</svg>';
+  $('#strip').innerHTML=s;
+  $('#pares-txt').textContent = 'Instituições comparadas ('+ps.length+'): '+ps.map(i=>i.sigla).join(', ')+'. Critério de porte: matrícula equivalente total; troque a comparação acima.';
+}
+function renderCampi(){
+  const c=campiBase(), t=totais(c);
+  const rows=Object.entries(c).filter(([n,v])=>v.meq>0).sort((a,b)=>b[1].meq-a[1].meq);
+  const maxm=Math.max(...rows.map(r=>r[1].meq));
+  $('#campi').innerHTML = `<thead><tr><th>Unidade</th><th class="r">Matr. equivalente</th><th>Parte técnica</th><th class="r">% técnico</th><th class="r">Peso no Ifes</th></tr></thead><tbody>`+
+    rows.map(([n,v])=>`<tr><td>${curto(n)}</td><td class="r num">${fmt(v.meq,0)}</td><td><div class="bar" style="width:${Math.max(8,100*v.meq/maxm)}%"><span style="width:${100*v.ct/v.meq}%"></span></div></td><td class="r num">${pct(v.ct/v.meq)}</td><td class="r num">${pct(v.meq/t.meq)}</td></tr>`).join('')+
+    `<tr><th>Ifes</th><th class="r num">${fmt(t.meq,0)}</th><th></th><th class="r num">${pct(t.ct/t.meq)}</th><th class="r">100%</th></tr></tbody>`;
+  const cf=c[CEFOR]; const sem=(t.ct-cf.ct)/(t.meq-cf.meq);
+  $('#achado').innerHTML = `<strong>Achado</strong><p class="small">Sem o Cefor, os campi somam <b class="num">${pct(sem)}</b> de formação técnica. O Cefor tem <b class="num">${pct(cf.meq/t.meq)}</b> da matrícula equivalente do Ifes, quase toda em especializações e cursos FIC a distância, e leva o indicador institucional a <b class="num">${pct(t.ct/t.meq)}</b>. A mesma oferta sustenta a formação de professores (${pct(t.fp/t.meq)} no Ifes). Chegar a 50% exige converter cerca de <b class="num">${fmt(Math.max(0,.5*t.meq-t.ct),0)}</b> matrículas equivalentes não técnicas em técnicas, ou criar cerca de <b class="num">${fmt(Math.max(0,(.5*t.meq-t.ct)/.5),0)}</b> novas matrículas equivalentes técnicas.</p>`;
+}
+
+// ---------- simulação ----------
+let ALTS=[];
+function acharCurso(campus,frag,tipo){ const c=campiBase()[campus]; if(!c) return null; return c.cursos.find(x=>x.curso.includes(frag)&&(!tipo||x.tipo==tipo))||null; }
+function idCurso(x){ return x? x.curso+' | '+x.oferta+' | '+(x.presencial?'P':'EAD') : ''; }
+function exemplos(){
+  const dec=(tipo,campus,frag,n,ctipo)=>({tipo,campus,curso:idCurso(acharCurso(campus,frag,ctipo)),n});
+  return [
+    {nome:'Expansão técnica em quatro campi', exemplo:true, decisoes:[
+      dec('ampliar','Campus Serra','Informática para Internet',80,'Técnico'),{tipo:'docentes',campus:'Campus Serra',n:5},
+      dec('ampliar','Campus Vila Velha','Técnico em Química',60,'Técnico'),{tipo:'docentes',campus:'Campus Vila Velha',n:4},
+      dec('ampliar','Campus Guarapari','Técnico em Mecânica',60,'Técnico'),{tipo:'docentes',campus:'Campus Guarapari',n:4},
+      dec('ampliar','Campus Cariacica','Metroferrovi',40,'Técnico'),{tipo:'docentes',campus:'Campus Cariacica',n:3}]},
+    {nome:'Reorientar a oferta EAD do Cefor', exemplo:true, decisoes:[
+      dec('reduzir',CEFOR,'Docência para a Educação Pro',1500),
+      dec('ampliar',CEFOR,'Multimeios',300,'Técnico')]},
+    {nome:'Combinada: campi + Cefor', exemplo:true, decisoes:[
+      dec('ampliar','Campus Serra','Informática para Internet',80,'Técnico'),{tipo:'docentes',campus:'Campus Serra',n:5},
+      dec('ampliar','Campus Guarapari','Técnico em Mecânica',60,'Técnico'),{tipo:'docentes',campus:'Campus Guarapari',n:4},
+      dec('reduzir',CEFOR,'Docência para a Educação Pro',800),
+      dec('reduzir','Campus Guarapari','Ciências Policiais',300)]}
+  ];
+}
+function simular(alt){
+  const base=campiBase(), c={}; for(const [k,v] of Object.entries(base)) c[k]={...v};
+  const avisos=[], prem=new Set();
+  for(const d of alt.decisoes){
+    const cp=c[d.campus]; if(!cp){ avisos.push('Unidade sem dados no ano: '+d.campus); continue; }
+    const n=Number(d.n)||0;
+    if(d.tipo=='docentes'){ cp.rap_p+=n; if(n) prem.add('Docentes informados como professores-equivalentes.'); continue; }
+    const x=base[d.campus].cursos.find(z=>idCurso(z)==d.curso);
+    if(!x||!x.matriculas){ avisos.push(curto(d.campus)+': curso não encontrado em '+ANO+'.'); continue; }
+    const mem=x.me/x.matriculas; let q=n;
+    if(d.tipo=='reduzir'){ if(q>x.matriculas){ avisos.push(curto(d.campus)+': redução maior que as '+x.matriculas+' matrículas do curso; limitada.'); q=x.matriculas; } q=-q; }
+    const dme=q*mem;
+    cp.meq+=dme;
+    if(x.tipo=='Técnico'){ cp.ct+=dme; if(x.oferta.includes('PROEJA')) cp.eja+=dme; }
+    else { const nt=base[d.campus].meq-base[d.campus].ct; const sh=nt>0?Math.min(1,base[d.campus].fp/nt):0; cp.fp+=dme*sh; if(sh>0) prem.add('Formação de professores: proporção da oferta não técnica do campus.'); }
+    if(x.presencial && base[d.campus].me_pres>0){ cp.rap_m+=dme*base[d.campus].rap_m/base[d.campus].me_pres; prem.add('RAP: matrículas presenciais convertidas pela razão atual do campus.'); }
+    prem.add('Matrícula equivalente por estudante igual à do curso em '+ANO+'.');
+  }
+  const t0=totais(base), t=totais(c);
+  const ind={}; for(const k of Object.keys(IND)) ind[k]=valor(t,k);
+  const contrib=Object.keys(c).map(k=>{ const b=base[k], n=c[k]; const dT=n.ct-b.ct, dG=n.meq-b.meq; return {campus:k, dT, dG, pp:(dT-(t0.ct/t0.meq)*dG)/t.meq}; }).filter(r=>Math.abs(r.dT)>1e-9||Math.abs(r.dG)>1e-9);
+  if(ind.fp< .20 && valor(t0,'fp')>=.20) avisos.push('Formação de professores cai abaixo da meta legal de 20%.');
+  if(ind.rap<18) avisos.push('Relação aluno-professor abaixo de 18.');
+  return {t0,t,ind,contrib,avisos,premissas:[...prem]};
+}
+// referência condicional (regime matriz 2026), demais constantes
+function reais(r){
+  if(ANO!='2024') return null;
+  const M=D.matriz_2026, S=M.submontantes, ins=M.instituicoes, ifes=ins.find(i=>/ESPIRITO/.test(i.nome));
+  const w={ct:v=>v<.5?0:v<.6?v:2*v, fp:v=>v<.1?0:v<.15?v:v<.2?2*v:2.5*v, eja:v=>v<.025?0:v<.05?v:v<.1?2*v:2.5*v, rap:v=>v<18?0:v<20?v:v<22?2*v:2.5*v};
+  const sub={ct:S.CT,fp:S.FP,eja:S.EJA,rap:S.RAP};
+  const rapM0=ifes.rap, rapPNP0=valor(r.t0,'rap'), rapM=rapM0*r.ind.rap/rapPNP0;
+  const atual={ct:ifes.ct,fp:ifes.fp,eja:ifes.eja,rap:rapM0}, novo={ct:r.ind.ct,fp:r.ind.fp,eja:r.ind.eja,rap:rapM};
+  let tot=0; const det={};
+  for(const k of Object.keys(w)){ const soma=ins.reduce((s,i)=>s+w[k](i[k]||0),0); const wa=w[k](atual[k]), wn=w[k](novo[k]);
+    const va=wa/soma*sub[k], vn=wn?wn/(soma-wa+wn)*sub[k]:0; det[k]=vn-va; tot+=vn-va; }
+  return {tot,det,rapM};
+}
+
+function opcoesCurso(campus,tipo,sel){
+  const c=campiBase()[campus]; if(!c) return '<option value="">—</option>';
+  const lista=c.cursos.filter(x=> x.matriculas>0 && (tipo=='ampliar'? x.tipo=='Técnico' : true)).sort((a,b)=>b.me-a.me);
+  return lista.map(x=>{ const v=idCurso(x); return `<option value="${v.replace(/"/g,'&quot;')}" ${v==sel?'selected':''}>${x.curso.replace(/ \(.*\)$/,'')} · ${x.oferta=='Não se aplica'?x.tipo:x.oferta} · ${x.presencial?'pres.':'EAD'} · ${x.matriculas} matr.</option>`; }).join('');
+}
+function renderAlts(){
+  const campi=Object.keys(campiBase()).filter(k=>campiBase()[k].meq>0).sort();
+  $('#alts').innerHTML = ALTS.map((a,ai)=>{
+    const r=simular(a);
+    const decs=a.decisoes.map((d,di)=>`<div class="dec">
+      <label>Decisão<select data-a="${ai}" data-d="${di}" data-f="tipo"><option value="ampliar" ${d.tipo=='ampliar'?'selected':''}>Ampliar curso técnico</option><option value="reduzir" ${d.tipo=='reduzir'?'selected':''}>Reduzir oferta</option><option value="docentes" ${d.tipo=='docentes'?'selected':''}>Ajustar docentes</option></select></label>
+      <label>Unidade<select data-a="${ai}" data-d="${di}" data-f="campus">${campi.map(c=>`<option value="${c}" ${c==d.campus?'selected':''}>${curto(c)}</option>`).join('')}</select></label>
+      ${d.tipo=='docentes'?'':`<label class="full">Curso<select data-a="${ai}" data-d="${di}" data-f="curso">${opcoesCurso(d.campus,d.tipo,d.curso)}</select></label>`}
+      <label>${d.tipo=='docentes'?'Professores-equivalentes (±)':'Matrículas'}<input type="number" step="1" value="${d.n}" data-a="${ai}" data-d="${di}" data-f="n"></label>
+      <div class="row" style="align-items:end;justify-content:flex-end"><button type="button" class="ghost mini" data-rm="${ai}:${di}">Remover</button></div></div>`).join('');
+    const dct=r.ind.ct-valor(r.t0,'ct');
+    return `<div class="panel alt">
+      ${a.exemplo?'<span class="badge-ex">Exemplo editável</span>':''}
+      <input class="name" type="text" value="${a.nome.replace(/"/g,'&quot;')}" data-a="${ai}" data-f="nome" aria-label="Nome da alternativa">
+      <div class="res">
+        <div><span class="eyebrow">Técnico</span><b>${pct(r.ind.ct)}</b><span class="small delta ${dct>=0?'up':'down'}">${dct>=0?'+':''}${fmt(100*dct,2)} p.p.</span></div>
+        <div><span class="eyebrow">Form. professores</span><b>${pct(r.ind.fp)}</b><span class="small muted">meta 20%</span></div>
+        <div><span class="eyebrow">EJA</span><b>${pct(r.ind.eja,2)}</b><span class="small muted">meta 10%</span></div>
+        <div><span class="eyebrow">RAP (PNP)</span><b>${fmt(r.ind.rap,2)}</b><span class="small muted">limiares 18 · 20 · 22</span></div>
+      </div>
+      <div class="chips">${chipsPara('ct',r.ind.ct)}</div>
+      ${r.avisos.map(t=>`<div class="chip warn" style="white-space:normal;line-height:1.3">${t}</div>`).join('')}
+      ${decs}
+      <div class="row"><button type="button" class="ghost mini" data-add="${ai}">Adicionar decisão</button>${ALTS.length>1?`<button type="button" class="ghost mini" data-rmalt="${ai}">Excluir alternativa</button>`:''}</div>
+      <div class="premissa">${r.premissas.join(' ')}</div>
+    </div>`;
+  }).join('');
+  $('#add-alt').hidden = ALTS.length>=3;
+}
+function renderComp(){
+  const rs=ALTS.map(simular), mostrar=$('#reais').checked, t0=rs[0]?rs[0].t0:totais(campiBase());
+  const linhas=[
+    ['Formação técnica', valor(t0,'ct'), r=>r.ind.ct, v=>pct(v), 'Meta legal 50% · limiares 50% e 60%'],
+    ['Formação de professores', valor(t0,'fp'), r=>r.ind.fp, v=>pct(v), 'Meta legal 20% · limiares 10, 15, 20%'],
+    ['EJA (PROEJA)', valor(t0,'eja'), r=>r.ind.eja, v=>pct(v,2), 'Meta legal 10% · limiares 2,5, 5, 10%'],
+    ['Relação aluno-professor (PNP)', valor(t0,'rap'), r=>r.ind.rap, v=>fmt(v,2), 'Limiares da matriz 18 · 20 · 22']
+  ];
+  let h=`<thead><tr><th>Indicador do Ifes</th><th class="r">Atual (${ANO})</th>${ALTS.map(a=>`<th class="r">${a.nome}</th>`).join('')}<th>Réguas</th></tr></thead><tbody>`;
+  for(const [n,b,f,fm,reg] of linhas) h+=`<tr><td>${n}</td><td class="r num">${fm(b)}</td>${rs.map(r=>`<td class="r num">${fm(f(r))}</td>`).join('')}<td class="small muted">${reg}</td></tr>`;
+  h+=`<tr><td>Distância à meta de 50% técnico</td><td class="r num">${fmt(100*(.5-valor(t0,'ct')),1)} p.p.</td>${rs.map(r=>`<td class="r num">${r.ind.ct>=.5?'atingida':fmt(100*(.5-r.ind.ct),1)+' p.p.'}</td>`).join('')}<td></td></tr>`;
+  h+=`<tr><td>Alertas</td><td></td>${rs.map(r=>`<td class="small">${r.avisos.join(' ')||'—'}</td>`).join('')}<td></td></tr>`;
+  if(mostrar){
+    if(ANO!='2024') h+=`<tr><td>Referência orçamentária</td><td colspan="${ALTS.length+2}" class="small muted">Disponível só para o ano-base 2024 (regime da matriz 2026).</td></tr>`;
+    else { const rr=rs.map(reais);
+      h+=`<tr><td>RAP da matriz (premissa proporcional)</td><td class="r num">${fmt(D.matriz_2026.instituicoes.find(i=>/ESPIRITO/.test(i.nome)).rap,2)}</td>${rr.map(x=>`<td class="r num">${fmt(x.rapM,2)}</td>`).join('')}<td class="small muted">Numerador da matriz não reconciliado com a PNP</td></tr>`;
+      h+=`<tr><td>Variação na referência de Qualidade e Eficiência</td><td class="r">—</td>${rr.map(x=>`<td class="r num">${x.tot>=0?'+':''}${brl(x.tot)}</td>`).join('')}<td class="small muted">Potencial condicional; demais instituições e submontantes de 2026 constantes; não é recurso garantido nem chega automaticamente aos campi.</td></tr>`; }
+  }
+  $('#comp').innerHTML=h+'</tbody>';
+  const campi=[...new Set(rs.flatMap(r=>r.contrib.map(c=>c.campus)))].sort();
+  $('#contrib').innerHTML = `<thead><tr><th>Unidade</th>${ALTS.map(a=>`<th class="r">${a.nome}</th>`).join('')}</tr></thead><tbody>`+
+    campi.map(c=>`<tr><td>${curto(c)}</td>${rs.map(r=>{ const x=r.contrib.find(z=>z.campus==c); return `<td class="r num">${x?(x.pp>=0?'+':'')+fmt(100*x.pp,2):'—'}</td>`; }).join('')}</tr>`).join('')+
+    `<tr><th>Ifes</th>${rs.map(r=>{ const d=r.ind.ct-valor(r.t0,'ct'); return `<th class="r num">${d>=0?'+':''}${fmt(100*d,2)}</th>`; }).join('')}</tr></tbody>`;
+  $('#sv-alt').innerHTML = ALTS.map((a,i)=>`<option value="${i}">${a.nome}</option>`).join('');
+  renderSalvos(); atualizarJSON();
+}
+// ---------- salvar ----------
+const KEY='prumo-poc-propostas';
+function lerSalvos(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+function proposta(){
+  const i=Number($('#sv-alt').value||0), a=ALTS[i]; if(!a) return null; const r=simular(a);
+  return {proposta:$('#sv-nome').value||a.nome, autor:$('#sv-autor').value, justificativa:$('#sv-just').value, data:new Date().toISOString().slice(0,10),
+    ano_base:ANO, alternativa:a.nome, decisoes:a.decisoes.map(d=>({...d, campus:curto(d.campus)})),
+    resultado:{tecnico:+r.ind.ct.toFixed(4), formacao_professores:+r.ind.fp.toFixed(4), eja:+r.ind.eja.toFixed(4), rap_pnp:+r.ind.rap.toFixed(2)},
+    contribuicoes_pp:Object.fromEntries(r.contrib.map(c=>[curto(c.campus), +(100*c.pp).toFixed(3)])),
+    premissas:r.premissas, alertas:r.avisos,
+    limitacoes:'Um ano-base; sem evolução de turmas, custos, capacidade física nem eficiência acadêmica. Situação: proposta, não decisão aprovada.'};
+}
+function atualizarJSON(){ const p=proposta(); $('#sv-json').value=p?JSON.stringify(p,null,2):''; }
+function renderSalvos(){ const s=lerSalvos(); $('#sv-list').innerHTML = s.length? '<strong>Salvas neste navegador:</strong> '+s.map(p=>`${p.proposta} (${p.data}, técnico ${pct(p.resultado.tecnico)})`).join(' · ') : '<span class="muted">Nenhuma proposta salva neste navegador.</span>'; }
+
+// ---------- eventos ----------
+function irPara(step){
+  ['comparar','simular','compor'].forEach(s=>{ $('#s-'+s).hidden = s!=step; const a=document.querySelector(`nav a[data-step="${s}"]`); a.setAttribute('aria-current', s==step?'true':'false'); });
+  if(step=='simular') renderAlts(); if(step=='compor') renderComp();
+}
+function passoAtual(){ const h=(location.hash||'').slice(1); return ['comparar','simular','compor'].includes(h)?h:'comparar'; }
+window.addEventListener('hashchange',()=>irPara(passoAtual()));
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]'); if(g){ location.hash=g.dataset.go; return; }
+  const add=e.target.closest('[data-add]'); if(add){ const a=ALTS[+add.dataset.add]; const c=Object.keys(campiBase()).find(k=>k.includes('Serra'))||Object.keys(campiBase())[0]; a.decisoes.push({tipo:'ampliar',campus:c,curso:'',n:40}); a.exemplo=false; renderAlts(); return; }
+  const rm=e.target.closest('[data-rm]'); if(rm){ const [ai,di]=rm.dataset.rm.split(':').map(Number); ALTS[ai].decisoes.splice(di,1); ALTS[ai].exemplo=false; renderAlts(); return; }
+  const ra=e.target.closest('[data-rmalt]'); if(ra){ ALTS.splice(+ra.dataset.rmalt,1); renderAlts(); return; }
+});
+$('#add-alt').addEventListener('click',()=>{ if(ALTS.length<3){ ALTS.push({nome:'Nova alternativa',decisoes:[]}); renderAlts(); }});
+document.addEventListener('change',e=>{
+  const el=e.target; if(el.dataset && el.dataset.a!=null && el.dataset.f){
+    const a=ALTS[+el.dataset.a];
+    if(el.dataset.f=='nome'){ a.nome=el.value; return; }
+    const d=a.decisoes[+el.dataset.d]; a.exemplo=false;
+    if(el.dataset.f=='n') d.n=Number(el.value)||0; else d[el.dataset.f]=el.value;
+    if(el.dataset.f=='tipo'||el.dataset.f=='campus'){ const first=campiBase()[d.campus]?.cursos.filter(x=>x.matriculas>0&&(d.tipo=='ampliar'?x.tipo=='Técnico':true)).sort((p,q)=>q.me-p.me)[0]; d.curso=idCurso(first); }
+    renderAlts();
+  }
+});
+$('#ind').addEventListener('change',renderStrip);
+$('#pares').addEventListener('change',()=>{ renderKpis(); renderStrip(); });
+$('#reais').addEventListener('change',renderComp);
+['#sv-alt','#sv-nome','#sv-autor','#sv-just'].forEach(s=>$(s).addEventListener('input',atualizarJSON));
+$('#sv-btn').addEventListener('click',()=>{ const p=proposta(); if(!p) return; const s=lerSalvos(); s.push(p); try{ localStorage.setItem(KEY,JSON.stringify(s)); $('#sv-msg').textContent='Proposta salva neste navegador.'; }catch(e){ $('#sv-msg').textContent='O navegador não permitiu salvar; copie o JSON abaixo.'; } renderSalvos(); });
+$('#sv-copy').addEventListener('click',()=>{ const t=$('#sv-json'); navigator.clipboard.writeText(t.value).then(()=>{ $('#sv-msg').textContent='JSON copiado.'; }).catch(()=>{ t.focus(); t.select(); $('#sv-msg').textContent='Selecione e copie o texto abaixo.'; }); });
+$('#ano').addEventListener('change',()=>{ ANO=$('#ano').value; ALTS=exemplos(); renderKpis(); renderStrip(); renderCampi(); irPara(passoAtual()); });
+
+ALTS=exemplos(); renderKpis(); renderStrip(); renderCampi(); irPara(passoAtual());
+})();
+</script>
