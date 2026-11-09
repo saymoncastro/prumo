@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Prumo 50% Técnico</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,13 +86,34 @@ button.mini{padding:4px 8px;font-size:.78rem}
 footer{font-size:.82rem;color:var(--muted);display:grid;gap:6px;border-top:1px solid var(--line);padding-top:14px}
 @media (max-width:520px){.dec{grid-template-columns:1fr}.res{grid-template-columns:1fr 1fr}}
 @media (prefers-reduced-motion:no-preference){.panel{transition:border-color .15s}}
+.sep{border-top:1px dashed var(--line);padding-top:8px;color:var(--ink)}
+.cards{display:flex;flex-wrap:wrap;gap:10px}
+.card{display:grid;gap:3px;text-align:left;min-width:190px;flex:1 1 190px;max-width:300px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit;cursor:pointer}
+.card.on{border-color:var(--teal);box-shadow:inset 0 0 0 1px var(--teal)}
+.card.add{place-items:center;color:var(--teal);font-weight:600;border-style:dashed}
+.card .cn{font:700 1rem/1.25 var(--f-display);font-stretch:90%}
+.card .cv{font-size:1.35rem;font-weight:600}
+.sim{display:grid;gap:14px;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start}
+@media (max-width:820px){.sim{grid-template-columns:1fr}}
+ol.decs{margin:0;padding-left:20px;display:grid;gap:8px}
+ol.decs summary{cursor:pointer;font-weight:600;padding:4px 0}
+ol.decs .dec{margin-top:6px}
+.big{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.big .num{font:600 2.4rem/1 var(--f-mono)}
+.verdict{border-left:3px solid var(--bad);padding:8px 12px;background:var(--bg);border-radius:0 6px 6px 0}
+.verdict.ok{border-left-color:var(--good)}
+.meter{position:relative;height:10px;background:var(--line);border-radius:5px}
+.meter span{position:absolute;inset:0 auto 0 0;background:var(--teal);border-radius:5px}
+.meter i{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.aviso{font-size:.84rem;color:var(--warn);border:1px solid currentColor;border-radius:6px;padding:6px 10px}
+ul.lim{margin:0;padding-left:18px;display:grid;gap:4px}
 </style>
 
 <div class="wrap">
   <header class="top">
-    <span class="eyebrow">Prumo · prova de conceito · Ifes</span>
+    <span class="eyebrow">Prumo · prova de conceito · Ifes · versão 2</span>
     <h1>Como os campi levam o Ifes a 50% de formação técnica?</h1>
-    <p class="muted">Compare o Ifes com a Rede Federal, simule decisões de oferta em alguns campi e componha uma estratégia. Dados oficiais da Plataforma Nilo Peçanha; valores em reais são opcionais e condicionais.</p>
+    <p class="muted">Compare o Ifes com a Rede Federal, experimente decisões de oferta em alguns campi e veja o efeito conjunto em várias metas. Dados oficiais da Plataforma Nilo Peçanha. Resultados são exploratórios, não previsões.</p>
     <div class="controls">
       <label class="small" for="ano">Ano-base dos dados</label>
       <select id="ano" style="width:auto">
@@ -103,15 +125,15 @@ footer{font-size:.82rem;color:var(--muted);display:grid;gap:6px;border-top:1px s
 
   <nav class="steps" aria-label="Etapas">
     <a href="#comparar" data-step="comparar">1 · Onde estamos</a>
-    <a href="#simular" data-step="simular">2 · Simular alternativas</a>
-    <a href="#compor" data-step="compor">3 · Compor a estratégia</a>
+    <a href="#simular" data-step="simular">2 · Experimentar decisões</a>
+    <a href="#compor" data-step="compor">3 · Comparar e registrar</a>
   </nav>
 
   <!-- ETAPA 1 -->
   <section class="step" id="s-comparar">
     <div class="lead">
       <h2>Onde o Ifes está</h2>
-      <p class="muted">Três réguas para cada indicador: a meta legal, o limiar que muda a pontuação na Matriz Orçamentária e a posição das demais instituições. Elas não são a mesma coisa.</p>
+      <p class="muted">Cada indicador tem réguas diferentes: a meta legal, o limiar que muda a pontuação na Matriz Orçamentária e a posição das demais instituições. Elas não são a mesma coisa.</p>
     </div>
     <div class="grid" id="kpis"></div>
     <div class="panel">
@@ -122,7 +144,7 @@ footer{font-size:.82rem;color:var(--muted);display:grid;gap:6px;border-top:1px s
             <option value="ct">Formação técnica</option>
             <option value="fp">Formação de professores</option>
             <option value="eja">EJA (PROEJA)</option>
-            <option value="rap">Relação aluno-professor</option>
+            <option value="rap">Relação aluno-professor (PNP)</option>
           </select>
           <select id="pares" style="width:auto" aria-label="Comparação">
             <option value="porte">Pares por porte (IFs de 0,6× a 1,6× o Ifes)</option>
@@ -131,60 +153,69 @@ footer{font-size:.82rem;color:var(--muted);display:grid;gap:6px;border-top:1px s
         </div>
       </div>
       <div id="strip"></div>
-      <div class="legend"><span><i></i>Meta legal</span><span><i class="dash"></i>Limiar da matriz</span><span><i class="band"></i>Faixa adequada PNP</span><span><i class="me"></i>Ifes</span></div>
+      <div class="legend" id="legend"></div>
       <p class="small muted" id="pares-txt"></p>
     </div>
     <div class="panel">
-      <h3>De onde vem o percentual técnico do Ifes</h3>
-      <p class="small muted">Matrícula equivalente por unidade: parte técnica em cor. O indicador institucional é a soma das unidades, não a média dos percentuais.</p>
+      <h3>Uma mesma oferta pesa em várias metas</h3>
+      <p class="small muted">Matrícula equivalente por unidade. O indicador do Ifes é a soma das unidades, não a média dos percentuais.</p>
       <div class="tablewrap"><table id="campi"></table></div>
       <div class="callout" id="achado"></div>
     </div>
-    <div class="row"><button type="button" data-go="simular">Simular alternativas para a meta de 50%</button></div>
+    <div class="row"><button type="button" data-go="simular">Experimentar decisões para a meta de 50%</button></div>
   </section>
 
   <!-- ETAPA 2 -->
   <section class="step" id="s-simular" hidden>
     <div class="lead">
-      <h2>Simular alternativas</h2>
-      <p class="muted">Cada alternativa é um conjunto de decisões em campi específicos. O efeito usa a matrícula equivalente por estudante do próprio curso no ano escolhido. Edite, acrescente ou remova decisões. As três alternativas abaixo são exemplos.</p>
+      <h2>Experimentar decisões</h2>
+      <p class="muted">Monte um cenário com poucas decisões em campi específicos e veja o efeito no Ifes. Você pode guardar até três cenários para comparar.</p>
     </div>
-    <div class="alts" id="alts"></div>
-    <div class="row"><button type="button" class="ghost" id="add-alt">Adicionar alternativa</button><button type="button" data-go="compor">Comparar e compor</button></div>
+    <div class="cards" id="cenarios"></div>
+    <div class="sim">
+      <div class="panel" id="editor"></div>
+      <div class="panel" id="efeito" aria-live="polite"></div>
+    </div>
+    <div class="row"><button type="button" data-go="compor">Comparar cenários e registrar uma proposta</button></div>
   </section>
 
   <!-- ETAPA 3 -->
   <section class="step" id="s-compor" hidden>
     <div class="lead">
-      <h2>Compor a estratégia</h2>
-      <p class="muted">Compare as alternativas lado a lado, veja quanto cada campus contribui para o indicador do Ifes e salve uma proposta com premissas e limitações.</p>
+      <h2>Comparar e registrar</h2>
+      <p class="muted">Os cenários lado a lado, a contribuição de cada campus e uma proposta salva com premissas e limitações.</p>
     </div>
     <div class="panel"><div class="tablewrap"><table id="comp"></table></div>
-      <label class="row small"><input type="checkbox" id="reais" style="width:auto"> Mostrar referência orçamentária condicional (regime da matriz 2026, demais instituições constantes)</label>
+      <label class="row small"><input type="checkbox" id="reais" style="width:auto"> Mostrar referência orçamentária condicional (técnico e EJA; regime da matriz 2026; demais instituições constantes)</label>
     </div>
-    <div class="panel"><h3>Contribuição de cada campus (pontos percentuais no indicador técnico do Ifes)</h3><div class="tablewrap"><table id="contrib"></table></div>
+    <div class="panel"><h3>Contribuição de cada campus para o percentual técnico do Ifes (pontos percentuais)</h3><div class="tablewrap"><table id="contrib"></table></div>
       <p class="premissa">Decomposição exata: variação do Ifes = Σ (Δ técnica do campus − percentual atual × Δ total do campus) ÷ total novo.</p></div>
     <div class="panel">
-      <h3>Salvar proposta</h3>
+      <h3>Registrar proposta</h3>
       <div class="grid">
-        <label class="small">Alternativa<select id="sv-alt"></select></label>
+        <label class="small">Cenário<select id="sv-alt"></select></label>
         <label class="small">Nome da proposta<input type="text" id="sv-nome" placeholder="Ex.: Pacto técnico 2027"></label>
         <label class="small">Autor<input type="text" id="sv-autor" placeholder="Nome e unidade"></label>
       </div>
-      <label class="small">Justificativa e premissas a validar<textarea id="sv-just" placeholder="Por que esta combinação? Quais premissas precisam ser confirmadas com os campi?"></textarea></label>
-      <div class="row"><button type="button" id="sv-btn">Salvar proposta neste navegador</button><button type="button" class="ghost" id="sv-copy">Copiar como JSON</button><span class="small muted" id="sv-msg" role="status"></span></div>
+      <label class="small">Justificativa e premissas a validar com os campi<textarea id="sv-just" placeholder="Por que esta combinação? O que precisa ser confirmado?"></textarea></label>
+      <div class="row"><button type="button" id="sv-btn">Salvar neste navegador</button><button type="button" class="ghost" id="sv-copy">Copiar como JSON</button><span class="small muted" id="sv-msg" role="status"></span></div>
       <div id="sv-list" class="small"></div>
       <textarea id="sv-json" readonly aria-label="Proposta em JSON"></textarea>
     </div>
     <div class="callout">
-      <strong>O que este protótipo não calcula</strong>
-      <p class="small">Evolução plurianual de turmas, evasão e conclusão; custos; capacidade física; eficiência acadêmica (só comparação); o numerador da RAP usado pela matriz (a RAP da matriz é ajustada em proporção à da PNP, como premissa). A classificação de cursos como formação de professores é aproximada pela proporção de cada campus.</p>
+      <strong>Limites desta prova de conceito</strong>
+      <ul class="small lim">
+        <li>Matrícula equivalente de novas vagas: média por estudante do próprio curso no ano escolhido. Turmas novas podem diferir (carga, duração, início no meio do ano). Resultado exploratório.</li>
+        <li>Formação de professores: a PNP não identifica quais cursos contam. Decisões em cursos não técnicos mostram um intervalo (o curso conta ou não conta).</li>
+        <li>RAP: a da PNP (20,11 em 2024) e a usada na matriz 2026 (18,148) têm numeradores diferentes, ainda não reconciliados. O protótipo simula só a RAP da PNP e não estima efeito orçamentário da RAP.</li>
+        <li>Não calcula evolução plurianual de turmas, evasão, custos nem capacidade física. Eficiência acadêmica aparece só na comparação.</li>
+      </ul>
     </div>
   </section>
 
   <footer>
-    <span>Fontes: Plataforma Nilo Peçanha, Indicadores de Gestão (matrícula equivalente por campus, RAP, cursos), anos-base 2024 e 2025; demonstrativo IFMT da Matriz 2026 (indicadores e submontantes de Qualidade); Portaria MEC nº 243/2026 (faixas); Lei nº 11.892/2008 e Decreto nº 5.840/2006 (metas legais); guia PNP (faixa adequada).</span>
-    <span>Conciliação: a soma dos campi reproduz os valores do Ifes usados na matriz 2026 (técnico 0,4403; formação de professores 0,1206; EJA 0,0186; professor-equivalente 1.520 × 1.517,5). O numerador da RAP da matriz (27.539) difere do da PNP (30.574) e não foi reconciliado.</span>
+    <span>Fontes: Plataforma Nilo Peçanha, Indicadores de Gestão (matrícula equivalente por unidade, RAP, cursos), anos-base 2024 e 2025; demonstrativo IFMT da Matriz 2026 (indicadores e submontantes de Qualidade); Portaria MEC nº 243/2026 (faixas); Lei nº 11.892/2008 e Decreto nº 5.840/2006 (metas legais); guia PNP (faixa adequada).</span>
+    <span>Conciliação: a soma das unidades reproduz os valores do Ifes usados na matriz 2026 (técnico 0,4403; formação de professores 0,1206; EJA 0,0186; professor-equivalente 1.520 × 1.517,5). O numerador da RAP da matriz (27.539) difere do da PNP (30.574).</span>
   </footer>
 </div>
 
@@ -194,249 +225,257 @@ footer{font-size:.82rem;color:var(--muted);display:grid;gap:6px;border-top:1px s
 const D = JSON.parse(document.getElementById('dados').textContent);
 const fmt = (x,d=1)=> (x==null||isNaN(x))?'–':x.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
 const pct = (x,d=1)=> fmt(100*x,d)+'%';
-const brl = x=> 'R$ '+Math.round(x).toLocaleString('pt-BR');
+const brl = x=> (x<0?'−':'+')+'R$ '+Math.abs(Math.round(x)).toLocaleString('pt-BR');
 const $ = s=>document.querySelector(s);
-let ANO = '2024';
-const CEFOR = 'Centro de Referência em Formação e Educação a Distância';
+const esc = s=> String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+let ANO='2024';
+const CEFOR='Centro de Referência em Formação e Educação a Distância';
 const curto = n=> n==CEFOR?'Cefor (EAD)':n.replace('Campus ','');
+const MATRIZ_IFES = D.matriz_2026.instituicoes.find(i=>/ESPIRITO/.test(i.nome));
 
 const IND = {
-  ct:{nome:'Formação técnica', legal:.50, limiares:[.50,.60], banda:[.45,.55], fmt:v=>pct(v), max:1, sentido:'Meta legal: mínimo de 50% (Lei 11.892/2008, art. 8º).'},
-  fp:{nome:'Formação de professores', legal:.20, limiares:[.10,.15,.20], banda:null, fmt:v=>pct(v), max:.6, sentido:'Meta legal: mínimo de 20% (Lei 11.892/2008, art. 8º).'},
-  eja:{nome:'EJA (PROEJA)', legal:.10, limiares:[.025,.05,.10], banda:null, fmt:v=>pct(v,2), max:.15, sentido:'Meta legal: 10% (Decreto 5.840/2006). Os limiares da matriz começam em 2,5%.'},
-  rap:{nome:'Relação aluno-professor', legal:20, limiares:[18,20,22], banda:null, fmt:v=>fmt(v,2), max:40, sentido:'Referência: 20 (PNE, estratégia 11.11). Valor maior não é sempre melhor: pode indicar turmas cheias demais.'}
+  ct:{nome:'Formação técnica', legal:.50, legalTxt:'Meta legal: mínimo de 50% (Lei 11.892/2008, art. 8º).', limiares:[.50,.60], banda:[.45,.55], f:v=>pct(v), max:1},
+  fp:{nome:'Formação de professores', legal:.20, legalTxt:'Meta legal: mínimo de 20% (Lei 11.892/2008, art. 8º).', limiares:[.10,.15,.20], banda:null, f:v=>pct(v), max:.6},
+  eja:{nome:'EJA (PROEJA)', legal:.10, legalTxt:'Meta legal: 10% (Decreto 5.840/2006). Os limiares da matriz começam em 2,5%.', limiares:[.025,.05,.10], banda:null, f:v=>pct(v,2), max:.15},
+  rap:{nome:'Relação aluno-professor (PNP)', legal:20, legalTxt:'Referência: 20 (PNE, estratégia 11.11). Valor maior não é sempre melhor: pode indicar turmas cheias demais.', limiares:[], banda:null, f:v=>fmt(v,2), max:40}
 };
-function valor(o,k){ if(k=='rap') return o.rap_p? o.rap_m/o.rap_p : null; return o.meq? o[k]/o.meq : null; }
-
-// ---------- dados por ano ----------
-function campiBase(){ return D.ifes_campi[ANO]; }
+const valor=(o,k)=> k=='rap'?(o.rap_p?o.rap_m/o.rap_p:null):(o.meq?o[k]/o.meq:null);
+const base=()=>D.ifes_campi[ANO];
 function totais(c){ const t={meq:0,ct:0,fp:0,eja:0,rap_m:0,rap_p:0}; for(const v of Object.values(c)) for(const k in t) t[k]+=v[k]||0; return t; }
-function instAno(){ return D.instituicoes[ANO]; }
+function faixa(k,v){ const l=IND[k].limiares; let f=0; l.forEach(x=>{ if(v>=x) f++; }); return f; }
 
 // ---------- etapa 1 ----------
 function pares(){
-  const ifs = instAno().filter(i=>i.org=='Instituto Federal');
-  const me = ifs.find(i=>i.sigla=='IFES');
-  if($('#pares').value=='ifs') return ifs;
-  return ifs.filter(i=> i.meq>=0.6*me.meq && i.meq<=1.6*me.meq);
+  const ifs=D.instituicoes[ANO].filter(i=>i.org=='Instituto Federal'), me=ifs.find(i=>i.sigla=='IFES');
+  return $('#pares').value=='ifs'? ifs : ifs.filter(i=>i.meq>=0.6*me.meq && i.meq<=1.6*me.meq);
 }
 function mediana(a){ const s=a.filter(x=>x!=null).sort((x,y)=>x-y); if(!s.length) return null; const m=Math.floor(s.length/2); return s.length%2?s[m]:(s[m-1]+s[m])/2; }
-function chipsPara(k,v){
-  const I=IND[k], out=[];
-  out.push(v>=I.legal?['good',k=='rap'?'Na referência de 20':'Cumpre a meta legal']:['bad',k=='rap'?'Abaixo de 20':'Abaixo da meta legal']);
-  const lim=I.limiares; let f=0; lim.forEach(l=>{ if(v>=l) f++; });
-  if(f==0) out.push(['bad','Peso zero na matriz (abaixo de '+(k=='rap'?fmt(lim[0],0):pct(lim[0],1))+')']);
-  else out.push(['brass','Faixa '+f+' de '+lim.length+' na matriz']);
-  if(I.banda && v>I.banda[1]) out.push(['warn','Acima da faixa adequada da PNP']);
-  return out.map(([c,t])=>`<span class="chip ${c}">${t}</span>`).join('');
+function chips(k,v){
+  const I=IND[k], o=[];
+  if(k=='rap') o.push(v>=20?['good','Na referência de 20 ou acima']:['warn','Abaixo da referência de 20']);
+  else {
+    o.push(v>=I.legal?['good','Cumpre a meta legal']:['bad','Abaixo da meta legal']);
+    const f=faixa(k,v); o.push(f==0?['bad','Peso zero na matriz (abaixo de '+I.f(I.limiares[0])+')']:['brass','Faixa '+f+' de '+I.limiares.length+' na matriz']);
+    if(I.banda && v>I.banda[1]) o.push(['warn','Acima da faixa adequada da PNP']);
+  }
+  return o.map(([c,t])=>`<span class="chip ${c}">${t}</span>`).join('');
 }
 function renderKpis(){
-  const t=totais(campiBase()), ps=pares();
+  const t=totais(base()), ps=pares();
   $('#kpis').innerHTML = Object.keys(IND).map(k=>{
     const I=IND[k], v=valor(t,k), med=mediana(ps.map(i=>valor(i,k)));
-    return `<div class="panel kpi"><span class="eyebrow">${I.nome}</span><span class="v">${I.fmt(v)}</span>
-      <span class="small muted">Mediana dos pares: <span class="num">${I.fmt(med)}</span></span>
-      <div class="chips">${chipsPara(k,v)}</div><span class="premissa">${I.sentido}</span></div>`;
+    let extra='';
+    if(k=='rap') extra = ANO=='2024'
+      ? `<div class="sep small"><b>Na matriz 2026 a RAP é ${fmt(MATRIZ_IFES.rap,2)}</b>, calculada com outro numerador: faixa ${[18,20,22].filter(l=>MATRIZ_IFES.rap>=l).length} de 3, a ${fmt(MATRIZ_IFES.rap-18,2)} do limiar 18, abaixo do qual o peso é zero. Os dois valores não são comparáveis entre si.</div>`
+      : `<div class="sep small">RAP da matriz para este ano-base: ainda não publicada.</div>`;
+    return `<div class="panel kpi"><span class="eyebrow">${I.nome}</span><span class="v">${I.f(v)}</span>
+      <span class="small muted">Mediana dos pares: <span class="num">${I.f(med)}</span></span>
+      <div class="chips">${chips(k,v)}</div><span class="premissa">${I.legalTxt}</span>${extra}</div>`;
   }).join('');
 }
 function renderStrip(){
-  const k=$('#ind').value, I=IND[k], ps=pares(), ifes=instAno().find(i=>i.sigla=='IFES');
-  $('#strip-title').textContent = I.nome+' na Rede Federal';
+  const k=$('#ind').value, I=IND[k], ps=pares(), ifes=D.instituicoes[ANO].find(i=>i.sigla=='IFES');
+  $('#strip-title').textContent=I.nome+' na Rede Federal';
   const W=760,H=118,L=24,R=24, vals=ps.map(i=>valor(i,k)).filter(v=>v!=null);
-  const max=Math.max(I.max, ...vals, valor(ifes,k)||0)*1.02;
-  const x=v=>L+(W-L-R)*Math.min(v,max)/max;
+  const max=Math.max(I.max,...vals,valor(ifes,k)||0)*1.02, x=v=>L+(W-L-R)*Math.min(v,max)/max;
   let s=`<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="${I.nome}: distribuição das instituições comparadas">`;
   if(I.banda) s+=`<rect x="${x(I.banda[0])}" y="18" width="${x(I.banda[1])-x(I.banda[0])}" height="58" fill="var(--teal-soft)"/>`;
   s+=`<line x1="${L}" x2="${W-R}" y1="47" y2="47" stroke="var(--line)"/>`;
   I.limiares.forEach(l=>{ s+=`<line x1="${x(l)}" x2="${x(l)}" y1="14" y2="80" stroke="var(--brass)" stroke-dasharray="4 3" stroke-width="1.5"/>`; });
   s+=`<line x1="${x(I.legal)}" x2="${x(I.legal)}" y1="8" y2="86" stroke="var(--ink)" stroke-width="2"/>`;
-  ps.forEach((i,n)=>{ const v=valor(i,k); if(v==null||i.sigla=='IFES') return; s+=`<circle cx="${x(v)}" cy="${47+((n%5)-2)*6}" r="4.5" fill="var(--dot)"><title>${i.sigla}: ${I.fmt(v)}</title></circle>`; });
-  const vi=valor(ifes,k); s+=`<circle cx="${x(vi)}" cy="47" r="7.5" fill="var(--brass)" stroke="var(--surface)" stroke-width="2"><title>Ifes: ${I.fmt(vi)}</title></circle>`;
-  s+=`<text x="${x(vi)}" y="${H-14}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)" font-family="var(--f-body)">Ifes ${I.fmt(vi)}</text>`;
-  [0, max/2, max].forEach(t=>{ s+=`<text x="${x(t)}" y="${H-1}" text-anchor="${t==0?'start':t==max?'end':'middle'}" font-size="10" fill="var(--muted)" font-family="var(--f-mono)">${I.fmt(t)}</text>`; });
-  s+='</svg>';
-  $('#strip').innerHTML=s;
-  $('#pares-txt').textContent = 'Instituições comparadas ('+ps.length+'): '+ps.map(i=>i.sigla).join(', ')+'. Critério de porte: matrícula equivalente total; troque a comparação acima.';
+  ps.forEach((i,n)=>{ const v=valor(i,k); if(v==null||i.sigla=='IFES') return; s+=`<circle cx="${x(v)}" cy="${47+((n%5)-2)*6}" r="4.5" fill="var(--dot)"><title>${i.sigla}: ${I.f(v)}</title></circle>`; });
+  const vi=valor(ifes,k);
+  s+=`<circle cx="${x(vi)}" cy="47" r="7.5" fill="var(--brass)" stroke="var(--surface)" stroke-width="2"><title>Ifes: ${I.f(vi)}</title></circle>`;
+  s+=`<text x="${Math.min(Math.max(x(vi),40),W-40)}" y="${H-14}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)" font-family="var(--f-body)">Ifes ${I.f(vi)}</text>`;
+  [0,max/2,max].forEach(t=>{ s+=`<text x="${x(t)}" y="${H-1}" text-anchor="${t==0?'start':t==max?'end':'middle'}" font-size="10" fill="var(--muted)" font-family="var(--f-mono)">${I.f(t)}</text>`; });
+  $('#strip').innerHTML=s+'</svg>';
+  $('#legend').innerHTML = k=='rap'
+    ? '<span><i></i>Referência PNE (20)</span><span><i class="me"></i>Ifes</span><span>Limiares da matriz não aparecem: ela usa outra RAP.</span>'
+    : '<span><i></i>Meta legal</span><span><i class="dash"></i>Limiar da matriz</span>'+(I.banda?'<span><i class="band"></i>Faixa adequada PNP</span>':'')+'<span><i class="me"></i>Ifes</span>';
+  $('#pares-txt').textContent='Instituições comparadas ('+ps.length+'): '+ps.map(i=>i.sigla).join(', ')+'. Critério de porte: matrícula equivalente total.';
 }
 function renderCampi(){
-  const c=campiBase(), t=totais(c);
-  const rows=Object.entries(c).filter(([n,v])=>v.meq>0).sort((a,b)=>b[1].meq-a[1].meq);
-  const maxm=Math.max(...rows.map(r=>r[1].meq));
-  $('#campi').innerHTML = `<thead><tr><th>Unidade</th><th class="r">Matr. equivalente</th><th>Parte técnica</th><th class="r">% técnico</th><th class="r">Peso no Ifes</th></tr></thead><tbody>`+
-    rows.map(([n,v])=>`<tr><td>${curto(n)}</td><td class="r num">${fmt(v.meq,0)}</td><td><div class="bar" style="width:${Math.max(8,100*v.meq/maxm)}%"><span style="width:${100*v.ct/v.meq}%"></span></div></td><td class="r num">${pct(v.ct/v.meq)}</td><td class="r num">${pct(v.meq/t.meq)}</td></tr>`).join('')+
-    `<tr><th>Ifes</th><th class="r num">${fmt(t.meq,0)}</th><th></th><th class="r num">${pct(t.ct/t.meq)}</th><th class="r">100%</th></tr></tbody>`;
-  const cf=c[CEFOR]; const sem=(t.ct-cf.ct)/(t.meq-cf.meq);
-  $('#achado').innerHTML = `<strong>Achado</strong><p class="small">Sem o Cefor, os campi somam <b class="num">${pct(sem)}</b> de formação técnica. O Cefor tem <b class="num">${pct(cf.meq/t.meq)}</b> da matrícula equivalente do Ifes, quase toda em especializações e cursos FIC a distância, e leva o indicador institucional a <b class="num">${pct(t.ct/t.meq)}</b>. A mesma oferta sustenta a formação de professores (${pct(t.fp/t.meq)} no Ifes). Chegar a 50% exige converter cerca de <b class="num">${fmt(Math.max(0,.5*t.meq-t.ct),0)}</b> matrículas equivalentes não técnicas em técnicas, ou criar cerca de <b class="num">${fmt(Math.max(0,(.5*t.meq-t.ct)/.5),0)}</b> novas matrículas equivalentes técnicas.</p>`;
+  const c=base(), t=totais(c), rows=Object.entries(c).filter(([n,v])=>v.meq>0).sort((a,b)=>b[1].meq-a[1].meq), maxm=Math.max(...rows.map(r=>r[1].meq));
+  $('#campi').innerHTML=`<thead><tr><th>Unidade</th><th class="r">Matr. equivalente</th><th>Parte técnica</th><th class="r">% técnico</th><th class="r">% form. professores</th><th class="r">Peso no Ifes</th></tr></thead><tbody>`+
+    rows.map(([n,v])=>`<tr><td>${curto(n)}</td><td class="r num">${fmt(v.meq,0)}</td><td><div class="bar" style="width:${Math.max(8,100*v.meq/maxm)}%"><span style="width:${100*v.ct/v.meq}%"></span></div></td><td class="r num">${pct(v.ct/v.meq)}</td><td class="r num">${pct(v.fp/v.meq)}</td><td class="r num">${pct(v.meq/t.meq)}</td></tr>`).join('')+
+    `<tr><th>Ifes</th><th class="r num">${fmt(t.meq,0)}</th><th></th><th class="r num">${pct(t.ct/t.meq)}</th><th class="r num">${pct(t.fp/t.meq)}</th><th class="r">100%</th></tr></tbody>`;
+  const cf=c[CEFOR], sem=(t.ct-cf.ct)/(t.meq-cf.meq), t24=totais(D.ifes_campi['2024']), t25=totais(D.ifes_campi['2025']);
+  const salto = `<p class="small"><b>Atenção à série:</b> a formação de professores do Ifes vai de ${pct(t24.fp/t24.meq)} (2024) para ${pct(t25.fp/t25.meq)} (2025). No Cefor, passa de ${fmt(D.ifes_campi['2024'][CEFOR].fp,0)} para ${fmt(D.ifes_campi['2025'][CEFOR].fp,0)} matrículas equivalentes enquanto suas especializações diminuem. Parece mudança de classificação de cursos, não de oferta. Confirmar com a Prodi antes de interpretar.</p>`;
+  $('#achado').innerHTML=`<strong>A composição das unidades afeta várias metas ao mesmo tempo</strong>
+    <p class="small">Sem o Cefor, as demais unidades somam <b class="num">${pct(sem)}</b> de formação técnica; com ele, o Ifes fica em <b class="num">${pct(t.ct/t.meq)}</b>. A mesma oferta do Cefor responde por <b class="num">${pct(cf.fp/t.fp)}</b> da formação de professores do Ifes. Mudar uma oferta para melhorar um indicador pode piorar outro: uma meta não deve ser perseguida isoladamente.</p>
+    <p class="small">Para chegar a 50% técnico seria preciso converter cerca de <b class="num">${fmt(Math.max(0,.5*t.meq-t.ct),0)}</b> matrículas equivalentes não técnicas em técnicas, ou criar cerca de <b class="num">${fmt(Math.max(0,(.5*t.meq-t.ct)/.5),0)}</b> novas técnicas.</p>${salto}`;
 }
 
-// ---------- simulação ----------
-let ALTS=[];
-function acharCurso(campus,frag,tipo){ const c=campiBase()[campus]; if(!c) return null; return c.cursos.find(x=>x.curso.includes(frag)&&(!tipo||x.tipo==tipo))||null; }
-function idCurso(x){ return x? x.curso+' | '+x.oferta+' | '+(x.presencial?'P':'EAD') : ''; }
+// ---------- etapa 2 ----------
+let CEN=[], ATIVO=0;
+function acharCurso(campus,frag,tipo){ const c=base()[campus]; return c? c.cursos.find(x=>x.curso.includes(frag)&&(!tipo||x.tipo==tipo))||null : null; }
+const idCurso=x=> x? x.curso+' | '+x.oferta+' | '+(x.presencial?'P':'EAD') : '';
 function exemplos(){
   const dec=(tipo,campus,frag,n,ctipo)=>({tipo,campus,curso:idCurso(acharCurso(campus,frag,ctipo)),n});
   return [
-    {nome:'Expansão técnica em quatro campi', exemplo:true, decisoes:[
-      dec('ampliar','Campus Serra','Informática para Internet',80,'Técnico'),{tipo:'docentes',campus:'Campus Serra',n:5},
-      dec('ampliar','Campus Vila Velha','Técnico em Química',60,'Técnico'),{tipo:'docentes',campus:'Campus Vila Velha',n:4},
-      dec('ampliar','Campus Guarapari','Técnico em Mecânica',60,'Técnico'),{tipo:'docentes',campus:'Campus Guarapari',n:4},
-      dec('ampliar','Campus Cariacica','Metroferrovi',40,'Técnico'),{tipo:'docentes',campus:'Campus Cariacica',n:3}]},
-    {nome:'Reorientar a oferta EAD do Cefor', exemplo:true, decisoes:[
-      dec('reduzir',CEFOR,'Docência para a Educação Pro',1500),
-      dec('ampliar',CEFOR,'Multimeios',300,'Técnico')]},
-    {nome:'Combinada: campi + Cefor', exemplo:true, decisoes:[
-      dec('ampliar','Campus Serra','Informática para Internet',80,'Técnico'),{tipo:'docentes',campus:'Campus Serra',n:5},
-      dec('ampliar','Campus Guarapari','Técnico em Mecânica',60,'Técnico'),{tipo:'docentes',campus:'Campus Guarapari',n:4},
-      dec('reduzir',CEFOR,'Docência para a Educação Pro',800),
-      dec('reduzir','Campus Guarapari','Ciências Policiais',300)]}
+    {nome:'Expansão técnica em dois campi', exemplo:true, decisoes:[dec('ampliar','Campus Serra','Informática para Internet',80,'Técnico'),dec('ampliar','Campus Guarapari','Técnico em Mecânica',60,'Técnico')]},
+    {nome:'Reorientar parte da oferta EAD', exemplo:true, decisoes:[dec('reduzir',CEFOR,'Docência para a Educação Pro',1500),dec('ampliar',CEFOR,'Multimeios',300,'Técnico')]}
   ];
 }
-function simular(alt){
-  const base=campiBase(), c={}; for(const [k,v] of Object.entries(base)) c[k]={...v};
-  const avisos=[], prem=new Set();
-  for(const d of alt.decisoes){
-    const cp=c[d.campus]; if(!cp){ avisos.push('Unidade sem dados no ano: '+d.campus); continue; }
+function simular(cen){
+  const b=base(), c={}; for(const [k,v] of Object.entries(b)) c[k]={...v};
+  const avisos=[]; let fpIncerto=0;
+  for(const d of cen.decisoes){
+    const cp=c[d.campus]; if(!cp){ avisos.push('Unidade sem dados em '+ANO+': '+curto(d.campus)); continue; }
     const n=Number(d.n)||0;
-    if(d.tipo=='docentes'){ cp.rap_p+=n; if(n) prem.add('Docentes informados como professores-equivalentes.'); continue; }
-    const x=base[d.campus].cursos.find(z=>idCurso(z)==d.curso);
+    if(d.tipo=='docentes'){ cp.rap_p+=n; continue; }
+    const x=b[d.campus].cursos.find(z=>idCurso(z)==d.curso);
     if(!x||!x.matriculas){ avisos.push(curto(d.campus)+': curso não encontrado em '+ANO+'.'); continue; }
-    const mem=x.me/x.matriculas; let q=n;
-    if(d.tipo=='reduzir'){ if(q>x.matriculas){ avisos.push(curto(d.campus)+': redução maior que as '+x.matriculas+' matrículas do curso; limitada.'); q=x.matriculas; } q=-q; }
-    const dme=q*mem;
-    cp.meq+=dme;
+    let q=n; if(d.tipo=='reduzir'){ if(q>x.matriculas){ avisos.push(curto(d.campus)+': redução limitada às '+x.matriculas+' matrículas do curso.'); q=x.matriculas; } q=-q; }
+    const dme=q*x.me/x.matriculas; cp.meq+=dme;
     if(x.tipo=='Técnico'){ cp.ct+=dme; if(x.oferta.includes('PROEJA')) cp.eja+=dme; }
-    else { const nt=base[d.campus].meq-base[d.campus].ct; const sh=nt>0?Math.min(1,base[d.campus].fp/nt):0; cp.fp+=dme*sh; if(sh>0) prem.add('Formação de professores: proporção da oferta não técnica do campus.'); }
-    if(x.presencial && base[d.campus].me_pres>0){ cp.rap_m+=dme*base[d.campus].rap_m/base[d.campus].me_pres; prem.add('RAP: matrículas presenciais convertidas pela razão atual do campus.'); }
-    prem.add('Matrícula equivalente por estudante igual à do curso em '+ANO+'.');
+    else fpIncerto+=dme; // pode ou não ser formação de professores
+    if(x.presencial && b[d.campus].me_pres>0) cp.rap_m+=dme*b[d.campus].rap_m/b[d.campus].me_pres;
   }
-  const t0=totais(base), t=totais(c);
-  const ind={}; for(const k of Object.keys(IND)) ind[k]=valor(t,k);
-  const contrib=Object.keys(c).map(k=>{ const b=base[k], n=c[k]; const dT=n.ct-b.ct, dG=n.meq-b.meq; return {campus:k, dT, dG, pp:(dT-(t0.ct/t0.meq)*dG)/t.meq}; }).filter(r=>Math.abs(r.dT)>1e-9||Math.abs(r.dG)>1e-9);
-  if(ind.fp< .20 && valor(t0,'fp')>=.20) avisos.push('Formação de professores cai abaixo da meta legal de 20%.');
-  if(ind.rap<18) avisos.push('Relação aluno-professor abaixo de 18.');
-  return {t0,t,ind,contrib,avisos,premissas:[...prem]};
+  const t0=totais(b), t=totais(c);
+  const ind={ct:valor(t,'ct'), eja:valor(t,'eja'), rap:valor(t,'rap')};
+  // intervalo de formação de professores: curso alterado conta (numerador também muda) ou não conta
+  const fpA=t.fp/t.meq, fpB=(t.fp+fpIncerto)/t.meq;
+  ind.fpMin=Math.min(fpA,fpB); ind.fpMax=Math.max(fpA,fpB);
+  const contrib=Object.keys(c).map(k=>{ const dT=c[k].ct-b[k].ct, dG=c[k].meq-b[k].meq; return {campus:k,dT,dG,pp:(dT-(t0.ct/t0.meq)*dG)/t.meq}; }).filter(r=>Math.abs(r.dT)>1e-9||Math.abs(r.dG)>1e-9);
+  const fp0=valor(t0,'fp');
+  if(fp0>=.20 && ind.fpMin<.20) avisos.push('Formação de professores pode cair abaixo da meta legal de 20%.');
+  if(ind.fpMax-ind.fpMin>.0005) avisos.push('Efeito em formação de professores incerto: a PNP não informa se o curso alterado conta como formação de professores.');
+  return {t0,t,ind,contrib,avisos};
 }
-// referência condicional (regime matriz 2026), demais constantes
+function opcoesCurso(campus,tipo,sel){
+  const c=base()[campus]; if(!c) return '<option value="">—</option>';
+  return c.cursos.filter(x=>x.matriculas>0&&(tipo=='ampliar'?x.tipo=='Técnico':true)).sort((a,b)=>b.me-a.me)
+    .map(x=>{ const v=idCurso(x); return `<option value="${esc(v)}" ${v==sel?'selected':''}>${esc(x.curso.replace(/ \(.*\)$/,''))} · ${x.oferta=='Não se aplica'?x.tipo:x.oferta} · ${x.presencial?'pres.':'EAD'} · ${x.matriculas} matr.</option>`; }).join('');
+}
+function frase(d){
+  if(d.tipo=='docentes') return `${curto(d.campus)}: ${d.n>=0?'+':''}${d.n} professores-equivalentes`;
+  const nome=(d.curso||'').split(' | ')[0].replace(/ \(.*\)$/,'')||'curso';
+  return `${curto(d.campus)}: ${d.tipo=='ampliar'?'+':'−'}${d.n} matrículas em ${nome}`;
+}
+function renderCenarios(){
+  $('#cenarios').innerHTML = CEN.map((c,i)=>{ const r=simular(c), gap=.5-r.ind.ct;
+    return `<button type="button" class="card ${i==ATIVO?'on':''}" data-sel="${i}" aria-pressed="${i==ATIVO}">
+      <span class="eyebrow">${c.exemplo?'Exemplo · ':''}Cenário ${i+1}</span><span class="cn">${esc(c.nome)}</span>
+      <span class="num cv">${pct(r.ind.ct)}</span><span class="small muted">${gap>0?'faltam '+fmt(100*gap,1)+' p.p.':'meta atingida'} · ${c.decisoes.length} decis${c.decisoes.length==1?'ão':'ões'}</span></button>`; }).join('')
+    + (CEN.length<3?`<button type="button" class="card add" id="novo">+ Novo cenário</button>`:'');
+}
+function renderEditor(){
+  const c=CEN[ATIVO], campi=Object.keys(base()).filter(k=>base()[k].meq>0).sort();
+  if(!c){ $('#editor').innerHTML=''; return; }
+  $('#editor').innerHTML=`<input class="name" type="text" value="${esc(c.nome)}" id="cen-nome" aria-label="Nome do cenário">
+    <ol class="decs">${c.decisoes.map((d,di)=>`<li><details ${d._aberto?'open':''} data-di="${di}"><summary>${esc(frase(d))}</summary>
+      <div class="dec">
+        <label>Decisão<select data-d="${di}" data-f="tipo"><option value="ampliar" ${d.tipo=='ampliar'?'selected':''}>Ampliar curso técnico</option><option value="reduzir" ${d.tipo=='reduzir'?'selected':''}>Reduzir oferta</option><option value="docentes" ${d.tipo=='docentes'?'selected':''}>Ajustar docentes</option></select></label>
+        <label>Unidade<select data-d="${di}" data-f="campus">${campi.map(x=>`<option value="${esc(x)}" ${x==d.campus?'selected':''}>${curto(x)}</option>`).join('')}</select></label>
+        ${d.tipo=='docentes'?'':`<label class="full">Curso<select data-d="${di}" data-f="curso">${opcoesCurso(d.campus,d.tipo,d.curso)}</select></label>`}
+        <label>${d.tipo=='docentes'?'Professores-equivalentes (±)':'Matrículas'}<input type="number" step="1" value="${d.n}" data-d="${di}" data-f="n"></label>
+        <div class="row" style="align-items:end;justify-content:flex-end"><button type="button" class="ghost mini" data-rm="${di}">Remover</button></div>
+      </div></details></li>`).join('')}</ol>
+    <div class="row"><button type="button" class="ghost mini" id="add-dec">Adicionar decisão</button>${CEN.length>1?'<button type="button" class="ghost mini" id="del-cen">Excluir cenário</button>':''}</div>`;
+}
+function renderEfeito(){
+  const c=CEN[ATIVO]; if(!c){ $('#efeito').innerHTML=''; return; }
+  const r=simular(c), ct0=valor(r.t0,'ct'), d=r.ind.ct-ct0, gap=.5-r.ind.ct;
+  const fp0=valor(r.t0,'fp'), fpTxt= r.ind.fpMax-r.ind.fpMin>.0005 ? `${pct(r.ind.fpMin)} a ${pct(r.ind.fpMax)}` : pct(r.ind.fpMin);
+  $('#efeito').innerHTML=`<span class="eyebrow">Efeito no Ifes (${ANO})</span>
+    <div class="big"><span class="num">${pct(r.ind.ct)}</span><span class="small delta ${d>=0?'up':'down'}">${d>=0?'+':''}${fmt(100*d,2)} p.p. em formação técnica</span></div>
+    <p class="verdict ${gap>0?'':'ok'}">${gap>0?`Ainda faltam <b>${fmt(100*gap,1)} p.p.</b> para 50%. Esta combinação não alcança a meta.`:'Esta combinação alcança a meta de 50%.'}</p>
+    <div class="meter" aria-hidden="true"><span style="width:${Math.min(100,100*r.ind.ct/.6)}%"></span><i style="left:${100*.5/.6}%"></i></div>
+    <div class="res">
+      <div><span class="eyebrow">Form. professores</span><b>${fpTxt}</b><span class="small muted">antes ${pct(fp0)} · meta 20%</span></div>
+      <div><span class="eyebrow">EJA</span><b>${pct(r.ind.eja,2)}</b><span class="small muted">antes ${pct(valor(r.t0,'eja'),2)} · meta 10%</span></div>
+      <div><span class="eyebrow">RAP (PNP)</span><b>${fmt(r.ind.rap,2)}</b><span class="small muted">antes ${fmt(valor(r.t0,'rap'),2)} · referência 20</span></div>
+      <div><span class="eyebrow">RAP da matriz</span><b>não estimada</b><span class="small muted">numerador não reconciliado</span></div>
+    </div>
+    ${r.avisos.map(t=>`<div class="aviso">${esc(t)}</div>`).join('')}
+    <p class="premissa">Estimativa exploratória: cada nova matrícula vale a média de matrícula equivalente por estudante do curso em ${ANO}.</p>`;
+}
+function renderSimular(){ renderCenarios(); renderEditor(); renderEfeito(); }
+
+// ---------- etapa 3 ----------
 function reais(r){
   if(ANO!='2024') return null;
-  const M=D.matriz_2026, S=M.submontantes, ins=M.instituicoes, ifes=ins.find(i=>/ESPIRITO/.test(i.nome));
-  const w={ct:v=>v<.5?0:v<.6?v:2*v, fp:v=>v<.1?0:v<.15?v:v<.2?2*v:2.5*v, eja:v=>v<.025?0:v<.05?v:v<.1?2*v:2.5*v, rap:v=>v<18?0:v<20?v:v<22?2*v:2.5*v};
-  const sub={ct:S.CT,fp:S.FP,eja:S.EJA,rap:S.RAP};
-  const rapM0=ifes.rap, rapPNP0=valor(r.t0,'rap'), rapM=rapM0*r.ind.rap/rapPNP0;
-  const atual={ct:ifes.ct,fp:ifes.fp,eja:ifes.eja,rap:rapM0}, novo={ct:r.ind.ct,fp:r.ind.fp,eja:r.ind.eja,rap:rapM};
-  let tot=0; const det={};
-  for(const k of Object.keys(w)){ const soma=ins.reduce((s,i)=>s+w[k](i[k]||0),0); const wa=w[k](atual[k]), wn=w[k](novo[k]);
-    const va=wa/soma*sub[k], vn=wn?wn/(soma-wa+wn)*sub[k]:0; det[k]=vn-va; tot+=vn-va; }
-  return {tot,det,rapM};
-}
-
-function opcoesCurso(campus,tipo,sel){
-  const c=campiBase()[campus]; if(!c) return '<option value="">—</option>';
-  const lista=c.cursos.filter(x=> x.matriculas>0 && (tipo=='ampliar'? x.tipo=='Técnico' : true)).sort((a,b)=>b.me-a.me);
-  return lista.map(x=>{ const v=idCurso(x); return `<option value="${v.replace(/"/g,'&quot;')}" ${v==sel?'selected':''}>${x.curso.replace(/ \(.*\)$/,'')} · ${x.oferta=='Não se aplica'?x.tipo:x.oferta} · ${x.presencial?'pres.':'EAD'} · ${x.matriculas} matr.</option>`; }).join('');
-}
-function renderAlts(){
-  const campi=Object.keys(campiBase()).filter(k=>campiBase()[k].meq>0).sort();
-  $('#alts').innerHTML = ALTS.map((a,ai)=>{
-    const r=simular(a);
-    const decs=a.decisoes.map((d,di)=>`<div class="dec">
-      <label>Decisão<select data-a="${ai}" data-d="${di}" data-f="tipo"><option value="ampliar" ${d.tipo=='ampliar'?'selected':''}>Ampliar curso técnico</option><option value="reduzir" ${d.tipo=='reduzir'?'selected':''}>Reduzir oferta</option><option value="docentes" ${d.tipo=='docentes'?'selected':''}>Ajustar docentes</option></select></label>
-      <label>Unidade<select data-a="${ai}" data-d="${di}" data-f="campus">${campi.map(c=>`<option value="${c}" ${c==d.campus?'selected':''}>${curto(c)}</option>`).join('')}</select></label>
-      ${d.tipo=='docentes'?'':`<label class="full">Curso<select data-a="${ai}" data-d="${di}" data-f="curso">${opcoesCurso(d.campus,d.tipo,d.curso)}</select></label>`}
-      <label>${d.tipo=='docentes'?'Professores-equivalentes (±)':'Matrículas'}<input type="number" step="1" value="${d.n}" data-a="${ai}" data-d="${di}" data-f="n"></label>
-      <div class="row" style="align-items:end;justify-content:flex-end"><button type="button" class="ghost mini" data-rm="${ai}:${di}">Remover</button></div></div>`).join('');
-    const dct=r.ind.ct-valor(r.t0,'ct');
-    return `<div class="panel alt">
-      ${a.exemplo?'<span class="badge-ex">Exemplo editável</span>':''}
-      <input class="name" type="text" value="${a.nome.replace(/"/g,'&quot;')}" data-a="${ai}" data-f="nome" aria-label="Nome da alternativa">
-      <div class="res">
-        <div><span class="eyebrow">Técnico</span><b>${pct(r.ind.ct)}</b><span class="small delta ${dct>=0?'up':'down'}">${dct>=0?'+':''}${fmt(100*dct,2)} p.p.</span></div>
-        <div><span class="eyebrow">Form. professores</span><b>${pct(r.ind.fp)}</b><span class="small muted">meta 20%</span></div>
-        <div><span class="eyebrow">EJA</span><b>${pct(r.ind.eja,2)}</b><span class="small muted">meta 10%</span></div>
-        <div><span class="eyebrow">RAP (PNP)</span><b>${fmt(r.ind.rap,2)}</b><span class="small muted">limiares 18 · 20 · 22</span></div>
-      </div>
-      <div class="chips">${chipsPara('ct',r.ind.ct)}</div>
-      ${r.avisos.map(t=>`<div class="chip warn" style="white-space:normal;line-height:1.3">${t}</div>`).join('')}
-      ${decs}
-      <div class="row"><button type="button" class="ghost mini" data-add="${ai}">Adicionar decisão</button>${ALTS.length>1?`<button type="button" class="ghost mini" data-rmalt="${ai}">Excluir alternativa</button>`:''}</div>
-      <div class="premissa">${r.premissas.join(' ')}</div>
-    </div>`;
-  }).join('');
-  $('#add-alt').hidden = ALTS.length>=3;
+  const M=D.matriz_2026, S=M.submontantes, ins=M.instituicoes;
+  const w={ct:v=>v<.5?0:v<.6?v:2*v, eja:v=>v<.025?0:v<.05?v:v<.1?2*v:2.5*v}, sub={ct:S.CT,eja:S.EJA};
+  let tot=0; for(const k of Object.keys(w)){ const soma=ins.reduce((s,i)=>s+w[k](i[k]||0),0), wa=w[k](MATRIZ_IFES[k]), wn=w[k](r.ind[k]);
+    tot+=(wn?wn/(soma-wa+wn)*sub[k]:0)-wa/soma*sub[k]; }
+  return tot;
 }
 function renderComp(){
-  const rs=ALTS.map(simular), mostrar=$('#reais').checked, t0=rs[0]?rs[0].t0:totais(campiBase());
-  const linhas=[
-    ['Formação técnica', valor(t0,'ct'), r=>r.ind.ct, v=>pct(v), 'Meta legal 50% · limiares 50% e 60%'],
-    ['Formação de professores', valor(t0,'fp'), r=>r.ind.fp, v=>pct(v), 'Meta legal 20% · limiares 10, 15, 20%'],
-    ['EJA (PROEJA)', valor(t0,'eja'), r=>r.ind.eja, v=>pct(v,2), 'Meta legal 10% · limiares 2,5, 5, 10%'],
-    ['Relação aluno-professor (PNP)', valor(t0,'rap'), r=>r.ind.rap, v=>fmt(v,2), 'Limiares da matriz 18 · 20 · 22']
-  ];
-  let h=`<thead><tr><th>Indicador do Ifes</th><th class="r">Atual (${ANO})</th>${ALTS.map(a=>`<th class="r">${a.nome}</th>`).join('')}<th>Réguas</th></tr></thead><tbody>`;
-  for(const [n,b,f,fm,reg] of linhas) h+=`<tr><td>${n}</td><td class="r num">${fm(b)}</td>${rs.map(r=>`<td class="r num">${fm(f(r))}</td>`).join('')}<td class="small muted">${reg}</td></tr>`;
-  h+=`<tr><td>Distância à meta de 50% técnico</td><td class="r num">${fmt(100*(.5-valor(t0,'ct')),1)} p.p.</td>${rs.map(r=>`<td class="r num">${r.ind.ct>=.5?'atingida':fmt(100*(.5-r.ind.ct),1)+' p.p.'}</td>`).join('')}<td></td></tr>`;
-  h+=`<tr><td>Alertas</td><td></td>${rs.map(r=>`<td class="small">${r.avisos.join(' ')||'—'}</td>`).join('')}<td></td></tr>`;
-  if(mostrar){
-    if(ANO!='2024') h+=`<tr><td>Referência orçamentária</td><td colspan="${ALTS.length+2}" class="small muted">Disponível só para o ano-base 2024 (regime da matriz 2026).</td></tr>`;
-    else { const rr=rs.map(reais);
-      h+=`<tr><td>RAP da matriz (premissa proporcional)</td><td class="r num">${fmt(D.matriz_2026.instituicoes.find(i=>/ESPIRITO/.test(i.nome)).rap,2)}</td>${rr.map(x=>`<td class="r num">${fmt(x.rapM,2)}</td>`).join('')}<td class="small muted">Numerador da matriz não reconciliado com a PNP</td></tr>`;
-      h+=`<tr><td>Variação na referência de Qualidade e Eficiência</td><td class="r">—</td>${rr.map(x=>`<td class="r num">${x.tot>=0?'+':''}${brl(x.tot)}</td>`).join('')}<td class="small muted">Potencial condicional; demais instituições e submontantes de 2026 constantes; não é recurso garantido nem chega automaticamente aos campi.</td></tr>`; }
+  const rs=CEN.map(simular), t0=totais(base());
+  const L=[['Formação técnica',pct(valor(t0,'ct')),r=>pct(r.ind.ct),'Meta legal 50% · limiares 50% e 60%'],
+    ['Distância à meta de 50%',fmt(100*(.5-valor(t0,'ct')),1)+' p.p.',r=>r.ind.ct>=.5?'atingida':fmt(100*(.5-r.ind.ct),1)+' p.p.',''],
+    ['Formação de professores',pct(valor(t0,'fp')),r=>r.ind.fpMax-r.ind.fpMin>.0005?pct(r.ind.fpMin)+' a '+pct(r.ind.fpMax):pct(r.ind.fpMin),'Meta legal 20% · limiares 10, 15, 20%'],
+    ['EJA (PROEJA)',pct(valor(t0,'eja'),2),r=>pct(r.ind.eja,2),'Meta legal 10% · limiares 2,5, 5, 10%'],
+    ['RAP (PNP)',fmt(valor(t0,'rap'),2),r=>fmt(r.ind.rap,2),'Referência 20; não é a RAP da matriz']];
+  let h=`<thead><tr><th>Indicador do Ifes</th><th class="r">Atual (${ANO})</th>${CEN.map(c=>`<th class="r">${esc(c.nome)}</th>`).join('')}<th>Réguas</th></tr></thead><tbody>`;
+  for(const [n,b,f,reg] of L) h+=`<tr><td>${n}</td><td class="r num">${b}</td>${rs.map(r=>`<td class="r num">${f(r)}</td>`).join('')}<td class="small muted">${reg}</td></tr>`;
+  h+=`<tr><td>Alertas</td><td></td>${rs.map(r=>`<td class="small">${r.avisos.map(esc).join(' ')||'—'}</td>`).join('')}<td></td></tr>`;
+  if($('#reais').checked){
+    if(ANO!='2024') h+=`<tr><td>Referência orçamentária</td><td colspan="${CEN.length+2}" class="small muted">Disponível só para o ano-base 2024 (regime da matriz 2026).</td></tr>`;
+    else h+=`<tr><td>Variação condicional na referência de Qualidade (técnico e EJA)</td><td class="r">—</td>${rs.map(r=>`<td class="r num">${brl(reais(r))}</td>`).join('')}<td class="small muted">Demais instituições e submontantes de 2026 constantes. Não é recurso garantido nem chega automaticamente aos campi. RAP e formação de professores fora do cálculo.</td></tr>`;
   }
   $('#comp').innerHTML=h+'</tbody>';
   const campi=[...new Set(rs.flatMap(r=>r.contrib.map(c=>c.campus)))].sort();
-  $('#contrib').innerHTML = `<thead><tr><th>Unidade</th>${ALTS.map(a=>`<th class="r">${a.nome}</th>`).join('')}</tr></thead><tbody>`+
+  $('#contrib').innerHTML=`<thead><tr><th>Unidade</th>${CEN.map(c=>`<th class="r">${esc(c.nome)}</th>`).join('')}</tr></thead><tbody>`+
     campi.map(c=>`<tr><td>${curto(c)}</td>${rs.map(r=>{ const x=r.contrib.find(z=>z.campus==c); return `<td class="r num">${x?(x.pp>=0?'+':'')+fmt(100*x.pp,2):'—'}</td>`; }).join('')}</tr>`).join('')+
     `<tr><th>Ifes</th>${rs.map(r=>{ const d=r.ind.ct-valor(r.t0,'ct'); return `<th class="r num">${d>=0?'+':''}${fmt(100*d,2)}</th>`; }).join('')}</tr></tbody>`;
-  $('#sv-alt').innerHTML = ALTS.map((a,i)=>`<option value="${i}">${a.nome}</option>`).join('');
+  $('#sv-alt').innerHTML=CEN.map((c,i)=>`<option value="${i}">${esc(c.nome)}</option>`).join('');
   renderSalvos(); atualizarJSON();
 }
-// ---------- salvar ----------
 const KEY='prumo-poc-propostas';
 function lerSalvos(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
 function proposta(){
-  const i=Number($('#sv-alt').value||0), a=ALTS[i]; if(!a) return null; const r=simular(a);
-  return {proposta:$('#sv-nome').value||a.nome, autor:$('#sv-autor').value, justificativa:$('#sv-just').value, data:new Date().toISOString().slice(0,10),
-    ano_base:ANO, alternativa:a.nome, decisoes:a.decisoes.map(d=>({...d, campus:curto(d.campus)})),
-    resultado:{tecnico:+r.ind.ct.toFixed(4), formacao_professores:+r.ind.fp.toFixed(4), eja:+r.ind.eja.toFixed(4), rap_pnp:+r.ind.rap.toFixed(2)},
-    contribuicoes_pp:Object.fromEntries(r.contrib.map(c=>[curto(c.campus), +(100*c.pp).toFixed(3)])),
-    premissas:r.premissas, alertas:r.avisos,
-    limitacoes:'Um ano-base; sem evolução de turmas, custos, capacidade física nem eficiência acadêmica. Situação: proposta, não decisão aprovada.'};
+  const c=CEN[Number($('#sv-alt').value||0)]; if(!c) return null; const r=simular(c);
+  return {proposta:$('#sv-nome').value||c.nome, autor:$('#sv-autor').value, justificativa:$('#sv-just').value, data:new Date().toISOString().slice(0,10),
+    situacao:'proposta (não é decisão aprovada)', ano_base:ANO, cenario:c.nome, decisoes:c.decisoes.map(frase),
+    resultado:{tecnico:+r.ind.ct.toFixed(4), formacao_professores:[+r.ind.fpMin.toFixed(4),+r.ind.fpMax.toFixed(4)], eja:+r.ind.eja.toFixed(4), rap_pnp:+r.ind.rap.toFixed(2)},
+    distancia_meta_tecnico_pp:+Math.max(0,100*(.5-r.ind.ct)).toFixed(2),
+    contribuicoes_pp:Object.fromEntries(r.contrib.map(x=>[curto(x.campus),+(100*x.pp).toFixed(3)])),
+    alertas:r.avisos,
+    premissas:['Matrícula equivalente por estudante igual à média do curso no ano-base','Formação de professores apresentada como intervalo','RAP da matriz não estimada']};
 }
 function atualizarJSON(){ const p=proposta(); $('#sv-json').value=p?JSON.stringify(p,null,2):''; }
-function renderSalvos(){ const s=lerSalvos(); $('#sv-list').innerHTML = s.length? '<strong>Salvas neste navegador:</strong> '+s.map(p=>`${p.proposta} (${p.data}, técnico ${pct(p.resultado.tecnico)})`).join(' · ') : '<span class="muted">Nenhuma proposta salva neste navegador.</span>'; }
+function renderSalvos(){ const s=lerSalvos(); $('#sv-list').innerHTML=s.length?'<strong>Salvas neste navegador:</strong> '+s.map(p=>`${esc(p.proposta)} (${p.data}, técnico ${pct(p.resultado.tecnico)})`).join(' · '):'<span class="muted">Nenhuma proposta salva neste navegador.</span>'; }
 
-// ---------- eventos ----------
+// ---------- navegação e eventos ----------
 function irPara(step){
-  ['comparar','simular','compor'].forEach(s=>{ $('#s-'+s).hidden = s!=step; const a=document.querySelector(`nav a[data-step="${s}"]`); a.setAttribute('aria-current', s==step?'true':'false'); });
-  if(step=='simular') renderAlts(); if(step=='compor') renderComp();
+  ['comparar','simular','compor'].forEach(s=>{ $('#s-'+s).hidden=s!=step; document.querySelector(`nav a[data-step="${s}"]`).setAttribute('aria-current',s==step?'true':'false'); });
+  if(step=='simular') renderSimular(); if(step=='compor') renderComp();
 }
-function passoAtual(){ const h=(location.hash||'').slice(1); return ['comparar','simular','compor'].includes(h)?h:'comparar'; }
-window.addEventListener('hashchange',()=>irPara(passoAtual()));
+const passo=()=>{ const h=(location.hash||'').slice(1); return ['comparar','simular','compor'].includes(h)?h:'comparar'; };
+window.addEventListener('hashchange',()=>irPara(passo()));
 document.addEventListener('click',e=>{
-  const g=e.target.closest('[data-go]'); if(g){ location.hash=g.dataset.go; return; }
-  const add=e.target.closest('[data-add]'); if(add){ const a=ALTS[+add.dataset.add]; const c=Object.keys(campiBase()).find(k=>k.includes('Serra'))||Object.keys(campiBase())[0]; a.decisoes.push({tipo:'ampliar',campus:c,curso:'',n:40}); a.exemplo=false; renderAlts(); return; }
-  const rm=e.target.closest('[data-rm]'); if(rm){ const [ai,di]=rm.dataset.rm.split(':').map(Number); ALTS[ai].decisoes.splice(di,1); ALTS[ai].exemplo=false; renderAlts(); return; }
-  const ra=e.target.closest('[data-rmalt]'); if(ra){ ALTS.splice(+ra.dataset.rmalt,1); renderAlts(); return; }
+  const t=e.target;
+  const g=t.closest('[data-go]'); if(g){ location.hash=g.dataset.go; return; }
+  const s=t.closest('[data-sel]'); if(s){ ATIVO=+s.dataset.sel; renderSimular(); return; }
+  if(t.closest('#novo')){ CEN.push({nome:'Cenário '+(CEN.length+1),decisoes:[]}); ATIVO=CEN.length-1; renderSimular(); return; }
+  if(t.closest('#add-dec')){ const c=CEN[ATIVO], u=Object.keys(base()).find(k=>k.includes('Serra'))||Object.keys(base())[0];
+    const first=base()[u].cursos.filter(x=>x.tipo=='Técnico'&&x.matriculas>0).sort((p,q)=>q.me-p.me)[0];
+    c.decisoes.push({tipo:'ampliar',campus:u,curso:idCurso(first),n:40,_aberto:true}); c.exemplo=false; renderSimular(); return; }
+  if(t.closest('#del-cen')){ CEN.splice(ATIVO,1); ATIVO=0; renderSimular(); return; }
+  const rm=t.closest('[data-rm]'); if(rm){ CEN[ATIVO].decisoes.splice(+rm.dataset.rm,1); CEN[ATIVO].exemplo=false; renderSimular(); }
 });
-$('#add-alt').addEventListener('click',()=>{ if(ALTS.length<3){ ALTS.push({nome:'Nova alternativa',decisoes:[]}); renderAlts(); }});
+document.addEventListener('toggle',e=>{ const d=e.target; if(d.tagName=='DETAILS'&&d.dataset.di!=null&&CEN[ATIVO]){ const x=CEN[ATIVO].decisoes[+d.dataset.di]; if(x) x._aberto=d.open; } },true);
 document.addEventListener('change',e=>{
-  const el=e.target; if(el.dataset && el.dataset.a!=null && el.dataset.f){
-    const a=ALTS[+el.dataset.a];
-    if(el.dataset.f=='nome'){ a.nome=el.value; return; }
-    const d=a.decisoes[+el.dataset.d]; a.exemplo=false;
+  const el=e.target;
+  if(el.id=='cen-nome'){ CEN[ATIVO].nome=el.value; renderCenarios(); return; }
+  if(el.dataset&&el.dataset.d!=null&&el.dataset.f){
+    const d=CEN[ATIVO].decisoes[+el.dataset.d]; CEN[ATIVO].exemplo=false; d._aberto=true;
     if(el.dataset.f=='n') d.n=Number(el.value)||0; else d[el.dataset.f]=el.value;
-    if(el.dataset.f=='tipo'||el.dataset.f=='campus'){ const first=campiBase()[d.campus]?.cursos.filter(x=>x.matriculas>0&&(d.tipo=='ampliar'?x.tipo=='Técnico':true)).sort((p,q)=>q.me-p.me)[0]; d.curso=idCurso(first); }
-    renderAlts();
+    if(el.dataset.f=='tipo'||el.dataset.f=='campus'){ const first=base()[d.campus]?.cursos.filter(x=>x.matriculas>0&&(d.tipo=='ampliar'?x.tipo=='Técnico':true)).sort((p,q)=>q.me-p.me)[0]; d.curso=idCurso(first); }
+    renderSimular();
   }
 });
 $('#ind').addEventListener('change',renderStrip);
 $('#pares').addEventListener('change',()=>{ renderKpis(); renderStrip(); });
 $('#reais').addEventListener('change',renderComp);
 ['#sv-alt','#sv-nome','#sv-autor','#sv-just'].forEach(s=>$(s).addEventListener('input',atualizarJSON));
-$('#sv-btn').addEventListener('click',()=>{ const p=proposta(); if(!p) return; const s=lerSalvos(); s.push(p); try{ localStorage.setItem(KEY,JSON.stringify(s)); $('#sv-msg').textContent='Proposta salva neste navegador.'; }catch(e){ $('#sv-msg').textContent='O navegador não permitiu salvar; copie o JSON abaixo.'; } renderSalvos(); });
+$('#sv-btn').addEventListener('click',()=>{ const p=proposta(); if(!p) return; const s=lerSalvos(); s.push(p); try{ localStorage.setItem(KEY,JSON.stringify(s)); $('#sv-msg').textContent='Proposta salva neste navegador.'; }catch(e){ $('#sv-msg').textContent='O navegador não permitiu salvar. Copie o JSON abaixo.'; } renderSalvos(); });
 $('#sv-copy').addEventListener('click',()=>{ const t=$('#sv-json'); navigator.clipboard.writeText(t.value).then(()=>{ $('#sv-msg').textContent='JSON copiado.'; }).catch(()=>{ t.focus(); t.select(); $('#sv-msg').textContent='Selecione e copie o texto abaixo.'; }); });
-$('#ano').addEventListener('change',()=>{ ANO=$('#ano').value; ALTS=exemplos(); renderKpis(); renderStrip(); renderCampi(); irPara(passoAtual()); });
+$('#ano').addEventListener('change',()=>{ ANO=$('#ano').value; CEN=exemplos(); ATIVO=0; renderKpis(); renderStrip(); renderCampi(); irPara(passo()); });
 
-ALTS=exemplos(); renderKpis(); renderStrip(); renderCampi(); irPara(passoAtual());
+CEN=exemplos(); renderKpis(); renderStrip(); renderCampi(); irPara(passo());
 })();
 </script>

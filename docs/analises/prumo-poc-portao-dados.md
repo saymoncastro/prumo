@@ -31,6 +31,20 @@ Etapas: comparar (Ifes × pares por porte, com meta legal, limiar da matriz e fa
 - A variação do numerador da RAP segue a razão atual do campus.
 - A RAP da matriz é ajustada em proporção à RAP da PNP.
 
+### Versão 2 do protótipo (após avaliação externa, 09/11/2026)
+
+| Achado da avaliação | Correção |
+|---|---|
+| A interface usava a RAP da PNP (20,11) para indicar a faixa da matriz, cuja RAP é 18,148 | As duas RAPs aparecem separadas. A RAP da PNP é comparada só com a referência 20 do PNE; a da matriz aparece como fato observado (faixa 1, a 0,15 do limiar 18) e **não é estimada** nos cenários. A referência em reais exclui a RAP. |
+| Formação de professores estimada pela proporção do campus | Removida a proporção. Decisões em cursos não técnicos mostram um **intervalo** (o curso conta ou não conta), com alerta. Verificação: a PNP não permite classificar por curso. A formação de professores inclui licenciaturas, parte das especializações e FICs, e há inconsistências (Piúma 2024: 208 ME em licenciatura e formação de professores zero). |
+| Matrícula equivalente de novas vagas pela média do curso | Mantida, declarada como estimativa exploratória junto ao resultado e nos limites. |
+| Três formulários simultâneos | Um cenário aberto por vez. Os demais aparecem como cartões-resumo (resultado e distância à meta). Decisões descritas em uma frase, editáveis sob demanda. Dois exemplos, com até três cenários. |
+| Distância à meta pouco explícita | Frase de veredito ("Ainda faltam X p.p. para 50%. Esta combinação não alcança a meta.") e régua com a marca de 50%. |
+| Narrativa "o Cefor reduz o percentual técnico" | Reescrita: "a composição das unidades afeta várias metas ao mesmo tempo". O Cefor responde por 25% da formação de professores do Ifes em 2024; a tabela por unidade mostra técnico e formação de professores lado a lado. |
+| Salto da formação de professores (12,1% → 24,8%) | Sinalizado na etapa 1 como **provável mudança de classificação** (Cefor 1.132 → 4.463 ME com especializações em queda de 4.462 para 2.788; Vitória, Vila Velha e Cariacica também sobem). Confirmar com a Prodi antes de interpretar. |
+
+Conferido no navegador: as três etapas sem erro de console. Resultados de exemplo (2024): expansão em dois campi +0,23 p.p. (faltam 5,7); reorientação parcial do Cefor +2,28 p.p. (faltam 3,7), com formação de professores entre 8,3% e 12,5%.
+
 O texto abaixo é o registro original, anterior à obtenção dos dados.
 
 ---
