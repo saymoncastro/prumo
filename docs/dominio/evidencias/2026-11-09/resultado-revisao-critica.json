@@ -1,0 +1,101 @@
+{
+  "cobertura_MT_B": {
+    "RO": 2322,
+    "N2": 1300,
+    "total": 2322,
+    "agro_inferido_1_5": {
+      "AGRONOMIA": 20,
+      "ENGENHARIA DE AQUICULTURA": 5,
+      "TECNICO EM AGROINDUSTRIA": 9,
+      "TECNICO EM AGROPECUARIA": 26,
+      "CAFEICULTURA": 6,
+      "TECNICO EM AGRICULTURA": 11,
+      "TECNICO EM FLORESTAS": 6,
+      "ZOOTECNIA": 5,
+      "CIENCIAS AGRARIAS": 4,
+      "TECNICO EM ZOOTECNIA": 6,
+      "ENGENHARIA DE PESCA": 8,
+      "TECNICO EM AQUICULTURA": 5,
+      "TECNICO EM PESCA": 6
+    }
+  },
+  "cobertura_MT_C5": {
+    "RO": 1086,
+    "N2": 993,
+    "total": 1086
+  },
+  "conciliacao_bolo_e_mooc": {
+    "B_D7_funcionamento": 1764782417.221694,
+    "C5_pres_mais_ead_mais_fp": 1764782417.21,
+    "C5_mooc_rede_fora_do_bolo": 22590866.05,
+    "B_D11_base_mooc_nacional": 23139.6926,
+    "C5_base_mooc_implicita": 23139.690925399533,
+    "C5_preco_ead_sobre_presencial": 0.2500000204858808,
+    "C5_preco_mooc_sobre_presencial": 0.7999999508338861
+  },
+  "funcionamento_ifes_por_regime": {
+    "mt_ifes_por_situacao": {
+      "PRESENCIAL": 49665.7545,
+      "EAD": 4809.8947,
+      "EAD MOOC": 739.1173,
+      "EAD FP": 1846.9836
+    },
+    "B": {
+      "preco_base": 1220.3988573849524,
+      "valor_ifes": 62782149.76
+    },
+    "N3_mooc_no_denominador": {
+      "preco_base": 1218.8385707600144,
+      "valor_ifes": 63873167.58
+    },
+    "N3_mooc_fora_de_F": {
+      "preco_base": 1220.3988573849524,
+      "valor_ifes": 63954934.31
+    }
+  },
+  "qualidade_ifes_C5": {
+    "ifes_indicadores": {
+      "IEA": 0.4905,
+      "RAP": 18.14786621,
+      "MEq_RAP": 27539.39,
+      "prof_eq": 1517.5,
+      "CT": 0.44,
+      "FP": 0.1206,
+      "EJA": 0.0186
+    },
+    "valor_atual_por_subcomponente": {
+      "IEA": 1595393,
+      "RAP": 726914,
+      "CT": 0,
+      "FP": 329918,
+      "EJA": 0
+    },
+    "valor_atual_total": 2652225,
+    "delta_por_cenario_isolado": {
+      "RAP_abaixo_18": -726914,
+      "RAP_20": 850257,
+      "RAP_22": 1418685,
+      "CT_50": 2055405,
+      "CT_60": 4755727,
+      "FP_15": 472913,
+      "FP_20": 976438,
+      "EJA_2_5": 311368,
+      "EJA_5": 1148229,
+      "IEA_peso_2": 510793
+    },
+    "primeiro_ramo_iea_aplicado_C5": [
+      [
+        0.3037,
+        0.5
+      ],
+      [
+        0.3332,
+        0.5
+      ],
+      [
+        0.3421,
+        0.5
+      ]
+    ]
+  }
+}

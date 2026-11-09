@@ -1,0 +1,48 @@
+{
+  "consulta": "2026-11-08",
+  "timezone": "America/Sao_Paulo",
+  "arquivos": [
+    {
+      "id": "N2",
+      "arquivo": "portaria-646-republicacao.pdf",
+      "url": "https://www.audit.cefetmg.br/wp-content/uploads/sites/169/2022/09/MATRIZ-OR%C3%87-PORT-646-25AGO22-SETEC.pdf?download=1",
+      "sha256": "cb56fcc25db01375e96ee1b62b37a8a0f774d4eaa105268486daef8b76f7b51c",
+      "bytes": 3255634
+    },
+    {
+      "id": "C5",
+      "arquivo": "ifmt-matriz-2026.xlsx",
+      "url": "https://docs.google.com/spreadsheets/d/1Y742qTN3Svetk9B2ggAefjKF8-rAjs8heIqJncXYwRE/export?format=xlsx",
+      "sha256": "b341f7a1e8a92bc510abd75058ec4396369d9725654c0d11e2e7e740bb66b9f3",
+      "bytes": 366321
+    },
+    {
+      "id": "C6",
+      "arquivo": "cadastro-publico.xlsx",
+      "url": "https://docs.google.com/spreadsheets/d/1voCoeyf8ByxxhAvDihep-weld6XcpVxzYOAVffxOH5I/export?format=xlsx",
+      "sha256": "040f1b7d3bcc987d1468798696d4bc4c2525d17465fccf08c3d37e28eea100b0",
+      "bytes": 728184
+    },
+    {
+      "id": "C7",
+      "url": "https://educapes.capes.gov.br/bitstream/capes/1133623/2/GUIA%20DE%20OR%C3%87AMENTO%20RFEPCT.pdf",
+      "sha256": "27b10eeac6f97a45bc03c6cde206bd4d13fb200d46f0371a42ed197134f71002",
+      "bytes": 16153464,
+      "condicao": "Consultado; não duplicado no repositório. Fonte auxiliar, não norma."
+    },
+    {
+      "id": "V1",
+      "arquivo": "matriz-orcamentaria-v1.0.0.md",
+      "url": "origem-local:docs/dominio/matriz-orcamentaria.md, cópia anterior à auditoria complementar",
+      "sha256": "3d4a9aafcce4adace3b3333900fbd9bd9adfa0f05cbc726dc5503f1bb42e1374",
+      "bytes": 177075
+    }
+  ],
+  "limites": [
+    "N2: reprodução DOU pp122–125 em repositório institucional; assinatura criptográfica não validada, códigos de autenticidade impressos05152022092100122 a125.",
+    "C5/C6: exportações públicas vinculadas pela página de orçamento IFMT; sem prova de identidade metodológica/temporal com B.",
+    "C6: PLOA2025 é rótulo da aba, não autorização para uso em2026; aba2027 não adotada por coerção de números em datas.",
+    "Metadados ausentes não foram completados a partir dos defaults de openpyxl."
+  ],
+  "conclusao_documental": "2026-11-09"
+}

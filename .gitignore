@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.pyc
+~$*
+
+# Fontes não publicadas (mantidas apenas localmente)
+/6ª Fase - Participação matrículas totais 2026 IFES - cópia.xlsx
+/LIVRO-MATRIZ-NOVA-CONFIGURACAO.pdf
+/tests/auditoria_matriz/ro_mt_casos.json
+/tests/auditoria_matriz/referencias.json

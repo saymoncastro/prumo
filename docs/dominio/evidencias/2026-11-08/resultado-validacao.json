@@ -1,0 +1,35 @@
+{
+  "conclusao": "2026-11-09",
+  "consultas_fontes": "2026-11-08",
+  "timezone": "America/Sao_Paulo",
+  "unittest": {
+    "executados": 19,
+    "falhas": 0,
+    "erros": 0,
+    "ignorados": 0,
+    "tipos": {
+      "operacional": 8,
+      "metodo_identificado": 6,
+      "hipotese": 5
+    },
+    "log": "test_H01_participacao_muda_denominador (test_referencia.Hipoteses) ... ok\ntest_H02_qualidade_fecha_com_submontantes (test_referencia.Hipoteses) ... ok\ntest_H03_renda_denominador_declarantes (test_referencia.Hipoteses) ... ok\ntest_H04_zeros_e_precisao_explicitos (test_referencia.Hipoteses) ... ok\ntest_H05_deficit_nacional_condicional_ead (test_referencia.Hipoteses) ... ok\ntest_M01_mt_amostras_sem_AC (test_referencia.MetodoIdentificado) ... ok\ntest_M02_contraexemplos_nao_sao_conformidade (test_referencia.MetodoIdentificado) ... ok\ntest_M03_tabelas_continuas_n2 (test_referencia.MetodoIdentificado) ... ok\ntest_M04_iea_tabela_e_equacao_divergem (test_referencia.MetodoIdentificado) ... ok\ntest_M05_retencao_duas_metades (test_referencia.MetodoIdentificado) ... ok\ntest_M06_ae_rip_e_exemplos_c5 (test_referencia.MetodoIdentificado) ... ok\ntest_O01_precos (test_referencia.Operacional) ... ok\ntest_O02_classificacao_literal (test_referencia.Operacional) ... ok\ntest_O03_monetizacao_por_ciclo (test_referencia.Operacional) ... ok\ntest_O04_totalizacao_campi_e_instituicao (test_referencia.Operacional) ... ok\ntest_O05_denominador_ifes (test_referencia.Operacional) ... ok\ntest_O06_icqa_fronteiras (test_referencia.Operacional) ... ok\ntest_O07_ano_bissexto_auxiliar (test_referencia.Operacional) ... ok\ntest_O08_mooc_e_diagnostico (test_referencia.Operacional) ... ok\n\n----------------------------------------------------------------------\nRan 19 tests in 0.001s\n\nOK\n"
+  },
+  "verificacao_fontes": {
+    "original_sha256_preservado": "7f62a6ebcf6fac12a7b63805e6f936a68469d2e13e3f71759c7d550cb5de5d33",
+    "ciclos_monetizados": 2322,
+    "max_erro_reais": "1.507095028861E-10",
+    "campi_conferidos": 22,
+    "amostras_conferidas": 23,
+    "mt_nao_fic_literal_N2_C5_cadastro_C6": {
+      "coincide": 1005,
+      "cadastro_ambiguo_ou_ausente": 207,
+      "diverge": 55
+    },
+    "limite": "Contagens exploratórias; cadastro PLOA2025; não certifica edição de B nem norma vigente."
+  },
+  "limites": [
+    "Testes aprovados não certificam vigência N3 nem conformidade integral da planilha.",
+    "T-M02 e T-M04 aprovam a preservação de divergências, não a legalidade dos valores.",
+    "Regra de comparação de quatro casas HALF_UP não é política oficial de resíduos."
+  ]
+}

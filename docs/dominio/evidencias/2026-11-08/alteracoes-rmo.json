@@ -1,0 +1,738 @@
+{
+  "RMO-003": {
+    "titulo_antes": "Base PNP e responsabilidade pela informação",
+    "titulo_depois": "Base PNP e responsabilidade pela informação",
+    "campos": {
+      "Fonte": {
+        "antes": "N2 art. 2º e parágrafo único, trecho oficial indexado do DOU de 21/09/2022 p. 122.",
+        "depois": "N2 republicada, art.2º e abertura do Anexo, p.122, agora lida integralmente; preserva-se a observação anterior de B e A."
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "N2, dispositivo verificado em trecho oficial; substituição por N3 indicada por C1, vigência exata não conferida.",
+        "depois": "Regime documentado da N2 republicada em 21/09/2022; edição PNP e ajustes anuais precisam ser identificados. N3 não verificada."
+      }
+    }
+  },
+  "RMO-004": {
+    "titulo_antes": "Quatro blocos e duas granularidades de distribuição",
+    "titulo_depois": "Quatro blocos e duas granularidades de distribuição",
+    "campos": {
+      "Fonte": {
+        "antes": "N2 Anexo, abertura indexada na p. 122 de 21/09/2022; A figura 2 p. 38 e p. 46.",
+        "depois": "N2 republicada, art.3º e abertura do Anexo, p.122, agora lida integralmente; preserva-se a observação anterior de B e A."
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Descrição de N2; aplicação atual sujeita a N3 e seus anexos não verificados.",
+        "depois": "Regime documentado da N2 republicada em 21/09/2022; edição PNP e ajustes anuais precisam ser identificados. N3 não verificada."
+      }
+    }
+  },
+  "RMO-006": {
+    "titulo_antes": "Divisão do remanescente em 80%, 10% e 10%",
+    "titulo_depois": "Divisão do remanescente em 80%, 10% e 10%",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "Na descrição de A, R=B−A_E; Funcionamento=0,8R, Reitoria=0,1R e Qualidade=0,1R. Os percentuais não incidem sobre o total antes da assistência.",
+        "depois": "N2 art.3º § 3º e Anexo p.122 confirmam F=0,8×(OT−AE), R=0,1×(OT−AE), QE=0,1×(OT−AE)."
+      },
+      "Fonte": {
+        "antes": "A pp. 38–40, gráfico 1; B Parâmetros D7.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Modelo apresentado no livro de 2025; B confirma apenas o cálculo dos 80%.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-008": {
+    "titulo_antes": "Referência anual de 800 horas para equalização",
+    "titulo_depois": "Referência anual de 800 horas para equalização",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A cita equalização anual de 800 horas; B divide a carga anual auxiliar por 800. Isso não basta para reconstruir os valores principais AC.",
+        "depois": "N2 Anexo pp.122–123 confirma referência de 800 horas; anualização usa 365 dias, enquanto o denominador temporal é o número real de dias do período (§ 6.6)."
+      },
+      "Fonte": {
+        "antes": "A p. 28; B CICLOS AN7:AN2328.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A relata origem histórica e método apresentado em 2025; divisor observado no auxiliar B.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-009": {
+    "titulo_antes": "Pesos de curso segundo infraestrutura descrita",
+    "titulo_depois": "Pesos de curso segundo infraestrutura descrita",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A apresenta 1 laboratório→1; 2→1,5; 3→2; 4 ou mais→2,5, vinculando a atribuição aos catálogos. B importa W sem fórmula nem inventário de laboratórios.",
+        "depois": "N2 Anexo p.123 confirma pesos 1/1,5/2/2,5 para 1/2/3/4 ou mais laboratórios, além dos critérios por tipo. O cadastro anual efetivo não se deduz só do nome."
+      },
+      "Fonte": {
+        "antes": "A pp. 42–43, quadro de qualificadores; B CICLOS W7:W2328.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Tabela metodológica de A em 2025; cadastro de W próprio de B.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-010": {
+    "titulo_antes": "Piso de peso para oferta integrada",
+    "titulo_depois": "Piso de peso para oferta integrada",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A afirma piso 1,5 mesmo quando o catálogo indicaria um laboratório. Não há fórmula MAX em B; W é importado.",
+        "depois": "N2 Anexo p.123 confirma piso de peso 1,5 para integrados; não confundir com piso financeiro de campus (RMO-065)."
+      },
+      "Fonte": {
+        "antes": "A p. 43; B M e W como entradas fixas.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Descrição de A em 2025; extrapolação para N3 não verificada.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-011": {
+    "titulo_antes": "Bonificação agropecuária descrita no livro",
+    "titulo_depois": "Bonificação agropecuária descrita no livro",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "O fator descrito é 1,5 sobre a medida ponderada elegível. O cadastro de elegibilidade precisa ser comprovado. B usa a flag L apenas em AR, auxiliar, e todas as linhas têm SIM.",
+        "depois": "N2 Anexo p.123 confirma bônus de 50% quando o curso é de agropecuária. B!L não é cadastro confiável para novas ofertas; L-08 permanece parcial."
+      },
+      "Fonte": {
+        "antes": "A p. 42; B CICLOS L7:L2328 e AR33.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "divergente",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A, pp. 28 e 42; aplicação geral vigente não confirmada.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-012": {
+    "titulo_antes": "Peso final de pós-graduação stricto sensu",
+    "titulo_depois": "Peso final de pós-graduação stricto sensu",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A descreve base 2,5 acrescida de 50%, resultando em 3,75. Os 73 ciclos de mestrado, mestrado profissional e doutorado de B possuem W=3,75.",
+        "depois": "N2 Anexo p.123 confirma peso final 3,75 de stricto sensu, incluindo a bonificação própria; não multiplicar novamente por 1,5 como se o peso ainda fosse 2,5."
+      },
+      "Fonte": {
+        "antes": "A p. 44; B CICLOS I/W, incluindo W33.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Descrição de A e cadastro de B, sem confirmação da tabela vigente de N3.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-013": {
+    "titulo_antes": "Fatores de modalidade e financiamento do livro",
+    "titulo_depois": "Fatores de modalidade e financiamento do livro",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A descreve presencial=1; EAD com financiamento da própria instituição=0,8; EAD com fomento externo=0,25 do valor presencial.",
+        "depois": "N2 Anexo p.123 confirma EAD próprio 80% e externo 25%. Não há nesse dispositivo divisor adicional por quatro. O 6,25% de B é outra variante, RMO-040; N3 não lida."
+      },
+      "Fonte": {
+        "antes": "A p. 42; B Parâmetros D14:D16 e E9:E12.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "divergente",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A, metodologia apresentada em 2025; não certifica o fator vigente depois de N3.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-015": {
+    "titulo_antes": "Ciclo regular, retenção e limite temporal descritos",
+    "titulo_depois": "Ciclo regular, retenção e limite temporal descritos",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A descreve 100% no ciclo regular, participação parcial até 1.095 dias após o fim e zero além desse limite. A expressão de A sobre quem iniciou fora do período é ambígua e não deve excluir todos os ciclos iniciados em anos anteriores.",
+        "depois": "N2 Anexo p.123 distingue ciclo ainda regular, ciclo encerrado com matrículas ativas e exclusão após três anos. Para encerrados, aplica FEDA=0,5 e também QTM×50%: duas reduções, não apenas ICQA. Início anterior ao período não exclui ciclo regular. N2 não explicita exceção FIC R=Q; a concretização em 1.095 dias está em C5 e B, sem resolver todos os aniversários bissextos."
+      },
+      "Fonte": {
+        "antes": "A p. 43; B P7/Q7/R7/Z7 e R197=Q197.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "divergente",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Descrição de A p. 43; B implementa recorte em Z e datas R pré-calculadas.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-019": {
+    "titulo_antes": "RAP presencial e faixas de ponderação",
+    "titulo_depois": "RAP presencial e faixas de ponderação",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A descreve matrículas equivalentes presenciais/docentes efetivos ponderados por regime. Figura 8: 0–17,99→0; 18–19,99→1; 20–21,99→2; 22–100→2,5. Não fornece todos os detalhes de equivalência docente.",
+        "depois": "N2 Anexo p.123 tabela 2 e p.124 fixam faixas contínuas: RAP<18→0; 18≤RAP<20→1; 20≤RAP<22→2; RAP≥22→2,5. Supera as lacunas de centésimos da figura de A. Indicador de origem continua dependente da edição PNP; CP II usa média da Rede (art.6º)."
+      },
+      "Exceções": {
+        "antes": "Lacunas entre limites decimais e valores >100 não resolvidos. RAP não é Y/número bruto de professores.",
+        "depois": "N2 resolve lacunas entre centésimos e não fixa teto 100. RAP não é Y/número bruto de professores; denominador docente zero exige documentação da origem PNP."
+      },
+      "Fonte": {
+        "antes": "A p. 48, figura 8 e texto.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A, descrição e tabela de 2025 com referência MEC (2022).",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-021": {
+    "titulo_antes": "Estrutura e faixas de atendimento aos percentuais legais",
+    "titulo_depois": "Estrutura e faixas de atendimento aos percentuais legais",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "Figuras 5/10 atribuem 5 pontos percentuais do remanescente ao IAPL e pesos internos 70% técnicos, 20% formação de professores e 10% EJA. Figura 11 mostra marcos: técnicos 0%→0, 50%→1, 60%→2; professores 10%→1, 15%→2, 20%→2,5; Proeja 2,5%→1, 5%→2, 10%→2,5.",
+        "depois": "N2 Anexo tabelas 3–5, pp.123–125: CT<0,5→0, [0,5;0,6)→1, ≥0,6→2; FP<0,1→0, [0,1;0,15)→1, [0,15;0,2)→2, ≥0,2→2,5; EJA<0,025→0, [0,025;0,05)→1, [0,05;0,1)→2, ≥0,1→2,5. Pesos internos CT/FP/EJA=7/2/1; Cefets/CP II têm tratamento do art.6º. A preservada como descrição anterior; percentuais monetários em RMO-062."
+      },
+      "Exceções": {
+        "antes": "Figura não define operadores de intervalo nem pesos abaixo de certos marcos. Não interpolar.",
+        "depois": "As lacunas da figura de A são superadas pelas tabelas de N2. Denominadores nacionais zero, edição dos índices e vigência posterior continuam pendentes."
+      },
+      "Fonte": {
+        "antes": "A pp. 46, 50–51, figuras 5, 10–12.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A, figuras de 2025; não comprovado como tabela vigente após N3.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-022": {
+    "titulo_antes": "Ponderação e normalização dos subindicadores legais",
+    "titulo_depois": "Ponderação e normalização dos subindicadores legais",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "Para k∈{técnicos, professores, EJA}, z_ik=a_ik×pesoFaixa_ik; s_ik=z_ik/Σ_j z_jk; s_i=Σ_k β_k s_ik; valor=s_i×orçamento IAPL.",
+        "depois": "N2 Anexo pp.124–125 confirma normalizar separadamente CT, FP e EJA ponderados e depois combinar 0,7/0,2/0,1. Não se normaliza apenas a soma bruta dos três indicadores. Denominadores zero e universo anual continuam dependentes de regra específica."
+      },
+      "Exceções": {
+        "antes": "Se um denominador for zero, a redistribuição não está especificada. Limites de faixas pendentes.",
+        "depois": "Se um denominador for zero, a redistribuição não está especificada. Limites de faixa N2 agora confirmados; edição e norma posterior pendentes."
+      },
+      "Fonte": {
+        "antes": "A p. 51, figura 12, examinada visualmente.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Reconstrução da figura 12 de A; pesos e universos anuais não confirmados.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-026": {
+    "titulo_antes": "Separação prévia e atualização do montante de assistência",
+    "titulo_depois": "Separação prévia e atualização do montante de assistência",
+    "campos": {
+      "Classificação": {
+        "antes": "METODOLÓGICA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A descreve atualização do valor anterior por um indicador de inflação, mas não fixa índice, data, fator ou fórmula legal. B contém D5 já fixado. Correção pela inflação isolada preserva poder de compra sob as mesmas premissas; não demonstra ganho real adicional.",
+        "depois": "N2 Anexo p.125 determina atualização das referências AE presencial/EAD/RIP do ano anterior pelo IPCA e pela variação das matrículas; a v1.0.0, limitada a A, não identificava o índice. Faltam janela do IPCA, bases/taxas anuais, deliberações e parâmetros homologados para calcular um novo montante. Art.7º contém esforço de manutenção do referencial, condicionado à disponibilidade; não garantia de ganho real."
+      },
+      "Fonte": {
+        "antes": "A pp. 38–39; B Parâmetros D5/D7.",
+        "depois": "N2 republicada, articulado/Anexo no dispositivo indicado; A mantida como referência histórica/metodológica."
+      },
+      "Fórmula ou algoritmo": {
+        "antes": "Procedimento não inteiramente determinado; somente a dedução de D5 é reproduzível em B.",
+        "depois": "Atualizar referências anterior por IPCA e variação das matrículas, conforme N2. Janelas, bases e eventual ordem de aplicação exigem memória anual; em B somente D5 fixo/dedução são reproduzíveis."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "confirmada no alcance do dispositivo citado; parametrização anual e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Descrição de A para 2025; não confirmada como obrigação normativa.",
+        "depois": "Variante N2 republicada em 21/09/2022, com aplicação anual sujeita aos arts.5º e 10; não comprova vigência após N3."
+      }
+    }
+  },
+  "RMO-014": {
+    "titulo_antes": "Carga horária de referência e excesso de PPC",
+    "titulo_depois": "Carga horária de referência e excesso de PPC",
+    "campos": {
+      "Definição técnica": {
+        "antes": "A afirma uso da carga de catálogo e exemplifica 3.600 ofertadas versus 3.200 consideradas. B dispõe de S, T e U fixos, com exceções que impedem estabelecer U=min(S,T) universal.",
+        "depois": "A limita a carga pela referência aplicável, mas B!U permanece entrada fixa; não é MIN(S,T) em 452 linhas. N2 p.122 chama CHM de carga ajustada de acordo com catálogo e usa CHM/QTDC; para ciclos ≤365 dias o passo FECH usa CHC, e não CHM (p.123). U>S em 83 linhas, e A/B auxiliar usam MIN(S,U); os procedimentos não são intercambiáveis. A formação anual de CHM de integrado, geral e exceções continua sem memória homologada."
+      },
+      "Fonte": {
+        "antes": "A pp. 43–44; B S:V.",
+        "depois": "A pp.43–45; N2 Anexo pp.122–123; B S:U, AL; C5 Ciclos N:V."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "parcialmente validada; cadastro upstream e divergências de carga abertos"
+      }
+    }
+  },
+  "RMO-016": {
+    "titulo_antes": "Conceito e recorte do IEA",
+    "titulo_depois": "Conceito e recorte do IEA",
+    "campos": {
+      "Exceções": {
+        "antes": "AA/AB de B não permitem calcular IEA. Filtros de ofertas do indicador exigem documentação própria.",
+        "depois": "N2 p.123 exclui Escolas Técnicas Vinculadas e Qualificação Profissional da média usada no IEA. B não calcula o indicador. C5 Indicadores traz valores institucionais fixos, sem eventos/coortes ou documentação da edição que permita recalculá-los."
+      },
+      "Fonte": {
+        "antes": "A p. 46.",
+        "depois": "A p.46; N2 Anexo pp.123–124; C5 Indicadores E:J."
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A, §4.1 de 2025; edição PNP necessária.",
+        "depois": "A, § 4.1 de 2025; edição PNP necessária."
+      }
+    }
+  },
+  "RMO-017": {
+    "titulo_antes": "Faixas de peso de IEA mostradas na figura 6",
+    "titulo_depois": "IEA: variante ilustrada de A e cinco faixas de N2",
+    "campos": {
+      "Definição técnica": {
+        "antes": "Faixas impressas: 42,07%–47,07%→0,5; 47,08%–51,78%→1,5; 51,79%–56,48%→2; 56,49%–100%→2,5. Não há cobertura explícita abaixo de 42,07% nem dos intervalos contínuos entre limites centesimais.",
+        "depois": "A figura 6 mantém registro ilustrativo 42,07–47,07→0,5; 47,08–51,78→1,5; 51,79–56,48→2; 56,49–100→2,5, insuficiente para parametrizar toda faixa. N2 p.123 tabela 1 define, para média m: IEA<0,9 m→0,5; [0,9 m;m)→1; [m;1,1 m)→1,5; [1,1 m;1,2 m)→2; ≥1,2 m→2,5. Há cinco faixas e limiares relativos, incluindo peso 1 ausente de A. A equação de p.124 imprime constante 0,5 no primeiro ramo, enquanto tabela e roteiro mandam multiplicar IEA pelo peso: nova L-23."
+      },
+      "Exceções": {
+        "antes": "Não inventar peso inferior nem arredondamento para fechar lacunas.",
+        "depois": "A tabela relativa de N2 supera lacunas da ilustração de A; a equação de seu primeiro ramo permanece em L-23. Não selecionar uma variante ponderada silenciosamente."
+      },
+      "Exemplo": {
+        "antes": "IEA fictício 50% está na segunda faixa: peso 1,5. IEA 47,075% exige esclarecimento.",
+        "depois": "Com média hipotética 50%, limites 45/50/55/60%; IEA=40% tem peso 0,5 pela tabela, ponderado 0,20 pelo roteiro, mas 0,5 na equação literal. Não confundir estes valores."
+      },
+      "Fonte": {
+        "antes": "A p. 47, figura 6, examinada visualmente.",
+        "depois": "A p.47 figura 6 preservada; N2 republicada p.123 tabela 1 e p.124 equação/roteiro; C7 p.36."
+      },
+      "Fórmula ou algoritmo": {
+        "antes": "Consulta de faixa somente para valores inequivocamente cobertos.",
+        "depois": "Tabela relativa acima para o peso. Não selecionar implicitamente entre IEA×0,5 e constante 0,5 para o primeiro ramo ponderado; registrar variante/homologação L-23."
+      },
+      "Situação da validação": {
+        "antes": "parcialmente validada",
+        "depois": "tabela normativa confirmada; primeiro ramo da equação divergente; N3 pendente"
+      }
+    }
+  },
+  "RMO-018": {
+    "titulo_antes": "Ponderação, normalização e valor do IEA",
+    "titulo_depois": "Ponderação, normalização e valor do IEA",
+    "campos": {
+      "Definição técnica": {
+        "antes": "IEAP_i=IEA_i×peso_i; participação=IEAP_i/ΣIEAP_j; valor=participação×orçamento específico de IEA. Figura 5 indica 2,5 pontos percentuais do remanescente para IEA; figura 7 usa Orçamento IEA.",
+        "depois": "IEA_i×peso_i, normalizado pelo somatório dos ponderados do mesmo universo. N2 pp.123–124 confirma roteiro e normalização, mas o primeiro ramo de sua equação diverge (L-23). Orçamento IEA=25% de QE na variante A/C5 (RMO-062), não QE inteiro."
+      },
+      "Exceções": {
+        "antes": "Texto da p. 47 menciona o bloco inteiro; não multiplicar pelo total dos 10% sem resolver L-04.",
+        "depois": "Denominador zero não tem redistribuição determinada; não transferir IFERROR de B para qualidade. Para IEA, preservar L-23."
+      },
+      "Fonte": {
+        "antes": "A pp. 46–48, figuras 5–7.",
+        "depois": "A figuras 5/7/9 e N2 republicada p.124; C5 Cálculo Custeio linhas 46/50; § 6.7."
+      },
+      "Situação da validação": {
+        "antes": "divergente",
+        "depois": "normalização confirmada; submontantes corroborados metodológica/operacionalmente; índices anuais e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A, §4.1; montante e pesos precisam ser confirmados por exercício.",
+        "depois": "A, § 4.1; montante e pesos precisam ser confirmados por exercício."
+      }
+    }
+  },
+  "RMO-020": {
+    "titulo_antes": "Normalização e valor do subcomponente RAP",
+    "titulo_depois": "Normalização e valor do subcomponente RAP",
+    "campos": {
+      "Definição técnica": {
+        "antes": "RAPPond_i=RAP_i×peso_i; participação=RAPPond_i/ΣRAPPond_j; valor=participação×orçamento RAP. Figura 5 indica 2,5 pontos percentuais do remanescente.",
+        "depois": "RAP_i×peso_i, normalizado pela soma dos ponderados do mesmo universo, confirmado em N2 p.124. Orçamento RAP=25% de QE na variante A/C5 (RMO-062), não QE inteiro."
+      },
+      "Exceções": {
+        "antes": "Texto p. 49 cita orçamento do bloco, figura 9 cita Orçamento RAP; preservar divergência.",
+        "depois": "Denominador zero não tem redistribuição determinada; não transferir IFERROR de B para qualidade. Para IEA, preservar L-23."
+      },
+      "Fonte": {
+        "antes": "A pp. 46, 48–49, figuras 5, 8 e 9.",
+        "depois": "A figuras 5/7/9 e N2 republicada p.124; C5 Cálculo Custeio linhas 46/50; § 6.7."
+      },
+      "Situação da validação": {
+        "antes": "divergente",
+        "depois": "normalização confirmada; submontantes corroborados metodológica/operacionalmente; índices anuais e N3 pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A, §4.1; parâmetros anuais não confirmados.",
+        "depois": "A, § 4.1; parâmetros anuais não confirmados."
+      }
+    }
+  },
+  "RMO-023": {
+    "titulo_antes": "Base própria de assistência estudantil",
+    "titulo_depois": "Base própria de assistência estudantil",
+    "campos": {
+      "Definição técnica": {
+        "antes": "A define MECHDA antes de peso de curso e bônus agropecuário para presencial/EAD; distingue presencial, EAD e RIP. Não há cálculo desse rateio em B, apenas D5 proposto deduzido do total.",
+        "depois": "N2 art.3º IV inclui presenciais/EAD, RIP e FIC. Anexo p.125 restringe o roteiro de renda a matrículas de orçamento próprio, excluindo financiamento externo; separa modalidades e define MECHDA anterior a peso de curso e bônus. Não aplicar ao conjunto inteiro Y de B nem usar AC/AQ como base AE. A seleção operacional de C5 AE EAD e seu /4 exigem justificativa anual."
+      },
+      "Exceções": {
+        "antes": "FIC passou a integrar AE historicamente em 2021; não há microdados de renda ou RIP em B.",
+        "depois": "FIC é abrangido no art.3º IV, mas a base anual precisa respeitar financiamento e elegibilidade. Não atribuir automaticamente AE a todo FIC/MOOC de B."
+      },
+      "Fonte": {
+        "antes": "A pp. 30, 51–54; B Parâmetros D5.",
+        "depois": "N2 art.3º IV e Anexo p.125; A § 4.2; C5 AE; § 6.8."
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "A, §4.2; parâmetros anuais e norma atual não integralmente verificados.",
+        "depois": "A, § 4.2; parâmetros anuais e norma atual não integralmente verificados."
+      }
+    }
+  },
+  "RMO-024": {
+    "titulo_antes": "Ponderação por faixa de renda e suas inconsistências",
+    "titulo_depois": "Ponderação por faixa de renda e suas inconsistências",
+    "campos": {
+      "Definição técnica": {
+        "antes": "Figura 13: 0<RFP≤0,5→2,5; 0,5<RFP≤1→2; 1<RFP≤1,5→1,5; 1,5<RFP≤2,5→1; 2,5<RFP≤3,5→0,5; não declarada→0. A última faixa impressa diz RFP≤3,5→0, contradizendo as anteriores; texto afirma >3,5→0 e repete incorretamente outra faixa.",
+        "depois": "Variante A preservada: tabela/texto contradizem a última faixa. N2 p.125 tabela 6 confirma 0<RFP≤0,5→2,5; 0,5<RFP≤1→2; 1<RFP≤1,5→1,5; 1,5<RFP≤2,5→1; 2,5<RFP≤3,5→0,5; RFP≥3,5→0. O próprio ato sobrepõe RFP=3,5 nas duas últimas faixas e não enquadra renda zero. Não declarantes ficam fora da proporção entre declarantes do roteiro, não simplesmente como observações de peso zero no denominador."
+      },
+      "Fonte": {
+        "antes": "A p. 52, figura 13 e parágrafo seguinte.",
+        "depois": "A p.52 figura 13/texto; N2 republicada p.125 tabela 6 e roteiro; C5 Alunos R:AG."
+      },
+      "Fórmula ou algoritmo": {
+        "antes": "Tabela parcial descrita; limite zero e última faixa exigem norma íntegra.",
+        "depois": "Aplicar apenas faixas inequívocas; renda zero, exatamente 3,5 SM e ausência total de declarantes requerem deliberação/codificação da PNP. Não escolher limite por suposição."
+      },
+      "Situação da validação": {
+        "antes": "divergente",
+        "depois": "parcialmente esclarecida; renda zero e fronteira 3,5 divergentes"
+      }
+    }
+  },
+  "RMO-025": {
+    "titulo_antes": "Agregação de renda e limite da equação publicada",
+    "titulo_depois": "Agregação de renda e limite da equação publicada",
+    "campos": {
+      "Definição técnica": {
+        "antes": "Figura 15 mostra RF ponderada=%MD×peso; VR=ΣRF ponderada; R$ Renda=VR×MECHDA×Orçamento IEA. P. 54 define ID RPC, não usado no fluxo. Falta normalização do universo e o orçamento citado é de outro componente.",
+        "depois": "Preserva-se como divergente a equação de A figura 15 com “Orçamento IEA”. N2 p.125 define proporções entre declarantes, VR=Σ(proporção_f×peso_f), ID_RPC=MECHDA×VR e MAE_RPC=ID_RPC×VAE_RPC. O valor unitário VAE_RPC não está expandido no ato; C5 evidencia VAE_RPC=montante da modalidade/Σ_Rede ID_RPC, equivalente à participação normalizada (RMO-064). Essa reconstrução é derivada/operacional, não leitura de fórmula explícita de normalização monetária em N2."
+      },
+      "Exemplo": {
+        "antes": "Exemplo fictício da parte verificável: 60%×2,5+40%×2=2,3 de VR. Isso não basta para determinar R$ de AE.",
+        "depois": "Exemplo fictício da parte verificável: 60% ×2,5+40% ×2=2,3 de VR. Isso não basta para determinar R$ de AE."
+      },
+      "Fonte": {
+        "antes": "A pp. 53–54, figura 15.",
+        "depois": "A pp.53–54 figura 15; N2 p.125; C5 Alunos AA:AG, Cálculo AE PRESENCIAL C:O e EAD C:Q."
+      },
+      "Fórmula ou algoritmo": {
+        "antes": "Expressão F-X1 preservada como divergente; não existe equação monetária validada nesta investigação.",
+        "depois": "VR e ID_RPC conforme N2; MAE_s=AE_s×ID_s/Σ_Rede ID_s conforme C5/derivação, com universo, modalidade e versão identificados. F-X1 de A continua excluída."
+      },
+      "Saídas": {
+        "antes": "VR adimensional; valor final não determinado.",
+        "depois": "VR, índice elegível e referência financeira condicionada aos parâmetros anuais."
+      },
+      "Situação da validação": {
+        "antes": "divergente",
+        "depois": "parte normativa confirmada e fechamento derivado corroborado em C5; B sem dados; fronteiras L-11 abertas"
+      }
+    }
+  },
+  "RMO-027": {
+    "titulo_antes": "Rateio e parâmetros de internato pleno não determinados",
+    "titulo_depois": "RIP: fórmula de rateio confirmada em N2; entradas anuais ausentes",
+    "campos": {
+      "Classificação": {
+        "antes": "NÃO DETERMINADA",
+        "depois": "NORMATIVA"
+      },
+      "Definição técnica": {
+        "antes": "A identifica RIP como item da AE, sem população, preço, orçamento, pesos e fórmula suficientes; B não contém campos de internato.",
+        "depois": "A v1.0.0 não determinava a fórmula. N2 p.125 determina MAERIP_i=QRIP_i/Σ_Rede QRIP×AERIP e coleta de QRIP por ofício do gestor. C5 reproduz o rateio e usa quantidades médias em duas datas; isto não comprova que as duas datas sejam exigência geral. B continua sem QRIP e AERIP segregado."
+      },
+      "Exemplo": {
+        "antes": "Não é possível desagregar D5 de B em presencial/EAD/RIP.",
+        "depois": "C5, Cálculo AE RIP linha 4: 119/7812×46.811.139,0126=713.072,9061059139. Valores do IFMT, não parâmetros Ifes."
+      },
+      "Explicação simples": {
+        "antes": "As fontes citam internato, mas não permitem calcular sua parcela.",
+        "depois": "Internato tem população e montante próprios; não é apenas peso de matrícula presencial."
+      },
+      "Fonte": {
+        "antes": "A pp. 28, 51; inventário integral de B.",
+        "depois": "N2 republicada p.125; C5 Cálculo AE RIP C4:K4 e Instituíção H:J."
+      },
+      "Fórmula ou algoritmo": {
+        "antes": "Não determinado.",
+        "depois": "F-26/§ 6.8: rateio proporcional do montante RIP, denominador positivo."
+      },
+      "Nível de confiança": {
+        "antes": "baixa",
+        "depois": "alta para fórmula de N2"
+      },
+      "Saídas": {
+        "antes": "Valor RIP não calculável com B.",
+        "depois": "Referência RIP calculável com entradas anuais completas; não calculável apenas com B."
+      },
+      "Situação da validação": {
+        "antes": "pendente",
+        "depois": "fórmula confirmada; dados Ifes/Rede e norma posterior pendentes"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Cobertura desta investigação em 08/11/2026.",
+        "depois": "Regime N2; exercício exige ofícios, universo e montante aprovados; N3 não verificada."
+      }
+    }
+  },
+  "RMO-033": {
+    "titulo_antes": "Parâmetros fixos e universo nacional da cópia recebida",
+    "titulo_depois": "Parâmetros fixos e universo nacional da cópia recebida",
+    "campos": {
+      "Observações": {
+        "antes": "Não extrapolar além da versão e da cobertura das fontes indicadas.",
+        "depois": "C1 informa proposta nacional 2026 de R$ 2.951.996.744,68, distinta de D4 de B. C5 também usa preço/denominadores diferentes. Não substituir D4/D5 de B: ano, fase e natureza dos parâmetros precisam de homologação (L-02/L-16). Metadado bruto core.xml de B traz modificação 25/02/2026; não prova data de elaboração/homologação."
+      }
+    }
+  },
+  "RMO-038": {
+    "titulo_antes": "Matrícula total como entrada fixa da cadeia principal",
+    "titulo_depois": "Matrícula total como entrada fixa da cadeia principal",
+    "campos": {
+      "Observações": {
+        "antes": "Não extrapolar além da versão e da cobertura das fontes indicadas.",
+        "depois": "A fronteira operacional permanece: AC é entrada fixa sem produtor em B. N2/C5 agora permitem reconstrução parcial externa (§ 6.6), sem transformar AR no produtor de AC e sem homologar o cadastro de B."
+      }
+    }
+  },
+  "RMO-040": {
+    "titulo_antes": "Redução adicional por quatro no preço EAD externo",
+    "titulo_depois": "Redução adicional por quatro no preço EAD externo",
+    "campos": {
+      "Fonte": {
+        "antes": "B Parâmetros D15 e F10; A p. 42.",
+        "depois": "B Parâmetros D15/F10; N2 Anexo p.123; C5 Cálculo Custeio E28 e Ciclos AN3; RMO-063."
+      },
+      "Observações": {
+        "antes": "Reproduzido integralmente; validade de negócio pendente, L-06.",
+        "depois": "N2/C5 funcionamento corroboram 25%, sem /4 adicional. C5 AE EAD contém /4 em outra etapa e outra base: não prova legitimidade do segundo /4 de B. Impacto isolado Ifes: +R$ 1.100.623,1242541133 se mantidos preço e MT e usado 25%; contrafactual, não correção autorizada nem receita devida."
+      }
+    }
+  },
+  "RMO-049": {
+    "titulo_antes": "Fator auxiliar de dias calculado pelo término do ciclo",
+    "titulo_depois": "Fator auxiliar de dias calculado pelo término do ciclo",
+    "campos": {
+      "Observações": {
+        "antes": "Não extrapolar além da versão e da cobertura das fontes indicadas.",
+        "depois": "AO é diagnóstico auxiliar; não produz AC nem AE. N2 FEDA divide dias do ciclo no período pelos dias reais do período; em 2024 são 366, com 183 no caso retido. O365 da anualização de carga em N2 tem outra função. L-09 encerrada quanto à interpretação e dependência, sem editar AO."
+      }
+    }
+  },
+  "RMO-050": {
+    "titulo_antes": "Cadeia auxiliar para valor suposto dos não contabilizados",
+    "titulo_depois": "Cadeia auxiliar para valor suposto dos não contabilizados",
+    "campos": {
+      "Observações": {
+        "antes": "Alta confiança na reprodução aritmética; significado prospectivo limitado por L-08 e L-09.",
+        "depois": "AR usa AB e bônus de L=SIM em todo o arquivo; portanto não produz AC. A cadeia principal de N2 usa QTM elegível, cinco situações temporais e flag válida (§ 6.6). Coincidência em algum ciclo não permite reutilizar AR para nova MT."
+      }
+    }
+  },
+  "RMO-055": {
+    "titulo_antes": "Limite causal do diagnóstico Custo Evadido",
+    "titulo_depois": "Limite causal do diagnóstico Custo Evadido",
+    "campos": {
+      "Observações": {
+        "antes": "Não extrapolar além da versão e da cobertura das fontes indicadas.",
+        "depois": "L-19 resolvida no alcance semântico/matemático: o diagnóstico não é evasão observada nem contrafactual financeiro; o nome da coluna permanece literal. Uma projeção exige coortes e denominador da Rede, não somar AI à dotação."
+      }
+    }
+  },
+  "RMO-056": {
+    "titulo_antes": "Transformação de nova oferta em MT principal não determinada",
+    "titulo_depois": "Nova oferta → MT: cadeia identificada, reprodução integral ainda parcial",
+    "campos": {
+      "Classificação": {
+        "antes": "NÃO DETERMINADA",
+        "depois": "METODOLÓGICA"
+      },
+      "Definição técnica": {
+        "antes": "Faltam dias ativos por matrícula, situações individuais, memória de cálculo de AC e cadastro anual de pesos/cargas/elegibilidade. A não apresenta cadeia completa suficiente para reproduzir AC de B a partir dessas entradas.",
+        "depois": "N2 Anexo pp.122–123 agora estabelece QTDC→CHMD→CHA→FECH→DACP1..5→FEDA→FECHDA→MECHDA→MP→BA→MT; C5 explicita as etapas. Doze amostras de B foram reconstruídas sem AC como entrada (T-M01), usando CHM, peso e agro identificados. Há contraexemplos em ciclo curto/FIC e CHM>S (T-M02). A fase produtora de B e o cadastro anual continuam ausentes. A v1.0.0 considerava toda a transformação não determinada; a v1.1.0 restringe a lacuna à compatibilidade de versão, cadastros e exceções documentadas."
+      },
+      "Entradas": {
+        "antes": "D26–D27, D35 e regras do exercício.",
+        "depois": "Datas, QTM elegível por ciclo/período, CHC, CHM ajustada e homologada, peso, flag agro, tipo/oferta, versão e regras de retenção/curtos."
+      },
+      "Exceções": {
+        "antes": "Um cenário de ΔAC assumido é possível, mas precisa se declarar como entrada hipotética.",
+        "depois": "Vagas não determinam QTM; conversão e permanência são hipóteses. Para curtos/FIC, U>S, cadastro ambíguo e versão posterior não resolvida, recusar rótulo de reprodução oficial."
+      },
+      "Fonte": {
+        "antes": "B AC fixo e grafo completo; A pp. 41–45; D26/D35 ausentes.",
+        "depois": "N2 republicada pp.122–123; C5 Ciclos K:AL; C6 PLOA 2025; T-M01/M02; exemplos§ 11 V-11."
+      },
+      "Fórmula ou algoritmo": {
+        "antes": "Não determinado; não substituir AC pelo auxiliar AR.",
+        "depois": "F-24/§ 6.6 e RMO-061. Não usar AC, AA ou AR como entrada do recálculo."
+      },
+      "Nível de confiança": {
+        "antes": "baixa",
+        "depois": "alta na cadeia explícita de N2; limitada na equivalência com B"
+      },
+      "Saídas": {
+        "antes": "Nova MT de oferta ainda não calculável de forma canônica.",
+        "depois": "MT de cenário condicionado calculável; reprodução integral de B e nova oferta vigente não homologadas."
+      },
+      "Situação da validação": {
+        "antes": "pendente",
+        "depois": "parcialmente reconstruída; CONDICIONAL no alcance documentado e BLOQUEADA para cálculo oficial vigente integral"
+      },
+      "Vigência/aplicabilidade": {
+        "antes": "Cobertura disponível em 08/11/2026.",
+        "depois": "Algoritmo N2 documentado e amostras B de 2024; implementação histórica condicionada. Não equivale ao regime N3."
+      }
+    }
+  },
+  "RMO-059": {
+    "titulo_antes": "Parcela de Reitoria e política interna do Ifes incompletas",
+    "titulo_depois": "Parcela de Reitoria e política interna do Ifes incompletas",
+    "campos": {
+      "Definição técnica": {
+        "antes": "Há descrição de 10% do remanescente e de mesma base de Funcionamento em N2; B não contém algoritmo de rateio de Reitoria nem ato de distribuição interna do Ifes. Não se confirma eventual combinação de pisos, parcela linear ou reservas.",
+        "depois": "N2 art.3º II/§ 3º: Reitoria=10% do remanescente e mesma base do Funcionamento. C5 Cálculo Custeio C37:H42 operacionaliza participação=referência de Funcionamento institucional/Σ_Rede referências, multiplicada pelo montante Reitoria. Isso permite regra nacional condicional; não prova rateio interno do Ifes, reservas ou repasse por AF/J. Pisos, complementos e efeitos na base anual precisam de memória (RMO-065)."
+      },
+      "Fonte": {
+        "antes": "A pp. 39–40; N2 art. 3º, II, trecho indexado; ausência nas quatro abas de B.",
+        "depois": "N2 art.3º II/§ 3º, arts.8º–10; C5 Cálculo Custeio C37:H42; B não calcula esse bloco; ato interno Ifes não obtido."
+      },
+      "Fórmula ou algoritmo": {
+        "antes": "Montante conceitual em RMO-006; distribuição efetiva não determinada.",
+        "depois": "Referência nacional condicional R_i=R×F_i/Σ_Rede F_i na variante observada em C5; validar componentes incluídos e pisos. Rateio interno Ifes não determinado."
+      },
+      "Situação da validação": {
+        "antes": "pendente",
+        "depois": "parcialmente esclarecida; nacional condicional, alocação interna bloqueada"
+      }
+    }
+  },
+  "RMO-060": {
+    "titulo_antes": "Regime da Portaria nº 243/2026 e regras de transição pendentes",
+    "titulo_depois": "Regime da Portaria nº 243/2026 e regras de transição pendentes",
+    "campos": {
+      "Observações": {
+        "antes": "Não extrapolar além da versão e da cobertura das fontes indicadas.",
+        "depois": "Nova tentativa em 08/11/2026 incluiu DOU com parâmetro de download (403/indisponível), buscas pelo título exato/alterações e repositórios institucionais. Não se recuperou a íntegra de N3. N2 republicada foi recuperada e lida; isso não resolve N3. C3 registra encaminhamento em 12/03, não comprova data de publicação ou entrada em vigor. Ver relatório para campos ainda não determinados."
+      }
+    }
+  }
+}

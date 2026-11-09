@@ -1,0 +1,25 @@
+{
+  "consulta": "2026-11-09",
+  "timezone": "America/Sao_Paulo",
+  "arquivos": [
+    {
+      "id": "N3",
+      "arquivo": "portaria-243-2026-dou-impressao-web.pdf",
+      "origem": "Fornecido pelo usuário em 09/11/2026: impressão em PDF da página do DOU (in.gov.br) gerada pelo macOS em 09/11/2026 14:09 -03",
+      "url_referencia": "https://www.in.gov.br/web/dou/-/portaria-mec-n-243-de-10-de-marco-de-2026-692098706",
+      "publicacao_declarada": "DOU de 12/03/2026, Edição 48, Seção 1, Página 63",
+      "sha256": "6cb24f83928ecbf60da575d13b1cad7edce9f726306cf619b637ce14623fb02e",
+      "bytes": 729400,
+      "condicao": "Versão HTML do DOU; a própria página adverte que não substitui a versão certificada. Texto extraído com pdftotext; equação do IEA (imagem) conferida visualmente. Sinais '+' perdidos na extração textual (ex.: 'QTDC = (DTC - DIC)  1')."
+    },
+    {
+      "id": "SCRIPT",
+      "arquivo": "reproduzir_revisao_critica.py",
+      "condicao": "Auditoria somente leitura; não é código de produto. Resultado em resultado-revisao-critica.json."
+    }
+  ],
+  "limites": [
+    "N3 lida a partir de impressão da página web, não do PDF certificado; recomenda-se confirmar com a versão certificada antes de homologar.",
+    "A Matriz/PLOA 2026 (B e C5) foi elaborada antes da publicação de N3; seus parâmetros não provam a aplicação de N3."
+  ]
+}

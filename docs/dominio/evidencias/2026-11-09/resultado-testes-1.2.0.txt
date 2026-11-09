@@ -1,0 +1,37 @@
+test_H01_participacao_muda_denominador (test_referencia.Hipoteses) ... ok
+test_H02_qualidade_fecha_com_submontantes (test_referencia.Hipoteses) ... ok
+test_H03_renda_denominador_declarantes (test_referencia.Hipoteses) ... ok
+test_H04_zeros_e_precisao_explicitos (test_referencia.Hipoteses) ... ok
+test_H05_deficit_nacional_condicional_ead (test_referencia.Hipoteses) ... ok
+test_M01_mt_amostras_sem_AC (test_referencia.MetodoIdentificado) ... ok
+test_M02_contraexemplos_nao_sao_conformidade (test_referencia.MetodoIdentificado) ... ok
+test_M03_tabelas_continuas_n2 (test_referencia.MetodoIdentificado) ... ok
+test_M04_iea_tabela_e_equacao_divergem (test_referencia.MetodoIdentificado) ... ok
+test_M05_retencao_duas_metades (test_referencia.MetodoIdentificado) ... ok
+test_M06_ae_rip_e_exemplos_c5 (test_referencia.MetodoIdentificado) ... ok
+test_O01_precos (test_referencia.Operacional) ... ok
+test_O02_classificacao_literal (test_referencia.Operacional) ... ok
+test_O03_monetizacao_por_ciclo (test_referencia.Operacional) ... ok
+test_O04_totalizacao_campi_e_instituicao (test_referencia.Operacional) ... ok
+test_O05_denominador_ifes (test_referencia.Operacional) ... ok
+test_O06_icqa_fronteiras (test_referencia.Operacional) ... ok
+test_O07_ano_bissexto_auxiliar (test_referencia.Operacional) ... ok
+test_O08_mooc_e_diagnostico (test_referencia.Operacional) ... ok
+test_C01_bolo_F_de_B_igual_ao_de_C5 (test_ro_mt.ConciliacaoC5) ... ok
+test_C02_base_mooc_identica_e_fatores_2026 (test_ro_mt.ConciliacaoC5) ... ok
+test_Q01_primeiro_ramo_iea_aplicado_como_meio_iea (test_ro_mt.QualidadeC5) ... ok
+test_Q02_iea_e_conclusao_sobre_conclusao_mais_evasao (test_ro_mt.QualidadeC5) ... ok
+test_Q03_degraus_do_ifes (test_ro_mt.QualidadeC5) ... ok
+test_R01_ro_mt_reproduz_todos_os_ciclos_de_B (test_ro_mt.ReproducaoOperacional) ... ok
+test_R02_ro_mt_reproduz_todos_os_ciclos_de_C5_com_flags_proprias (test_ro_mt.ReproducaoOperacional) ... ok
+test_R03_antigos_contraexemplos_sao_casos_positivos (test_ro_mt.ReproducaoOperacional) ... ok
+test_R04_agro_inferido_coincide_com_cursos_agrarios (test_ro_mt.ReproducaoOperacional) ... ok
+test_R05_fic_retido_sem_tolerancia (test_ro_mt.ReproducaoOperacional) ... ok
+test_R06_empates_de_quinta_casa_sao_indeterminados (test_ro_mt.ReproducaoOperacional) ... ok
+test_T01_texto_n2_n3_diverge_da_pratica_L24 (test_ro_mt.TextoNormativo) ... ok
+test_T02_fatores_funcionamento_n3_e_valor_ifes (test_ro_mt.TextoNormativo) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.025s
+
+OK
