@@ -16,6 +16,24 @@
 
 > **Atualização de 09/11/2026: Portaria MEC nº 243/2026 obtida** (DOU de 12/03/2026; análise no [§ 0 do Documento B](../dominio/revisao-critica-regras-prumo.md#0-atualização-de-09112026-portaria-mec-nº-2432026-n3-obtida)). Ela **mantém** as faixas de Qualidade, os blocos 80/10/10, EAD 25%/80% e o texto da cadeia de MT, e **fixa a MOOC em 8%** do presencial. As conclusões centrais deste documento ficam **reforçadas**: os degraus de Qualidade valem sob a norma vigente, e a MOOC deixa de ser alavanca orçamentária relevante. Os trechos que citavam a MOOC a 80% ou a Portaria 243 como indisponível foram corrigidos abaixo. As correções de regras foram incorporadas na [fonte canônica v1.2.0](../dominio/matriz-orcamentaria.md).
 
+> **Atualização 2 (09/11/2026): parecer externo e distribuição interna da PROAD.** Um parecer sobre esta revisão aprovou a direção estratégica com ressalvas, incorporadas abaixo:
+> - **Degraus são consequência, não objetivo.** O Prumo deve tornar visíveis os efeitos das decisões educacionais sobre os limiares, e não decidir o portfólio por eles. Um curso superior com demanda, êxito e infraestrutura não deve ser descartado para proteger o percentual técnico. Contratações docentes não devem ser contidas para proteger a RAP.
+> - **Valores em reais são potencial de alteração da referência orçamentária**, mantidas as premissas do cenário, e não recursos "deixados de receber".
+> - **Regra operacional reproduzida ≠ regra normativa confirmada** (L-24).
+> - **A meta de 50% técnico só entra em simulação depois de reproduzir o indicador oficial.** O guia da PNP distingue matrículas equivalentes (`ALMTEC`) de vagas (`ALVTEC`). O art. 8º, § 1º, da Lei 11.892/2008 manda aferir os percentuais pelo conceito de aluno-equivalente. Falta confirmar qual indicador alimenta a matriz (L-25).
+>
+> A [página da PROAD](https://proad.ifes.edu.br/orcamento-2026) (publicada em 01/04/2026, atualizada em 05/08/2026; [cópia e extrato](../dominio/evidencias/2026-11-09/distribuicao-interna-ifes-2026.json)) mostrou que a distribuição interna de custeio 2026 (total de R$ 77.513.000,00) **acompanha a referência da matriz por campus, ajustada por piso e teto**. Em 8 dos 22 campi da planilha a diferença fica dentro de ±2%, e em 10 dentro de 0,98–1,03. O total dos 22 fica a 0,4% do total da planilha. Três campi novos recebem o mesmo valor (R$ 848.891,15). Consequências:
+> - Decisões do campus chegam ao orçamento do próprio campus, amortecidas por piso e teto.
+> - [HIPÓTESE] O ganho de Qualidade e Eficiência é institucional e parece concentrar-se na Reitoria (R$ 11,7 mi). Assim, o campus que muda o portfólio para o Ifes cruzar um degrau arca com o custo, enquanto o benefício fica no nível central. **Um pacto precisa prever como esse ganho retorna a quem contribuiu.** Ver RMO-075 e L-28 na fonte canônica.
+
+> **Atualização 3 (09/11/2026): segundo parecer externo.** Correções incorporadas:
+> - **A conciliação com a PROAD foi refeita por universo comparável** ([Documento B § 0.1](../dominio/revisao-critica-regras-prumo.md#01-atualização-distribuição-interna-do-ifes-2026-e-indicador-pnp-09112026)). O "0,4%" incluía Presidente Kennedy, cujo valor vem do piso. Nos 21 campi consolidados, a PROAD distribuiu 1,75% a menos que a referência da matriz. Todas as unidades exceto a Reitoria somam +4,8%, diferença explicada por Cefor e campi novos. "Matriz por campus com piso e teto" é **hipótese forte, não regra reconstruída** (RMO-075 reclassificada).
+> - **Meta legal ≠ limiar orçamentário ≠ meta pactuada.** Só no técnico o limiar (50%) coincide com a meta legal. Em formação de professores, a meta legal é 20% e os limiares são 10%, 15% e 20%. Em EJA, a meta legal é 10% e os limiares são 2,5%, 5% e 10%: cruzar 2,5% rende pontuação, mas cumpre só um quarto do exigido. O Prumo deve exibir as três camadas separadamente (RPE-09).
+> - **Incentivos e contrapartidas passam a ser dimensão formal da concepção.** Além de quem contribui, o produto deve mostrar o custo de cada contribuição, a capacidade usada e como benefícios institucionais retornam às unidades. Isso vale mesmo antes de confirmar a hipótese de que a Qualidade fica na Reitoria (RPE-10).
+> - **Explicabilidade é requisito transversal** de todas as camadas: cada resultado rastreável a dados, premissas, regras e decisões humanas (RPE-11). As seis camadas são lógicas, não seis serviços.
+> - **Corrigir dados não é "risco zero":** a correção pode aumentar ou reduzir valores e exige verificação ciclo a ciclo com os responsáveis. Os R$ 278 mil associados a 55 ciclos com carga abaixo do catálogo são hipótese até essa verificação.
+> - **Próximo passo:** sanear três fundamentos (indicadores oficiais de técnico, EJA e RAP; conciliação PROAD por universo comparável; metodologia de MT do exercício aplicável); demonstração com três alternativas; validação com gestores. A reconstrução completa da regra da PROAD não é pré-requisito da demonstração.
+
 ---
 
 ## 1. Resumo executivo
@@ -26,13 +44,13 @@ Quatro descobertas desta revisão mudam a leitura do problema:
 
 1. **A matrícula total (MT) já está reproduzida, e é simples.** [FATO] Uma regra operacional unificada reproduz **2.322/2.322 ciclos** da planilha do Ifes e **1.086/1.086 ciclos** do demonstrativo do IFMT, a quatro casas decimais. A leitura literal da Portaria 646/2022 acerta 1.300 e 993, respectivamente. Os cinco "contraexemplos" da auditoria anterior e os 1.055 ciclos FIC, que ela não testou, ficam explicados. Em termos de gestão: **MT ≈ estudantes ativos × horas do curso efetivamente transcorridas no ano-base ÷ 800 × peso do curso** (×1,5 para cursos agropecuários), com redutores para retidos. Uma aluno-hora presencial vale cerca de **R$ 1,53 × peso** na referência de Funcionamento 2026. Reproduzir mais essa cadeia tem retorno marginal baixo.
 
-2. **No bloco de Qualidade, o Ifes está abaixo de dois degraus que zeram sua participação.** [FATO, C5 2026] O Ifes tem 44% de matrículas equivalentes em cursos técnicos (degrau em 50%) e 1,86% em PROEJA (degrau em 2,5%). Recebe **R$ 0** nos subcomponentes CT (R$ 77,2 mi na Rede) e EJA (R$ 11,0 mi). A RAP de 18,15 está a **0,15** do degrau que zera o subcomponente RAP: uma perda de cerca de 224 matrículas equivalentes presenciais (0,8%) bastaria. [INFERÊNCIA, mantidos os demais participantes] Alcançar 50% de CT renderia cerca de **+R$ 2,06 mi/ano**; alcançar 60%, **+R$ 4,76 mi/ano**. Isso equivale a 3% a 7,6% de todo o Funcionamento do Ifes (R$ 62,8 mi) e corresponde ao que se obteria com milhares de novas matrículas totais.
+2. **No bloco de Qualidade, o Ifes está abaixo de dois degraus que zeram sua participação.** [FATO, C5 2026] O Ifes tem 44% de matrículas equivalentes em cursos técnicos (degrau em 50%) e 1,86% em PROEJA (degrau em 2,5%). Recebe **R$ 0** nos subcomponentes CT (R$ 77,2 mi na Rede) e EJA (R$ 11,0 mi). A RAP de 18,15 está a **0,15** do degrau que zera o subcomponente RAP: uma perda de cerca de 224 matrículas equivalentes presenciais (0,8%) bastaria. [INFERÊNCIA, mantidos os demais participantes] O potencial de alteração da referência orçamentária ao alcançar 50% de CT é de cerca de **+R$ 2,06 mi/ano**; ao alcançar 60%, **+R$ 4,76 mi/ano**. Isso equivale a 3% a 7,6% do Funcionamento do Ifes (R$ 62,8 mi), com as premissas do cenário mantidas, e não é recurso garantido.
 
-3. **Esses degraus são metas institucionais que coincidem com mandatos legais e que só se alcançam com contribuições diferenciadas dos campi.** Os mandatos são 50% em técnicos (Lei 11.892/2008, art. 8º) e EJA. [INFERÊNCIA] O percentual técnico do Ifes é a agregação dos portfólios de 22 campi, cujas participações técnicas estimadas vão de 15% a 85%. Nenhum campus sozinho move o indicador; nenhum precisa fazer o mesmo esforço. Esse é, literalmente, o problema que a tese de governança distribuída descreve, e ele tem valor demonstrável em reais, em conformidade legal e em missão.
+3. **Esses degraus são indicadores institucionais que só se movem com contribuições diferenciadas dos campi; no técnico, o degrau coincide com a meta legal.** A Lei 11.892/2008 (art. 8º) exige 50% em técnicos, o mesmo valor do degrau. Em formação de professores (meta legal 20%) e EJA (meta legal 10%), os primeiros degraus (15% e 2,5%) ficam abaixo da meta legal e não devem ser confundidos com ela. [INFERÊNCIA] O percentual técnico do Ifes é a agregação dos portfólios de 22 campi, cujas participações técnicas estimadas vão de 15% a 85%. Nenhum campus sozinho move o indicador; nenhum precisa fazer o mesmo esforço. Esse é, literalmente, o problema que a tese de governança distribuída descreve, e ele tem valor demonstrável em reais, em conformidade legal e em missão.
 
 4. **O maior risco de concepção é o produto incentivar a otimização local contra o coletivo.** [INFERÊNCIA] Mostrar "contribuição do campus na matriz em R$" estimula volume de matrícula total (FIC curto, MOOC, EAD de baixo custo). Esse volume rende pouco no Funcionamento e pode **diluir** os percentuais institucionais (CT, FP) e a RAP, que são os indicadores de maior alavancagem. Um simulador centrado em Funcionamento por campus pode piorar decisões.
 
-**Recomendação central.** Reposicionar a primeira prova de valor de "simulador de oferta com efeito na Matriz CONIF" para **"pacto de metas institucionais com degraus: como os campi, com contribuições diferentes, levam o Ifes a cruzar limiares legais e orçamentários"**. O motor de coortes e a MT continuam necessários, mas como instrumentos dessa decisão. A Portaria 243/2026 já foi obtida e confirma as faixas. Antes de qualquer código, restam três verificações de baixo custo: (a) conciliar a definição de matrícula equivalente usada nos percentuais legais (o Ifes tem 44% na PNP contra 58% estimados a partir das matrículas equalizadas da planilha); (b) obter a regra interna de distribuição do Ifes; (c) pedir à Setec a memória de cálculo da matriz 2027, porque a Portaria 243 repete um texto de MT e IEA que a prática de 2026 não seguiu.
+**Recomendação central.** Reposicionar a primeira prova de valor de "simulador de oferta com efeito na Matriz CONIF" para **"pacto de metas institucionais com degraus: como os campi, com contribuições diferentes, levam o Ifes a cruzar limiares legais e orçamentários"**. O motor de coortes e a MT continuam necessários, mas como instrumentos dessa decisão. A Portaria 243/2026 já foi obtida e confirma as faixas. Antes de qualquer código, restam três verificações de baixo custo: (a) conciliar a definição de matrícula equivalente usada nos percentuais legais (o Ifes tem 44% na PNP contra 58% estimados a partir das matrículas equalizadas da planilha); (b) reconstruir a regra interna de piso e teto, cuja existência a PROAD já confirmou; (c) pedir à Setec a memória de cálculo da matriz 2027, porque a Portaria 243 repete um texto de MT e IEA que a prática de 2026 não seguiu.
 
 ---
 
@@ -69,7 +87,7 @@ Quatro descobertas desta revisão mudam a leitura do problema:
 | Confundimos projeção de indicadores com apoio à decisão? | **Parcialmente.** | O contexto lista perguntas decisórias boas (§ 6), mas o trabalho executado (65 RMO, 19 testes) produziu um **calculador de Funcionamento**. Nenhum artefato liga uma decisão concreta a um degrau institucional, a uma meta ou a um compromisso de campus. |
 | Priorizamos cálculo antes de entender as decisões? | **Sim.** | A Fase 0 do contexto previa entrevistas e a escolha de uma decisão real. Não há registro de que tenham ocorrido. A auditoria avançou sem saber se o Funcionamento é a parte decisiva. Esta revisão mostra que, para o Ifes em 2026, os degraus de Qualidade podem ter efeito marginal maior que expansões de oferta. |
 | Modelamos a instituição como soma de campi? | **Risco real.** | O Funcionamento é aditivo por campus. Qualidade (IEA, RAP, CT, FP, EJA), Reitoria e piso **não são**: são razões institucionais com degraus, e a contribuição de um campus depende do que os outros fazem. Um modelo "soma de campi" erra justamente onde está o valor. |
-| Consideramos só o efeito financeiro? | **Na prática, sim.** | Embora o discurso inclua valor público, nenhum indicador educacional (conclusão, evasão, cumprimento legal, EJA) foi modelado. Os degraus de Qualidade mostram que **missão legal e orçamento estão alinhados**, um argumento forte contra a falsa dicotomia "missão × matriz". |
+| Consideramos só o efeito financeiro? | **Na prática, sim.** | Embora o discurso inclua valor público, nenhum indicador educacional (conclusão, evasão, cumprimento legal, EJA) foi modelado. Os degraus de Qualidade mostram que **missão legal e orçamento apontam na mesma direção**, um argumento contra a falsa dicotomia "missão × matriz". Mas só no técnico o limiar coincide com a meta legal. |
 | Simulador sofisticado sem mecanismo de decisão acompanhada? | **Sim, por enquanto.** | Não há modelo de compromisso, meta, responsável ou acompanhamento. É barato introduzi-lo agora: um registro leve de pacto, como na § 12. |
 
 ### 3.3. Uma mudança de leitura sobre o Funcionamento
@@ -100,7 +118,7 @@ A versão anterior ("decidir ofertas com informação insuficiente") é verdadei
 | Reitoria / Prodi / Proen | Metas institucionais anuais e plurianuais; priorização de expansão; pactuação com campi | Séries PNP, PDI, negociação política | Qual combinação de contribuições cruza um limiar (CT 50%, RAP 20) e **quando**, dado o atraso de dois anos entre ano-base e exercício |
 | Direção-geral de campus | Abrir, ampliar, reconfigurar ou suspender ofertas; alocar docentes e espaços | Conhecimento local, demanda percebida, colegiado | Efeito de sua escolha no agregado institucional; gargalos futuros de coorte; trade-off entre volume (MT) e composição (%CT, RAP) |
 | Proen / coordenações | Desenho de PPC, carga horária, turnos, permanência | PPC, normas, histórico | Como evasão e retenção afetam IEA e MT em quais anos |
-| Pró-reitoria de Administração / orçamento | Regra de distribuição interna; reservas; complementações | Matriz nacional, regra interna (não obtida) | Se a regra interna reproduz ou neutraliza os incentivos da matriz nacional |
+| Pró-reitoria de Administração / orçamento | Regra de distribuição interna; reservas; complementações | Matriz nacional; distribuição publicada pela PROAD (matriz por campus + piso/teto; parâmetros não publicados) | Se a regra interna reproduz ou neutraliza os incentivos da matriz nacional |
 | Gestão de pessoas | Vagas docentes, remoções, códigos de vaga | Banco de professor-equivalente | Efeito de cada contratação ou remoção na RAP institucional, perto do degrau de 18 |
 
 ### 4.3. Decisões tomadas hoje com informação insuficiente [HIPÓTESE, a validar em entrevistas]
@@ -121,11 +139,11 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 
 - **Problema:** indicadores institucionais com faixas descontínuas (IEA relativo à média; RAP 18/20/22; CT 50/60%; FP 10/15/20%; EJA 2,5/5/10%) determinam 10% do remanescente nacional (R$ 220,6 mi), e o Ifes está em posição desfavorável em três deles.
 - **Decisão melhorada:** quais metas institucionais perseguir, com que prazo e com qual contribuição de cada campus.
-- **Beneficiados:** Reitoria, Prodi, Proen e, indiretamente, os estudantes (as metas coincidem com mandatos legais).
-- **Por que é valor substancial:** [INFERÊNCIA] +R$ 2,06 a 4,76 mi/ano (CT), +R$ 0,31 a 1,15 mi (EJA), +R$ 0,85 mi (RAP 20), proteção contra −R$ 0,73 mi (RAP < 18). E, sobretudo, conformidade legal.
+- **Beneficiados:** Reitoria, Prodi, Proen e, indiretamente, os estudantes (os indicadores apontam para as metas legais, embora só no técnico o limiar coincida com elas).
+- **Por que é valor substancial:** [INFERÊNCIA] +R$ 2,06 a 4,76 mi/ano (CT), +R$ 0,31 a 1,15 mi (EJA), +R$ 0,85 mi (RAP 20), proteção contra −R$ 0,73 mi (RAP < 18). São potenciais condicionais, não recursos garantidos. E, sobretudo, aproximação das metas legais, que em FP (20%) e EJA (10%) estão acima dos primeiros limiares.
 - **Dados e regras:** indicadores PNP por instituição (já em C5 para 2026); definição de matrícula equivalente para percentuais legais (**ausente**, ver Documento B); faixas de N2/N3.
 - **Dependências:** conciliar a definição de %ME. As faixas foram confirmadas, sem alteração, pela Portaria 243/2026.
-- **Riscos:** os degraus são relativos à Rede (o valor depende dos demais); N3 pode ter alterado faixas; risco de gaming (ex.: reclassificar cursos).
+- **Riscos:** os degraus são relativos à Rede (o valor depende dos demais); a Portaria 243 manteve as faixas, mas a Comissão Paritária pode revê-las anualmente (art. 10); risco de gaming (ex.: reclassificar cursos).
 - **Validação de baixo custo:** reproduzir %CT, %FP, %EJA e RAP do Ifes a partir dos microdados públicos da PNP, por campus; apresentar o mapa de degraus a três gestores e observar se muda alguma decisão em discussão.
 
 ### O2 — Pacto de contribuições diferenciadas para uma meta agregada
@@ -200,7 +218,7 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 | Concluintes/evadidos → IEA | C5 mostra IEA = conclusão ÷ (conclusão + evasão) nos ciclos encerrados | **Verificável** na fórmula; dados PNP |
 | Portfólio por campus → %CT/%FP/%EJA institucional | Depende da definição de matrícula equivalente da PNP | **A pesquisar** (definição ausente) |
 | Docentes e MEq presenciais → RAP | PNP | **Verificável** na fórmula; dados por campus a obter |
-| Participação nacional → orçamento do campus | Regra interna do Ifes ausente; IFMT distribui por matriz | **A pesquisar** |
+| Participação nacional → orçamento do campus | PROAD 2026: custeio por campus ≈ referência da matriz por campus, com piso e teto (RMO-075) | **Verificável em 2026**; parâmetros de piso e teto a obter (L-28) |
 | Oferta → resultados territoriais e egressos | Trajetória, dados externos | **A pesquisar**; janela longa |
 
 ### 6.2. Interpretações causais equivocadas que o produto precisa impedir
@@ -211,7 +229,7 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 | "Mais vagas, mais ingressantes" | Sem regra; depende de demanda | Ocupação é premissa explícita por cenário |
 | "Evasão reduz a matriz do mesmo ano" | Ativo no período conta [a confirmar] | Linha do tempo por ano-base |
 | "Melhorar um pouco o indicador gera ganho proporcional" | Faixas são degraus; ganho é zero até o limiar e depois salta | Visualizar distância ao degrau, não "ganho por ponto" |
-| "Participação do campus na matriz = orçamento do campus" | Regra interna desconhecida | Separar níveis (nacional, Ifes, campus) |
+| "Participação do campus na matriz = orçamento do campus" | Aproximadamente verdadeiro em 2026, mas amortecido por piso e teto; a Qualidade não vai ao campus | Separar níveis e mostrar o efeito do piso e do teto |
 | "Especialização sempre vale mais que FIC" | Vale por hora e peso; um FIC presencial de 160 h com 30 alunos ≈ R$ 7,3 mil; o peso da especialização depende do cadastro | Comparar em aluno-hora ponderada |
 | "MOOC não vale nada" / "MOOC vale muito" | Em B vale zero; em C5 (2026, pré-Portaria 243), 80% fora do bolo; pela Portaria 243, 8% | Tratar como regra versionada por exercício; para 2027+, 8% |
 | "Ganhar a média da Rede é suficiente" | IEA é relativo: se a Rede melhora, a faixa muda | Mostrar a posição relativa e sua estabilidade |
@@ -233,7 +251,7 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 |---|---|---|---|
 | ~~Portaria 243/2026~~ obtida; resta saber se a prática de 2026 (MT por fração do ciclo, 0,5×IEA) continuará em 2027, já que o texto da Portaria não a prevê | Precisão das projeções de MT e IEA para 2027+ | Memória de cálculo da matriz 2027 junto à Setec | Baixo |
 | Definição de %ME dos percentuais legais e da RAP (PNP) | Bloqueia a oportunidade O1/O2 | Portaria Setec 146/2021 + documentação PNP + microdados; reproduzir os 44% do Ifes | Baixo a médio |
-| Regra interna de distribuição do Ifes | Bloqueia qualquer efeito por campus em R$ | Pedido à Proad/Prodi | Baixo |
+| Parâmetros de piso e teto da distribuição interna e composição dos R$ 11,7 mi da Reitoria | Efeito por campus em R$ e desenho de incentivo do pacto | Pedido à PROAD/Câmara de Orçamento; distribuição 2025 para calibrar | Baixo |
 | Código de campus vazio em B; ausência de chave de curso nacional | Integração e histórico | Usar códigos SISTEC/PNP de unidade e ciclo | Baixo |
 | Histórico de ocupação de vagas, evasão e conclusão por curso e campus | Projeção de coortes | PNP (pública) + qAcadêmico agregado | Médio |
 | Professor-equivalente por campus e área | O4 e capacidade | PNP + gestão de pessoas | Médio |
@@ -274,7 +292,7 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 
 ## 10. Cinco oportunidades de maior potencial
 
-1. **O1 + O2 — Mapa de degraus e pacto de contribuições diferenciadas.** É a única capacidade que, ao mesmo tempo, materializa a tese central (governança distribuída), tem valor financeiro demonstrado (milhões de reais por ano), coincide com mandatos legais e pode ser validada em semanas, com dados públicos.
+1. **O1 + O2 — Mapa de degraus e pacto de contribuições diferenciadas.** É a única capacidade que, ao mesmo tempo, materializa a tese central (governança distribuída), tem valor financeiro demonstrado (milhões de reais por ano), aponta para metas legais (coincidindo com elas no técnico) e pode ser validada em semanas, com dados públicos.
 2. **Motor de coortes simples com saída em aluno-hora ponderada (O3 + O5).** Base para tudo: projeta MT, %ME, concluintes e RAP com a mesma estrutura, e explica o "quando".
 3. **Sentinela de RAP (O4).** Decisão frequente, distribuída e com risco iminente identificado (degrau zero a 0,8%).
 4. **Registro leve de premissas, propostas e compromissos.** Sem ele, simulação não vira decisão acompanhada. Pode começar como estrutura de dados simples (proposta → parecer → decisão → meta por campus → observado).
@@ -324,9 +342,10 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 4. Simular **três pactos alternativos:**
    - (A) **Uniforme:** todos +6 p.p.
    - (B) **Por vocação:** campi com capacidade técnica ociosa ampliam integrados; campi superiores convertem parte de FIC em técnico concomitante ou subsequente.
-   - (C) **Combinado:** CT + PROEJA, porque o degrau EJA 2,5% é próximo e soma +R$ 0,31 mi.
+   - (C) **Combinado:** CT + PROEJA. O limiar EJA de 2,5% é próximo e tem potencial de +R$ 0,31 mi, mas a meta legal de EJA é 10%: a demonstração deve mostrar as duas distâncias.
 5. Para cada pacto: ano-base e exercício do cruzamento; efeito na RAP (risco do degrau 18); docentes adicionais por área; efeito no Funcionamento relativo; indicadores de missão (matrículas técnicas integradas, EJA).
 6. **Registrar o pacto escolhido como compromissos por campus** e definir o indicador a acompanhar no ano-base seguinte.
+7. **Explicitar o retorno do ganho institucional:** mostrar, com a regra interna de piso e teto, quanto do efeito chega a cada campus e quanto fica na Reitoria, e registrar no pacto como o ganho de Qualidade será compartilhado. O simulador de portfólio de cursos continua sendo o instrumento que gera as alternativas de cada campus.
 
 **Critério de sucesso:** os gestores identificam ao menos uma decisão em curso que mudariam, ou uma meta que pactuariam de outra forma, após ver o mapa.
 
@@ -338,7 +357,7 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 
 1. Quem é o patrocinador com autoridade sobre metas institucionais pactuadas: Reitoria, Prodi, Proen ou o Colégio de Dirigentes?
 2. O Ifes conhece e acompanha sua posição nas faixas de Qualidade? Houve debate sobre os 44% técnicos e os 1,86% de PROEJA?
-3. Qual é a regra interna de distribuição de custeio entre campi? Ela reproduz a matriz por campus, como no IFMT, ou usa outro critério?
+3. Quais são os parâmetros de piso e teto da distribuição interna (a PROAD confirmou o mecanismo)? O que compõe os R$ 11,7 mi da Reitoria? Há regra para devolver aos campi ganhos de Qualidade obtidos por contribuição deles?
 4. Qual é a origem e o uso da planilha "6ª Fase"? Ela é usada em decisões internas? Os valores de EAD externo (6,25%) e MOOC (zero) foram questionados?
 5. Quais decisões de oferta estão em discussão para 2027 e 2028 que poderiam compor o piloto?
 6. Como se decidem hoje vagas docentes entre campi? O efeito na RAP é considerado?
@@ -351,7 +370,7 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 
 ## 15. Respostas às questões finais obrigatórias
 
-**Q1 — Maior oportunidade não explorada.** A gestão coordenada dos **degraus institucionais do bloco de Qualidade e Eficiência** como metas pactuadas entre campi. O Ifes recebe R$ 0 em CT e EJA e está a 0,8% de perder a RAP. Cruzar CT 50% vale cerca de +R$ 2,06 mi/ano, e a meta coincide com o mandato legal (§§ 1, 5 O1/O2; Documento B § 6, RMO-P04).
+**Q1 — Maior oportunidade não explorada.** A gestão coordenada dos **degraus institucionais do bloco de Qualidade e Eficiência** como metas pactuadas entre campi. O Ifes recebe R$ 0 em CT e EJA e está a 0,8% de perder a RAP. Cruzar CT 50% tem potencial de cerca de +R$ 2,06 mi/ano na referência orçamentária, mantidas as premissas, e esse limiar coincide com a meta legal (§§ 1, 5 O1/O2; Documento B § 6, RMO-P04).
 
 **Q2 — Maior risco de concepção.** Construir um simulador de Funcionamento por campus que incentive volume de MT (FIC curto, MOOC, EAD barata) e, com isso, **dilua os indicadores institucionais** de maior alavancagem: otimização local contra o coletivo, embutida no produto (§§ 1, 3.2, 8).
 
@@ -367,11 +386,11 @@ Cada oportunidade abaixo é **não prevista explicitamente** nos documentos atua
 
 **Q8 — O que simplificar, adiar ou eliminar.** Eliminar a continuação da auditoria forense da planilha B. Adiar Assistência, renda e RIP, o fechamento nacional, o inventário físico detalhado, a otimização automática, a IA no núcleo e as integrações transacionais. Simplificar a fonte canônica numa camada de "regras implementáveis" separada do dossiê de auditoria (§ 9; Documento B § 12).
 
-**Q9 — Como representar contribuições diferenciadas sem reduzir tudo a finanças.** A meta é um **indicador institucional com limiar** (ex.: %CT ≥ 50%), que é simultaneamente legal, educacional e orçamentário. Cada campus contribui com **variações de numerador e denominador** dessa razão, e não com reais. O valor orçamentário aparece como consequência condicional, ao lado de indicadores de missão e de compensações entre metas (CT, FP, EJA, IEA). Assim, o campus com vocação superior contribui via FP ou IEA, e o agrícola via CT, sem metas uniformes (§§ 5 O2, 13).
+**Q9 — Como representar contribuições diferenciadas sem reduzir tudo a finanças.** A meta é um **indicador institucional com limiar** (ex.: %CT ≥ 50%), que é educacional e orçamentário e, no técnico, também legal. A interface separa meta legal, limiar orçamentário e meta pactuada (RPE-09). Cada campus contribui com **variações de numerador e denominador** dessa razão, e não com reais. O valor orçamentário aparece como consequência condicional, ao lado de indicadores de missão e de compensações entre metas (CT, FP, EJA, IEA). Assim, o campus com vocação superior contribui via FP ou IEA, e o agrícola via CT, sem metas uniformes (§§ 5 O2, 13).
 
 **Q10 — Caminho de evolução recomendado.**
 
-1. **Semanas 1–4:** obter a definição de %ME com reprodução dos 44%, a regra interna e a memória de cálculo da matriz 2027 (Setec); entrevistar os decisores das questões do § 14.
+1. **Semanas 1–4:** reproduzir os 44% (indicadores `ALMTEC`/`ALVTEC` da PNP); obter piso, teto e composição da Reitoria na PROAD; testar a regra de MT na matriz 2027 publicada pelo IFMT; entrevistar os decisores das questões do § 14.
 2. **Semanas 4–8:** demonstração em planilha "Ifes 50% técnico" com 3 a 4 campi.
 3. Se validada, construir o mínimo de software: motor de coortes, regras versionadas da matriz 2026, consolidação por razão das somas e registro de compromissos.
 4. Só então adicionar a capacidade docente por área e a infraestrutura dos campi do piloto.

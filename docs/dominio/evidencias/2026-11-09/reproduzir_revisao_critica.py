@@ -142,6 +142,34 @@ def funcionamento_ifes_por_regime():
     return out
 
 
+def distribuicao_interna_vs_matriz():
+    """Custeio 2026 publicado pela PROAD × contribuição de Funcionamento por campus em B."""
+    proad = json.loads((Path(__file__).with_name("distribuicao-interna-ifes-2026.json")).read_text())["unidades"]
+    soma_b = {}
+    for r in openpyxl.load_workbook(B, data_only=True, read_only=True)["CICLOS"].iter_rows(
+            min_row=7, max_row=2328, values_only=True):
+        nome = r[4].replace("CAMPUS ", "").title().replace(" De ", " de ").replace(" Do ", " do ")
+        soma_b[nome] = soma_b.get(nome, 0) + float(r[30] or 0)
+    norm = lambda x: x.lower().replace("ó", "o")
+    proad_n = {norm(k): v["custeio"] for k, v in proad.items()}
+    linhas = {k: {"matriz_B": round(v, 2), "proad": proad_n.get(norm(k)),
+                  "razao": round(proad_n[norm(k)] / v, 3) if proad_n.get(norm(k)) and v else None}
+              for k, v in sorted(soma_b.items())}
+    comuns = [x for x in linhas.values() if x["proad"]]
+    razoes = [x["razao"] for x in comuns if x["razao"]]
+    # Tabela por campus não é exportada: valores derivados de B são resultado de auditoria local.
+    return {
+        "custeio_total_proad": round(sum(v["custeio"] for v in proad.values()), 2),
+        "campi_pareados": len(comuns),
+        "faixas_de_razao": {"<0,90": sum(r < 0.90 for r in razoes), "0,90–0,98": sum(0.90 <= r < 0.98 for r in razoes),
+                            "0,98–1,02": sum(0.98 <= r <= 1.02 for r in razoes), "1,02–1,10": sum(1.02 < r <= 1.10 for r in razoes),
+                            ">1,10": sum(r > 1.10 for r in razoes)},
+        "dentro_2pct": sum(1 for x in comuns if x["razao"] and 0.98 <= x["razao"] <= 1.02),
+        "soma_proad_campi_comuns": round(sum(x["proad"] for x in comuns), 2),
+        "soma_matriz_campi_comuns": round(sum(x["matriz_B"] for x in comuns), 2),
+    }
+
+
 def qualidade_ifes():
     ws = openpyxl.load_workbook(C5, data_only=True)["Indicadores"]
     inst = []
@@ -190,5 +218,6 @@ if __name__ == "__main__":
         "cobertura_MT_C5": cobertura_C5(),
         "conciliacao_bolo_e_mooc": conciliacao_bolo(),
         "funcionamento_ifes_por_regime": funcionamento_ifes_por_regime(),
+        "distribuicao_interna_vs_matriz": distribuicao_interna_vs_matriz(),
         "qualidade_ifes_C5": qualidade_ifes(),
     }, ensure_ascii=False, indent=2, default=str))

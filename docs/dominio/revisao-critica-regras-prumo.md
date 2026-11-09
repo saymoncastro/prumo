@@ -39,6 +39,35 @@ Depois da primeira versão desta revisão, o usuário forneceu a íntegra de N3,
 
 As seções seguintes foram ajustadas onde N3 altera conclusões; o texto original da primeira versão foi mantido quando continua válido.
 
+### 0.1. Atualização: distribuição interna do Ifes 2026 e indicador PNP (09/11/2026)
+
+**Fonte:** [PROAD — Orçamento 2026](https://proad.ifes.edu.br/orcamento-2026), publicada em 01/04/2026 e atualizada em 05/08/2026. HTML preservado em [`proad-orcamento-2026.html`](evidencias/2026-11-09/proad-orcamento-2026.html), com extrato em [`distribuicao-interna-ifes-2026.json`](evidencias/2026-11-09/distribuicao-interna-ifes-2026.json). A página informa que a distribuição foi discutida entre a PROAD e a Câmara de Orçamento, usou os "critérios institucionais vigentes" com **piso e teto** para evitar variações excessivas em relação ao exercício anterior, e foi aprovada pelo Colégio de Dirigentes. Ela não publica fórmulas nem parâmetros.
+
+**Confronto com B (contribuição por campus, R$ de Funcionamento):**
+- Custeio total 2026: R$ 77.513.000,00, sendo Reitoria 11.705.437,42, Cefor 1.581.820,45 e campi 64.225.742,13.
+- Nos 22 campi presentes em B, a razão PROAD ÷ B fica dentro de ±2% em 8 unidades e entre 0,98 e 1,03 em 10.
+- As demais razões se afastam de 1 nos dois sentidos (até cerca de +22% e −16%), padrão compatível com piso e teto. A tabela por campus derivada da planilha não é publicada aqui: é resultado de auditoria, não distribuição oficial, e só pode ser regenerada localmente com a planilha original (script `distribuicao_interna_vs_matriz`).
+- Soma dos 22: PROAD R$ 62.527.960 × B R$ 62.782.150 (razão 0,996).
+- Laranja da Terra, Pedro Canário e Presidente Kennedy recebem R$ 848.891,15 cada. [HIPÓTESE] É o piso de campus novo (art. 8º de N3, R$ 700 mil) atualizado (fator 1,2127), compatível com correção pelo IPCA desde 2022; não verificado.
+- Cefor não aparece como unidade em B; não se sabe em que unidade de B seus ciclos foram registrados.
+
+**Conciliação por universo comparável (revista após o segundo parecer externo):**
+
+| Universo | PROAD 2026 | Matriz B | Diferença |
+|---|---:|---:|---:|
+| Todas as unidades exceto Reitoria | 65.807.562,58 | 62.782.149,76 | +4,8% |
+| (−) Cefor, ausente de B | −1.581.820,45 | — | |
+| (−) Laranja da Terra e Pedro Canário, ausentes de B | −1.697.782,30 | — | |
+| 22 unidades presentes nas duas fontes | 62.527.959,83 | 62.782.149,76 | −0,4% |
+| (−) Presidente Kennedy (unidade de piso; valor de matriz desprezível) | −848.891,15 | (desprezível) | |
+| **21 campi consolidados** | **61.679.068,68** | **62.779.760,83** | **−1,75%** |
+
+O "0,4%" da versão anterior desta seção estava favorecido pela inclusão de uma unidade de piso. Há ainda diferença de natureza de recurso: o custeio total de R$ 77.513.000,00 (número redondo, provável limite PLOA/LOA) supera a soma estimada dos blocos da matriz do Ifes (Funcionamento 6ª fase ≈ 62,8 mi + Reitoria ≈ 7,7 mi estimados + Qualidade ≈ 2,65 mi ≈ 73,2 mi) em cerca de R$ 4,3 mi, sem explicação nas fontes. A B também é fase anterior à final.
+
+**Conclusões (revistas):** [HIPÓTESE forte] a regra interna 2026 seria a referência da matriz por campus, ajustada por piso e teto relativos ao exercício anterior. Os valores sugerem isso (8 campi a ±2%, desvios compatíveis com piso e teto, piso para campi novos), mas fórmula, parâmetros, exceções, natureza do recurso e a decomposição dos R$ 11,7 mi da Reitoria não estão demonstrados. **RMO-075 reclassificada para HIPÓTESE**; pendências em L-28. A hipótese de que o ganho de Qualidade fica na Reitoria **não está comprovada**. A demonstração decisória do Prumo **não depende** de reconstruir essa regra; ela só é necessária para modelar contrapartidas financeiras entre unidades.
+
+**Indicador dos percentuais legais (L-25):** o guia de indicadores da PNP distingue percentual de matrículas equivalentes (`ALMTEC`) e de vagas (`ALVTEC`), com numeradores e denominadores próprios. O art. 8º, § 1º, da Lei 11.892/2008 manda aferir os percentuais legais pelo conceito de aluno-equivalente. Assim, o indicador da matriz e a aferição legal tendem a convergir, mas é preciso confirmar qual indicador a matriz usa e reproduzir os 44% do Ifes antes de simular.
+
 ---
 
 Siglas de fontes seguem o § 0.1 da fonte canônica: **A** (livro), **B** (planilha 6ª fase Ifes), **N2** (Portaria 646/2022 republicada), **N3** (Portaria 243/2026), **C5** (demonstrativo IFMT PLOA 2026), **C6** (cadastro público).
@@ -223,7 +252,7 @@ Regras **não** recomendadas como RMO (são do domínio estratégico; ver § 11)
 |---|---|---|---|
 | ~~N3 íntegra~~ **resolvida (§ 0)**; restam: forma de MT e de IEA efetivamente aplicada em 2027 (texto × prática), MOOC dentro ou fora de F, alcance do art. 7º | Cálculo 2027+ com confiança operacional | P1 | Memória de cálculo da matriz 2027 junto à Setec; confirmar com a versão certificada do DOU |
 | RMO-P05 (%ME e MEq RAP) | Degraus por campus (a capacidade de maior valor) | P0 | Portaria Setec 146/2021 + microdados PNP; teste: reproduzir 44% / 12,06% / 1,86% / 18,15 do Ifes |
-| Regra interna do Ifes | Efeito em R$ por campus | P0 para R$ por campus; não bloqueia metas institucionais | Proad/Prodi |
+| Parâmetros de piso e teto da regra interna e composição da Reitoria (L-28) | Efeito em R$ por campus; incentivo do pacto | P1 (mecanismo confirmado pela PROAD; § 0.1) | PROAD/Câmara de Orçamento; distribuição 2025 |
 | Taxas de ocupação, evasão e conclusão por curso e campus | Projeção de coortes (vagas → QTM) | P1 | PNP (pública), por ciclo |
 | Definição PNP de "matrícula ativa no período" | Modelo causal de evasão × MT | P1 | Glossário PNP |
 | Origem do recurso MOOC fora de F | Valor MOOC 2027+ | P2 | Setec |
@@ -279,6 +308,9 @@ Com base no § 6: RMO-P01 (RO-MT), P02 (MOOC 2026), P03 (IEA), P04 (degraus), P0
 | RPE-06 | Cenário que aumenta MT sem aumentar matrícula técnica, conclusão ou atendimento de demanda exibe alerta de "ganho por volume" | Guarda-corpo anti-gaming |
 | RPE-07 | Efeito orçamentário por campus só é exibido em R$ com regra interna versionada; caso contrário, apenas em participação e contribuição | Separação nacional × interna |
 | RPE-08 | Um pacto registra: meta, contribuições por campus, premissas, responsável, data de revisão e indicador observado | Mínimo de governança |
+| RPE-09 | Toda meta é tipada como **meta legal/institucional**, **limiar orçamentário** ou **meta pactuada**, com fonte própria; a interface mostra a distância a cada uma e nunca apresenta um limiar como cumprimento da meta legal | Técnico 50% = 50%; FP 20% × limiares 10/15/20%; EJA 10% × limiares 2,5/5/10% (guia PNP; N3) |
+| RPE-10 | Toda contribuição de campus registra custo, capacidade consumida e benefícios esperados, separando os que ficam na unidade dos que são institucionais; o pacto define a contrapartida aos contribuintes | Governança de incentivos (segundo parecer externo) |
+| RPE-11 | Todo resultado é explicável: cada número aponta para dados (fonte, exercício), premissas, regra (versão) e decisões humanas que o produziram | Explicabilidade transversal; evita caixa-preta |
 
 ---
 
@@ -305,7 +337,7 @@ Com base no § 6: RMO-P01 (RO-MT), P02 (MOOC 2026), P03 (IEA), P04 (degraus), P0
 | Degraus de Qualidade por campus (contribuições) | — (não previsto) | **BLOQUEADA** | RMO-P05 (%ME, MEq RAP) e dados PNP por campus |
 | Assistência Estudantil | CONDICIONAL | Sem alteração; **baixa prioridade** | — |
 | Reitoria nacional | CONDICIONAL | CONDICIONAL (base inclui MOOC) | — |
-| Distribuição interna Ifes | BLOQUEADA | BLOQUEADA | Ato interno |
+| Distribuição interna Ifes | BLOQUEADA | **CONDICIONAL como hipótese** (matriz por campus + piso/teto, RMO-075 não demonstrada) | Conciliação por universo, parâmetros de piso e teto, composição da Reitoria |
 | Fechamento nacional / conformidade vigente | BLOQUEADA | BLOQUEADA (sem valor decisório para o Ifes; **não priorizar**) | Bases nacionais por ciclo; N3 já obtida |
 | Fatores de Funcionamento 2027+ (EAD, FP, MOOC) | BLOQUEADA (N3) | **PRONTA (N3):** 25% / 80% / 8% | MOOC dentro ou fora de F |
 | Cenários plurianuais | CONDICIONAL | CONDICIONAL; calendário de efeitos definido (RMO-P06) | Séries de coorte; N3 |

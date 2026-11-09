@@ -53,6 +53,20 @@
       "valor_ifes": 63954934.31
     }
   },
+  "distribuicao_interna_vs_matriz": {
+    "custeio_total_proad": 77513000.0,
+    "campi_pareados": 22,
+    "faixas_de_razao": {
+      "<0,90": 3,
+      "0,90–0,98": 5,
+      "0,98–1,02": 8,
+      "1,02–1,10": 3,
+      ">1,10": 3
+    },
+    "dentro_2pct": 8,
+    "soma_proad_campi_comuns": 62527959.83,
+    "soma_matriz_campi_comuns": 62782149.76
+  },
   "qualidade_ifes_C5": {
     "ifes_indicadores": {
       "IEA": 0.4905,

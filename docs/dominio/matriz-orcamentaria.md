@@ -8,12 +8,12 @@
 | Escopo | Livro de 2025; pasta de participação das matrículas de 2026; verificação externa dos atos e de documentação institucional. Nenhum simulador foi implementado. |
 | Exercícios | Histórico descrito no livro até 2025; caso operacional denominado 2026, com dados de 2024 (elaborado antes de N3); N3 publicada em 12/03/2026, íntegra lida na v1.2.0 e aplicável, no mínimo, à matriz 2027 em diante. |
 | Data da análise e das consultas externas | Consultas em 08/11/2026; auditoria concluída em 09/11/2026; revisão crítica e incorporação de N3 (v1.2.0) em 09/11/2026, America/Sao_Paulo. |
-| Versão | **1.2.0** — revisão crítica independente e incorporação de N3, 09/11/2026; preserva IDs e o histórico das versões 1.0.0 e 1.1.0. |
+| Versão | **1.2.2** — 1.2.1 com conciliação PROAD por universo comparável e RMO-075 reclassificada para HIPÓTESE; base: 1.2.0 (revisão crítica e N3) acrescida da distribuição interna publicada pela PROAD (RMO-075, L-28), 09/11/2026; preserva IDs e o histórico das versões 1.0.0 e 1.1.0. |
 | Situação | N3 lida integralmente; regra operacional de produção da MT (RMO-066) reproduz 100% dos ciclos de B e de C5, divergindo do texto de N2/N3 (L-24); homologações institucionais e definição de %ME (L-25) pendentes. |
 | Responsável pela análise | v1.0.0–1.1.0: agente Codex; v1.2.0: Claude (revisão crítica), a pedido do projeto Prumo/Ifes. |
 | Responsável pela validação de domínio | Não indicado. Recomenda-se responsável pela matriz no Ifes e, nas questões nacionais, Comissão Paritária/Setec/Forplan. |
 | Limite de autoridade | Esta consolidação não substitui os atos oficiais nem certifica valores de LOA ou receita. Uma fórmula reproduzida pode implementar um parâmetro incorreto. |
-| Prontidão | Reprodução de B e de AC PRONTAS; MT por ciclo PRONTA como regra (entrada QTM condicional); fatores N3 de Funcionamento e faixas de Qualidade PRONTOS; degraus por campus e alocação interna BLOQUEADOS (§ 13.1). |
+| Prontidão | Reprodução de B e de AC PRONTAS; MT por ciclo PRONTA como regra (entrada QTM condicional); fatores N3 de Funcionamento e faixas de Qualidade PRONTOS; degraus por campus BLOQUEADOS; alocação interna CONDICIONAL (§ 13.1). |
 
 ### 0.1. Registro das fontes
 
@@ -33,6 +33,7 @@ Identificadores de fonte são usados em todo o documento. Referências de págin
 | C5 | [IFMT, Matriz Orçamentária 2026 — PLOA](https://docs.google.com/spreadsheets/d/1Y742qTN3Svetk9B2ggAefjKF8-rAjs8heIqJncXYwRE/edit), vinculado por C1. [Cópia XLSX](evidencias/2026-11-08/ifmt-matriz-2026.xlsx). | 11 abas examinadas, fórmulas e resultados salvos; cabeçalhos S:AL de Ciclos documentam a fase anterior à monetização. É outro demonstrativo institucional, com parâmetros diferentes de B; não homologa o Ifes nem prova identidade da fase/versão. |
 | C6 | [Cadastro público de cursos/pesos vinculado pelo IFMT](https://docs.google.com/spreadsheets/d/1voCoeyf8ByxxhAvDihep-weld6XcpVxzYOAVffxOH5I/edit). [Cópia XLSX](evidencias/2026-11-08/cadastro-publico.xlsx). | Aba PLOA 2025: nome, tipo, eixo, peso, esforço, CH e agro. Usada para cotejo de amostras, sem transferir vigência para B. Há chaves ambíguas e ausentes; aba Cópia de PLOA 2027 contém números interpretados como datas e não foi adotada como parâmetro. |
 | C7 | Oliveira, Claudemiro Soares de; Pinto, Leandro Rafael. *Guia de análise e interpretação de indicadores da Matriz Orçamentária*, produto educacional IFPR, 2025. [PDF EduCAPES](https://educapes.capes.gov.br/bitstream/capes/1133623/2/GUIA%20DE%20OR%C3%87AMENTO%20RFEPCT.pdf). | Texto de apoio examinado, especialmente pp.27–44. Cinco situações temporais, pesos e percentuais; não substitui N2/N3. Tabelas têm imprecisões editoriais de operadores. |
+| C8 | [PROAD/Ifes — Orçamento 2026](https://proad.ifes.edu.br/orcamento-2026), publicada em 01/04/2026, atualizada em 05/08/2026. [HTML preservado](evidencias/2026-11-09/proad-orcamento-2026.html); [extrato](evidencias/2026-11-09/distribuicao-interna-ifes-2026.json). | Valores de custeio e assistência 2026 por unidade (total de custeio R$ 77.513.000,00) e descrição do método: critérios institucionais vigentes com piso e teto, Câmara de Orçamento, aprovação do Colégio de Dirigentes. Não publica fórmulas nem parâmetros. Usada na v1.2.1. |
 | R1 | [Revisão independente das regras](revisao-critica-regras-prumo.md), 09/11/2026, com [script](evidencias/2026-11-09/reproduzir_revisao_critica.py) e [testes](../../tests/auditoria_matriz/test_ro_mt.py). | Origem das correções da v1.2.0. Reprocessou os 2.322 ciclos de B e os 1.086 ciclos e 41 indicadores institucionais de C5 sem usar AC/AL como entrada. Não é fonte normativa. |
 | P1 | `contexto_projeto_inteligencia_estrategica_educacional_ifes_v1_1.md`, especialmente § 11. | Contexto de produto e pista para buscar N3. Não é fonte comprobatória de regra da matriz. |
 
@@ -72,7 +73,7 @@ Manter os IDs RMO ao revisar. Registrar nova versão, fonte, exercício e efeito
 | Preços, EAD, MOOC e fechamento | 013, 033, 037, 039–041, 063, 067 | §§ 6.2/6.7; reprodução de B PRONTA; N3: EAD 25%/80%, **MOOC 8%** (RMO-067); `/4` de B é anomalia (L-06 resolvida); MOOC dentro ou fora de F não determinado (L-26). |
 | Qualidade e eficiência | 016–022, 062, 068, 069, 072 | §§ 6.7/6.9; faixas idênticas em N3; indicadores e submontantes 2026 de todas as instituições disponíveis (RMO-072); valor de degrau (RMO-069); IEA aplicado como 0,5×IEA em 2026, texto N3 ainda diverge (L-23). |
 | Assistência, renda, IDH e RIP | 023–027, 064 | § 6.8; regras N2 e rateio com bases homologadas CONDICIONAIS; limites de renda e exercício atual BLOQUEADOS. |
-| Reitoria, campi e orçamento efetivo | 004–006, 043–046, 058–059, 065, 071 | §§ 7/13.1; base de Reitoria inclui MOOC em 2026 (RMO-071); alocação interna Ifes BLOQUEADA. |
+| Reitoria, campi e orçamento efetivo | 004–006, 043–046, 058–059, 065, 071, 075 | §§ 7/13.1; base de Reitoria inclui MOOC em 2026 (RMO-071); alocação interna Ifes 2026: hipótese de matriz por campus com piso e teto (RMO-075, não demonstrada); parâmetros e conciliação em L-28. |
 | Participação, causalidade e projeção | 051–057 | §§ 12/13.2; hipóteses explícitas e universo comparável, sem promessa de receita. |
 | Evidências e testes | 001–065 conforme fonte/variante | §§ 11/15/16; [suíte de referência](../../tests/auditoria_matriz/README.md), manifesto e relatório. |
 
@@ -94,7 +95,7 @@ A situação de uma capacidade não é uma classificação jurídica da regra. �
 
 [RMO-061](#rmo-061) · [RMO-062](#rmo-062) · [RMO-063](#rmo-063) · [RMO-064](#rmo-064) · [RMO-065](#rmo-065) · [RMO-066](#rmo-066) · [RMO-067](#rmo-067) · [RMO-068](#rmo-068) · [RMO-069](#rmo-069) · [RMO-070](#rmo-070)
 
-[RMO-071](#rmo-071) · [RMO-072](#rmo-072) · [RMO-073](#rmo-073) · [RMO-074](#rmo-074)
+[RMO-071](#rmo-071) · [RMO-072](#rmo-072) · [RMO-073](#rmo-073) · [RMO-074](#rmo-074) · [RMO-075](#rmo-075)
 
 ## 1. Visão geral — Entenda a matriz em cinco minutos
 
@@ -1924,6 +1925,8 @@ Nas tabelas abaixo, **c** significa ciclo; **g**, grupo de classificação/curso
 
 **Observações:** Não extrapolar além da versão e da cobertura das fontes indicadas.
 
+**Revisão 1.2.1:** AF/J continuam sendo contribuição, não repasse. Mas a distribuição interna publicada para 2026 acompanha de perto essa contribuição por campus, ajustada por piso e teto (RMO-075).
+
 <a id="rmo-044"></a>
 
 #### RMO-044 — Agregação por classificação com seis critérios
@@ -2479,6 +2482,8 @@ Nas tabelas abaixo, **c** significa ciclo; **g**, grupo de classificação/curso
 **Nível de confiança:** baixa
 
 **Observações:** Não extrapolar além da versão e da cobertura das fontes indicadas.
+
+**Revisão 1.2.1:** para 2026, o valor efetivamente distribuído pelo Ifes (custeio de R$ 77.513.000,00) é publicado por unidade em C8; a passagem LOA → distribuição interna passa a ser observável (RMO-075).
 
 <a id="rmo-059"></a>
 
@@ -3051,6 +3056,44 @@ Nas tabelas abaixo, **c** significa ciclo; **g**, grupo de classificação/curso
 **Nível de confiança:** alta no texto; baixa na aplicação.
 
 
+<a id="rmo-075"></a>
+
+#### RMO-075 — Distribuição interna de custeio do Ifes 2026: hipótese de matriz por campus com piso e teto
+
+**Objetivo:** Ligar a referência da matriz ao orçamento efetivamente distribuído a cada campus.
+
+**Explicação simples:** Em 2026, cada campus recebeu aproximadamente o que a matriz calcula para ele; alguns foram protegidos por um piso, outros contidos por um teto, para evitar variações bruscas em relação ao ano anterior.
+
+**Definição técnica:** Custeio_campus ≈ ajuste(valor de Funcionamento do campus na matriz; piso, teto relativos ao exercício anterior). Unidades sem histórico (campi novos) recebem valor de piso. A Reitoria recebe parcela própria (R$ 11.705.437,42), e o Cefor (R$ 1.581.820,45) aparece como unidade separada.
+
+**Classificação:** HIPÓTESE (v1.2.2; v1.2.1: OPERACIONAL)
+
+**Vigência/aplicabilidade:** Exercício 2026 do Ifes (C8). A forma de piso e teto não foi publicada; não estender a outros exercícios sem nova publicação.
+
+**Entradas:** Valor da matriz por campus; distribuição do exercício anterior; parâmetros de piso e teto; total de custeio do exercício.
+
+**Fórmula ou algoritmo:** Não determinada nos parâmetros. Evidência agregada: razão PROAD ÷ B entre 0,98 e 1,02 em 8 dos 22 campi de B e entre 0,98 e 1,03 em 10; demais desvios em ambos os sentidos (até cerca de +22% e −16%), compatíveis com piso e teto. Soma dos 22: 62.527.959,83 × 62.782.149,76 (0,996). A tabela por campus derivada de B é resultado de auditoria local e não é publicada.
+
+**Saídas:** Custeio por campus (R$ efetivamente distribuídos).
+
+**Condições:** Mesmo exercício e mesma fase da matriz; B é a 6ª fase, e não a final.
+
+**Exceções:** Campi novos (Laranja da Terra, Pedro Canário, Presidente Kennedy) recebem R$ 848.891,15 cada; [HIPÓTESE] piso de R$ 700 mil (art. 8º de N3) atualizado pelo fator 1,2127. A parcela de Qualidade e Eficiência não aparece repartida por campus.
+
+**Dependências:** RMO-004, 042–046, 058–059, 065, 069, 074; L-15, L-28.
+
+**Exemplo:** Valores publicados pela PROAD (C8): campi novos com R$ 848.891,15 cada; os valores de referência por campus derivados de B não são reproduzidos aqui.
+
+**Fonte:** C8; B CICLOS E/AE; [script](evidencias/2026-11-09/reproduzir_revisao_critica.py), chave `distribuicao_interna_vs_matriz`.
+
+**Situação da validação:** comparação reproduzida; regra **não demonstrada** (fórmula, parâmetros, exceções e natureza do recurso desconhecidos).
+
+**Conciliação por universo (v1.2.2):** todas as unidades exceto Reitoria 65.807.562,58 × B 62.782.149,76 (+4,8%); excluídos Cefor (1.581.820,45) e os campi novos ausentes de B (Laranja da Terra e Pedro Canário, 1.697.782,30), as 22 unidades comuns somam 62.527.959,83 (−0,4%); excluído também Presidente Kennedy (unidade de piso; valor de matriz desprezível), os **21 campi consolidados somam 61.679.068,68 × 62.779.760,83 (−1,75%)**. O custeio total (R$ 77.513.000,00) supera em cerca de R$ 4,3 mi a soma estimada dos blocos da matriz do Ifes; diferença não explicada.
+
+**Nível de confiança:** média como hipótese; não usar como regra de cálculo.
+
+**Observações:** Implicação para governança: decisões do campus alcançam o orçamento do próprio campus, amortecidas por piso e teto, enquanto ganhos de Qualidade (institucionais) não aparecem repartidos por campus. A apropriação desses ganhos pela Reitoria é hipótese não comprovada: a PROAD não decompõe os R$ 11,7 mi por componente da matriz.
+
 ## 6. Fórmulas matemáticas consolidadas
 
 ### 6.1. Notação, unidades e execução
@@ -3373,6 +3416,8 @@ Defasagem observada: `ano-base educacional 2024 → elaboração não identifica
 | Versão | Mudança e alcance |
 |---|---|
 | 1.0.0 —08/11/2026 | Primeira consolidação:60RMO,23 famílias,22 lacunas;49.583 fórmulas declaradas conferidas. Mantida como base histórica de comparação desta auditoria. |
+| 1.2.2 — 09/11/2026 | Segundo parecer externo: conciliação PROAD por universo comparável (o "0,4%" incluía unidade de piso; 21 campi consolidados a −1,75%); RMO-075 reclassificada para HIPÓTESE; L-28 e § 13.1 ajustadas. Distinção entre meta legal, limiar orçamentário e meta pactuada registrada nas revisões (RPE-09). |
+| 1.2.1 — 09/11/2026 | Distribuição interna publicada pela PROAD (C8): RMO-075, L-28; L-15 e L-25 atualizadas; RMO-043/058 com bloco "Revisão 1.2.1"; capacidade de distribuição interna passa a CONDICIONAL. Parecer externo incorporado nas revisões (degraus como consequência, valores como potencial). |
 | 1.2.0 — 09/11/2026 | Revisão crítica independente ([revisão](revisao-critica-regras-prumo.md)) e íntegra de N3. 22 RMO com bloco **Revisão 1.2.0**; RMO-060 reclassificada; RMO-066–074 criadas; F-28–29, V-12–13, § 6.9; L-01, L-02, L-06, L-10, L-12 e L-13 resolvidas no alcance indicado; L-24–27 abertas; 13 testes novos (32 no total). Nenhum dado ou fórmula das planilhas alterado. [Cópia integral da v1.1.0](evidencias/2026-11-09/matriz-orcamentaria-v1.1.0.md). |
 | 1.1.0 —09/11/2026 |32RMO existentes revisadas,5 adicionadas; N2 republicada íntegra; cadeia MT recuperada com contraexemplos;4 famílias adicionais F-24–27; L-01–22 preservadas e novaL-23;19 testes e verificação de fontes; prontidão por capacidade. Nenhuma fórmula/dado original ou regra de produto alterado. |
 
@@ -3588,7 +3633,7 @@ O quadro da v1.1.0 está preservado na [cópia integral](evidencias/2026-11-09/m
 | Degraus de Qualidade por campus (contribuições) | 069, 072 | %ME e MEq-RAP por campus, definição PNP | **BLOQUEADA** | Definição de %ME e MEq não extraída (L-25). |
 | Simular Assistência Estudantil | 023–027, 064 | MECHDA elegível, renda, RIP, montantes | **CONDICIONAL** | Renda 0 e 3,5 SM ambíguos também em N3 (L-11). Baixa prioridade decisória. |
 | Simular Reitoria nacional | 004–006, 059, 071 | Valores de matriz por situação, inclusive MOOC | **CONDICIONAL** | Base anual. |
-| Distribuir internamente o orçamento do Ifes | 043–046, 058–059 | Ato interno, reservas, fundos | **BLOQUEADA** | AF/J medem contribuição; não estabelecem repasse. |
+| Distribuir internamente o orçamento do Ifes | 043–046, 058–059, 075 | Valor da matriz por campus; distribuição anterior; piso e teto; natureza do recurso | **CONDICIONAL como hipótese (v1.2.2)** | Mecanismo de piso e teto publicado (C8); fórmula não demonstrada; 21 campi consolidados a −1,75% da referência B. Não é pré-requisito da demonstração de metas (L-28). |
 | Projetar cenários plurianuais | 053, 056–058, 066, 070, 074 | Coortes, permanência, Rede e regras por exercício | **CONDICIONAL** | Calendário exercício = ano-base + 2; art. 7º de N3 pode amortecer variações (L-27). |
 | Estimar referência financeira | 005, 039, 053, 057, 062–064, 067 | Participação comparável e montante por componente | **CONDICIONAL** | Nunca equivaler automaticamente a LOA/receita. |
 | Fechar a matriz nacional / validar conformidade vigente | 060, 063, 065 | Bases nacionais por ciclo, parâmetros finais, pisos | **BLOQUEADA** (baixo valor decisório para o Ifes) | N3 lida; fechamento 2026 de F confirmado em C5. |
@@ -3610,7 +3655,7 @@ No caso denominado 2026, os dados de B são de 2024. Isso demonstra defasagem de
 
 ## 14. Divergências, lacunas e questões abertas
 
-**Estado v1.2.0:** com N3 e a revisão crítica, L-01, L-02, L-06, L-10, L-12 e L-13 foram resolvidas no alcance indicado (as quatro de 2026 por evidência operacional de B e C5); L-17 e L-23 foram atualizadas; L-24–27 foram abertas. Total: 27 registros, sendo 10 resolvidos, 10 parcialmente esclarecidos e 7 abertos ou divergentes. A descrição da v1.1.0 segue abaixo de cada linha alterada, quando útil, e integralmente na cópia preservada.
+**Estado v1.2.0:** com N3 e a revisão crítica, L-01, L-02, L-06, L-10, L-12 e L-13 foram resolvidas no alcance indicado (as quatro de 2026 por evidência operacional de B e C5); L-17 e L-23 foram atualizadas; L-24–27 foram abertas. Total: 27 registros, sendo 10 resolvidos, 10 parcialmente esclarecidos e 7 abertos ou divergentes. **v1.2.1:** acrescida L-28 (aberta), totalizando 28: 10 resolvidos, 10 parciais e 8 abertos ou divergentes. A descrição da v1.1.0 segue abaixo de cada linha alterada, quando útil, e integralmente na cópia preservada.
 
 Prioridades P0/P1/P2 mantêm o sentido original. Os IDs L-01–L-22 foram preservados. **Resolvida** significa conclusão comprovada no alcance indicado, não edição/correção da planilha. A versão 1.0.0 mantinha todas abertas; nesta versão quatro foram encerradas como questões de interpretação/estrutura,14 parcialmente esclarecidas e quatro continuam abertas entre as 22 originais. Nova L-23 eleva o total ativo a23:4 resolvidas,14 parciais e 5 abertas. Não há declaração de conformidade vigente.
 
@@ -3630,7 +3675,7 @@ Prioridades P0/P1/P2 mantêm o sentido original. Os IDs L-01–L-22 foram preser
 | L-12 — CHM fixa e carga de integrado | **Resolvida operacionalmente (v1.2.0)** | Longos usam min(CHC, CHM); curtos usam CHM (RMO-014/066). CHM própria do integrado (ex.: 3.000 para catálogo 800) continua sendo entrada do cadastro, não fórmula. | Cadastro CHM homologado para cursos novos. | P2 |
 | L-13 — Retenção, FIC e datas | **Resolvida operacionalmente (v1.2.0)** | Elegibilidade por DJ informada; FIC com DJ = DTC → retido FIC vale zero (RMO-073); ciclos curtos com FEDA relativo à duração (RMO-066). | Ausência de dispositivo para a exceção FIC integra L-24. | P2 |
 | L-14 — AE completa e RIP | **Parcialmente esclarecida** | N2 p.125 confirma RIP proporcional por QRIP/ofício, IPCA+variação de matrículas, transição IDH e renda; C5 corrobora rateios e segrega modalidades. B não fornece bases/quantidades; /4 e seleção EAD de C5 não foram homologados para o Ifes. | Bases ME/renda/financiamento e RIP por ofício, universos e montantes anuais; N3. | P0 |
-| L-15 — Reitoria e alocação interna | **Parcialmente esclarecida** | N2 define 10% e mesma base de Funcionamento; C5 operacionaliza proporção institucional×montante Reitoria. Atos internos do Ifes, reservas, complementos e ordem anual de rateio não foram obtidos. AF/J não são regra de transferência. | Ato e memória interna Ifes; base nacional/ajustes da Reitoria. | P0 |
+| L-15 — Reitoria e alocação interna | **Parcialmente esclarecida (v1.2.1)** | N2/N3 definem 10% e mesma base de Funcionamento; C5 operacionaliza a proporção institucional. C8 publica a distribuição interna 2026 do Ifes (custeio R$ 77.513.000,00) e o método de piso e teto; a aderência à matriz por campus está em RMO-075. | Parâmetros e composição: ver L-28. | P1 |
 | L-16 — Totais nacionais e fechamento | **Não determinada** | C5 contém outros parâmetros nacionais/índices, sem reconciliá-los a D9:D12 de B; C1 informa total nacional 2026 diferente de D4. Não há base nacional de ciclos, mesma edição, exclusões e homologação que permitam fechar a Rede. | Primeiro: definição/composição de D9:D12 e base nacional da mesma fase. Depois pisos, ajustes e resíduos. | P0 |
 | L-17 — Precisão e resíduos | **Parcialmente esclarecida (v1.2.0)** | Com RO-MT, B tem 33 empates exatos na 5ª casa (32 sobem, 1 desce: linhas 173 e 1080) e C5 tem 3; compatível com arredondamento em ponto flutuante binário pelo produtor. Testes aceitam os dois lados apenas em empate exato. | Política oficial de precisão e de destino de resíduos. | P2 |
 | L-18 — Filtros, H4 e cabeçalhos | **Resolvida com evidência** | Inspeção e fórmulas confirmam filtros de cabeçalho, CURSOS H4 vazio e critério tipo de curso sob rótulo oferta; total geral e visível têm semânticas diferentes. É diagnóstico delimitado, não erro oculto no fechamento recebido. | Nenhum bloqueio para documentar/reproduzir; arquivo original preservado. | P2 |
@@ -3641,8 +3686,9 @@ Prioridades P0/P1/P2 mantêm o sentido original. Os IDs L-01–L-22 foram preser
 | L-23 — IEA: tabela/roteiro versus primeiro ramo da equação N2 | **Permanece divergente no texto; prática identificada (v1.2.0)** | N3 repete a Tabela 1 (peso 0,5) e a equação com constante 0,5. C5 2026 aplica 0,5×IEA às 13 instituições abaixo de 0,9×média (T-Q01). | Retificação ou orientação oficial; até lá, cenário padrão 0,5×IEA rotulado "prática 2026". | P1 |
 
 | L-24 — Prática de produção da MT × texto de N2/N3 | **Divergente (nova, v1.2.0)** | RO-MT reproduz 100% de B e C5; o texto (idêntico em N2 e N3) reproduz 1.300/2.322 e 993/1.086. Diferenças: limiar 365, carga min(CHC, CHM)/CHM, FEDA de curtos pela duração do ciclo, exceção FIC por DJ (F-28). | Memória de cálculo da matriz 2027 junto à Setec/Comissão Paritária: qual forma será aplicada. | P0 |
-| L-25 — Definição de %ME legal e MEq da RAP | **Não determinada (nova, v1.2.0)** | Ifes 2026: %CT PNP 44% × 57,8% técnico em MECHDA de B; FP 12,06% × 8,3% de licenciaturas; EJA 1,86% × 1,64%. Não derivável de MT. Necessária para simular degraus por campus. | Portaria Setec nº 146/2021, documentação e microdados PNP; reproduzir os 44%/12,06%/1,86%/18,15 do Ifes. | P0 |
+| L-25 — Definição de %ME legal e MEq da RAP | **Não determinada (nova, v1.2.0; atualizada 1.2.1)** | Ifes 2026: %CT PNP 44% × 57,8% técnico em MECHDA de B; FP 12,06% × 8,3%; EJA 1,86% × 1,64%. Não derivável de MT. O guia de indicadores da PNP distingue matrículas equivalentes (`ALMTEC`) e vagas (`ALVTEC`); o art. 8º, § 1º, da Lei 11.892/2008 manda aferir os percentuais por aluno-equivalente. | Confirmar qual indicador PNP alimenta a matriz; reproduzir os 44%/12,06%/1,86%/18,15 do Ifes. | P0 |
 | L-26 — MOOC no denominador de F | **Não determinada (nova, v1.2.0)** | N3 fixa MOOC = 8% sem dizer se integra o denominador de F; C5 2026 manteve a MOOC fora de F. Efeito no Ifes: R$ 63,87 mi (dentro) × R$ 63,95 mi (fora). | Memória de cálculo 2027. | P2 |
+| L-28 — Parâmetros de piso e teto da distribuição interna e composição da Reitoria | **Não determinada (nova, v1.2.1)** | C8 confirma o mecanismo de piso e teto, mas não os parâmetros. Conciliação v1.2.2 (RMO-075): +4,8% (todas as unidades exceto Reitoria), −0,4% (22 comuns), −1,75% (21 campi consolidados); cerca de R$ 4,3 mi do custeio total sem correspondência nos blocos da matriz. Não se sabe se os R$ 11,7 mi da Reitoria incluem a Qualidade e Eficiência, nem se há regra para devolver aos campi ganhos institucionais. O valor de R$ 848.891,15 dos campi novos sugere piso atualizado. | Pedido à PROAD/Câmara de Orçamento; distribuição de 2025 para calibrar o teto. | P1 |
 | L-27 — Alcance do art. 7º de N3 | **Não determinada (nova, v1.2.0)** | "Manter, no mínimo, o referencial do ano anterior atualizado pelo IPCA": não diz se é da Rede ou de cada instituição. O art. 9º repete prazo já esgotado. | Orientação Setec; memória de complementação 2027. Afeta a leitura de ganhos e perdas marginais. | P1 |
 
 As descrições iniciais e sua evolução estão resumidas no relatório complementar; o livro/arquivo não foram alterados. Resolver a interpretação não transforma contribuição em repasse, AI em evasão ou uma reprodução operacional em regra vigente.
@@ -3728,6 +3774,7 @@ Cada linha relaciona evidência e capacidade de verificação. As referências A
 | RMO-072 | C5 Indicadores; Cálculo Custeio | Dados observados 2026 | 41 instituições | Linha de base de Qualidade | T-Q01–Q03 |
 | RMO-073 | B Q:R/AC; C5 L:M/AL | DJ ≥ DIP | DTC, DJ | Elegibilidade de retido | T-R05 |
 | RMO-074 | N3 arts. 7º/9º | Não determinada | Referencial, IPCA | Possível piso | L-27 |
+| RMO-075 | C8; B CICLOS E/AE | Matriz por campus com piso/teto (parâmetros não publicados) | Valor por campus, distribuição anterior | Custeio por campus 2026 | Script `distribuicao_interna_vs_matriz`; L-28 |
 
 ## 16. Guia de consulta para agentes de IA
 
@@ -3764,12 +3811,12 @@ Executar a [suíte de referência](../../tests/auditoria_matriz/README.md); sele
 | Livro A | 65 páginas físicas inventariadas; texto integral lido. Capítulos 1–4 e referências mapeados; 15 figuras, gráfico 1 e três quadros de conteúdo examinados visualmente (o rótulo Quadro 2 se repete). Capas também examinadas. |
 | Pasta B | 4/4 abas examinadas, inclusive áreas ocultas, comentários, todas as células não vazias, fórmulas, resultados salvos, formatos e estruturas relevantes do pacote XLSX. |
 | Registros de B | 2.322 ciclos, 164 classificações, 279 grupos de curso e 22 nomes de unidades do Ifes. Não há base de pessoas nem de outras instituições. |
-| Regras catalogadas | 74 (v1.2.0): 23 NORMATIVA, 12 METODOLÓGICA, 5 HISTÓRICA, 25 OPERACIONAL, 6 DERIVADA, 1 HIPÓTESE, 2 NÃO DETERMINADA. RMO-060 reclassificada para NORMATIVA; RMO-066–074 acrescentadas. Contagem descritiva; não mede completude nem vigência. |
+| Regras catalogadas | 75 (v1.2.2): 23 NORMATIVA, 12 METODOLÓGICA, 5 HISTÓRICA, 25 OPERACIONAL, 6 DERIVADA, 2 HIPÓTESE, 2 NÃO DETERMINADA. RMO-060 reclassificada para NORMATIVA (1.2.0); RMO-075 para HIPÓTESE (1.2.2); RMO-066–075 acrescentadas. Contagem descritiva; não mede completude nem vigência. |
 | Fórmulas reconstruídas | 29 famílias: 23 da v1.0.0, F-24–27 da v1.1.0 e F-28–29 da v1.2.0 (RO-MT e valor de degrau). F-X1 divergente permanece excluída. |
 | Conferência operacional | Registro da v1.0.0:49.583/49.583 fórmulas declaradas comparadas sem divergência; preenchimento/chaves examinados. Auditoria1.1.0:19 testes,23 extratos reais, monetização 2.322 ciclos,22 campi e estruturas críticas conferidos por rotina separada. Ver resultado-validacao.json; não é nova certificação das 49.583 células. |
 | Exemplos | 8 casos reais V-01–08 conferidos; V-09 é álgebra com números fictícios; V-10 é análise de fronteiras e caso bissexto real. Nenhum deles representa cálculo integral até LOA. |
 | Normativos | N1 e republicação integral de N2 lidos; N2 original não recuperado para diff; **N3 lida integralmente (v1.2.0)** a partir de impressão web do DOU. C1–C7 no alcance declarado. |
-| Divergências e lacunas | 27 registros (v1.2.0): 10 resolvidos, 10 parciais, 7 abertos/divergentes; estados em § 14. |
+| Divergências e lacunas | 28 registros (v1.2.1): 10 resolvidos, 10 parciais, 8 abertos/divergentes; estados em § 14. |
 | Dependências externas | Edição/exportação PNP, produção de AC, cadastro CHM/pesos/flags, totais da Rede, normativos integrais, indicadores de qualidade, renda/RIP, montantes/atos anuais, política interna e orçamento efetivo Ifes. |
 | Modificações de produto | Nenhuma. Documentação, evidências públicas preservadas e testes/scripts de auditoria; originais A/B preservados. |
 
@@ -3796,4 +3843,4 @@ Executar a [suíte de referência](../../tests/auditoria_matriz/README.md); sele
 - [ ] Definição de %ME legal e MEq da RAP (L-25).
 - [ ] Reconstrução independente dos valores fixos e dos componentes ausentes, dependente de novas fontes.
 
-A entrega ativa é a **versão 1.2.0, com revisão crítica, N3 incorporada e 32 testes reproduzíveis**; as versões 1.0.0 e 1.1.0 permanecem no histórico de alterações. Não se declara completude da metodologia vigente nem prontidão para um simulador financeiro integral. Resolver as pendências acima exige novas fontes ou confirmação humana identificada, não testes que apenas procurem palavras neste arquivo.
+A entrega ativa é a **versão 1.2.2, com revisão crítica, N3 incorporada e 32 testes reproduzíveis**; as versões 1.0.0 e 1.1.0 permanecem no histórico de alterações. Não se declara completude da metodologia vigente nem prontidão para um simulador financeiro integral. Resolver as pendências acima exige novas fontes ou confirmação humana identificada, não testes que apenas procurem palavras neste arquivo.

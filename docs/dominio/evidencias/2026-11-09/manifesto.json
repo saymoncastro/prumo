@@ -16,6 +16,15 @@
       "id": "SCRIPT",
       "arquivo": "reproduzir_revisao_critica.py",
       "condicao": "Auditoria somente leitura; não é código de produto. Resultado em resultado-revisao-critica.json."
+    },
+    {
+      "id": "C8",
+      "arquivo": "proad-orcamento-2026.html",
+      "url": "https://proad.ifes.edu.br/orcamento-2026",
+      "publicacao_declarada": "01/04/2026 13h19; atualizada em 05/08/2026 10h52",
+      "sha256": "bcb54f357be56841ee90e714b110cbb526235184c739a7e2c9a13aca4d0bd9a9",
+      "bytes": 61708,
+      "condicao": "Baixada em 09/11/2026; extrato em distribuicao-interna-ifes-2026.json. A página descreve o método (piso e teto) sem fórmulas ou parâmetros."
     }
   ],
   "limites": [
