@@ -1,0 +1,741 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prumo POC 0.0.2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@85..100,500..800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Mesmo vocabulário visual da demonstração de recomposição (poc/prumo-recomposicao.template.html).
+   Categóricas das alternativas validadas com o validador de paleta (claro e escuro): A, B, C em ordem fixa. */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --ink:#14272a; --muted:#56696b; --line:#d5dddc;
+  --teal:#1f6b66; --teal-soft:#dcebe8; --brass:#a5761b; --brass-soft:#f3e7cc;
+  --a1:#008a7e; --a2:#9e6c00; --a3:#7048a8; --base:#7a8a8c;
+  --good:#2f7d4f; --warn:#a86a0c; --bad:#b03a2e;
+  --f-display:"Archivo",system-ui,sans-serif; --f-body:"Source Sans 3",system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1a1b; --surface:#152325; --ink:#e3ecea; --muted:#9db0ae; --line:#2a3b3d;
+  --teal:#5fb3ab; --teal-soft:#1d3634; --brass:#d9a849; --brass-soft:#3a2f17;
+  --a1:#1fa090; --a2:#c08a1c; --a3:#9277d4; --base:#8a9b9d;
+  --good:#6cc28f; --warn:#e0a443; --bad:#e8786b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1a1b; --surface:#152325; --ink:#e3ecea; --muted:#9db0ae; --line:#2a3b3d;
+  --teal:#5fb3ab; --teal-soft:#1d3634; --brass:#d9a849; --brass-soft:#3a2f17;
+  --a1:#1fa090; --a2:#c08a1c; --a3:#9277d4; --base:#8a9b9d;
+  --good:#6cc28f; --warn:#e0a443; --bad:#e8786b; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--f-body)}
+.wrap{max-width:1200px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px));display:grid;gap:24px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:88%;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(1.55rem,3vw,2.2rem);font-weight:800}
+h2{font-size:1.3rem;font-weight:700}
+h3{font-size:1rem;font-weight:700}
+p{margin:0;max-width:72ch}
+.muted{color:var(--muted)} .small{font-size:.88rem} .tiny{font-size:.78rem}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font:600 .74rem/1 var(--f-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+header.top{display:grid;gap:8px;border-left:3px solid var(--brass);padding-left:16px}
+nav.steps{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;gap:6px;flex-wrap:wrap;padding-block:8px;border-bottom:1px solid var(--line)}
+nav.steps a{font:600 .92rem var(--f-body);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+nav.steps a b{font-family:var(--f-mono);margin-right:4px}
+nav.steps a[aria-current="true"]{background:var(--teal);border-color:var(--teal);color:var(--surface)}
+nav.steps .sep{align-self:center;color:var(--muted)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+section.view{display:grid;gap:20px}
+.block{display:grid;gap:10px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;min-width:0}
+.facts{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.fact{display:grid;gap:3px;padding:10px 12px;border-left:2px solid var(--line)}
+.fact b{font:600 1.3rem/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+.callout{border-left:3px solid var(--brass);background:var(--brass-soft);padding:12px 14px;border-radius:0 8px 8px 0;display:grid;gap:6px}
+.callout ul,.plain{margin:0;padding-left:18px;display:grid;gap:4px}
+.two{display:grid;gap:16px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.grid4{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.alts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.alt{display:grid;gap:8px;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:14px;font:inherit;cursor:pointer;min-width:0;align-content:start}
+.alt.on{border-color:var(--teal);box-shadow:inset 0 0 0 1px var(--teal)}
+.alt .key{display:flex;align-items:center;gap:8px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;flex:none;vertical-align:-1px}
+.sw.dash{background:repeating-linear-gradient(90deg,var(--base) 0 4px,transparent 4px 7px);height:3px;width:16px;border-radius:0;vertical-align:3px}
+.alt .nm{font:700 1.02rem/1.2 var(--f-display);font-stretch:90%}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:.78rem;letter-spacing:.03em}
+td.r,th.r{text-align:right;white-space:nowrap}
+tr.grp th{background:var(--bg);color:var(--ink);font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;padding-top:10px}
+tr.hl td{background:var(--teal-soft)}
+th.obs,td.obs{background:var(--teal-soft)}
+.tag{display:inline-block;font:600 .68rem/1 var(--f-body);letter-spacing:.04em;padding:3px 6px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;vertical-align:1px}
+.tag.fato{color:var(--teal)} .tag.est{color:var(--a3)} .tag.prem{color:var(--brass)} .tag.ne{color:var(--muted)} .tag.hip{color:var(--warn)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:.82rem;color:var(--muted)}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font:11px var(--f-body);fill:var(--muted)}
+.chart .lab{font-weight:600;fill:var(--ink)}
+.charthost{position:relative}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-size:.78rem;box-shadow:0 2px 8px rgba(0,0,0,.12);display:none;z-index:3;white-space:nowrap}
+select,input[type=number],input[type=text],textarea{font:inherit;font-size:.9rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 8px;width:100%;min-width:0}
+textarea{min-height:60px}
+textarea.json{min-height:110px;font-family:var(--f-mono);font-size:.74rem}
+label.f{display:grid;gap:2px;font-size:.8rem;color:var(--muted);min-width:0}
+.form{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.form .full{grid-column:1/-1}
+button{font:600 .88rem var(--f-body);border-radius:6px;border:1px solid var(--teal);background:var(--teal);color:var(--surface);padding:7px 12px;cursor:pointer}
+button.ghost{background:transparent;color:var(--teal)}
+button.mini{padding:4px 8px;font-size:.78rem}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;justify-self:start;width:max-content;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;border-radius:0;background:var(--surface);color:var(--ink);font-weight:600;padding:6px 12px}
+.seg button[aria-pressed="true"]{background:var(--teal);color:var(--surface)}
+.up{color:var(--good)} .down{color:var(--bad)} .flat{color:var(--muted)}
+.verdict{font:600 1.02rem/1.35 var(--f-body)}
+.status{font-size:.86rem;color:var(--good)}
+details summary{cursor:pointer;font-weight:600}
+footer{font-size:.82rem;color:var(--muted);display:grid;gap:6px;border-top:1px solid var(--line);padding-top:14px}
+.mx td.r{font-family:var(--f-mono)}
+.combo td{text-align:center;font-family:var(--f-mono);font-size:.82rem}
+.combo td.on{outline:2px solid var(--teal);outline-offset:-2px}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">Prumo · POC 0.0.2 · Ifes · campi Vitória e Serra</span>
+    <h1>Ampliar vagas, aproveitar melhor os cursos atuais ou reorganizar a oferta?</h1>
+    <p class="muted">Três passos: ver onde estamos com a série 2017–2025 da Plataforma Nilo Peçanha, simular alternativas de cada campus até 2032 e compor as contribuições dos campi para os objetivos do Ifes. Cada número traz sua natureza: <span class="tag fato">fato</span> observado na PNP, <span class="tag est">estimado</span> a partir da PNP, <span class="tag prem">premissa</span> editável, <span class="tag hip">hipótese</span> a verificar ou <span class="tag ne">não estimado</span>. Material de conversa de planejamento: não é previsão, recomendação nem decisão.</p>
+  </header>
+
+  <nav class="steps" aria-label="Etapas">
+    <a href="#comparar" data-v="comparar"><b>1</b>Comparar</a><span class="sep">→</span>
+    <a href="#simular/vitoria" data-v="simular/vitoria"><b>2</b>Simular · Vitória</a>
+    <a href="#simular/serra" data-v="simular/serra">Simular · Serra</a><span class="sep">→</span>
+    <a href="#compor" data-v="compor"><b>3</b>Compor</a>
+    <a href="#metodo" data-v="metodo">Como calcula</a>
+  </nav>
+
+  <section class="view" id="v-comparar" hidden></section>
+  <section class="view" id="v-simular" hidden></section>
+  <section class="view" id="v-compor" hidden></section>
+  <section class="view" id="v-metodo" hidden></section>
+
+  <footer>
+    <span>Fontes: Plataforma Nilo Peçanha, Indicadores de Gestão (DadosGerais, Percentuais Legais, Taxa de Evasão, RAP), anos-base 2017–2025, 41 instituições da Matriz CONIF; demonstrativo IFMT da Matriz 2026 (percentuais legais da Rede e submontantes de Qualidade); Portaria MEC nº 243/2026 (faixas); fonte canônica de regras do Prumo v1.2.2; auditoria longitudinal da PNP (docs/analises).</span>
+    <span>Gerado por <span class="num">poc/montar.py</span> a partir de <span class="num">poc/extrair_poc002.py</span> e <span class="num">poc/coortes002.js</span>. Premissas e propostas ficam só neste navegador.</span>
+  </footer>
+</div>
+
+<script>
+const D = /*DADOS*/;
+/*COORTES*/
+const C = Coortes2, OBS = 2025, FUT = [2026, 2027, 2028, 2029, 2030, 2031, 2032], HIST = D.anos.map(Number), FIM = 2032;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fmt = (v, d = 0) => (v == null || !isFinite(v)) ? '—' : v.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+const sinal = (v, d = 0) => (Math.abs(v) < 0.5 * Math.pow(10, -d) ? '0' : (v > 0 ? '+' : '−') + fmt(Math.abs(v), d));
+const pct = (v, d = 0) => v == null ? '—' : fmt(100 * v, d) + '%';
+const pp = (v, d = 2) => sinal(100 * v, d) + ' p.p.';
+const tag = (k, t) => `<span class="tag ${k}">${t || { fato: 'fato', est: 'estimado', prem: 'premissa', hip: 'hipótese', ne: 'não estimado' }[k]}</span>`;
+const dir = (v, tol = 0.5) => v > tol ? '<span class="up">▲ melhora</span>' : v < -tol ? '<span class="down">▼ piora</span>' : '<span class="flat">● estável</span>';
+const curto = of => of.curso.replace(/^Técnico em /, '') + ' · ' + of.oferta.replace('PROEJA - ', 'PROEJA ').toLowerCase();
+const COR = { M: 'var(--base)', A: 'var(--a1)', B: 'var(--a2)', C: 'var(--a3)' };
+const NOMEALT = { M: 'Manter a oferta', A: 'A · Ampliar vagas', B: 'B · Aproveitar melhor', C: 'C · Reorganizar a oferta' };
+
+/* ---------------- ofertas dos campi ---------------- */
+const CAMPI = { vitoria: 'Vitória', serra: 'Serra' };
+const ehNaoIntegrada = of => of.tipo === 'Técnico' && (of.oferta === 'Concomitante' || of.oferta === 'Subsequente');
+function prepararCampus(chave) {
+  const c = D.campi[CAMPI[chave]];
+  const ofs = c.ofertas.filter(o => o.presencial && o.tipo === 'Técnico' && o.serie[OBS] && (o.serie[OBS][0] > 0 || o.serie[OBS][3] >= 10));
+  const evMed = C.media(ofs.map(o => o.evasao && o.evasao['2024']).filter(x => x != null)) || 0.2;
+  const lista = ofs.map(o => {
+    const k = C.calibrar(o, evMed), s = o.serie[OBS];
+    const banda = { mat: Math.max(k.erro.mat ?? 0.15, k.teste?.mat ?? 0, 0.05), conc: Math.min(0.6, Math.max(k.erro.conc ?? 0.3, k.teste?.conc ?? 0, 0.1)) };
+    return { of: o, id: o.id, nome: curto(o), k, banda, vagas: s[0], insc: s[1], ing: s[2], mat: s[3], conc: s[4], me: s[5], naoInt: ehNaoIntegrada(o),
+      ocup: k.ocup ?? 1, demandaExtra: Math.max(0, s[1] - s[2]) };
+  }).sort((a, b) => b.mat - a.mat);
+  // oferta com menos de dois anos de série: conclusão emprestada da mediana das ofertas calibradas da mesma forma no campus
+  for (const o of lista.filter(x => !x.k.cFato)) {
+    const pares = lista.filter(x => x.k.cFato && x.naoInt === o.naoInt).map(x => x.k.c).sort((a, b) => a - b);
+    o.k.c = pares.length ? pares[Math.floor(pares.length / 2)] : 0.6; o.k.emprestado = true;
+    o.banda = { mat: 0.25, conc: 0.6 };
+  }
+  return { chave, nome: CAMPI[chave], dados: c, lista };
+}
+const CP = { vitoria: prepararCampus('vitoria'), serra: prepararCampus('serra') };
+const achar = (chave, curso, oferta) => CP[chave].lista.find(o => o.of.curso === curso && o.of.oferta === oferta);
+
+/* ---------------- alternativas ---------------- */
+// Ocupação de vagas novas: limitada pela procura excedente observada em 2025 (inscritos − ingressantes).
+const ocupNovas = (o, n) => Math.min(o.ocup, o.demandaExtra / Math.max(n, 1));
+function exemplos() {
+  const v = { mec: achar('vitoria', 'Técnico em Mecânica', 'Concomitante'), eleC: achar('vitoria', 'Técnico em Eletrotécnica', 'Concomitante'), eleI: achar('vitoria', 'Técnico em Eletrotécnica', 'Integrado') };
+  const s = { infC: achar('serra', 'Técnico em Informática', 'Concomitante'), infI: achar('serra', 'Técnico em Informática para Internet', 'Integrado') };
+  return {
+    vitoria: {
+      A: { tipo: 'ampliar', oferta: v.mec.id, n: 36, desde: 2027, ocup: +ocupNovas(v.mec, 36).toFixed(2) },
+      B: { tipo: 'aproveitar', desde: 2027, redEvasao: 0.30, redRetencao: 0, ocupAlvo: 0.95 },
+      C: { tipo: 'migrar', de: v.eleC.id, para: v.eleI.id, n: 32, desde: 2027, ocup: +ocupNovas(v.eleI, 32).toFixed(2) },
+    },
+    serra: {
+      A: { tipo: 'ampliar', oferta: s.infC.id, n: 40, desde: 2027, ocup: +ocupNovas(s.infC, 40).toFixed(2) },
+      B: { tipo: 'aproveitar', desde: 2027, redEvasao: 0.30, redRetencao: 0, ocupAlvo: 0.95 },
+      C: { tipo: 'migrar', de: s.infC.id, para: s.infI.id, n: 40, desde: 2027, ocup: +ocupNovas(s.infI, 40).toFixed(2) },
+    },
+  };
+}
+const PREM0 = { turma: 40, aulas_integrado: 30, aulas_naoint: 20, aulas_proeja: 25, horas_prof: 14 };
+const KEY = 'prumo-poc-002-v1';
+function carregar() { try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && s.alts && s.prem) return s; } catch (e) {} return null; }
+let ST = carregar() || { alts: exemplos(), prem: { ...PREM0 }, ativo: { vitoria: 'A', serra: 'A' }, combo: { vitoria: 'B', serra: 'C' }, propostas: [] };
+function salvar() { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (e) {} }
+
+/* ---------------- simulação ---------------- */
+const aulasDe = (o) => o.of.oferta === 'Integrado' ? ST.prem.aulas_integrado : o.of.oferta.includes('PROEJA') ? ST.prem.aulas_proeja : ST.prem.aulas_naoint;
+const turmasDe = v => v > 0 ? Math.ceil(v / ST.prem.turma - 0.05) : 0; // 36 ou 40 vagas = 1 turma; 64 = 2; 96 = 3
+// cenário: 'M' (manter) ou alternativa; var: 'central' | 'pess' | 'otim' (sensibilidade das premissas)
+function simular(chave, letra, varr = 'central', ate = FIM) {
+  const cp = CP[chave], alt = letra === 'M' ? null : ST.alts[chave][letra];
+  const FUT = []; for (let t = OBS + 1; t <= ate; t++) FUT.push(t);
+  const fator = { central: 1, pess: 0.5, otim: 1.5 }[varr];
+  const linhas = [];
+  for (const o of cp.lista) {
+    const vg = {}, oc = {}, eF = {}, cF = {};
+    for (const t of FUT) { vg[t] = o.vagas; oc[t] = o.ocup; }
+    let ocupNovas = null, nNovas = 0;
+    if (alt) {
+      const desde = alt.desde;
+      if (alt.tipo === 'ampliar' && alt.oferta === o.id) { nNovas = alt.n; ocupNovas = Math.min(1.05, alt.ocup * (varr === 'pess' ? 0.7 : varr === 'otim' ? 1.2 : 1)); }
+      if (alt.tipo === 'migrar' && alt.de === o.id) for (const t of FUT) if (t >= desde) vg[t] = Math.max(0, vg[t] - alt.n);
+      if (alt.tipo === 'migrar' && alt.para === o.id) { nNovas = alt.n; ocupNovas = Math.min(1.05, alt.ocup * (varr === 'pess' ? 0.85 : 1)); }
+      if (alt.tipo === 'aproveitar' && o.naoInt) for (const t of FUT) if (t >= desde) {
+        eF[t] = o.k.e * (1 - Math.min(0.9, alt.redEvasao * fator));
+        cF[t] = o.k.c + (1 - o.k.c) * Math.min(1, alt.redRetencao * fator);
+        // ocupação sobe até o alvo só se a procura observada em 2025 comportar
+        if (o.insc >= o.vagas * alt.ocupAlvo) oc[t] = Math.max(o.ocup, alt.ocupAlvo);
+      }
+      if (nNovas) for (const t of FUT) if (t >= desde) { oc[t] = (o.vagas * oc[t] + nNovas * ocupNovas) / (o.vagas + nNovas); vg[t] += nNovas; }
+    }
+    const p = C.projetar({ hist: o.of, D: o.k.D, e: o.k.e, c: o.k.c, meRatio: o.k.meRatio, vagas: vg, ocup: oc, eFut: eF, cFut: cF }, ate);
+    // turmas simultâneas: uma coorte por ano de curso, enquanto tiver estudantes
+    for (const t of FUT) {
+      let tur = 0;
+      for (let k = 0; k <= o.k.D; k++) { const y = t - k, v = y <= OBS ? C.vagas(o.of, y) : vg[y]; if (k < o.k.D) tur += turmasDe(v); }
+      p[t].turmas = tur; p[t].horas = tur * aulasDe(o);
+    }
+    linhas.push({ o, p });
+  }
+  const anos = {};
+  const zero = () => ({ ing: 0, mat: 0, prazo: 0, ret: 0, conc: 0, me: 0, ct: 0, fp: 0, eja: 0, turmas: 0, horas: 0, banda: 0, bandaC: 0 });
+  anos[OBS] = zero();
+  for (const { o } of linhas) { const a = anos[OBS]; a.ing += o.ing; a.mat += o.mat; a.conc += o.conc; a.me += o.me; if (o.of.classe.tec) a.ct += o.me; if (o.of.classe.eja) a.eja += o.me; }
+  for (const t of FUT) {
+    const a = anos[t] = zero();
+    for (const { o, p } of linhas) {
+      const x = p[t];
+      a.ing += x.ing; a.mat += x.mat; a.prazo += x.prazo; a.ret += x.ret; a.conc += x.conc; a.me += x.me; a.turmas += x.turmas; a.horas += x.horas;
+      if (o.of.classe.tec) a.ct += x.me; if (o.of.classe.eja) a.eja += x.me; if (o.of.classe.fp) a.fp += x.me;
+      a.banda += x.mat * o.banda.mat; a.bandaC += x.conc * o.banda.conc;
+    }
+    a.prof = a.horas / ST.prem.horas_prof;
+  }
+  return { chave, letra, alt, linhas, anos };
+}
+const SIM = {};
+function sims(chave) {
+  const r = {};
+  // regime: efeito anual depois que todas as turmas afetadas amadurecem (projeção até 2042, mesmas premissas)
+  for (const l of ['M', 'A', 'B', 'C']) r[l] = { central: simular(chave, l), pess: l === 'M' ? null : simular(chave, l, 'pess'), otim: l === 'M' ? null : simular(chave, l, 'otim'), regime: simular(chave, l, 'central', REGIME).anos[REGIME] };
+  return SIM[chave] = r;
+}
+const REGIME = 2042;
+const acumConc = (s, de = 2027) => FUT.filter(t => t >= de).reduce((x, t) => x + s.anos[t].conc, 0);
+
+/* ---------------- Ifes e matriz ---------------- */
+const I25 = D.ifes[OBS];
+function ifes(esc, t) { // esc: {vitoria: sim, serra: sim}
+  const o = { meq: I25.meq, ct: I25.ct, fp: I25.fp, eja: I25.eja };
+  for (const s of Object.values(esc)) { const a = s.anos[t], b = s.anos[OBS]; o.meq += a.me - b.me; o.ct += a.ct - b.ct; o.fp += a.fp - b.fp; o.eja += a.eja - b.eja; }
+  return { ...o, pct: { ct: o.ct / o.meq, fp: o.fp / o.meq, eja: o.eja / o.meq } };
+}
+// contribuição de um campus para a variação do percentual (decomposição numerador × denominador, como na v2)
+function contribPP(s, t, base, k = 'ct') {
+  const dT = s.anos[t][k] - s.anos[OBS][k], dG = s.anos[t].me - s.anos[OBS].me;
+  return (dT - (I25[k] / I25.meq) * dG) / base.meq;
+}
+const LIM = { ct: [0.5, 0.6], fp: [0.1, 0.15, 0.2], eja: [0.025, 0.05, 0.1] }, META = { ct: 0.5, fp: 0.2, eja: 0.1 };
+const ROT = { ct: 'Formação técnica', fp: 'Formação de professores', eja: 'EJA (PROEJA)' };
+const faixa = (k, v) => LIM[k].filter(l => v >= l).length;
+const proxLim = (k, v) => LIM[k].find(l => l > v);
+
+/* ---------------- gráfico de linhas (SVG) ---------------- */
+// séries: [{nome, cor, tracejado, pontos: [[ano, valor]]}]; uma escala; rótulo direto no fim; dica ao passar o mouse
+function grafico(id, series, { de, ate, divisa, faixaSombra, alto = 210, fmtY = v => fmt(v), titulo } = {}) {
+  const W = 560, H = alto, m = { t: 14, r: 92, b: 24, l: 44 };
+  const todos = series.flatMap(s => s.pontos.map(p => p[1])).filter(v => v != null && isFinite(v));
+  let lo = Math.min(...todos), hi = Math.max(...todos); const pad = (hi - lo) * 0.12 || hi * 0.1 || 1; lo = Math.max(0, lo - pad); hi += pad;
+  const x = a => m.l + (a - de) / (ate - de) * (W - m.l - m.r), y = v => m.t + (1 - (v - lo) / (hi - lo)) * (H - m.t - m.b);
+  const tick = (() => { const st = Math.pow(10, Math.floor(Math.log10((hi - lo) / 4))); const n = [1, 2, 2.5, 5, 10].find(f => (hi - lo) / (f * st) <= 5) * st; const r = []; for (let v = Math.ceil(lo / n) * n; v <= hi; v += n) r.push(v); return r; })();
+  let g = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(titulo || '')}">`;
+  if (faixaSombra) g += `<rect x="${x(faixaSombra[0] - 0.5)}" y="${m.t}" width="${x(faixaSombra[1] + 0.5) - x(faixaSombra[0] - 0.5)}" height="${H - m.t - m.b}" fill="var(--line)" opacity=".35"/><text x="${x((faixaSombra[0] + faixaSombra[1]) / 2)}" y="${m.t + 10}" text-anchor="middle">pandemia</text>`;
+  for (const v of tick) g += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${m.l - 6}" y="${y(v) + 4}" text-anchor="end">${fmtY(v)}</text>`;
+  for (let a = de; a <= ate; a++) if ((a - de) % (ate - de > 10 ? 2 : 1) === 0 || a === ate) g += `<text x="${x(a)}" y="${H - 6}" text-anchor="middle">${a}</text>`;
+  if (divisa) g += `<line x1="${x(divisa)}" x2="${x(divisa)}" y1="${m.t}" y2="${H - m.b}" stroke="var(--muted)" stroke-dasharray="2 3"/><text x="${x(divisa) + 4}" y="${H - m.b - 4}">projeção →</text>`;
+  const rot = [];
+  for (const s of series) {
+    const pts = s.pontos.filter(p => p[1] != null && isFinite(p[1]));
+    if (!pts.length) continue;
+    g += `<polyline fill="none" stroke="${s.cor}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" ${s.tracejado ? 'stroke-dasharray="5 4"' : ''} points="${pts.map(p => `${x(p[0])},${y(p[1])}`).join(' ')}"/>`;
+    const u = pts[pts.length - 1]; g += `<circle cx="${x(u[0])}" cy="${y(u[1])}" r="4" fill="${s.cor}" stroke="var(--surface)" stroke-width="2"/>`;
+    rot.push({ y: y(u[1]), t: s.nome, x: x(u[0]) });
+  }
+  rot.sort((a, b) => a.y - b.y); for (let i = 1; i < rot.length; i++) if (rot[i].y - rot[i - 1].y < 12) rot[i].y = rot[i - 1].y + 12;
+  for (const r of rot) g += `<text class="lab" x="${r.x + 8}" y="${r.y + 4}">${esc(r.t)}</text>`;
+  g += `<line class="cross" x1="0" x2="0" y1="${m.t}" y2="${H - m.b}" stroke="var(--muted)" opacity="0"/><rect class="hit" x="${m.l}" y="${m.t}" width="${W - m.l - m.r}" height="${H - m.t - m.b}" fill="transparent"/></svg><div class="tip"></div>`;
+  setTimeout(() => {
+    const host = document.getElementById(id); if (!host) return;
+    const svg = host.querySelector('svg'), tip = host.querySelector('.tip'), cross = host.querySelector('.cross');
+    svg.addEventListener('mousemove', ev => {
+      const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) / r.width * W;
+      const a = Math.round(de + (px - m.l) / (W - m.l - m.r) * (ate - de)); if (a < de || a > ate) return;
+      const linhas = series.map(s => { const p = s.pontos.find(q => q[0] === a); return p && p[1] != null ? `<div><span class="sw" style="background:${s.cor}"></span> ${esc(s.nome)}: <b class="num">${fmtY(p[1])}</b></div>` : ''; }).join('');
+      if (!linhas) { tip.style.display = 'none'; return; }
+      cross.setAttribute('x1', x(a)); cross.setAttribute('x2', x(a)); cross.setAttribute('opacity', '.6');
+      tip.innerHTML = `<b>${a}</b>${linhas}`; tip.style.display = 'block';
+      const left = x(a) / W * r.width; tip.style.left = Math.min(left + 12, r.width - tip.offsetWidth - 4) + 'px'; tip.style.top = '8px';
+    });
+    svg.addEventListener('mouseleave', () => { tip.style.display = 'none'; cross.setAttribute('opacity', '0'); });
+  });
+  return `<div class="charthost" id="${id}">${g}</div>`;
+}
+const legenda = series => `<div class="legend">${series.map(s => `<span><span class="sw${s.tracejado ? ' dash' : ''}" style="${s.tracejado ? '' : `background:${s.cor}`}"></span> ${esc(s.nome)}</span>`).join('')}</div>`;
+
+/* ---------------- 1. Comparar ---------------- */
+function renderComparar() {
+  const T = D.trajetorias, A3 = ['2017', '2018', '2019'], B3 = ['2023', '2024', '2025'];
+  const med = (s, anos, i) => anos.reduce((x, a) => x + s[a][i], 0) / anos.length;
+  const varp = (s, i) => med(s, B3, i) / med(s, A3, i) - 1;
+  const rot = ['Vagas', 'Ingressantes', 'Matrículas', 'Concluintes'];
+  const idx = (s, i) => HIST.map(a => [a, s[a][i] / med(s, A3, i) * 100]);
+  const g = T.IFES.concsub, r = T.Rede41.concsub, gi = T.IFES.integrado;
+  const mult = rot.map((nome, i) => {
+    const ser = [{ nome: 'Ifes', cor: 'var(--a1)', pontos: idx(g, i) }, { nome: 'Rede', cor: 'var(--base)', tracejado: true, pontos: idx(r, i) }];
+    return `<div class="panel"><h3>${nome} <span class="muted small">índice, 2017–19 = 100</span></h3>${grafico('cmp' + i, ser, { de: 2017, ate: 2025, faixaSombra: [2020, 2022], alto: 170, fmtY: v => fmt(v), titulo: nome + ', Ifes e Rede' })}
+      <p class="small">Ifes <b class="num">${sinal(100 * varp(g, i))}%</b> · Rede <b class="num">${sinal(100 * varp(r, i))}%</b> <span class="muted">(médias 2017–19 → 2023–25)</span></p></div>`;
+  }).join('');
+  const ocI = med(g, B3, 1) / med(g, B3, 0), mi = (s, an) => med(s, an, 2) / med(s, an, 1), ci = (s, an) => med(s, an, 3) / med(s, an, 1);
+  const ct = HIST.map(a => [a, D.ifes[a].ct / D.ifes[a].meq * 100]);
+  const ctx = D.contexto_campi.map(c => {
+    const a = c.concsub.A, b = c.concsub.B; if (a[1] < 30 && b[1] < 30) return '';
+    const hl = c.campus === 'Vitória' || c.campus === 'Serra';
+    const v = (i) => a[i] >= 5 ? sinal(100 * (b[i] / a[i] - 1)) + '%' : '—';
+    return `<tr class="${hl ? 'hl' : ''}"><td>${esc(c.campus)}${hl ? ' ◆' : ''}</td><td class="r num">${fmt(a[1])} → ${fmt(b[1])}</td><td class="r num">${v(1)}</td><td class="r num">${fmt(a[2])} → ${fmt(b[2])}</td><td class="r num">${v(2)}</td><td class="r num">${fmt(a[3])} → ${fmt(b[3])}</td><td class="r num">${v(3)}</td><td class="r num">${b[1] > 0 ? fmt(b[2] / b[1], 1) : '—'}</td></tr>`;
+  }).join('');
+  $('#v-comparar').innerHTML = `
+  <div class="block">
+    <span class="eyebrow">1 · Comparar — onde estamos</span>
+    <h2>No técnico concomitante e subsequente, o Ifes preenche as vagas, mas perde estudantes e concluintes depois do ingresso</h2>
+    <p class="muted">Oferta técnica presencial não integrada (concomitante e subsequente juntas, porque o Ifes reclassificou cursos entre as duas formas a partir de 2023). Médias trienais para atravessar a pandemia ${tag('fato')}.</p>
+  </div>
+  <div class="facts">
+    <div class="fact"><span class="eyebrow">Vagas</span><b>${sinal(100 * varp(g, 0))}%</b><span class="tiny muted">${fmt(med(g, A3, 0))} → ${fmt(med(g, B3, 0))} por ano · Rede ${sinal(100 * varp(r, 0))}%</span></div>
+    <div class="fact"><span class="eyebrow">Ingressantes por vaga</span><b>${fmt(ocI, 2)}</b><span class="tiny muted">vagas preenchidas em 2023–25 · Rede ${fmt(med(r, B3, 1) / med(r, B3, 0), 2)}</span></div>
+    <div class="fact"><span class="eyebrow">Matrículas</span><b>${sinal(100 * varp(g, 2))}%</b><span class="tiny muted">${fmt(med(g, A3, 2))} → ${fmt(med(g, B3, 2))} · Rede ${sinal(100 * varp(r, 2))}%</span></div>
+    <div class="fact"><span class="eyebrow">Concluintes</span><b>${sinal(100 * varp(g, 3))}%</b><span class="tiny muted">${fmt(med(g, A3, 3))} → ${fmt(med(g, B3, 3))} por ano · Rede ${sinal(100 * varp(r, 3))}%</span></div>
+    <div class="fact"><span class="eyebrow">Concluintes por ingressante</span><b>${fmt(ci(g, B3), 2)}</b><span class="tiny muted">era ${fmt(ci(g, A3), 2)} · integrado do Ifes: ${fmt(ci(gi, B3), 2)}</span></div>
+  </div>
+  ${legenda([{ nome: 'Ifes', cor: 'var(--a1)' }, { nome: 'Rede (41 instituições)', cor: 'var(--base)', tracejado: true }])}
+  <div class="grid4">${mult}</div>
+  <div class="two">
+    <div class="callout">
+      <b>O que os dados mostram ${tag('fato')}</b>
+      <ul>
+        <li>As vagas se mantiveram e continuam preenchidas (≈ 1 ingressante por vaga).</li>
+        <li>Matrículas e, principalmente, concluintes caíram mais no Ifes do que na Rede.</li>
+        <li>No técnico integrado do próprio Ifes, cada ingressante gera ${fmt(ci(gi, B3), 2)} concluinte; no concomitante e subsequente, ${fmt(ci(g, B3), 2)}.</li>
+      </ul>
+      <b>O que ainda é hipótese ${tag('hip')}</b>
+      <ul>
+        <li>Se a perda vem de evasão no primeiro ano, de cursos mais curtos, de saneamento de registros ou de reclassificação. Só os dados por turma (qAcadêmico) separam essas causas.</li>
+        <li>Se a procura que preenche as vagas hoje continuará. Inscritos por vaga é um indicador pouco confiável na PNP.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Formação técnica do Ifes (percentual de matrícula equivalente)</h3>
+      ${grafico('cmpct', [{ nome: 'Ifes', cor: 'var(--a1)', pontos: ct }, { nome: 'meta 50%', cor: 'var(--base)', tracejado: true, pontos: HIST.map(a => [a, 50]) }], { de: 2017, ate: 2025, alto: 180, fmtY: v => fmt(v, 0) + '%', titulo: 'Formação técnica do Ifes' })}
+      <p class="small muted">${tag('fato')} ${fmt(ct[ct.length - 1][1], 1)}% em 2025. A fórmula da matrícula equivalente mudou entre 2020 e 2021 (Portaria Setec 146/2021): a série antes e depois não é comparável. Abaixo de 50%, a faixa de formação técnica da Matriz tem peso zero.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Os campi do Ifes na oferta concomitante e subsequente <span class="muted small">médias 2017–19 → 2023–25 ${tag('fato')}</span></h3>
+    <p class="small muted">Ordenados pelo tamanho da oferta em 2017–19, não por desempenho. ◆ = campi simulados nesta demonstração.</p>
+    <div class="tablewrap"><table><thead><tr><th>Campus</th><th class="r">Ingressantes/ano</th><th class="r">Δ</th><th class="r">Matrículas</th><th class="r">Δ</th><th class="r">Concluintes/ano</th><th class="r">Δ</th><th class="r">Matrículas por ingressante, 2023–25</th></tr></thead><tbody>${ctx}</tbody></table></div>
+  </div>
+  <div class="callout">
+    <b>Por que Vitória e Serra</b>
+    <ul>
+      <li><b>Vitória</b> tem a maior oferta concomitante do Ifes, procura alta em parte dos cursos e concluintes em queda. Em 2023 já dobrou as vagas de Metalurgia concomitante: os ingressantes dobraram, os concluintes não acompanharam.</li>
+      <li><b>Serra</b> viu a procura pelos concomitantes despencar (Informática: 312 inscritos em 2017, 90 em 2025) enquanto o integrado de Informática para Internet chegou a 1.765 inscritos para 74 vagas, e já reorganizou parte da oferta.</li>
+      <li>Os dois campi permitem comparar, com os mesmos cursos, as três decisões: ampliar, aproveitar melhor e reorganizar.</li>
+    </ul>
+    <div class="row"><a href="#simular/vitoria"><button type="button">Simular Vitória →</button></a></div>
+  </div>`;
+}
+
+/* ---------------- 2. Simular ---------------- */
+function fraseAlt(chave, letra) {
+  const a = ST.alts[chave][letra], cp = CP[chave], o = id => cp.lista.find(x => x.id === id);
+  if (a.tipo === 'ampliar') return `Ampliar ${o(a.oferta).nome} em ${fmt(a.n)} vagas por ano a partir de ${a.desde}.`;
+  if (a.tipo === 'aproveitar') return `Manter as vagas e reduzir a evasão em ${pct(a.redEvasao)} e a retenção em ${pct(a.redRetencao)} na oferta não integrada, a partir de ${a.desde}; ocupação até ${pct(a.ocupAlvo)} onde houver procura.`;
+  return `Transferir ${fmt(a.n)} vagas por ano de ${o(a.de).nome} para ${o(a.para).nome} a partir de ${a.desde}.`;
+}
+function evidencia(chave, letra) {
+  const a = ST.alts[chave][letra], cp = CP[chave], o = id => cp.lista.find(x => x.id === id);
+  const serie = (x, titulo) => {
+    const s = x.of.serie, anos = HIST.filter(t => s[t]);
+    const lin = (r, i, d = 0) => `<tr><th>${r}</th>${anos.map(t => `<td class="r num">${fmt(s[t][i], d)}</td>`).join('')}</tr>`;
+    return `<p class="small"><b>${esc(titulo)}</b> ${tag('fato')}</p><div class="tablewrap"><table><thead><tr><th></th>${anos.map(t => `<th class="r">${t}</th>`).join('')}</tr></thead><tbody>
+      ${lin('Vagas', 0)}${lin('Inscritos', 1)}${lin('Ingressantes', 2)}${lin('Matrículas', 3)}${lin('Concluintes', 4)}
+      <tr><th>Evasão anual</th>${anos.map(t => `<td class="r num">${x.of.evasao[t] != null ? pct(x.of.evasao[t]) : '—'}</td>`).join('')}</tr></tbody></table></div>`;
+  };
+  if (a.tipo === 'ampliar') {
+    const x = o(a.oferta), cap = x.demandaExtra / a.n;
+    let analogo = '';
+    if (chave === 'vitoria') { const m = cp.lista.find(z => z.of.curso === 'Técnico em Metalurgia' && z.of.oferta === 'Concomitante'); if (m) analogo = serie(m, 'Precedente no próprio campus: Metalurgia concomitante dobrou as vagas em 2023'); }
+    return `${serie(x, x.nome)}
+      <div class="callout"><b>O que a série diz sobre ampliar</b><ul>
+        <li>Procura excedente em 2025: ${fmt(x.insc)} inscritos − ${fmt(x.ing)} ingressantes = <b class="num">${fmt(x.demandaExtra)}</b> candidatos sem vaga ${tag('fato')} (inscritos é um indicador pouco confiável).</li>
+        <li>Com ${fmt(a.n)} vagas novas, essa procura cobriria ${cap >= 1 ? 'todas as vagas' : `no máximo <b>${pct(cap)}</b> delas`} — premissa inicial de ocupação das vagas novas: <b>${pct(a.ocup)}</b> ${tag('prem')}.</li>
+        <li>Cada ingressante dessa oferta gerou ${fmt(x.mat / Math.max(x.ing, 1), 1)} matrículas e ${fmt(x.conc / Math.max(x.ing, 1), 2)} concluinte em 2025 ${tag('fato')}: ampliar repete essa conversão, a menos que algo mais mude.</li>
+      </ul></div>${analogo}`;
+  }
+  if (a.tipo === 'aproveitar') {
+    const alvo = cp.lista.filter(x => x.naoInt && x.vagas > 0);
+    const rows = alvo.map(x => `<tr><td>${esc(x.nome)}</td><td class="r num">${fmt(x.vagas)}</td><td class="r num">${pct(x.ocup)}</td><td class="r num">${fmt(x.insc / Math.max(x.vagas, 1), 1)}</td><td class="r num">${pct(x.k.e)}</td><td class="r num">${pct(1 - x.k.c)}</td><td class="r num">${fmt(x.conc / Math.max(x.ing, 1), 2)}</td></tr>`).join('');
+    const integ = cp.lista.filter(x => x.of.oferta === 'Integrado' && x.vagas > 0);
+    const eInt = C.media(integ.map(x => x.k.e));
+    return `<p class="small"><b>Ofertas não integradas do campus em 2025</b></p>
+      <div class="tablewrap"><table><thead><tr><th>Oferta</th><th class="r">Vagas ${tag('fato')}</th><th class="r">Ocupação ${tag('fato')}</th><th class="r">Inscritos/vaga ${tag('fato')}</th><th class="r">Evasão anual 2023–25 ${tag('fato')}</th><th class="r">Fica um ano a mais ${tag('est')}</th><th class="r">Concluintes/ingressante ${tag('fato')}</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <div class="callout"><b>O que a série diz sobre aproveitar melhor</b><ul>
+        <li>A ocupação já é alta: o espaço para ganhar está na permanência, não no preenchimento das vagas.</li>
+        <li>A evasão anual dos integrados do mesmo campus é ${pct(eInt)} ${tag('fato')}. Não é meta para o concomitante (público e duração diferentes), mas mostra que a evasão atual não é inevitável.</li>
+        <li>Reduzir evasão e reduzir retenção puxam as matrículas em sentidos opostos: menos evasão aumenta matrículas e concluintes; menos retenção antecipa concluintes e reduz matrículas. Os dois controles estão separados nas premissas.</li>
+        <li>Nenhum dado da PNP mostra quanto um programa de permanência reduz a evasão. A redução de ${pct(a.redEvasao)} é premissa ilustrativa, com faixa de ${pct(a.redEvasao / 2)} a ${pct(Math.min(0.9, a.redEvasao * 1.5))} ${tag('prem')}.</li>
+      </ul></div>`;
+  }
+  const de = o(a.de), para = o(a.para);
+  return `${serie(de, 'Origem: ' + de.nome)}${serie(para, 'Destino: ' + para.nome)}
+    <div class="callout"><b>O que a série diz sobre reorganizar</b><ul>
+      <li>Procura: ${fmt(de.insc / Math.max(de.vagas, 1), 1)} inscritos por vaga na origem contra ${fmt(para.insc / Math.max(para.vagas, 1), 1)} no destino em 2025 ${tag('fato')}.</li>
+      <li>Evasão anual: ${pct(de.k.e)} na origem contra ${pct(para.k.e)} no destino ${tag('fato')}; o integrado dura ${para.k.D} anos (${de.k.D} na origem) ${tag('est')}.</li>
+      <li>O integrado atende outro público (concluintes do ensino fundamental) e exige mais aulas por turma (${ST.prem.aulas_integrado} contra ${ST.prem.aulas_naoint} por semana ${tag('prem')}), inclusive de núcleo comum. Quem buscava o concomitante perde ${fmt(a.n)} vagas por ano.</li>
+    </ul></div>`;
+}
+function premissasForm(chave, letra) {
+  const a = ST.alts[chave][letra];
+  const campo = (k, rot, step, min, max, mult = 1, nota = '') => `<label class="f">${rot}<input type="number" data-k="${k}" step="${step}" min="${min}" max="${max}" value="${+(a[k] * mult).toFixed(2)}" data-mult="${mult}">${nota ? `<span class="tiny">${nota}</span>` : ''}</label>`;
+  let f = campo('desde', 'Primeiro ano de ingresso com a decisão', 1, 2027, 2030);
+  if (a.tipo === 'ampliar') f += campo('n', 'Vagas novas por ano', 4, 0, 200) + campo('ocup', 'Ocupação das vagas novas (%)', 5, 0, 105, 100, 'premissa limitada pela procura excedente');
+  if (a.tipo === 'migrar') f += campo('n', 'Vagas transferidas por ano', 4, 0, 200) + campo('ocup', 'Ocupação das vagas no destino (%)', 5, 0, 105, 100);
+  if (a.tipo === 'aproveitar') f += campo('redEvasao', 'Redução da evasão anual (%)', 5, 0, 90, 100, 'faixa: metade a 1,5×') + campo('redRetencao', 'Redução da retenção (%)', 5, 0, 100, 100, 'antecipa concluintes e reduz matrículas') + campo('ocupAlvo', 'Ocupação-alvo onde houver procura (%)', 5, 50, 105, 100);
+  return `<div class="form">${f}</div><div class="row"><button type="button" class="ghost mini" id="restaurar">Restaurar premissas iniciais</button><span class="tiny muted">Alterações ficam só neste navegador.</span></div>`;
+}
+
+function renderSimular(chave, letraHash) {
+  const cp = CP[chave], S = sims(chave);
+  if (letraHash && 'ABC'.includes(letraHash)) ST.ativo[chave] = letraHash;
+  const L = ST.ativo[chave], M = S.M.central, X = S[L].central;
+  const delta = (s, k, t = FIM) => s.anos[t][k] - M.anos[t][k];
+  // ---- quadro comparativo das três alternativas
+  const linhaAlt = l => {
+    const c = S[l].central, p = S[l].pess, o = S[l].otim;
+    const i30 = ifes({ [chave]: c }, FIM), iM = ifes({ [chave]: M }, FIM);
+    const dm = delta(c, 'mat'), dc = acumConc(c) - acumConc(M), dret = delta(c, 'ret'), dprof = c.anos[FIM].prof - M.anos[FIM].prof;
+    const fx = (k, f) => { const a = [p, o].map(s => f(s)); return `${sinal(Math.min(...a))} a ${sinal(Math.max(...a))}`; };
+    const fxs = f => { const a = [p, o].map(f); return `<br><span class="tiny muted">${sinal(Math.min(...a))} a ${sinal(Math.max(...a))}</span>`; };
+    return `<tr class="${l === L ? 'hl' : ''}"><td style="white-space:nowrap"><span class="sw" style="background:${COR[l]}"></span> <b>${NOMEALT[l]}</b></td>
+      <td class="r num">${sinal(dm)}${fxs(s => s.anos[FIM].mat - M.anos[FIM].mat)}</td>
+      <td class="r num">${sinal(dc)}${fxs(s => acumConc(s) - acumConc(M))}</td>
+      <td class="r num">${sinal(S[l].regime.conc - S.M.regime.conc)}</td>
+      <td class="r num">${sinal(dret)}</td>
+      <td class="r num">${pp(i30.pct.ct - iM.pct.ct)}</td>
+      <td class="r num">${sinal(dprof, 1)}</td></tr>`;
+  };
+  const leitura = (() => {
+    const r = ['A', 'B', 'C'].map(l => ({ l, dm: delta(S[l].central, 'mat'), dc: acumConc(S[l].central) - acumConc(M), dp: S[l].central.anos[FIM].prof - M.anos[FIM].prof, dret: delta(S[l].central, 'ret'), reg: S[l].regime.conc - S.M.regime.conc }));
+    const maisC = [...r].sort((a, b) => b.dc - a.dc)[0], maisM = [...r].sort((a, b) => b.dm - a.dm)[0];
+    const porDoc = r.filter(x => x.dp > 0.5).map(x => `${NOMEALT[x.l].split(' · ')[0]} exige ${fmt(x.dp, 1)} professores-equivalentes a mais e, em regime, forma ${sinal(x.reg)} técnicos por ano`);
+    const tardio = r.filter(x => x.reg > 5 && x.dc < x.reg * 2).map(x => NOMEALT[x.l]);
+    const verd = maisM.l === maisC.l
+      ? `Até ${FIM}, <b>${NOMEALT[maisM.l]}</b> é a que mais aumenta matrículas (${sinal(maisM.dm)}) e concluintes acumulados (${sinal(maisC.dc)}) em relação a manter a oferta.`
+      : `Até ${FIM}, <b>${NOMEALT[maisM.l]}</b> é a que mais aumenta matrículas (${sinal(maisM.dm)}) e <b>${NOMEALT[maisC.l]}</b> a que mais aumenta concluintes acumulados (${sinal(maisC.dc)}) em relação a manter a oferta.`;
+    const neg = r.filter(x => x.dc < -5).map(x => NOMEALT[x.l]);
+    return `<p class="verdict">${verd}</p>
+      <ul class="plain small">
+        ${ST.alts[chave].A.ocup < 0.6 ? `<li>A depende de procura que a série não mostra: a ocupação das vagas novas está estimada em ${pct(ST.alts[chave].A.ocup)}, e a turma nova precisa ser aberta mesmo que fique parcialmente vazia.</li>` : ''}
+        ${r.find(x => x.l === 'B').dp < 0.5 ? `<li>B não exige turmas novas, mas depende de um programa de permanência cujo custo e efeito não estão na PNP ${tag('ne')}.</li>` : ''}
+        ${porDoc.length ? `<li>${porDoc.join('; ')} ${tag('prem')}.</li>` : ''}
+        ${neg.length ? `<li>${neg.join(' e ')} reduz concluintes no período: turmas que deixam de entrar em cursos curtos deixam de concluir antes que as novas turmas cheguem ao fim.</li>` : ''}
+        ${tardio.length ? `<li>${tardio.join(' e ')}: o ganho de concluintes aparece tarde. Até ${FIM} soma pouco, mas em regime chega a ${tardio.map(n => sinal(r.find(x => NOMEALT[x.l] === n).reg)).join(' e ')} por ano.</li>` : ''}
+        ${r.some(x => x.dret > 5) ? `<li>Parte do ganho de matrículas vem de estudantes que ficam além do prazo (retidos): na Matriz, retido conta ¼ da matrícula no prazo.</li>` : ''}
+        <li>O Prumo não escolhe por você: os ganhos têm naturezas e incertezas diferentes (veja as faixas e o que precisa ser verdade).</li>
+      </ul>`;
+  })();
+  // ---- gráfico de matrículas e concluintes
+  const obsSerie = k => HIST.map(t => [t, cp.lista.reduce((s, o) => s + (o.of.serie[t] ? o.of.serie[t][k] : 0), 0)]);
+  const proj = (l, k) => [[OBS, S[l].central.anos[OBS][k]], ...FUT.map(t => [t, S[l].central.anos[t][k]])];
+  const serM = [{ nome: 'observado*', cor: 'var(--ink)', pontos: obsSerie(3) }, { nome: 'manter', cor: 'var(--base)', tracejado: true, pontos: proj('M', 'mat') },
+    ...['A', 'B', 'C'].map(l => ({ nome: l, cor: COR[l], pontos: proj(l, 'mat') }))];
+  const serC = [{ nome: 'observado*', cor: 'var(--ink)', pontos: obsSerie(4) }, { nome: 'manter', cor: 'var(--base)', tracejado: true, pontos: proj('M', 'conc') },
+    ...['A', 'B', 'C'].map(l => ({ nome: l, cor: COR[l], pontos: proj(l, 'conc') }))];
+  // ---- tabela anual da alternativa ativa
+  const anos = [OBS, ...FUT];
+  const semObs = ['prazo', 'ret', 'turmas'];
+  const lin = (rot, k, d = 0) => `<tr><th>${rot}</th>${anos.map(t => `<td class="r num ${t === OBS ? 'obs' : ''}">${t === OBS && semObs.includes(k) ? '—' : fmt(X.anos[t][k], d)}</td>`).join('')}<td class="r num">${sinal(X.anos[FIM][k] - M.anos[FIM][k], d)}</td></tr>`;
+  const banda = t => X.anos[t].banda, bandaC = t => X.anos[t].bandaC;
+  const ifX = ifes({ [chave]: X }, FIM), ifM = ifes({ [chave]: M }, FIM);
+  const ret25 = X.anos[FIM].ret, prazo25 = X.anos[FIM].prazo;
+
+  $('#v-simular').innerHTML = `
+  <div class="block">
+    <span class="eyebrow">2 · Simular — campus ${esc(cp.nome)}</span>
+    <h2>Qual decisão faz mais diferença na oferta técnica de ${esc(cp.nome)}?</h2>
+    <p class="muted">Oferta técnica presencial do campus, projetada de 2026 a ${FIM} (horizonte longo o bastante para turmas de 4 anos que ingressam em 2027 concluírem). Os ingressos de 2026 já ocorreram e são projetados sem mudança; as decisões valem a partir de 2027. As demais ofertas do campus ficam como em 2025 ${tag('prem')}.</p>
+  </div>
+  <div class="alts">${['A', 'B', 'C'].map(l => `<button type="button" class="alt ${l === L ? 'on' : ''}" data-alt="${l}" aria-pressed="${l === L}">
+      <span class="key"><span class="sw" style="background:${COR[l]}"></span><span class="nm">${NOMEALT[l]}</span></span>
+      <span class="small">${esc(fraseAlt(chave, l))}</span></button>`).join('')}</div>
+
+  <div class="panel">
+    <h3>As três alternativas lado a lado, em relação a manter a oferta atual (${FIM})</h3>
+    <p class="tiny muted">Resultados ${tag('est')} pelo modelo de coortes calibrado na PNP; professores-equivalentes dependem de ${tag('prem')} de aulas por turma.</p>
+    <div class="tablewrap"><table><thead><tr><th>Alternativa</th><th class="r">Matrículas ${FIM}</th><th class="r">Concluintes 2027–${String(FIM).slice(2)}</th><th class="r">Concluintes por ano, em regime</th><th class="r">Retidos ${FIM}</th><th class="r">% técnico do Ifes</th><th class="r">Professores-equiv.</th></tr></thead>
+    <tbody>${['A', 'B', 'C'].map(linhaAlt).join('')}</tbody></table></div>
+    <p class="tiny muted">Valores centrais; abaixo, em cinza, a faixa entre as premissas pessimista e otimista da alternativa (ocupação das vagas novas, efeito do programa de permanência). Some-se o erro do modelo de cada oferta (Como calcula). Professores-equivalentes = turmas simultâneas × aulas semanais ÷ ${ST.prem.horas_prof} h de aula por professor. Em regime = diferença anual de concluintes depois que todas as turmas afetadas amadurecem, com as mesmas premissas (projeção técnica até ${REGIME}, não é previsão para esse ano).</p>
+    ${leitura}
+  </div>
+
+  <div class="two">
+    <div class="panel"><h3>Matrículas na oferta técnica presencial</h3>${legenda(serM)}${grafico('simm', serM, { de: 2017, ate: FIM, divisa: OBS + 0.5, alto: 230, titulo: 'Matrículas' })}</div>
+    <div class="panel"><h3>Concluintes por ano</h3>${legenda(serC)}${grafico('simc', serC, { de: 2017, ate: FIM, divisa: OBS + 0.5, alto: 230, titulo: 'Concluintes' })}</div>
+  </div>
+  <p class="tiny muted">* Observado: soma, em cada ano, das ofertas técnicas presenciais que existem em 2025 ${tag('fato')}. Cursos já encerrados ficam fora, para que a série seja comparável com a projeção.</p>
+
+  <div class="panel">
+    <h3><span class="sw" style="background:${COR[L]}"></span> ${NOMEALT[L]}: evidência da PNP para esta decisão</h3>
+    ${evidencia(chave, L)}
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>Premissas desta alternativa ${tag('prem')}</h3>
+      ${premissasForm(chave, L)}
+    </div>
+    <div class="panel">
+      <h3>O que precisa ser verdade</h3>
+      <ul class="plain small">${precisa(chave, L).map(x => `<li>${x}</li>`).join('')}</ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Ano a ano: ${NOMEALT[L]} ${tag('est')}</h3>
+    <div class="tablewrap"><table><thead><tr><th></th>${anos.map(t => `<th class="r ${t === OBS ? 'obs' : ''}">${t}${t === OBS ? ' (fato)' : ''}</th>`).join('')}<th class="r">vs manter, ${FIM}</th></tr></thead><tbody>
+      ${lin('Ingressantes', 'ing')}
+      ${lin('Matrículas', 'mat')}
+      <tr><th class="tiny">faixa do modelo (±)</th>${anos.map(t => `<td class="r num tiny ${t === OBS ? 'obs' : ''}">${t === OBS ? '' : fmt(banda(t))}</td>`).join('')}<td></td></tr>
+      ${lin('· no prazo', 'prazo')}${lin('· retidos (ano a mais)', 'ret')}
+      ${lin('Concluintes', 'conc')}
+      <tr><th class="tiny">faixa do modelo (±)</th>${anos.map(t => `<td class="r num tiny ${t === OBS ? 'obs' : ''}">${t === OBS ? '' : fmt(bandaC(t))}</td>`).join('')}<td></td></tr>
+      ${lin('Matrícula equivalente PNP', 'me')}
+      ${lin('Turmas simultâneas', 'turmas')}
+    </tbody></table></div>
+    <p class="tiny muted">Em 2025, matrículas no prazo e retidos não são separados pela PNP agregada; o modelo os estima a partir da evasão observada e do ajuste da conclusão.</p>
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>Três medidas que não são a mesma coisa</h3>
+      <div class="tablewrap"><table><thead><tr><th>Medida</th><th class="r">${FIM} vs manter</th><th>Leitura</th></tr></thead><tbody>
+        <tr><td>Matrícula física (PNP) ${tag('est')}</td><td class="r num">${sinal(X.anos[FIM].mat - M.anos[FIM].mat)}</td><td class="small">Estudantes ativos em algum dia do ano.</td></tr>
+        <tr><td>Matrícula equivalente (PNP) ${tag('est')}</td><td class="r num">${sinal(X.anos[FIM].me - M.anos[FIM].me)}</td><td class="small">Pondera carga horária e esforço do curso. Base dos percentuais legais.</td></tr>
+        <tr><td>Base elegível da Matriz (MT) ${tag('ne')}</td><td class="r">não calculada</td><td class="small">Conta horas no ano × peso do curso; retido vale ¼. Aqui, ${sinal(X.anos[FIM].prazo - M.anos[FIM].prazo)} no prazo e ${sinal(X.anos[FIM].ret - M.anos[FIM].ret)} retidos: a MT tende a variar ${Math.abs(X.anos[FIM].ret - M.anos[FIM].ret) > Math.abs(X.anos[FIM].prazo - M.anos[FIM].prazo) / 3 ? 'bem menos' : 'na mesma direção'} que a matrícula física.</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="panel">
+      <h3>Quando aparece na Matriz</h3>
+      <p class="small">A Matriz de um exercício usa a PNP do ano anterior, que retrata o ano-base de dois anos antes ${tag('fato', 'norma')}. Turmas que ingressam em ${ST.alts[chave][L].desde} entram no ano-base ${ST.alts[chave][L].desde} e podem aparecer no exercício <b>${ST.alts[chave][L].desde + 2}</b>; o efeito completo de ${FIM} chega ao exercício <b>${FIM + 2}</b>.</p>
+      <p class="small">Formação técnica do Ifes em ${FIM}: <b class="num">${pct(ifX.pct.ct, 2)}</b> com esta alternativa, contra ${pct(ifM.pct.ct, 2)} mantendo a oferta. ${ifX.pct.ct < 0.5 ? `Não cruza a faixa de 50%: <b>sem referência orçamentária de Qualidade</b> para esta alternativa isolada.` : `Cruza 50%: ver a referência condicional em Compor.`}</p>
+      <p class="tiny muted">Funcionamento e distribuição interna aos campi não são estimados em reais: exigiriam a MT do campus e a regra interna do Ifes, ainda não validadas.</p>
+    </div>
+  </div>`;
+  document.querySelectorAll('[data-alt]').forEach(b => b.onclick = () => { ST.ativo[chave] = b.dataset.alt; salvar(); location.hash = `#simular/${chave}/${b.dataset.alt}`; });
+  document.querySelectorAll('#v-simular input[data-k]').forEach(inp => inp.onchange = () => {
+    const a = ST.alts[chave][L], k = inp.dataset.k, mult = +inp.dataset.mult || 1;
+    let v = Number(inp.value); if (!isFinite(v)) return;
+    v = Math.min(+inp.max, Math.max(+inp.min, v)); a[k] = k === 'desde' || k === 'n' ? Math.round(v) : v / mult;
+    salvar(); renderSimular(chave);
+  });
+  $('#restaurar').onclick = () => { ST.alts[chave][L] = exemplos()[chave][L]; salvar(); renderSimular(chave); };
+}
+function precisa(chave, L) {
+  const a = ST.alts[chave][L], cp = CP[chave], o = id => cp.lista.find(x => x.id === id);
+  if (a.tipo === 'ampliar') return [
+    `Haver procura para ${fmt(a.n)} vagas a mais por ano em ${esc(o(a.oferta).nome)} ${tag('hip')}.`,
+    `Haver ${fmt(turmasDe(a.n) * o(a.oferta).k.D)} turma(s) simultânea(s) a mais: docentes da área técnica, salas e laboratórios ${tag('ne')}.`,
+    `Aceitar que a conversão em concluintes repita a atual (${fmt(o(a.oferta).conc / Math.max(o(a.oferta).ing, 1), 2)} concluinte por ingressante), salvo ação de permanência.`];
+  if (a.tipo === 'aproveitar') return [
+    `Existir um programa de acompanhamento capaz de reduzir a evasão em cerca de ${pct(a.redEvasao)} ${tag('hip')}.`,
+    `Confirmar com dados por turma (qAcadêmico) onde ocorre a evasão: primeiro semestre, estágio, conciliação com o ensino médio ${tag('hip')}.`,
+    `Custo do programa de permanência ${tag('ne')}.`];
+  return [
+    `Haver procura no integrado para ${fmt(a.n)} vagas a mais (hoje ${fmt(o(a.para).insc / Math.max(o(a.para).vagas, 1), 1)} inscritos por vaga) ${tag('fato')}.`,
+    `Haver docentes de núcleo comum e técnicos para ${fmt(turmasDe(a.n) * o(a.para).k.D)} turma(s) simultânea(s) de integrado ${tag('ne')}.`,
+    `Aceitar a redução de ${fmt(a.n)} vagas para quem busca o concomitante (jovens já no ensino médio e adultos) ${tag('hip')}.`,
+    `Aprovar a mudança de projeto pedagógico e de vagas no calendário institucional ${tag('hip')}.`];
+}
+
+/* ---------------- 3. Compor ---------------- */
+function renderCompor() {
+  const S = { vitoria: sims('vitoria'), serra: sims('serra') };
+  const esc0 = ST.combo, cen = { vitoria: S.vitoria[esc0.vitoria].central, serra: S.serra[esc0.serra].central };
+  const base = { vitoria: S.vitoria.M.central, serra: S.serra.M.central };
+  const iB = ifes(base, FIM), iC = ifes(cen, FIM), i25 = ifes({ vitoria: S.vitoria.M.central, serra: S.serra.M.central }, OBS);
+  const escolha = chave => `<div class="block"><b>${CAMPI[chave]}</b><div class="seg" role="group">${['M', 'A', 'B', 'C'].map(l => `<button type="button" data-c="${chave}" data-l="${l}" aria-pressed="${esc0[chave] === l}">${l === 'M' ? 'Manter' : l}</button>`).join('')}</div><span class="tiny muted">${esc0[chave] === 'M' ? 'oferta atual' : esc(fraseAlt(chave, esc0[chave]))}</span></div>`;
+  // contribuições por campus (em relação a manter)
+  const contrib = chave => {
+    const c = cen[chave], m = base[chave];
+    return { ct: contribPP(c, FIM, iC) - contribPP(m, FIM, iB), mat: c.anos[FIM].mat - m.anos[FIM].mat, conc: acumConc(c) - acumConc(m),
+      ret: c.anos[FIM].ret - m.anos[FIM].ret, prof: c.anos[FIM].prof - m.anos[FIM].prof, eja: contribPP(c, FIM, iC, 'eja') - contribPP(m, FIM, iB, 'eja'), fp: contribPP(c, FIM, iC, 'fp') - contribPP(m, FIM, iB, 'fp') };
+  };
+  const cv = contrib('vitoria'), cs = contrib('serra');
+  const tot = k => cv[k] + cs[k];
+  const linhaObj = (rot, k, d, f, nota) => `<tr><td>${rot}</td><td class="r num">${f(cv[k])}</td><td class="r num">${f(cs[k])}</td><td class="r num"><b>${f(tot(k))}</b></td><td>${nota(tot(k))}</td></tr>`;
+  // grade de combinações
+  const grade = `<table class="combo"><thead><tr><th>Vitória ↓ · Serra →</th>${['M', 'A', 'B', 'C'].map(l => `<th>${l === 'M' ? 'Manter' : l}</th>`).join('')}</tr></thead><tbody>${['M', 'A', 'B', 'C'].map(lv => `<tr><th>${lv === 'M' ? 'Manter' : lv}</th>${['M', 'A', 'B', 'C'].map(ls => {
+    const e = { vitoria: S.vitoria[lv].central, serra: S.serra[ls].central }, i = ifes(e, FIM);
+    const dc = acumConc(e.vitoria) + acumConc(e.serra) - acumConc(base.vitoria) - acumConc(base.serra);
+    return `<td class="${lv === esc0.vitoria && ls === esc0.serra ? 'on' : ''}">${pp(i.pct.ct - iB.pct.ct)}<br><span class="tiny">${sinal(dc)} concl.</span></td>`; }).join('')}</tr>`).join('')}</tbody></table>`;
+  const falta = 0.5 - iC.pct.ct, faltaME = (0.5 * iC.meq - iC.ct) / 0.5;
+  const prem = [...new Set(['vitoria', 'serra'].flatMap(ch => esc0[ch] === 'M' ? [] : precisa(ch, esc0[ch]).map(x => `<b>${CAMPI[ch]}</b>: ${x}`)))];
+  const props = ST.propostas.map((p, i) => `<tr><td class="num tiny">${esc(p.data)}</td><td>${esc(p.autor || '—')}</td><td>Vitória ${esc(p.combo.vitoria)} · Serra ${esc(p.combo.serra)}</td><td class="small">${esc(p.justificativa)}</td><td><span class="tag hip">para discussão</span></td><td><button type="button" class="ghost mini" data-del="${i}">Remover</button></td></tr>`).join('');
+
+  $('#v-compor').innerHTML = `
+  <div class="block">
+    <span class="eyebrow">3 · Compor — como as decisões dos campi somam para o Ifes</span>
+    <h2>Escolha uma alternativa por campus e veja o efeito conjunto em ${FIM}</h2>
+    <p class="muted">Os demais campi ficam como em 2025 ${tag('prem')}. Tudo é comparado com os dois campi mantendo a oferta atual, porque manter também muda: turmas novas de 2025 amadurecem e cursos em extinção concluem.</p>
+  </div>
+  <div class="panel"><div class="row" style="gap:28px">${escolha('vitoria')}${escolha('serra')}</div></div>
+
+  <div class="facts">
+    <div class="fact"><span class="eyebrow">Formação técnica do Ifes, ${FIM}</span><b>${pct(iC.pct.ct, 2)}</b><span class="tiny muted">manter: ${pct(iB.pct.ct, 2)} · 2025: ${pct(i25.pct.ct, 2)} ${tag('fato')}</span></div>
+    <div class="fact"><span class="eyebrow">Distância para 50%</span><b>${falta > 0 ? fmt(100 * falta, 1) + ' p.p.' : 'alcançada'}</b><span class="tiny muted">${falta > 0 ? `≈ ${fmt(faltaME)} matrículas equivalentes técnicas a mais` : ''}</span></div>
+    <div class="fact"><span class="eyebrow">Concluintes técnicos 2027–${FIM}</span><b>${sinal(tot('conc'))}</b><span class="tiny muted">nos dois campi, vs manter ${tag('est')}</span></div>
+    <div class="fact"><span class="eyebrow">Professores-equivalentes</span><b>${sinal(tot('prof'), 1)}</b><span class="tiny muted">em ${FIM}, vs manter ${tag('prem')}</span></div>
+  </div>
+
+  <div class="panel">
+    <h3>Contribuição de cada campus (vs manter, ${FIM})</h3>
+    <div class="tablewrap"><table class="mx"><thead><tr><th>Objetivo</th><th class="r">Vitória · ${esc0.vitoria === 'M' ? 'Manter' : esc0.vitoria}</th><th class="r">Serra · ${esc0.serra === 'M' ? 'Manter' : esc0.serra}</th><th class="r">Ifes</th><th>Efeito</th></tr></thead><tbody>
+      ${linhaObj('Formação técnica (meta 50%)', 'ct', 2, v => pp(v), v => dir(v * 1e4, 0.5))}
+      ${linhaObj('Formação de professores (meta 20%)', 'fp', 3, v => pp(v, 3), v => dir(v * 1e4, 0.5))}
+      ${linhaObj('EJA (meta 10%)', 'eja', 3, v => pp(v, 3), v => dir(v * 1e4, 0.5))}
+      ${linhaObj('Matrículas técnicas', 'mat', 0, v => sinal(v), v => dir(v, 5))}
+      ${linhaObj('Concluintes técnicos 2027–' + FIM, 'conc', 0, v => sinal(v), v => dir(v, 5))}
+      ${linhaObj('Retidos além do prazo', 'ret', 0, v => sinal(v), v => dir(-v, 5))}
+      ${linhaObj('Professores-equivalentes necessários', 'prof', 1, v => sinal(v, 1), v => v > 0.5 ? '<span class="down">▼ exige recursos</span>' : '<span class="flat">● sem acréscimo</span>')}
+    </tbody></table></div>
+    <p class="tiny muted">Contribuição em p.p. = variação do numerador menos o efeito do campus no denominador (mesma decomposição da v2). A soma dos campi é a variação do Ifes. ▲/▼ indicam a direção do objetivo, não juízo sobre a decisão. Formação de professores e EJA caem por diluição: as alternativas não mexem nessas ofertas, mas aumentam a matrícula equivalente total.</p>
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>Todas as combinações <span class="muted small">Δ formação técnica do Ifes e Δ concluintes 2027–${FIM}, vs manter</span></h3>
+      <div class="tablewrap">${grade}</div>
+      <p class="small">${iC.pct.ct < 0.5 && Math.max(...['M', 'A', 'B', 'C'].flatMap(lv => ['M', 'A', 'B', 'C'].map(ls => ifes({ vitoria: S.vitoria[lv].central, serra: S.serra[ls].central }, FIM).pct.ct))) < 0.5 ? '<b>Nenhuma combinação dos dois campi leva o Ifes a 50%.</b> A meta depende de contribuições de outros campi e do Cefor, que respondem por parte maior da matrícula equivalente.' : ''}</p>
+    </div>
+    <div class="panel">
+      <h3>Referência orçamentária condicional</h3>
+      <p class="small">${iC.pct.ct >= 0.5 ? `A combinação cruza a faixa de 50% de formação técnica. Referência de Qualidade (F-29), mantidas a Rede e os submontantes da Matriz 2026: ${refQualidade(iC)} ${tag('est')}.` : `Nenhum percentual legal cruza faixa da Matriz nesta combinação: <b>não há referência orçamentária de Qualidade a mostrar</b>. Mudanças dentro da mesma faixa não alteram o fator de formação técnica abaixo de 50%.`}</p>
+      <p class="small">Funcionamento: a matrícula física e a equivalente sobem ${tot('mat') > 0 ? '' : '(ou caem) '}com esta combinação, mas a base elegível (MT) não foi calculada ${tag('ne')}. Distribuição interna ao campus: regra do Ifes não validada ${tag('ne')}. Nada aqui é repasse garantido.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Premissas e restrições a validar antes de pactuar</h3>
+    ${prem.length ? `<ul class="plain small">${prem.map(x => `<li>${x}</li>`).join('')}</ul>` : '<p class="small muted">Escolha uma alternativa em pelo menos um campus.</p>'}
+    <p class="small">Sempre: confirmar a escolha do prazo efetivo dos cursos e os dados por turma (qAcadêmico); docentes por área, salas e laboratórios não estão na PNP ${tag('ne')}.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Registrar como proposta para discussão</h3>
+    <p class="small muted">Registra a combinação, as premissas e os resultados para levar à discussão institucional (colegiado, Câmara de Ensino, Colégio de Dirigentes). <b>Não é decisão aprovada.</b></p>
+    <div class="form">
+      <label class="f">Quem propõe<input type="text" id="p-autor" placeholder="ex.: Direção de Ensino, Campus Vitória"></label>
+      <label class="f">Contrapartida ou condição<input type="text" id="p-cond" placeholder="ex.: depende de 2 docentes de Mecânica"></label>
+      <label class="f full">Justificativa<textarea id="p-just" placeholder="Por que esta combinação, e o que precisa ser verificado"></textarea></label>
+    </div>
+    <div class="row"><button type="button" id="p-salvar">Registrar proposta</button><span class="status" id="p-ok" aria-live="polite"></span></div>
+    ${props ? `<div class="tablewrap"><table><thead><tr><th>Data</th><th>Quem propõe</th><th>Combinação</th><th>Justificativa</th><th>Situação</th><th></th></tr></thead><tbody>${props}</tbody></table></div>` : ''}
+    <details><summary class="small">Registro completo para reprodução (JSON)</summary><textarea class="json" readonly id="p-json">${esc(JSON.stringify({ versao: 'POC 0.0.2', combinacao: esc0, premissas_gerais: ST.prem, alternativas: { vitoria: ST.alts.vitoria[esc0.vitoria] || null, serra: ST.alts.serra[esc0.serra] || null }, resultado_fim_horizonte: { ano: FIM,  formacao_tecnica: +iC.pct.ct.toFixed(4), manter: +iB.pct.ct.toFixed(4), contribuicao_pp: { vitoria: +(100 * cv.ct).toFixed(3), serra: +(100 * cs.ct).toFixed(3) }, concluintes_desde_2027: Math.round(tot('conc')), professores_equivalentes: +tot('prof').toFixed(1) }, propostas: ST.propostas }, null, 1))}</textarea></details>
+  </div>`;
+  document.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { ST.combo[b.dataset.c] = b.dataset.l; salvar(); renderCompor(); });
+  document.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { ST.propostas.splice(+b.dataset.del, 1); salvar(); renderCompor(); });
+  $('#p-salvar').onclick = () => {
+    const just = $('#p-just').value.trim();
+    if (!just) { $('#p-ok').textContent = 'Escreva uma justificativa.'; return; }
+    ST.propostas.push({ data: new Date().toLocaleDateString('pt-BR'), autor: $('#p-autor').value.trim(), condicao: $('#p-cond').value.trim(), justificativa: just, combo: { ...esc0 },
+      alternativas: { vitoria: ST.alts.vitoria[esc0.vitoria] || null, serra: ST.alts.serra[esc0.serra] || null }, resultado: { ano: FIM, ct: +iC.pct.ct.toFixed(4), concluintes: Math.round(tot('conc')), prof: +tot('prof').toFixed(1) }, situacao: 'para discussão' });
+    salvar(); renderCompor(); $('#p-ok').textContent = 'Proposta registrada neste navegador, como "para discussão".';
+  };
+}
+// referência F-29 (só quando cruza faixa): fatia do submontante de formação técnica, Rede 2026 constante
+function refQualidade(i) {
+  const R = D.matriz_2026.rede, SUB = D.matriz_2026.submontantes.CT, W = v => v < .5 ? 0 : v < .6 ? v : 2 * v;
+  const ifesR = R.find(r => r.nome && r.nome.includes('ESPIRITO SANTO')), sR = R.reduce((s, r) => s + W(r.ct || 0), 0);
+  const w = W(i.pct.ct), v = w ? w / (sR - W(ifesR.ct) + w) * SUB : 0;
+  return 'R$ ' + fmt(v) + ' por exercício';
+}
+
+/* ---------------- Como calcula ---------------- */
+function renderMetodo() {
+  const linhas = ch => CP[ch].lista.map(o => `<tr><td>${esc(CAMPI[ch])}</td><td>${esc(o.nome)}</td><td class="r num">${o.k.D}${o.k.candidatos.length > 1 ? ` <span class="tiny muted">(${o.k.candidatos.join(' ou ')})</span>` : ''}</td><td class="r num">${pct(o.k.e)}</td><td class="r num">${pct(o.k.c)}${o.k.emprestado ? ` ${tag('prem', 'emprestado')}` : ''}</td><td class="r num">${pct(o.ocup)}</td><td class="r num">${o.k.erro.mat != null ? pct(o.k.erro.mat) : 'sem série'}</td><td class="r num">${o.k.erro.conc != null ? pct(o.k.erro.conc) : '—'}</td><td class="r num">${o.k.teste ? pct(o.k.teste.mat) + ' / ' + pct(o.k.teste.conc) : '—'}</td></tr>`).join('');
+  $('#v-metodo').innerHTML = `
+  <div class="block"><h2>Como calcula</h2>
+  <ol class="plain">
+    <li><b>Coortes.</b> Cada oferta é um conjunto de turmas de ingresso. No prazo de <i>D</i> anos, a turma perde a cada ano a evasão anual <i>e</i>. No último ano, uma fração <i>c</i> conclui no prazo; o restante fica um ano a mais (retidos, estágio pendente, dependência) e então conclui ou evade. Matrículas do ano = soma das turmas ativas.</li>
+    <li><b>Fatos da PNP.</b> Evasão anual = evadidos ÷ matrículas (média 2023–2025, Taxa de Evasão). Ocupação = ingressantes ÷ vagas (média 2023–2025). Matrícula equivalente por matrícula = a de 2025 de cada oferta.</li>
+    <li><b>Estimado.</b> O prazo efetivo <i>D</i> (a PNP não informa a duração) é escolhido entre dois valores plausíveis por tipo de oferta, e <i>c</i> é ajustado para reproduzir matrículas e concluintes de 2023–2025 com os ingressos observados. As turmas já abertas são ancoradas na matrícula observada em 2025.</li>
+    <li><b>Premissas.</b> Vagas, ocupação das vagas novas (limitada pela procura excedente de 2025), efeito do programa de permanência, aulas por turma e horas de aula por professor. Todas editáveis e marcadas.</li>
+    <li><b>Ifes.</b> Percentuais legais de 2025 (PNP, conciliados com a Matriz 2026) mais a variação dos dois campi simulados. Demais campi constantes.</li>
+    <li><b>Matriz.</b> Exercício = ano-base + 2. A referência de Qualidade (F-29) só é exibida se um percentual cruzar faixa. Funcionamento (MT) e distribuição interna não são estimados.</li>
+  </ol></div>
+  <div class="panel"><h3>Ajuste do modelo por oferta</h3>
+    <p class="small muted">Erro médio de ajuste 2023–2025 e teste fora da amostra (calibra com 2023–2024 e prevê 2025). As faixas das projeções usam o maior desses erros (mínimo 5% para matrículas e 10% para concluintes). Concluintes são mais ruidosos que matrículas.</p>
+    <div class="tablewrap"><table><thead><tr><th>Campus</th><th>Oferta</th><th class="r">Prazo <i>D</i> ${tag('est')}</th><th class="r">Evasão <i>e</i> ${tag('fato')}</th><th class="r">Conclui no prazo <i>c</i> ${tag('est')}</th><th class="r">Ocupação ${tag('fato')}</th><th class="r">Erro matrículas</th><th class="r">Erro concluintes</th><th class="r">Teste 2025</th></tr></thead><tbody>${linhas('vitoria')}${linhas('serra')}</tbody></table></div>
+    <p class="small">Leitura cuidadosa: <i>c</i> baixo nos integrados de Vitória não quer dizer que quase ninguém conclui; quer dizer que o estoque observado só se explica se a maioria fica um ano além dos 4 previstos (estágio, dependência ou atraso). É uma das premissas a validar com o campus.</p>
+  </div>
+  <div class="panel"><h3>Limites desta demonstração</h3><ul class="plain small">
+    <li>Sem dados por turma: evasão no primeiro ano, retenção e conclusão no prazo são estimadas a partir de agregados anuais.</li>
+    <li>Sem custo do programa de permanência, sem inventário de docentes por área, salas e laboratórios.</li>
+    <li>Inscritos é um indicador pouco confiável na PNP; a ocupação de vagas novas é premissa.</li>
+    <li>Matrícula equivalente da PNP não é a base elegível da Matriz; Funcionamento e repasse ao campus não são estimados.</li>
+    <li>Não recomenda alternativa nem ordena campi.</li>
+  </ul></div>`;
+}
+
+/* ---------------- navegação ---------------- */
+function render() {
+  const h = (location.hash || '#comparar').slice(1), [v, campus, letra] = h.split('/');
+  const vista = ['comparar', 'simular', 'compor', 'metodo'].includes(v) ? v : 'comparar';
+  const ch = CAMPI[campus] ? campus : 'vitoria';
+  document.querySelectorAll('nav.steps a').forEach(a => a.setAttribute('aria-current', a.dataset.v === (vista === 'simular' ? 'simular/' + ch : vista) ? 'true' : 'false'));
+  for (const s of ['comparar', 'simular', 'compor', 'metodo']) $('#v-' + s).hidden = s !== vista;
+  if (vista === 'comparar') renderComparar();
+  if (vista === 'simular') renderSimular(ch, letra);
+  if (vista === 'compor') renderCompor();
+  if (vista === 'metodo') renderMetodo();
+}
+window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+render();
+</script>
