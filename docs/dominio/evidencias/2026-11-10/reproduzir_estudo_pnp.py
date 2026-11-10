@@ -2,7 +2,7 @@
 
 Relatório: docs/analises/prumo-pnp-inteligencia-comparativa-exploratoria.md
 
-Somente leitura. T1–T12 usam apenas a biblioteca padrão (csv, sqlite3 em memória).
+Somente leitura. T1–T12 e T14 usam apenas a biblioteca padrão (csv, sqlite3 em memória).
 T13 é opcional e usa openpyxl (já usado em poc/extrair_dados.py) para ler o demonstrativo C5 da matriz 2026.
 Fonte: exportação local dos Indicadores de Gestão da PNP (pasta `indicadores-gestao/`,
 não versionada; 19 CSV, anos-base 2017–2025, 64 instituições).
@@ -106,9 +106,15 @@ def main():
         cols = [r[1] for r in con.execute(f'PRAGMA table_info("{t}")')]
         anos = [r[0] for r in con.execute(f'SELECT DISTINCT Ano FROM "{t}" ORDER BY 1')]
         ni = con.execute(f'SELECT COUNT(DISTINCT Instituicao) FROM "{t}" WHERE Instituicao IS NOT NULL').fetchone()[0]
-        nu = (con.execute(f'SELECT COUNT(DISTINCT Instituicao||nomeUnidadeRecente) FROM "{t}" WHERE Ano="2025"').fetchone()[0]
-              if "nomeUnidadeRecente" in cols else "-")
-        print(f"{rel:52} {tam/1e6:6.1f} MB {n:8} linhas  anos {anos[0]}–{anos[-1]}  inst {ni:3}  unid(2025) {nu}")
+        nu = ("/".join(str(con.execute(f'SELECT COUNT(DISTINCT Instituicao||nomeUnidadeRecente) FROM "{t}" WHERE Ano=?', (a,)).fetchone()[0])
+                       for a in ("2017", "2025")) if "nomeUnidadeRecente" in cols else "-")
+        print(f"{rel:52} {tam/1e6:6.1f} MB {n:8} linhas  anos {anos[0]}–{anos[-1]}  inst {ni:3}  unid(2017/2025) {nu}")
+    print("\nCélulas vazias (% das linhas):")
+    for t, cols in (("DadosGerais", ("Numero_de_vagas", "Numero_de_inscritos", "Numero_de_ingressantes", "Numero_de_concluintes")),
+                    ("TaxaEvasao", ("Matriculas_Numero_de_Evadidos",))):
+        tot = con.execute(f'SELECT COUNT(*) FROM "{t}"').fetchone()[0]
+        vaz = [(c, con.execute(f'SELECT COUNT(*) FROM "{t}" WHERE {c} IS NULL').fetchone()[0] / tot * 100) for c in cols]
+        print(f"  {t}: " + "; ".join(f"{c} {v:.0f}%" for c, v in vaz))
 
     titulo("T2. Coerência do universo de matrículas entre arquivos e escala da ME (64 instituições)")
     print("ano    mat DadosGerais  mat TaxaEvasao  mat SituacaoMatr  mat Racial  ME DadosGerais  ME PercLegais/100")
@@ -313,6 +319,11 @@ def main():
         g = con.execute("SELECT SUM(Gastos_Correntes_Gastos_Correntes)/1e9 FROM IndicadoresGastos WHERE Ano=?", (a,)).fetchone()[0]
         print(f"{a}  RAP {rap[0]:6.2f}  professor-equivalente {rap[1]:8,.0f}  gastos correntes R$ {g:6.2f} bi (nominal)")
 
+    t13(con)
+    t14(con)
+
+
+def t13(con):
     titulo("T13. Numerador da RAP da matriz 2026 (C5, 'MEq-RAP Pres') × candidatos PNP, ano-base 2024")
     c5 = RAIZ / "docs/dominio/evidencias/2026-11-08/ifmt-matriz-2026.xlsx"
     try:
@@ -347,6 +358,69 @@ def main():
         if p[0] == "IFES":
             print(f"  Ifes: matriz {p[1]:,.2f} / {p[2]} = {p[1]/p[2]:.3f}; ME presencial {p[3]:,.0f} / {p[6]:,.0f} = {p[3]/p[6]:.2f}; "
                   f"Matrículas RAP {p[5]:,.0f} / {p[6]:,.0f} = {p[5]/p[6]:.2f}")
+
+
+def t14(con):
+    titulo("T14. Séries de apoio citadas nos estudos de caso (rastreabilidade do relatório)")
+    def serie(rot, sql, args, fmt="{:8.0f}"):
+        d = dict(con.execute(sql, args).fetchall())
+        linha(rot, [d.get(a) for a in ANOS], fmt, 40)
+    print(" " * 40 + "".join(f"{a:>8}" for a in ANOS))
+    for inst in ("IFES", "IFMA", "IFPE", "IFPR", "IFPI", "IF GOIANO", "IFSUL"):
+        print(f"\n{inst}")
+        base = "FROM DadosGerais WHERE Instituicao=? AND "
+        serie("mat. técnico presencial", f"SELECT Ano, SUM(Numero_de_Matriculas) {base}{TEC} AND {PRES} GROUP BY Ano", (inst,))
+        serie("mat. graduação presencial", f"SELECT Ano, SUM(Numero_de_Matriculas) {base}{GRAD} AND {PRES} GROUP BY Ano", (inst,))
+        serie("ME técnico EaD", f"SELECT Ano, SUM(Matricula_Equivalente_Geral) {base}{TEC} AND {EAD} GROUP BY Ano", (inst,))
+        serie("ME graduação + pós EaD", f"SELECT Ano, SUM(Matricula_Equivalente_Geral) {base}({GRAD} OR {POS}) AND {EAD} GROUP BY Ano", (inst,))
+        serie("ME FIC EaD", f"SELECT Ano, SUM(Matricula_Equivalente_Geral) {base}{FIC} AND {EAD} GROUP BY Ano", (inst,))
+        serie("inscritos/vaga (regular presencial)", f"SELECT Ano, SUM(Numero_de_inscritos)*1.0/SUM(Numero_de_vagas) {base}{REG} AND {PRES} AND Numero_de_vagas>0 GROUP BY Ano", (inst,), "{:8.2f}")
+        serie("evasão anual % (regular presencial)", f"SELECT Ano, SUM(Matriculas_Numero_de_Evadidos)*100.0/SUM(Numero_de_Matriculas) FROM TaxaEvasao WHERE Instituicao=? AND {REG} AND {PRES} GROUP BY Ano", (inst,), "{:8.1f}")
+        serie("professor-equivalente", "SELECT Ano, SUM(RAP_Professor_Equivalente) FROM RelacaoAlunoProfessorRAP WHERE Instituicao=? GROUP BY Ano", (inst,))
+    print("\nIFPE — técnico subsequente presencial, médias A × B")
+    for col in ("Numero_de_vagas", "Numero_de_ingressantes"):
+        a, b = (con.execute(f"SELECT SUM({col})/3.0 FROM DadosGerais WHERE Instituicao='IFPE' AND {TEC} AND tipoOferta='Subsequente' AND {PRES} "
+                            f"AND Ano IN (?,?,?)", anos).fetchone()[0] for anos in (A3, B3))
+        print(f"  {col:24} A {a:8.0f}  B {b:8.0f}")
+    print("\nIfes — cursos técnicos presenciais por tipo de oferta registrado (nº de linhas curso × campus)")
+    for of in ("Concomitante", "Subsequente"):
+        d = dict(con.execute(f"SELECT Ano, COUNT(*) FROM DadosGerais WHERE Instituicao='IFES' AND {TEC} AND {PRES} AND tipoOferta=? GROUP BY Ano", (of,)).fetchall())
+        linha(f"  {of}", [d.get(a) for a in ANOS], "{:8.0f}", 40)
+    print("\nIfes — técnico concomitante+subsequente presencial por campus, médias A × B")
+    print(f"  {'campus':30}{'vagA':>7}{'vagB':>7}{'ingA':>7}{'ingB':>7}{'matA':>7}{'matB':>7}{'concA':>7}{'concB':>7}")
+    for r in con.execute(f"""SELECT nomeUnidadeRecente,
+            SUM(CASE WHEN Ano IN ('2017','2018','2019') THEN Numero_de_vagas END)/3.0, SUM(CASE WHEN Ano IN ('2023','2024','2025') THEN Numero_de_vagas END)/3.0,
+            SUM(CASE WHEN Ano IN ('2017','2018','2019') THEN Numero_de_ingressantes END)/3.0, SUM(CASE WHEN Ano IN ('2023','2024','2025') THEN Numero_de_ingressantes END)/3.0,
+            SUM(CASE WHEN Ano IN ('2017','2018','2019') THEN Numero_de_Matriculas END)/3.0, SUM(CASE WHEN Ano IN ('2023','2024','2025') THEN Numero_de_Matriculas END)/3.0,
+            SUM(CASE WHEN Ano IN ('2017','2018','2019') THEN Numero_de_concluintes END)/3.0, SUM(CASE WHEN Ano IN ('2023','2024','2025') THEN Numero_de_concluintes END)/3.0
+            FROM DadosGerais WHERE Instituicao='IFES' AND {TEC} AND {PRES} AND tipoOferta IN ('Concomitante','Subsequente')
+            GROUP BY 1 ORDER BY 6 DESC"""):
+        print(f"  {r[0].replace('Campus ', '')[:29]:30}" + "".join(f"{(v or 0):7.0f}" for v in r[1:]))
+    print("\nIfes — especializações EaD com mais de 1.500 matrículas no ano (pulsos)")
+    for r in con.execute(f"SELECT Ano, nomeUnidadeRecente, nomeIdCurso, Numero_de_Matriculas, Matricula_Equivalente_Geral FROM DadosGerais "
+                         f"WHERE Instituicao='IFES' AND tipoCurso LIKE 'Especializa%' AND {EAD} AND Numero_de_Matriculas>1500 ORDER BY Ano"):
+        print(f"  {r[0]}  {r[1][:40]:40}  {r[2][:70]:70}  mat {r[3]:6.0f}  ME {r[4]:7.0f}")
+
+    print("\nIfes — regular presencial, médias A × B (Caso 1)")
+    for col in ("Numero_de_vagas", "Numero_de_ingressantes", "Numero_de_Matriculas"):
+        a, b = (con.execute(f"SELECT SUM({col})/3.0 FROM DadosGerais WHERE Instituicao='IFES' AND {REG} AND {PRES} AND Ano IN (?,?,?)", anos).fetchone()[0]
+                for anos in (A3, B3))
+        print(f"  {col:24} A {a:8.0f}  B {b:8.0f}  ({b/a*100-100:+.1f}%)")
+    print("\nControles citados no § 2.4 do relatório")
+    d = dict(con.execute(f"SELECT Ano, SUM(Eficiencia_Academica_Concluidos)*100.0/(SUM(Eficiencia_Academica_Concluidos)+SUM(Eficiencia_Academica_Numero_de_Evadidos)) "
+                         f"FROM EficienciaAcademica WHERE {R41} GROUP BY Ano").fetchall())
+    linha("  IEA Rede41, arquivo com FIC (%)", [d.get(a) for a in ANOS], "{:8.1f}", 40)
+    r = con.execute(f"SELECT Instituicao, Ano, Taxa_de_Ocupacao_Taxa_de_Ocupacao FROM TaxaOcupacao WHERE {R41} ORDER BY 3 DESC LIMIT 1").fetchone()
+    print(f"  Taxa de Ocupação: máximo {r[2]:.1f}% ({r[0]}, {r[1]}); linhas > 100%: "
+          f"{con.execute(f'SELECT COUNT(*) FROM TaxaOcupacao WHERE {R41} AND Taxa_de_Ocupacao_Taxa_de_Ocupacao>100').fetchone()[0]}")
+    print("  Matrículas (mil) por programa, 64 instituições:")
+    for (prog,) in con.execute("SELECT DISTINCT nomePrograma FROM TaxaEvasao ORDER BY 1"):
+        d = dict(con.execute("SELECT Ano, SUM(Numero_de_Matriculas)/1000.0 FROM TaxaEvasao WHERE nomePrograma=? GROUP BY Ano", (prog,)).fetchall())
+        linha(f"    {prog}", [d.get(a) for a in ANOS], "{:8.1f}", 40)
+    d = dict(con.execute(f"SELECT Ano, SUM(Numero_de_Matriculas)/1000.0 FROM DadosGerais WHERE {FIC} AND {EAD} GROUP BY Ano").fetchall())
+    linha("  Matrículas FIC EaD (mil), 64 inst.", [d.get(a) for a in ANOS], "{:8.1f}", 40)
+    d = dict(con.execute(f"SELECT Ano, SUM(Numero_de_vagas)/1000.0 FROM DadosGerais WHERE {R41} AND {REG} AND {PRES} GROUP BY Ano").fetchall())
+    linha("  Vagas regulares presenciais (mil), Rede41", [d.get(a) for a in ANOS], "{:8.1f}", 40)
 
 
 if __name__ == "__main__":

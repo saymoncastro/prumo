@@ -2,7 +2,7 @@
 
 > **Data:** 10/11/2026 · **Natureza:** descoberta de produto e auditoria analítica. Nada foi implementado no simulador, nos protótipos ou nos dados de origem.
 > **Fonte de dados:** exportação local dos Indicadores de Gestão da PNP (`indicadores-gestao/`, 93 MB, 19 CSV, não versionada), anos-base 2017–2025.
-> **Reprodução:** [`reproduzir_estudo_pnp.py`](../dominio/evidencias/2026-11-10/reproduzir_estudo_pnp.py) (somente leitura, ~4 s; T1–T12 usam só a biblioteca padrão, T13 usa openpyxl) e [saída completa](../dominio/evidencias/2026-11-10/resultado-estudo-pnp.txt). As referências "T1"–"T13" apontam para as tabelas dessa saída.
+> **Reprodução:** [`reproduzir_estudo_pnp.py`](../dominio/evidencias/2026-11-10/reproduzir_estudo_pnp.py) (somente leitura, ~4 s; T1–T12 usam só a biblioteca padrão, T13 usa openpyxl) e [saída completa](../dominio/evidencias/2026-11-10/resultado-estudo-pnp.txt). As referências "T1"–"T14" apontam para as tabelas dessa saída. A T14 reúne as séries de apoio citadas nos casos e no § 2.4, para que cada número do texto tenha origem na saída.
 > **Local:** o pedido sugeria `docs/estudos/`. Segui o padrão do repositório: análises em `docs/analises/` e scripts de evidência em `docs/dominio/evidencias/<data>/`.
 > **Revisão (10/11/2026, após avaliação externa):**
 > 1. M/I passou a se chamar "anos de vínculo por ingressante", porque mistura progressão regular, duração do curso e retenção. O texto deixou de tratá-lo como permanência.
@@ -43,7 +43,7 @@
 2. **Matrícula cresce por duas vias, e elas pesam igual.** Entre as médias A e B, as matrículas regulares presenciais da Rede cresceram 10,4%, **com 2,3% menos ingressantes**. O crescimento veio de mais anos de vínculo por ingressante (M/I de 3,17 para 3,59). Isso não é, por si, melhora: no mesmo período, a fatia de retidos entre os matriculados em curso subiu de 21–22% para 25–30%. Entre as 41 instituições, a variação das matrículas se divide em partes iguais entre ingresso e tempo de vínculo (T6).
 3. **O Ifes inverte esse padrão, e o gargalo do técnico está depois do ingresso.** Vagas regulares presenciais +9,7%, ingressantes +4,6%, matrículas +0,7% e M/I de 3,30 para 3,18 (T6). No técnico concomitante/subsequente, as vagas continuam preenchidas (0,99 → 0,93 ingressante por vaga), mas as matrículas caem 25% com ingressantes −6%, e os concluintes caem à metade em alguns campi. A diferença entre vagas e ingressantes vem sobretudo da graduação, onde os ingressantes por vaga caem de 1,03 para 0,92 (§ 5.4).
 4. **A Rede se afastou da meta de 50% técnico.** O %CT caiu de 61,5% (2017) para 47,8% (2025). As instituições com %CT ≥ 50% passaram de 35 para 24. Parte da queda é metodológica (2021). Parte vem de FIC e pós-graduação EaD no denominador. Parte é reconfiguração real de portfólio, de técnico para graduação, em IFPE, IFBA, IF Goiano, IFTO e Cefet-MG (T6, T7).
-5. **Uma única oferta em pulso pode mover o indicador institucional.** Em 2023, uma especialização EaD registrada em Colatina, com 6.454 ME, tirou 6,3 p.p. do %CT do Ifes, que ficou em 36,8%. Com a especialização do Cefor, o efeito chega a ~10 p.p. Pelo calendário de RMO-070, o ano-base 2023 alimenta a matriz 2025 (T11).
+5. **Uma única oferta em pulso pode mover o indicador institucional.** Em 2023, as especializações EaD registradas em Colatina somaram 6.454 ME, quase todas de um único curso. Elas tiraram 6,3 p.p. do %CT do Ifes, que ficou em 36,8%. Com a especialização do Cefor, o efeito chega a ~10 p.p. Pelo calendário de RMO-070, o ano-base 2023 alimenta a matriz 2025 (T11).
 
 **Limites.** Esta exportação não reproduz o IEA da matriz, porque o arquivo de eficiência inclui FIC. A RAP da PNP não reconcilia com a da matriz. A definição do guia aproxima, mas também não fecha: mediana −2,9% nas 41 instituições (T13). A Taxa de Ocupação foi retirada da PNP para revisão. Não há planilhas oficiais da matriz da Rede para exercícios anteriores a 2026. Por isso, **nenhum resultado aqui é estimativa orçamentária**: são proxies acadêmicas.
 
@@ -91,13 +91,13 @@ Todos os arquivos trazem **indicadores agregados já calculados**, como os do Ex
 | Efeito | Evidência | Consequência |
 |---|---|---|
 | **Fórmula da ME (anos-base 2020 → 2021)** | A razão ME/matrícula cai de 1,21 para 1,08 no técnico presencial, de 1,17 para 1,05 em tecnologia e de 1,13 para 1,09 em bacharelado. Na EaD, sobe de 0,15–0,65 para ~1,0 (T3). O guia PNP atual define ME = M × FECH × FEC, com FECH = carga mínima regulamentada ÷ 800 e FEC pelo Anexo II da Portaria Setec/MEC 146/2021. O guia de 2018 usava fator de nível de curso e contava só matrículas "sem programa associado". | **A ME não forma série contínua entre 2017–2020 e 2021–2025.** Para comparar a ME, usei apenas o bloco 2021–2025. Para séries longas, usei matrículas físicas da oferta regular presencial. A edição exata em que a mudança foi adotada não foi confirmada; o salto coincide com o ano-base 2021. |
-| **MOOC e programas** | A FIC EaD salta de 91 mil para 642 mil matrículas em 2020, ainda como "Sem Programa Associado". Os rótulos MOOC só aparecem a partir de 2021. PROEJA, Bolsa Formação e PARTIUIF só aparecem como programa em 2025 (T4, `TaxaEvasao`). | Matrícula total e FIC não são comparáveis ao longo da série. **O rótulo de programa não serve para série histórica.** |
-| **Pandemia (2020–2022)** | Na Rede41, a evasão anual da oferta regular presencial cai de 18,5% (2017) para 9,1% (2021) e volta a 16,0% em 2022. A fatia de retidos entre os matriculados "em curso" passa de 21% para 46,6% (2021) e volta a 24,9% (2025). As vagas caem 20% em 2020 (T10). | As matrículas de 2021–2022 estão infladas por vínculos prolongados e retenção, e 2023 mostra a "queda" de normalização. **Melhoras de evasão em 2020–2021 são artefato.** Por isso usei médias trienais antes e depois. |
-| **Inscritos** | Inscritos por vaga: 6,5 (2017), 4,2 (2022–2023), 6,1 (2025). Em 2025 há saltos atípicos: IFSP 12,9 e IFPE na graduação 18,6. | Indicador de demanda de **baixa confiabilidade** para série. A contagem depende do processo seletivo, já que o mesmo candidato pode se inscrever em várias opções. |
-| **Taxa de Ocupação** | O guia PNP atual informa: "Este indicador foi removido da PNP para reanálise de seu modelo matemático". A exportação mostra valores acima de 100% e um outlier (IFG 2020: 321,5%). | Não usar. |
-| **Eficiência acadêmica** | O arquivo por campus inclui FIC, e com isso o IEA da Rede vai de 46,8% para 77,9% puxado por MOOCs. O IEA da matriz exclui qualificação profissional ([RMO-068](../dominio/matriz-orcamentaria.md#rmo-068)). | Não serve como proxy do IEA da matriz. O IEA sem FIC não pode ser reconstruído com esta exportação. |
+| **MOOC e programas** | A FIC EaD salta de 91 mil para 642 mil matrículas em 2020, ainda como "Sem Programa Associado". Os rótulos MOOC só aparecem a partir de 2021. PROEJA, Bolsa Formação e PARTIUIF só aparecem como programa em 2025 (T14; 64 instituições). | Matrícula total e FIC não são comparáveis ao longo da série. **O rótulo de programa não serve para série histórica.** |
+| **Pandemia (2020–2022)** | Na Rede41, a evasão anual da oferta regular presencial cai de 18,5% (2017) para 9,1% (2021) e volta a 16,0% em 2022. A fatia de retidos entre os matriculados "em curso" passa de 21% para 46,6% (2021) e volta a 24,9% (2025). As vagas regulares presenciais caem 20% em 2020 (T10, T14). | As matrículas de 2021–2022 estão infladas por vínculos prolongados e retenção, e 2023 mostra a "queda" de normalização. **Melhoras de evasão em 2020–2021 são artefato.** Por isso usei médias trienais antes e depois. |
+| **Inscritos** | Inscritos por vaga (Rede41, regular presencial): 6,5 (2017), 4,2 (2022–2023), 6,1 (2025) (T10). Em 2025 há saltos atípicos; no IFPE, por exemplo, vai de 3,50 para 8,13 (T14). | Indicador de demanda de **baixa confiabilidade** para série. A contagem depende do processo seletivo, já que o mesmo candidato pode se inscrever em várias opções. |
+| **Taxa de Ocupação** | O guia PNP atual informa: "Este indicador foi removido da PNP para reanálise de seu modelo matemático". A exportação mostra 144 linhas acima de 100% e um outlier (IFG 2020: 321,5%) (T14). | Não usar. |
+| **Eficiência acadêmica** | O arquivo por campus inclui FIC, e com isso o IEA da Rede41 vai de 46,8% para 77,9% puxado por MOOCs (T14). O IEA da matriz exclui qualificação profissional ([RMO-068](../dominio/matriz-orcamentaria.md#rmo-068)). | Não serve como proxy do IEA da matriz. O IEA sem FIC não pode ser reconstruído com esta exportação. |
 | **Gastos** | Valores nominais. Os gastos correntes da Rede41 vão de R$ 13,2 bi para R$ 23,6 bi (T12). | Sem deflator e sem rateio por campus. Não sustenta conclusões sobre eficiência. |
-| **Tipo de oferta** | O Ifes registra quase toda a oferta técnica não integrada como "Concomitante" (30 cursos), ao contrário da Rede, onde predomina "Subsequente". De 2023 a 2025, o Ifes passa 4 → 26 cursos para "Subsequente". | Mudança de classificação. Concomitante e subsequente devem ser analisados juntos. |
+| **Tipo de oferta** | O Ifes registra quase toda a oferta técnica não integrada como "Concomitante" (30 linhas curso × campus em 2025), ao contrário da Rede, onde predomina "Subsequente". As linhas "Subsequente" do Ifes passam de 4–6 (2017–2022) para 13, 16 e 26 (2023–2025) (T14). | Mudança de classificação. Concomitante e subsequente devem ser analisados juntos. |
 
 ---
 
@@ -238,9 +238,10 @@ Cada linha de `DadosGerais` tem um único tipo de curso e uma única modalidade.
 **Variação entre as 41 instituições (n = 41, medidas A → B):**
 
 - **Ingresso e tempo de vínculo pesam igual.** Na decomposição da variância de Δlog matrículas, 0,50 vem dos ingressantes e 0,50 do M/I.
-- **Ambos se associam positivamente ao crescimento.** A correlação entre Δlog matrículas e ingressantes é 0,53, e com o M/I é 0,51.
-- **A evasão anual não explica o crescimento.** A correlação entre Δ evasão anual (p.p.) e Δlog matrículas é **0,01**.
-- **O crescimento acompanha o professor-equivalente.** A correlação com Δ% professor-equivalente é 0,44. É associação, não causalidade: docentes podem seguir a matrícula ou precedê-la.
+- **Ambos se associam positivamente ao crescimento.** A correlação entre Δlog matrículas e Δlog ingressantes é 0,52, e com Δlog M/I também é 0,52.
+- **A evasão anual não explica o crescimento.** A correlação entre Δ evasão anual média (p.p.) e Δlog matrículas é **−0,00**; com Δlog M/I, é −0,10.
+- **O crescimento acompanha o professor-equivalente.** A correlação com Δ% professor-equivalente é 0,43. É associação, não causalidade: docentes podem seguir a matrícula ou precedê-la.
+- *Fórmulas (T6):* correlação de Pearson entre instituições (n = 41). As variações comparam as médias trienais A e B. A evasão é a média das taxas anuais de cada triênio.
 
 **Interpretação (associação plausível, não causal).** O aumento do M/I da Rede tem pelo menos três explicações possíveis, que os dados agregados não separam:
 
@@ -266,7 +267,7 @@ Por isso, **"crescer em matrícula" pode significar mais acesso, cursos mais lon
 - **Técnico.** As vagas do Ifes se preenchem: 0,93–1,01 ingressante por vaga, acima da Rede. A perda no concomitante/subsequente ocorre na trajetória da turma: o estoque cai 25% com ingressantes −6%, e os concluintes também caem (Vitória 410 → 231/ano; Serra 152 → 53; Vila Velha 134 → 17). Para esse problema, a alavanca é a trajetória da turma (evasão precoce, duração, retenção, reclassificação), não a ocupação das vagas.
 - **Graduação.** É aqui que está a queda de ocupação: licenciatura de 1,03 para 0,86 e tecnologia de 1,08 para 0,78 ingressante por vaga (T9). A distância entre vagas (+9,7%) e ingressantes (+4,6%) na oferta regular presencial vem principalmente daí.
 - **Integrado.** Parte da diferença pode ser defasagem: os ingressantes do Ifes crescem sobretudo em 2023–2025, e o estoque de cursos de 3–4 anos ainda não acompanhou.
-- **Classificação.** No Ifes, "subsequente" sozinho não forma série estável (reclassificação de concomitante para subsequente: 4 cursos em 2022, 26 em 2025). As duas formas devem ser analisadas juntas.
+- **Classificação.** No Ifes, "subsequente" sozinho não forma série estável (as linhas "Subsequente" passam de 5 em 2022 para 26 em 2025; T14). As duas formas devem ser analisadas juntas.
 
 ### 5.5. Capacidade institucional (pergunta E)
 
@@ -306,7 +307,10 @@ Nas 41 instituições, os três campi que mais cresceram concentram de 25% (IFPR
 
 ### 5.7. Resiliência e picos (pergunta H)
 
-- **Pulsos de oferta EaD.** No Ifes, a especialização EaD "Desenvolvimento Educacional e Social" registrada em Colatina soma 2.992 ME em 2021, 202 em 2022, 6.454 em 2023 e 54 em 2024. A especialização do Cefor passa de 171 para 4.304 em 2023 e volta a 2.788 em 2025. Esses pulsos explicam o %CT de 36,8% em 2023 (T11).
+- **Pulsos de oferta EaD.**
+  - **Colatina:** as especializações EaD registradas no campus somam 2.992 ME em 2021, 202 em 2022, 6.454 em 2023 e 54 em 2024 (T11). Quase tudo vem de um único curso, "Desenvolvimento Educacional e Social", com 2.934 matrículas em 2021 e 6.313 em 2023 (T14).
+  - **Cefor:** o mesmo curso soma 4.304 matrículas em 2023. Em 2024, outra especialização EaD, de docência para a educação profissional, soma 3.499 (T14).
+  - **Efeito:** esses pulsos explicam o %CT de 36,8% em 2023 (T11).
 - **MOOC sem continuidade.** A FIC EaD do IFSUL sobe de 489 ME (2019) para 36.178 (2021) e cai para 9.993 (2022). O %CT do IFSUL vai de 68% para 23% e depois para 41%.
 - **Sem picos isolados no total institucional.** Nenhuma instituição tem alta acima de 20% seguida de queda acima de 15% na ME total ou na ME sem FIC de 2021 a 2025. Os picos ficam no nível de componente ou de campus.
 - **Crescimento sustentado:** IFSP, IFRJ, IFPR, IFPI, IFPA, IFMS, IFMG, Ifes, IFC e IFB cresceram em 6 dos 8 anos nas matrículas regulares presenciais. O critério é pouco discriminante por causa da pandemia.
@@ -381,7 +385,7 @@ Cada caso separa **fato observado**, **associação plausível** e **hipótese a
 | Medida (regular presencial) | A (2017–19) | B (2023–25) | Rede41 A → B |
 |---|---:|---:|---:|
 | Vagas | 7.451 | 8.171 (+9,7%) | +0,7% |
-| Ingressantes | — | +4,6% | −2,3% |
+| Ingressantes | 7.514 | 7.862 (+4,6%) | −2,3% |
 | Matrículas | 24.791 | 24.973 (+0,7%) | +10,4% |
 | M/I (anos de vínculo por ingressante) | 3,30 | 3,18 | 3,17 → 3,59 |
 | Participação na Rede (matrículas) | 3,47% | 3,17% | |
@@ -394,7 +398,7 @@ Cada caso separa **fato observado**, **associação plausível** e **hipótese a
   - A fatia de retidos entre os matriculados em curso é menor que a da Rede (Ifes 17–27%; Rede 25–30% em B).
 - **Associação plausível.** Os cursos de duração menor (subsequente) ganham peso e as coortes de integrado ampliadas em 2023–2025 ainda não maturaram. As duas coisas reduzem o M/I sem implicar piora.
 - **Explicações alternativas.**
-  - Reclassificação concomitante → subsequente (4 cursos em 2022, 26 em 2025).
+  - Reclassificação concomitante → subsequente (linhas "Subsequente": 5 em 2022, 26 em 2025; T14).
   - Saneamento de registros de retidos antigos.
   - Encurtamento de PPCs.
   - Evasão nos primeiros meses, não captada pela taxa anual.
@@ -418,7 +422,7 @@ Cada caso separa **fato observado**, **associação plausível** e **hipótese a
   - Graduação +4.141 matrículas e técnico +1.223. O %CT fica em 60,2% em 2025.
   - O crescimento é distribuído: 21 campi crescem, 1 diminui, e os três maiores concentram 25% do ganho (T6, T11).
 - **Associação plausível.** Expansão acompanhada de provimento docente e com contribuição de muitos campi.
-- **Explicações alternativas.** Maturação de campi criados na expansão; inscritos/vaga baixos (2,3–2,6) sugerem demanda menos folgada; ingressantes/vaga de 0,84 a 0,92.
+- **Explicações alternativas.** Maturação de campi criados na expansão; inscritos por vaga baixos (2,2–2,6 entre 2021 e 2025; T14) sugerem demanda menos folgada; os ingressantes cresceram menos que as vagas (+13,2% × +24,6%; T6).
 - **Para confirmar.** Cronologia de provimentos e de autorização de cursos no IFPR; inscritos por campus.
 
 ### Caso 4 — IFPE: reconfiguração com ociosidade (caso negativo)

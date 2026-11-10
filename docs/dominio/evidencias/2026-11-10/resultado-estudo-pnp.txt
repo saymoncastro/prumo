@@ -2,24 +2,28 @@
 ====================================================================================================
 T1. Inventário: arquivos, linhas, anos-base, instituições e unidades
 ====================================================================================================
-CargosCarreira.csv                                      0.0 MB      409 linhas  anos 2016–2023  inst  40  unid(2025) -
-DadosGerais.csv                                        20.4 MB    86330 linhas  anos 2017–2025  inst  64  unid(2025) 661
-dados-academicos/CassificacaoRacialRendaSexo.csv       33.2 MB   244006 linhas  anos 2017–2025  inst  64  unid(2025) -
-dados-academicos/SituacaoMatricula.csv                  5.6 MB    40404 linhas  anos 2017–2025  inst  64  unid(2025) 661
-indicadores-academicos/EficienciaAcademica.csv          0.8 MB     5774 linhas  anos 2017–2025  inst  64  unid(2025) 658
-indicadores-academicos/IndiceVerticalizacao.csv         0.7 MB     5883 linhas  anos 2017–2025  inst  64  unid(2025) 662
-indicadores-academicos/RelacaoAlunoProfessorRAP.csv     0.7 MB     5966 linhas  anos 2017–2025  inst  64  unid(2025) 666
-indicadores-academicos/TaxaEvasao.csv                  30.6 MB   109396 linhas  anos 2017–2025  inst  64  unid(2025) 661
-indicadores-academicos/TaxaOcupacao.csv                 0.1 MB      574 linhas  anos 2017–2025  inst  64  unid(2025) -
-indicadores-gastos/IndicadoresGastos.csv                0.1 MB      369 linhas  anos 2017–2025  inst  41  unid(2025) -
-indicadores-gastos/PanoramaOrcamentario.csv             0.8 MB     4509 linhas  anos 2013–2025  inst  40  unid(2025) -
-indicadores-pessoal/ProfessoresPorInstituicao.csv       0.6 MB     5612 linhas  anos 2017–2025  inst  64  unid(2025) -
-indicadores-pessoal/TecnicosAdmNivel.csv                0.3 MB     3048 linhas  anos 2017–2025  inst  64  unid(2025) -
-indicadores-pessoal/TitulacaoDocente.csv                0.1 MB      575 linhas  anos 2017–2025  inst  64  unid(2025) -
-percentuais-legais/OfertaVagasNoturnas.csv              0.5 MB     4337 linhas  anos 2017–2025  inst  44  unid(2025) 535
-percentuais-legais/PercentuaisLegais.csv                0.8 MB     5877 linhas  anos 2017–2025  inst  64  unid(2025) 661
-percentuais-legais/RelacaoInscritosVagas.csv            0.7 MB     5847 linhas  anos 2017–2025  inst  64  unid(2025) 659
-percentuais-legais/ReservaVagas.csv                     1.1 MB     8800 linhas  anos 2019–2025  inst  64  unid(2025) 645
+CargosCarreira.csv                                      0.0 MB      409 linhas  anos 2016–2023  inst  40  unid(2017/2025) -
+DadosGerais.csv                                        20.4 MB    86330 linhas  anos 2017–2025  inst  64  unid(2017/2025) 642/661
+dados-academicos/CassificacaoRacialRendaSexo.csv       33.2 MB   244006 linhas  anos 2017–2025  inst  64  unid(2017/2025) -
+dados-academicos/SituacaoMatricula.csv                  5.6 MB    40404 linhas  anos 2017–2025  inst  64  unid(2017/2025) 642/661
+indicadores-academicos/EficienciaAcademica.csv          0.8 MB     5774 linhas  anos 2017–2025  inst  64  unid(2017/2025) 607/658
+indicadores-academicos/IndiceVerticalizacao.csv         0.7 MB     5883 linhas  anos 2017–2025  inst  64  unid(2017/2025) 642/662
+indicadores-academicos/RelacaoAlunoProfessorRAP.csv     0.7 MB     5966 linhas  anos 2017–2025  inst  64  unid(2017/2025) 668/666
+indicadores-academicos/TaxaEvasao.csv                  30.6 MB   109396 linhas  anos 2017–2025  inst  64  unid(2017/2025) 642/661
+indicadores-academicos/TaxaOcupacao.csv                 0.1 MB      574 linhas  anos 2017–2025  inst  64  unid(2017/2025) -
+indicadores-gastos/IndicadoresGastos.csv                0.1 MB      369 linhas  anos 2017–2025  inst  41  unid(2017/2025) -
+indicadores-gastos/PanoramaOrcamentario.csv             0.8 MB     4509 linhas  anos 2013–2025  inst  40  unid(2017/2025) -
+indicadores-pessoal/ProfessoresPorInstituicao.csv       0.6 MB     5612 linhas  anos 2017–2025  inst  64  unid(2017/2025) -
+indicadores-pessoal/TecnicosAdmNivel.csv                0.3 MB     3048 linhas  anos 2017–2025  inst  64  unid(2017/2025) -
+indicadores-pessoal/TitulacaoDocente.csv                0.1 MB      575 linhas  anos 2017–2025  inst  64  unid(2017/2025) -
+percentuais-legais/OfertaVagasNoturnas.csv              0.5 MB     4337 linhas  anos 2017–2025  inst  44  unid(2017/2025) 404/535
+percentuais-legais/PercentuaisLegais.csv                0.8 MB     5877 linhas  anos 2017–2025  inst  64  unid(2017/2025) 640/661
+percentuais-legais/RelacaoInscritosVagas.csv            0.7 MB     5847 linhas  anos 2017–2025  inst  64  unid(2017/2025) 638/659
+percentuais-legais/ReservaVagas.csv                     1.1 MB     8800 linhas  anos 2019–2025  inst  64  unid(2017/2025) 0/645
+
+Células vazias (% das linhas):
+  DadosGerais: Numero_de_vagas 24%; Numero_de_inscritos 24%; Numero_de_ingressantes 21%; Numero_de_concluintes 25%
+  TaxaEvasao: Matriculas_Numero_de_Evadidos 21%
 
 ====================================================================================================
 T2. Coerência do universo de matrículas entre arquivos e escala da ME (64 instituições)
@@ -446,3 +450,145 @@ T13. Numerador da RAP da matriz 2026 (C5, 'MEq-RAP Pres') × candidatos PNP, ano
   Matrículas RAP (arquivo PNP)                   mediana 1.066  mín 1.001  máx 2.567  ±1%:  8  ±3%: 14
   Professor-equivalente (PNP ÷ matriz)           mediana 1.002  mín 1.000  máx 1.005
   Ifes: matriz 27,539.39 / 1517.5 = 18.148; ME presencial 26,689 / 1,520 = 17.56; Matrículas RAP 30,574 / 1,520 = 20.11
+
+====================================================================================================
+T14. Séries de apoio citadas nos estudos de caso (rastreabilidade do relatório)
+====================================================================================================
+                                            2017    2018    2019    2020    2021    2022    2023    2024    2025
+
+IFES
+mat. técnico presencial                    16513   16459   15034   15374   16449   17499   14799   14956   15948
+mat. graduação presencial                   7234    7838    7929    7949    9114    9694    8206    7986    8571
+ME técnico EaD                                 2      44      88      76      60     385     248     445     303
+ME graduação + pós EaD                       397    1264     833     659    5168    5055   14618    8869    7044
+ME FIC EaD                                   200     248     234     776     658    1268    2443    1535    2453
+inscritos/vaga (regular presencial)         6.88    5.84    5.56    5.31    6.57    3.26    3.47    3.91    5.67
+evasão anual % (regular presencial)         15.0    15.3    12.2     7.4     6.5    22.3    14.3    12.2    13.7
+professor-equivalente                       1452    1456    1463    1404    1498    1501    1495    1520    1589
+
+IFMA
+mat. técnico presencial                    17626   18953   21041   20771   22167   24177   24247   23156   22383
+mat. graduação presencial                   7418    8065    8623    8630    9446   10747   11188   11066   11272
+ME técnico EaD                               118       0    2112    2027    1645    3777    3660    3687    3984
+ME graduação + pós EaD                       212     904    1301    1158    2673    4423    5328    4913    5112
+ME FIC EaD                                     6       1     123      78     173     287      89      16      76
+inscritos/vaga (regular presencial)         7.12    6.22    5.93    5.76    6.20    3.63    3.84    4.57    7.14
+evasão anual % (regular presencial)          8.7     8.6     6.4     6.8     6.1     8.1     8.7    11.6     9.9
+professor-equivalente                       1637    1657    1600    1741    1751    1760    1734    1715    1692
+
+IFPE
+mat. técnico presencial                    20111   18592   18659   17113   17459   16899   15964   15989   14846
+mat. graduação presencial                   3771    3811    4521    4789    6014    6524    6664    6834    6801
+ME técnico EaD                                 0       0       0       0       0       0      40      68      98
+ME graduação + pós EaD                         0       0       0     101    1276    1220     916    1153    1742
+ME FIC EaD                                     1      10       9     324     303      64      42      46      81
+inscritos/vaga (regular presencial)         5.88    5.70    5.84    5.18    6.24    6.17    5.56    3.50    8.13
+evasão anual % (regular presencial)         23.5    16.5    13.7    16.0    14.2    20.6    13.0    18.2    14.7
+professor-equivalente                       1141    1171    1107    1204    1201    1195    1186    1182    1185
+
+IFPR
+mat. técnico presencial                    10677   11873   12242   11384   12549   12946   12514   12582   13366
+mat. graduação presencial                   5238    5899    7043    8101    9143   10237   10359    9882   10363
+ME técnico EaD                              6208    4707    8178    5215    4330    4324    3708    3291    7102
+ME graduação + pós EaD                      1282     154     461     459     421     149     213     616     529
+ME FIC EaD                                     0       0      16       3     193     101      23     171      71
+inscritos/vaga (regular presencial)         2.57    4.10    4.21    3.37    2.46    2.55    2.18    2.46    2.34
+evasão anual % (regular presencial)         14.5    11.8    11.2     5.7     9.4    16.1    13.6    13.5    14.0
+professor-equivalente                       1105    1176    1189    1267    1280    1360    1450    1517    1547
+
+IFPI
+mat. técnico presencial                    15036   16132   15649   14680   16955   17853   17323   17738   18683
+mat. graduação presencial                   5931    6953    7675    8404    9382    9876    9133    8863    8913
+ME técnico EaD                                 0       1       0       0       0       1       0       0      91
+ME graduação + pós EaD                         0       0       0       0     964    2029    3000    3365    7787
+ME FIC EaD                                     0       0       0    1408     695      11     372     430     270
+inscritos/vaga (regular presencial)         5.93    5.61    5.82    5.50    5.10    3.71    3.36    3.48    3.32
+evasão anual % (regular presencial)         15.7    14.9    10.6     7.2     7.4    16.4    13.5    14.6    14.8
+professor-equivalente                       1126    1235    1224    1285    1283    1285    1410    1446    1446
+
+IF GOIANO
+mat. técnico presencial                     7222    7673    8172    7664    7513    6964    5678    5886    6424
+mat. graduação presencial                   5222    6635    7191    7720    7701    8641    8384    8429    8664
+ME técnico EaD                               764     677     588     520      57     352     339     650    4589
+ME graduação + pós EaD                         0     124     397     398     779     779    1860    1626    2495
+ME FIC EaD                                    78       2       5     387     106      31      95     590    1116
+inscritos/vaga (regular presencial)         2.57    2.36    2.08    2.17    2.24    1.65    2.16    1.73    2.03
+evasão anual % (regular presencial)         12.6    11.9     8.0    11.0    10.2    16.9    10.0    10.4    13.6
+professor-equivalente                        660     674     718     722     729     726     712     780     783
+
+IFSUL
+mat. técnico presencial                    11553   11873   11849   11506   11986   12507   11415   11047   11456
+mat. graduação presencial                   4088    4567    4787    4638    4686    5308    4857    4670    4689
+ME técnico EaD                                 0    2897     855      97     245     328      51     217      51
+ME graduação + pós EaD                         5     116     278     164    2386    3243    2796    3252    3630
+ME FIC EaD                                    26     231     489    5969   36178    9993    7349    8713    6897
+inscritos/vaga (regular presencial)         4.91    5.09    4.42    4.34    4.56    4.12    4.41    3.98    5.37
+evasão anual % (regular presencial)         14.8    14.5    12.5     6.8     8.8    21.2    18.2    18.0    14.6
+professor-equivalente                        923     975     966     971     967     981     997    1016    1019
+
+IFPE — técnico subsequente presencial, médias A × B
+  Numero_de_vagas          A     4266  B     3497
+  Numero_de_ingressantes   A     4018  B     2671
+
+Ifes — cursos técnicos presenciais por tipo de oferta registrado (nº de linhas curso × campus)
+  Concomitante                                38      32      31      30      32      30      29      28      30
+  Subsequente                                  6       6       4       5       4       5      13      16      26
+
+Ifes — técnico concomitante+subsequente presencial por campus, médias A × B
+  campus                           vagA   vagB   ingA   ingB   matA   matB  concA  concB
+  Vitória                           565    682    567    629   1492   1257    410    231
+  Serra                             223    131    237    128    832    406    152     53
+  Cariacica                         225    236    224    231    661    506    233    139
+  Cachoeiro de Itapemirim           217    261    218    245    565    629     76     68
+  Vila Velha                        134    107    137    101    499    247    134     17
+  São Mateus                        130    149    132    152    403    385     57     46
+  Guarapari                         169    139    172    109    375    280     86     93
+  Aracruz                            80     80     81     93    245    209     85     37
+  Nova Venécia                       87     24     77     25    220     58     59      5
+  Linhares                           72     61     73     49    208     94     76     22
+  Barra de São Francisco             93     27     86     19    165     36     33     13
+  Colatina                           56     54     53     50    120    122     26     27
+  Itapina                            40     26     13      9     35     30     14      9
+  Ibatiba                             0     35      0     33     24     44      4      0
+  Centro Serrano                     13      0     12      0     18      0      6      0
+  Venda Nova do Imigrante             0      0      0      0     13      0      7      0
+  Santa Teresa                        0     13      0     13      5     22      2      8
+  Alegre                              0      0      0      0      1      9      1      0
+  Piúma                               0     68      0     66      0     75      0     30
+
+Ifes — especializações EaD com mais de 1.500 matrículas no ano (pulsos)
+  2021  Campus Colatina                           Especialização (Lato Sensu) - Desenvolvimento Educacional e Social (Es  mat   2934  ME    2934
+  2023  Campus Colatina                           Especialização - Desenvolvimento Educacional e Social (Especialização   mat   6313  ME    6313
+  2023  Centro de Referência em Formação e Educa  Especialização - Desenvolvimento Educacional e Social (Especialização   mat   4304  ME    4304
+  2024  Centro de Referência em Formação e Educa  Pós-graduação Especialização em Docência para a Educação Profissional   mat   3499  ME    3499
+
+Ifes — regular presencial, médias A × B (Caso 1)
+  Numero_de_vagas          A     7451  B     8171  (+9.7%)
+  Numero_de_ingressantes   A     7514  B     7862  (+4.6%)
+  Numero_de_Matriculas     A    24791  B    24973  (+0.7%)
+
+Controles citados no § 2.4 do relatório
+  IEA Rede41, arquivo com FIC (%)           46.8    48.3    53.0    55.9    69.4    57.9    64.8    73.4    77.9
+  Taxa de Ocupação: máximo 321.5% (IFG, 2020); linhas > 100%: 144
+  Matrículas (mil) por programa, 64 instituições:
+    Bolsa Formação - Bioeconomia             0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.2
+    Bolsa Formação - EJA EPT                 0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     1.4
+    Bolsa Formação - Empreender              0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.1
+    Bolsa Formação - Energife                0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.5
+    Bolsa Formação - Mulheres Mil            0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0    14.6
+    Bolsa Formação - Outros                  0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     8.7
+    E-TEC                                  107.8    33.7     0.0     0.0     0.0     0.0     0.7     0.1     0.1
+    MOOC - Aprenda Mais                      0.0     0.0     0.0     0.0     3.0    80.5   237.6   481.9   615.9
+    MOOC - Outros                            0.0     0.0     0.0     0.0   235.3    85.2   186.6   304.4   377.3
+    MedioTec                                 0.0     0.0     0.0     0.0     0.0     0.0     2.7     2.4     0.8
+    Outros Programas                         0.0     0.0     0.0     0.0     0.0    74.6    17.8    43.5    91.1
+    PARTIUIF                                 0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0    23.8
+    PROEJA                                   0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0    16.8
+    PROJOVEM                                 0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0
+    Programa EJA INTEGRADA - EPT (SECAD      0.0     0.0     0.0     0.0     0.0     0.0     0.0     0.0     4.7
+    Programa EJA INTEGRADA – EPT (SEB/M      0.0     0.0     0.0     0.0     0.0     0.0     6.0    14.3     2.8
+    Sem Programa Associado                 894.4   902.9   997.2  1482.9  1262.0  1246.9  1198.5  1102.2  1170.2
+    UAB (Universidade Aberta do Brasil)     29.6    28.0    26.1    24.6    23.0    25.8    30.2    34.0    57.7
+    [Sem informação]                         0.0     0.0     0.0     0.0     0.0     0.0     1.4     0.0     0.0
+  Matrículas FIC EaD (mil), 64 inst.        48.7    33.8    90.8   642.3   591.0   503.1   657.5   971.6  1244.9
+  Vagas regulares presenciais (mil), Re    242.6   234.6   250.9   200.1   233.1   241.0   245.0   241.1   246.9
