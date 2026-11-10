@@ -1,6 +1,7 @@
 # PRUMO — Diagnóstico do estado atual (10/11/2026)
 
 > **Atualização de 10/11/2026:** depois deste diagnóstico, o idealizador decidiu não fazer sessões com gestores agora e seguir para a estruturação da solução. Ver [próximo passo](proximo-passo.md). As menções abaixo a "próximo experimento" refletem a recomendação original. As duas pendências técnicas apontadas nos §§ 3 e 4.2 (tratamento numérico do extrator da POC 0.0.2 e rótulo de versão da fonte canônica) foram resolvidas no mesmo dia, sem alterar nenhum resultado.
+> **Integração:** os PRs #1 e #2 foram integrados à `main` em 10/11/2026, depois deste diagnóstico. As marcas "(PR #1)" e "(PR #2)" e o § 1.1 descrevem a situação anterior.
 > **Natureza:** retrato do repositório e da evolução do projeto em 10/11/2026, feito para fundamentar a [visão de produto](visao-prumo.md). É um registro datado: não será mantido em dia. Nenhum protótipo, motor de cálculo ou dado foi alterado nesta atividade.
 > **Método:** leitura do histórico do Git, das três branches, dos dois pull requests abertos, dos documentos de concepção e de análise, e do código dos três protótipos. Os documentos de domínio foram lidos por amostragem dirigida (sumário, versões, lacunas, regras de produto). Os testes dos motores de coortes foram executados; os testes de auditoria da matriz não, porque dependem de arquivos locais não versionados.
 
@@ -36,9 +37,9 @@ Não havia alterações não commitadas em nenhum dos três diretórios de traba
 | **Evidências** | `docs/dominio/evidencias/2026-11-08` e `2026-11-09` | Cópias das versões 1.0.0 e 1.1.0 da fonte canônica, portarias, demonstrativo do IFMT, página da PROAD, guia da PNP de 2018, scripts e resultados |
 | | `tests/auditoria_matriz/` | 32 testes de auditoria; só rodam com os arquivos locais |
 | **Estudos** | [Portão de dados](../analises/prumo-poc-portao-dados.md) (09/11) | Conciliação PNP × matriz 2026. Resultado válido e reaproveitado por tudo que veio depois |
-| | [Estudo da PNP](https://github.com/saymoncastro/prumo/blob/claude/prumo-pnp-exploratory-audit-aff2d0/docs/analises/prumo-pnp-inteligencia-comparativa-exploratoria.md) **(PR #1)** (10/11) | Auditoria longitudinal reproduzível, com 14 tabelas |
+| | [Estudo da PNP](../analises/prumo-pnp-inteligencia-comparativa-exploratoria.md) **(PR #1)** (10/11) | Auditoria longitudinal reproduzível, com 14 tabelas |
 | **Protótipos** | [Avaliação da v2](../analises/prumo-avaliacao-prototipo-v2.md), [plano de Itapina](../analises/prumo-plano-demonstracao-itapina.md) (09/11) | Registro do desenho e dos resultados de cada protótipo |
-| | [Documento da POC 0.0.2](https://github.com/saymoncastro/prumo/blob/claude/prumo-poc-002/docs/analises/prumo-poc-002.md) **(PR #2)** (10/11) | Idem |
+| | [Documento da POC 0.0.2](../analises/prumo-poc-002.md) **(PR #2)** (10/11) | Idem |
 | | `poc/` | Templates, motores, extratores, dados derivados e páginas montadas |
 
 ---

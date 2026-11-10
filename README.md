@@ -50,7 +50,7 @@ Se dois documentos divergirem sobre o que o produto é, vale a visão de produto
 |---|---|
 | [Revisão estratégica](docs/analises/prumo-revisao-estrategica-oportunidades.md) | Onde está a alavanca de coordenação na matriz; oito oportunidades; riscos de concepção |
 | [Portão de dados](docs/analises/prumo-poc-portao-dados.md) | A soma dos campi na PNP reproduz os percentuais legais da matriz de 2026 |
-| [Estudo da PNP](https://github.com/saymoncastro/prumo/blob/claude/prumo-pnp-exploratory-audit-aff2d0/docs/analises/prumo-pnp-inteligencia-comparativa-exploratoria.md) | Série longitudinal da Rede: o que é comparável, o que não é, e quatro achados. **Em [PR #1](https://github.com/saymoncastro/prumo/pull/1), ainda fora da `main`** |
+| [Estudo da PNP](docs/analises/prumo-pnp-inteligencia-comparativa-exploratoria.md) | Série longitudinal da Rede: o que é comparável, o que não é, e quatro achados. |
 
 ### Provas de conceito
 
@@ -60,7 +60,7 @@ Páginas HTML estáticas, com dados públicos embutidos. Abrem direto no navegad
 |---|---|---|---|
 | Meta de 50% técnico (v2) | Como os campi levam a instituição a uma meta agregada? | [poc/prumo-poc.html](poc/prumo-poc.html) | [Portão de dados](docs/analises/prumo-poc-portao-dados.md), [avaliação](docs/analises/prumo-avaliacao-prototipo-v2.md) |
 | Recomposição | Como um campus recompõe sua oferta e o que negocia? | [poc/prumo-recomposicao.html](poc/prumo-recomposicao.html) | [Plano e resultados](docs/analises/prumo-plano-demonstracao-itapina.md) |
-| POC 0.0.2 | Ampliar, aproveitar melhor ou reorganizar? | Em [PR #2](https://github.com/saymoncastro/prumo/pull/2), ainda fora da `main` | [Documento](https://github.com/saymoncastro/prumo/blob/claude/prumo-poc-002/docs/analises/prumo-poc-002.md) |
+| POC 0.0.2 | Ampliar, aproveitar melhor ou reorganizar? | [poc/prumo-poc-002.html](poc/prumo-poc-002.html) | [Documento](docs/analises/prumo-poc-002.md) |
 
 O que cada uma comprovou, e o que aproveitar de cada uma, está no [diagnóstico](docs/produto/diagnostico-2026-11.md#3-comparação-dos-protótipos).
 
@@ -78,11 +78,19 @@ node poc/testar_coortes.cjs
 
 Valida o motor de coortes da recomposição contra a série histórica.
 
+```bash
+node poc/testar_poc002.cjs
+```
+
+Valida o motor e os dados da POC 0.0.2.
+
 Os passos abaixo dependem de arquivos locais não versionados:
 
 | Comando | Precisa de |
 |---|---|
 | `python3 poc/extrair_dados.py`, `python3 poc/extrair_recomposicao.py` | `indicadores-gestao/` na raiz |
+| `python3 poc/extrair_poc002.py <pasta>` | A mesma exportação, em qualquer pasta |
+| `docs/dominio/evidencias/2026-11-10/reproduzir_estudo_pnp.py` | A mesma exportação |
 | Testes em [tests/auditoria_matriz/](tests/auditoria_matriz/README.md) | Planilha da matriz e arquivos JSON de referência |
 | `docs/dominio/evidencias/2026-11-09/reproduzir_revisao_critica.py` | Planilha da matriz |
 
