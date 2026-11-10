@@ -1,6 +1,8 @@
 # Da Operação à Decisão
 ## Contexto fundador de uma Plataforma de Inteligência, Planejamento e Execução Estratégica Educacional
 
+> **Situação em 10/11/2026.** Documento fundador, preservado sem alteração de conteúdo. Seus princípios continuam valendo. A descrição vigente do produto, com escopo ampliado (inteligência da Rede Federal como capacidade própria e direção de SaaS), está na [visão de produto](docs/produto/visao-prumo.md).
+
 > **Documento de referência para iniciar um novo projeto**  
 > **Versão:** 1.1 — 8 de novembro de 2026 (ênfase estratégica revisada para transferência a outro agente)  
 > **Situação:** visão conceitual e hipóteses de produto; **não** é uma especificação aprovada de requisitos, uma proposta oficial do Ifes ou um compromisso de implementação.  

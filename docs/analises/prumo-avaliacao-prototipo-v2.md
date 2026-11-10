@@ -1,5 +1,7 @@
 # Avaliação do protótipo Prumo v2 diante da visão do projeto
 
+> **Situação em 10/11/2026.** Parecer preservado como evidência. A "próxima prova de valor" aqui recomendada foi executada (demonstração de recomposição) e é um caso de uso entre outros. Ver a [visão de produto](../produto/visao-prumo.md).
+
 Data: 09/11/2026. Natureza: parecer de produto baseado no código e nos documentos locais; não é homologação de regras, decisão institucional ou implementação de uma nova versão.
 
 ## Parecer

@@ -1,5 +1,7 @@
 # Plano da demonstração: recomposição de oferta no Campus Itapina
 
+> **Situação em 10/11/2026.** Plano executado, preservado como evidência. A recomposição de oferta de um campus é um caso de uso entre outros. Ver a [visão de produto](../produto/visao-prumo.md).
+
 Data: 09/11/2026. Natureza: plano de produto para a próxima prova de valor. Não é implementação, decisão institucional nem recomendação de abrir ou fechar cursos. As alternativas descritas são hipóteses de demonstração, editáveis pelo gestor.
 
 Origem: [Avaliação do protótipo v2](prumo-avaliacao-prototipo-v2.md) e documento fundador, §§ 7.1, 7.2, 8.3, 11.7, 13 e 15.3–15.5.
