@@ -41,7 +41,7 @@ GRUPOS = {  # oferta técnica e graduação presenciais, para as trajetórias da
 
 def num(x):
     x = (x or "").strip()
-    return float(x.replace(",", ".")) if x else 0.0
+    return float(x.replace(".", "").replace(",", ".")) if x else 0.0  # ponto = milhar, como nos demais extratores
 
 
 def ler(rel):
