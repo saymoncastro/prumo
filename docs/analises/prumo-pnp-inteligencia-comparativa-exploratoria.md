@@ -2,8 +2,13 @@
 
 > **Data:** 10/11/2026 · **Natureza:** descoberta de produto e auditoria analítica. Nada foi implementado no simulador, nos protótipos ou nos dados de origem.
 > **Fonte de dados:** exportação local dos Indicadores de Gestão da PNP (`indicadores-gestao/`, 93 MB, 19 CSV, não versionada), anos-base 2017–2025.
-> **Reprodução:** [`reproduzir_estudo_pnp.py`](../dominio/evidencias/2026-11-10/reproduzir_estudo_pnp.py) (biblioteca padrão, somente leitura, ~4 s) e [saída completa](../dominio/evidencias/2026-11-10/resultado-estudo-pnp.txt). As referências "T1"–"T12" apontam para as tabelas dessa saída.
+> **Reprodução:** [`reproduzir_estudo_pnp.py`](../dominio/evidencias/2026-11-10/reproduzir_estudo_pnp.py) (somente leitura, ~4 s; T1–T12 usam só a biblioteca padrão, T13 usa openpyxl) e [saída completa](../dominio/evidencias/2026-11-10/resultado-estudo-pnp.txt). As referências "T1"–"T13" apontam para as tabelas dessa saída.
 > **Local:** o pedido sugeria `docs/estudos/`. Segui o padrão do repositório: análises em `docs/analises/` e scripts de evidência em `docs/dominio/evidencias/<data>/`.
+> **Revisão (10/11/2026, após avaliação externa):**
+> 1. M/I passou a se chamar "anos de vínculo por ingressante", porque mistura progressão regular, duração do curso e retenção. O texto deixou de tratá-lo como permanência.
+> 2. Entrou a decomposição em quatro grupos mutuamente exclusivos, sem dupla contagem (§ 5.1).
+> 3. Ficou explícito que, no técnico do Ifes, o gargalo está depois do ingresso, e que a queda de ocupação das vagas ocorre na graduação (§ 5.4).
+> 4. Foi testado o numerador da RAP pela definição do guia, nas 41 instituições (§ 5.5, T13).
 
 **Convenções usadas em todo o texto**
 
@@ -12,7 +17,12 @@
 - **Regular presencial** são os cursos presenciais, exceto FIC (qualificação profissional).
 - **ME** é a matrícula equivalente da PNP. **MT** é a matrícula total da matriz. As duas não são a mesma medida (§ 4).
 - Médias trienais: **A = 2017–2019** (antes da pandemia) e **B = 2023–2025** (depois da normalização).
-- **M/I** = matrículas ÷ ingressantes do mesmo ano. Indica quantos anos, em média, cada ingressante permanece matriculado (relação estoque/fluxo). Não é medida oficial da PNP.
+- **M/I — anos de vínculo por ingressante** = matrículas ÷ ingressantes do mesmo ano (relação estoque/fluxo). Não é medida oficial da PNP. **Não é medida de permanência.** Um M/I maior pode vir de três causas, com sentidos educacionais opostos:
+  - progressão regular em cursos mais longos;
+  - menos evasão;
+  - **retenção** (reprovação, atraso, vínculo além do prazo), que é resultado indesejável.
+
+  Sem dados por turma de ingresso, essas causas não se separam.
 
 ---
 
@@ -25,13 +35,17 @@
 
 **Achados com base suficiente (fatos observados):**
 
-1. **O crescimento recente da Rede veio quase todo de FIC e EaD.** De 2021 a 2025, a ME da Rede41 cresceu 12,0% (+122 mil). FIC respondeu por 40% desse aumento e EaD regular por 55%. A oferta presencial regular contribuiu com **5%**: a ME de técnico presencial caiu 0,8% e a de graduação presencial subiu 1,8% (T4). Por isso, uma instituição de perfil presencial perde participação pelo denominador mesmo crescendo. O Ifes perdeu 0,15 p.p. na ME sem FIC. O próprio crescimento somou +0,12 p.p., e o crescimento da Rede tirou −0,26 p.p. (T5).
-2. **Matrícula cresce por duas vias, e elas pesam igual.** Entre as médias A e B, as matrículas regulares presenciais da Rede cresceram 10,4%, **com 2,3% menos ingressantes**. O crescimento veio de mais anos de permanência por ingressante (M/I de 3,17 para 3,59). Entre as 41 instituições, a variação das matrículas se divide em partes iguais entre ingresso e permanência (T6).
-3. **O Ifes inverte esse padrão.** Vagas regulares presenciais +9,7%, ingressantes +4,6%, matrículas +0,7% e M/I de 3,30 para 3,18 (T6). O caso mais forte é o técnico concomitante/subsequente: ingressantes −6% e matrículas −25%, enquanto na Rede o M/I dessa oferta subiu (§ 5.4).
+1. **O crescimento recente da Rede veio quase todo de FIC e EaD.** De 2021 a 2025, a ME da Rede41 cresceu 12,0% (+122 mil). Em quatro grupos mutuamente exclusivos, cuja soma fecha exatamente com o total:
+   - regular a distância: 55,1%;
+   - FIC presencial: 23,0%;
+   - FIC a distância: 16,7%;
+   - regular presencial: **5,3%**. Dentro dela, a ME de técnico presencial caiu 0,8% e a de graduação presencial subiu 1,8% (T4). Por isso, uma instituição de perfil presencial perde participação pelo denominador mesmo crescendo. O Ifes perdeu 0,15 p.p. na ME sem FIC. O próprio crescimento somou +0,12 p.p., e o crescimento da Rede tirou −0,26 p.p. (T5).
+2. **Matrícula cresce por duas vias, e elas pesam igual.** Entre as médias A e B, as matrículas regulares presenciais da Rede cresceram 10,4%, **com 2,3% menos ingressantes**. O crescimento veio de mais anos de vínculo por ingressante (M/I de 3,17 para 3,59). Isso não é, por si, melhora: no mesmo período, a fatia de retidos entre os matriculados em curso subiu de 21–22% para 25–30%. Entre as 41 instituições, a variação das matrículas se divide em partes iguais entre ingresso e tempo de vínculo (T6).
+3. **O Ifes inverte esse padrão, e o gargalo do técnico está depois do ingresso.** Vagas regulares presenciais +9,7%, ingressantes +4,6%, matrículas +0,7% e M/I de 3,30 para 3,18 (T6). No técnico concomitante/subsequente, as vagas continuam preenchidas (0,99 → 0,93 ingressante por vaga), mas as matrículas caem 25% com ingressantes −6%, e os concluintes caem à metade em alguns campi. A diferença entre vagas e ingressantes vem sobretudo da graduação, onde os ingressantes por vaga caem de 1,03 para 0,92 (§ 5.4).
 4. **A Rede se afastou da meta de 50% técnico.** O %CT caiu de 61,5% (2017) para 47,8% (2025). As instituições com %CT ≥ 50% passaram de 35 para 24. Parte da queda é metodológica (2021). Parte vem de FIC e pós-graduação EaD no denominador. Parte é reconfiguração real de portfólio, de técnico para graduação, em IFPE, IFBA, IF Goiano, IFTO e Cefet-MG (T6, T7).
 5. **Uma única oferta em pulso pode mover o indicador institucional.** Em 2023, uma especialização EaD registrada em Colatina, com 6.454 ME, tirou 6,3 p.p. do %CT do Ifes, que ficou em 36,8%. Com a especialização do Cefor, o efeito chega a ~10 p.p. Pelo calendário de RMO-070, o ano-base 2023 alimenta a matriz 2025 (T11).
 
-**Limites.** Esta exportação não reproduz o IEA da matriz, porque o arquivo de eficiência inclui FIC. A RAP da PNP não reconcilia com a da matriz. A Taxa de Ocupação foi retirada da PNP para revisão. Não há planilhas oficiais da matriz da Rede para exercícios anteriores a 2026. Por isso, **nenhum resultado aqui é estimativa orçamentária**: são proxies acadêmicas.
+**Limites.** Esta exportação não reproduz o IEA da matriz, porque o arquivo de eficiência inclui FIC. A RAP da PNP não reconcilia com a da matriz. A definição do guia aproxima, mas também não fecha: mediana −2,9% nas 41 instituições (T13). A Taxa de Ocupação foi retirada da PNP para revisão. Não há planilhas oficiais da matriz da Rede para exercícios anteriores a 2026. Por isso, **nenhum resultado aqui é estimativa orçamentária**: são proxies acadêmicas.
 
 **Recomendação.** Vale incorporar a inteligência longitudinal ao PRUMO, mas como **fonte de premissas fundamentadas e de comparação contextual para o simulador e para o pacto de metas**. Não deve virar painel de desempenho nem ranking. A primeira pergunta de alto valor que já é possível responder bem está no § 10: **quanto cada vaga nova, por tipo de oferta e por campus, se converte em matrícula ativa ao longo do ciclo, e por que essa conversão está caindo no Ifes enquanto sobe na Rede?**
 
@@ -78,7 +92,7 @@ Todos os arquivos trazem **indicadores agregados já calculados**, como os do Ex
 |---|---|---|
 | **Fórmula da ME (anos-base 2020 → 2021)** | A razão ME/matrícula cai de 1,21 para 1,08 no técnico presencial, de 1,17 para 1,05 em tecnologia e de 1,13 para 1,09 em bacharelado. Na EaD, sobe de 0,15–0,65 para ~1,0 (T3). O guia PNP atual define ME = M × FECH × FEC, com FECH = carga mínima regulamentada ÷ 800 e FEC pelo Anexo II da Portaria Setec/MEC 146/2021. O guia de 2018 usava fator de nível de curso e contava só matrículas "sem programa associado". | **A ME não forma série contínua entre 2017–2020 e 2021–2025.** Para comparar a ME, usei apenas o bloco 2021–2025. Para séries longas, usei matrículas físicas da oferta regular presencial. A edição exata em que a mudança foi adotada não foi confirmada; o salto coincide com o ano-base 2021. |
 | **MOOC e programas** | A FIC EaD salta de 91 mil para 642 mil matrículas em 2020, ainda como "Sem Programa Associado". Os rótulos MOOC só aparecem a partir de 2021. PROEJA, Bolsa Formação e PARTIUIF só aparecem como programa em 2025 (T4, `TaxaEvasao`). | Matrícula total e FIC não são comparáveis ao longo da série. **O rótulo de programa não serve para série histórica.** |
-| **Pandemia (2020–2022)** | Na Rede41, a evasão anual da oferta regular presencial cai de 18,5% (2017) para 9,1% (2021) e volta a 16,0% em 2022. A fatia de retidos entre os matriculados "em curso" passa de 21% para 46,6% (2021) e volta a 24,9% (2025). As vagas caem 20% em 2020 (T10). | As matrículas de 2021–2022 estão infladas por permanência, e 2023 mostra a "queda" de normalização. **Melhoras de evasão em 2020–2021 são artefato.** Por isso usei médias trienais antes e depois. |
+| **Pandemia (2020–2022)** | Na Rede41, a evasão anual da oferta regular presencial cai de 18,5% (2017) para 9,1% (2021) e volta a 16,0% em 2022. A fatia de retidos entre os matriculados "em curso" passa de 21% para 46,6% (2021) e volta a 24,9% (2025). As vagas caem 20% em 2020 (T10). | As matrículas de 2021–2022 estão infladas por vínculos prolongados e retenção, e 2023 mostra a "queda" de normalização. **Melhoras de evasão em 2020–2021 são artefato.** Por isso usei médias trienais antes e depois. |
 | **Inscritos** | Inscritos por vaga: 6,5 (2017), 4,2 (2022–2023), 6,1 (2025). Em 2025 há saltos atípicos: IFSP 12,9 e IFPE na graduação 18,6. | Indicador de demanda de **baixa confiabilidade** para série. A contagem depende do processo seletivo, já que o mesmo candidato pode se inscrever em várias opções. |
 | **Taxa de Ocupação** | O guia PNP atual informa: "Este indicador foi removido da PNP para reanálise de seu modelo matemático". A exportação mostra valores acima de 100% e um outlier (IFG 2020: 321,5%). | Não usar. |
 | **Eficiência acadêmica** | O arquivo por campus inclui FIC, e com isso o IEA da Rede vai de 46,8% para 77,9% puxado por MOOCs. O IEA da matriz exclui qualificação profissional ([RMO-068](../dominio/matriz-orcamentaria.md#rmo-068)). | Não serve como proxy do IEA da matriz. O IEA sem FIC não pode ser reconstruído com esta exportação. |
@@ -92,7 +106,8 @@ Todos os arquivos trazem **indicadores agregados já calculados**, como os do Ex
 | Pergunta de gestão | Variáveis | Disponibilidade | Observação |
 |---|---|---|---|
 | A instituição/campus cresceu? | matrículas, ME por tipo/modalidade/campus | **confirmado** | ME comparável só em 2021–2025. Matrículas regulares presenciais servem para 2017–2025, com ressalva da pandemia. |
-| Cresceu por ingresso ou por permanência? | vagas, ingressantes, matrículas, concluintes, evadidos | **confirmado** (agregado) | Sem coorte: M/I é proxy, não taxa de permanência. |
+| Cresceu por ingresso ou por tempo de vínculo? | vagas, ingressantes, matrículas, concluintes, evadidos | **confirmado** (agregado) | Sem coorte, o M/I não separa progressão regular de retenção. |
+| O estoque cresceu por retenção? | retidos × em fluxo (`SituacaoMatricula`) | **parcial** | Disponível por campus, mas inclui FIC e EaD. Não há separação por tipo de curso. |
 | A composição do portfólio mudou? | tipo de curso, oferta, modalidade, eixo, turno | **confirmado** | Mudanças de classificação, como concomitante → subsequente, exigem checagem. |
 | A expansão foi absorvida? | ingressantes/vaga, inscritos/vaga | **parcial** | Ingressantes/vaga é confiável. Inscritos/vaga não é, e a Taxa de Ocupação foi retirada. |
 | Permanência e êxito melhoraram? | evasão anual por curso; IEA por campus | **parcial** | A evasão anual por curso é utilizável. O IEA de ciclo sem FIC está ausente. A pandemia distorce 2020–2022. |
@@ -112,7 +127,7 @@ A tabela separa os cinco níveis pedidos. A fonte canônica é [`matriz-orcament
 | Nível | O que existe | Situação nesta base |
 |---|---|---|
 | **1. Indicador PNP** | ME, %CT, %FP, %EJA, RAP, professor-equivalente, evasão, eficiência | Disponível 2017–2025, com as quebras do § 2.4. |
-| **2. Variável elegível e ponderada pela matriz** | Funcionamento: **MT** = matrículas ativas × horas do curso no ano ÷ 800 × peso (×1,5 agro); retidos valem ¼ por até 3 anos; FIC entra; fatores N3: EaD próprio 0,8, EaD externo 0,25, MOOC 0,08 ([RMO-066](../dominio/matriz-orcamentaria.md#rmo-066), [RMO-067](../dominio/matriz-orcamentaria.md#rmo-067)). Qualidade: IEA sem FIC, RAP e %CT/%FP/%EJA em faixas ([RMO-021](../dominio/matriz-orcamentaria.md#rmo-021), [RMO-068](../dominio/matriz-orcamentaria.md#rmo-068)). | **%CT, %FP e %EJA: proxy oficial.** Reconcilia com 2026 (Ifes 0,4403 × 0,44). **Professor-equivalente:** reconcilia (±1%). **RAP:** não reconcilia (20,11 × 18,148). **IEA:** não reproduzível (arquivo com FIC). **MT:** não derivável da ME, porque usa carga transcorrida, peso de curso, retidos a ¼ e fatores de financiamento. |
+| **2. Variável elegível e ponderada pela matriz** | Funcionamento: **MT** = matrículas ativas × horas do curso no ano ÷ 800 × peso (×1,5 agro); retidos valem ¼ por até 3 anos; FIC entra; fatores N3: EaD próprio 0,8, EaD externo 0,25, MOOC 0,08 ([RMO-066](../dominio/matriz-orcamentaria.md#rmo-066), [RMO-067](../dominio/matriz-orcamentaria.md#rmo-067)). Qualidade: IEA sem FIC, RAP e %CT/%FP/%EJA em faixas ([RMO-021](../dominio/matriz-orcamentaria.md#rmo-021), [RMO-068](../dominio/matriz-orcamentaria.md#rmo-068)). | **%CT, %FP e %EJA: proxy oficial.** Reconcilia com 2026 (Ifes 0,4403 × 0,44). **Professor-equivalente:** reconcilia (±1%). **RAP:** não reconcilia. Ifes: 20,11 na PNP, 17,56 pela definição do guia, 18,148 na matriz (T13). **IEA:** não reproduzível (arquivo com FIC). **MT:** não derivável da ME, porque usa carga transcorrida, peso de curso, retidos a ¼ e fatores de financiamento. |
 | **3. Participação relativa no montante** | Para 2026, o demonstrativo C5 traz indicadores e submontantes de Qualidade das 41 instituições ([RMO-072](../dominio/matriz-orcamentaria.md#rmo-072)). | **Não calculável** para outros exercícios. A "participação na ME da PNP" (§ 5.1) é proxy acadêmica: não pondera EaD, MOOC e retidos como a MT. |
 | **4. Dotação em reais** | Depende do montante distribuível, da separação de assistência e de 80/10/10 ([RMO-006](../dominio/matriz-orcamentaria.md#rmo-006)). | **Não calculado.** |
 | **5. Distribuição interna aos campi** | Ifes 2026: critérios próprios com piso e teto, sem fórmula publicada ([RMO-075](../dominio/matriz-orcamentaria.md#rmo-075), HIPÓTESE). | **Fora do alcance da PNP.** |
@@ -122,7 +137,7 @@ A tabela separa os cinco níveis pedidos. A fonte canônica é [`matriz-orcament
 **Três consequências diretas para leitura dos dados:**
 
 - **Crescer em ME não equivale a crescer na matriz.** O caso extremo é o IFRS: a ME de FIC EaD (MOOC) passa de 184 para 55.726 e a ME total dobra de 2021 a 2025 (índice 249,5; T5). Na N3, MOOC pesa 0,08 no Funcionamento. Ao mesmo tempo, o %CT do IFRS cai de 55% para 16,9%, abaixo da primeira faixa de Qualidade.
-- **Crescer em matrículas por retenção rende pouco na MT.** Um retido conta ¼ na MT e não entra no IEA. Instituições cujo estoque cresce por permanência acima do previsto (§ 5.4, caso IFMA) teriam ganho de MT menor que o aumento de matrículas.
+- **Crescer em matrículas por retenção rende pouco na MT.** Um retido conta ¼ na MT e não entra no IEA. Instituições cujo estoque cresce por vínculo além do prazo previsto (§ 5.4, caso IFMA) teriam ganho de MT menor que o aumento de matrículas. Além disso, esse crescimento seria piora acadêmica, não melhora.
 - **A participação relativa reage ao denominador.** O Ifes cresceu 3,5% na ME sem FIC de 2021 a 2025 e ainda assim perdeu participação, porque a Rede cresceu 7,9%, sobretudo em EaD (§ 5.1). Na matriz, o efeito depende dos fatores de EaD de cada exercício e não é calculável aqui. Isso é distributivo e não mede qualidade educacional.
 
 ---
@@ -146,7 +161,19 @@ A tabela separa os cinco níveis pedidos. A fonte canônica é [`matriz-orcament
 | FIC EaD (inclui MOOC) | 71,0 | 49,8 | 91,3 | +20,4 | 17% |
 | **Total** | **1.017,8** | **1.028,2** | **1.139,8** | **+122,0** | 100% |
 
-*Fórmula:* soma de `Matrícula Equivalente | Geral` (`DadosGerais.csv`) por grupo. Nível: instituição agregada à Rede41.
+*Fórmula:* soma de `Matrícula Equivalente | Geral` (`DadosGerais.csv`) por grupo (tipo de curso × modalidade). Nível: instituição agregada à Rede41.
+
+**Verificação de dupla contagem (T4).** As mesmas linhas, agrupadas em quatro grupos mutuamente exclusivos:
+
+| Grupo | ME 2021 | ME 2025 | Δ | % do Δ |
+|---|---:|---:|---:|---:|
+| Regular presencial | 846.106 | 852.551 | +6.444 | 5,3% |
+| Regular EaD | 91.409 | 158.599 | +67.191 | 55,1% |
+| FIC presencial | 9.358 | 37.367 | +28.009 | 23,0% |
+| FIC EaD | 70.971 | 91.323 | +20.352 | 16,7% |
+| **Soma = Δ total da Rede41** | | | **+121.996** | 100% |
+
+Cada linha de `DadosGerais` tem um único tipo de curso e uma única modalidade. Por isso os grupos não se sobrepõem, e a soma reproduz o total. Destaque: a ME de FIC presencial quase quadruplicou (9,4 mil → 37,4 mil). Tudo isso é ME da PNP, não MT da matriz (§ 4).
 
 **Participação na ME sem FIC da Rede41, 2021 → 2025, com decomposição (T5).** Δparticipação = (x₂₅ − x₂₁)/X₂₅ [efeito numerador] + (x₂₁/X₂₅ − x₂₁/X₂₁) [efeito denominador], onde x é a ME da instituição e X a da Rede.
 
@@ -196,7 +223,7 @@ A tabela separa os cinco níveis pedidos. A fonte canônica é [`matriz-orcament
 - No IFPE, o técnico subsequente passa de 0,94 (média A) para 0,76 (média B) ingressante por vaga, com 0,71 em 2025. A graduação vai de 0,99 (2017) para 0,84 (2025) (T11).
 - Inscritos por vaga tem baixa confiabilidade (§ 2.4) e não foi usado em conclusões.
 
-### 5.4. Ingresso, permanência e estoque (perguntas A, C e D)
+### 5.4. Ingresso, tempo de vínculo e estoque (perguntas A, C e D)
 
 **Rede41, oferta regular presencial, médias A → B (T6):**
 
@@ -210,7 +237,7 @@ A tabela separa os cinco níveis pedidos. A fonte canônica é [`matriz-orcament
 
 **Variação entre as 41 instituições (n = 41, medidas A → B):**
 
-- **Ingresso e permanência pesam igual.** Na decomposição da variância de Δlog matrículas, 0,50 vem dos ingressantes e 0,50 do M/I.
+- **Ingresso e tempo de vínculo pesam igual.** Na decomposição da variância de Δlog matrículas, 0,50 vem dos ingressantes e 0,50 do M/I.
 - **Ambos se associam positivamente ao crescimento.** A correlação entre Δlog matrículas e ingressantes é 0,53, e com o M/I é 0,51.
 - **A evasão anual não explica o crescimento.** A correlação entre Δ evasão anual (p.p.) e Δlog matrículas é **0,01**.
 - **O crescimento acompanha o professor-equivalente.** A correlação com Δ% professor-equivalente é 0,44. É associação, não causalidade: docentes podem seguir a matrícula ou precedê-la.
@@ -221,28 +248,48 @@ A tabela separa os cinco níveis pedidos. A fonte canônica é [`matriz-orcament
 2. mais retenção: a fatia de retidos entre os matriculados "em curso" passa de 21–22% para 25–30%;
 3. efeitos residuais da pandemia.
 
-Por isso, **"crescer em matrícula" pode significar mais acesso, cursos mais longos ou mais estudantes retidos**, e cada uma dessas vias tem efeito diferente na MT (retido conta ¼) e no IEA.
+Por isso, **"crescer em matrícula" pode significar mais acesso, cursos mais longos ou mais estudantes retidos**, e cada uma dessas vias tem efeito diferente na MT (retido conta ¼) e no IEA. **Crescimento do estoque por retenção é resultado acadêmico indesejável**, mesmo quando eleva contagens. Nenhum M/I maior deve ser lido como sucesso de permanência sem separar retidos de estudantes em fluxo regular.
 
 **Ifes × Rede, médias A → B (T9, médias trienais):**
 
-| Oferta | | Vagas | Ingressantes | Matrículas | M/I |
-|---|---|---|---|---|---|
-| Técnico integrado | Ifes | +19% | +18% | +10% | 3,50 → 3,27 |
-| | Rede41 | +16% | +19% | +21% | 3,34 → 3,39 |
-| Técnico concomitante + subsequente | Ifes | −1% | −6% | −25% | 2,82 → 2,26 |
-| | Rede41 | −20% | −27% | −20% | 2,69 → 2,93 |
-| Graduação | Ifes | +7% | −4% | +8% | 3,62 → 4,07 |
+| Oferta | | Vagas | Ingressantes | Ingressantes/vaga | Matrículas | M/I |
+|---|---|---|---|---|---|---|
+| Técnico integrado | Ifes | +19% | +18% | 1,02 → 1,01 | +10% | 3,50 → 3,27 |
+| | Rede41 | +16% | +19% | 0,96 → 0,98 | +21% | 3,34 → 3,39 |
+| Técnico concomitante + subsequente | Ifes | −1% | −6% | 0,99 → 0,93 | −25% | 2,82 → 2,26 |
+| | Rede41 | −20% | −27% | 0,91 → 0,83 | −20% | 2,69 → 2,93 |
+| Graduação | Ifes | +7% | −4% | 1,03 → 0,92 | +8% | 3,62 → 4,07 |
+| | Rede41 | +5% | +1% | 0,91 → 0,88 | +23% | 3,55 → 4,34 |
 
-Notas sobre a tabela:
+**Leitura: no técnico do Ifes, o gargalo está depois do ingresso.**
 
-- No integrado, parte da diferença pode ser defasagem: os ingressantes do Ifes crescem sobretudo em 2023–2025, e o estoque de cursos de 3–4 anos ainda não acompanhou.
-- No concomitante/subsequente, os concluintes do Ifes também caem. Por campus: Vitória de 410 para 231/ano, Serra de 152 para 53 e Vila Velha de 134 para 17.
+- **Técnico.** As vagas do Ifes se preenchem: 0,93–1,01 ingressante por vaga, acima da Rede. A perda no concomitante/subsequente ocorre na trajetória da turma: o estoque cai 25% com ingressantes −6%, e os concluintes também caem (Vitória 410 → 231/ano; Serra 152 → 53; Vila Velha 134 → 17). Para esse problema, a alavanca é a trajetória da turma (evasão precoce, duração, retenção, reclassificação), não a ocupação das vagas.
+- **Graduação.** É aqui que está a queda de ocupação: licenciatura de 1,03 para 0,86 e tecnologia de 1,08 para 0,78 ingressante por vaga (T9). A distância entre vagas (+9,7%) e ingressantes (+4,6%) na oferta regular presencial vem principalmente daí.
+- **Integrado.** Parte da diferença pode ser defasagem: os ingressantes do Ifes crescem sobretudo em 2023–2025, e o estoque de cursos de 3–4 anos ainda não acompanhou.
+- **Classificação.** No Ifes, "subsequente" sozinho não forma série estável (reclassificação de concomitante para subsequente: 4 cursos em 2022, 26 em 2025). As duas formas devem ser analisadas juntas.
 
 ### 5.5. Capacidade institucional (pergunta E)
 
 - Na Rede41, o professor-equivalente cresce de 37.979 para 43.237 entre 2017 e 2025 (+13,8%). A RAP da PNP oscila entre 22,6 e 25,4 (T12).
 - No Ifes, o professor-equivalente vai de 1.452 para 1.589 (+9,4%), contra matrículas regulares presenciais +0,7% (médias A → B).
 - **Não interpreto RAP maior ou menor como eficiência.** O numerador da RAP não reconcilia com a matriz, os gastos são nominais e só existem por instituição, e não há docente por área nem inventário físico.
+
+**Teste do numerador da RAP (T13).** O guia PNP define a "relação entre matrícula equivalente presencial e professor equivalente" (ALRAPE). Comparei três candidatos ao numerador da matriz 2026 ("MEq-RAP Pres (5.6b PNP)" no demonstrativo C5), ano-base 2024, nas 41 instituições:
+
+| Candidato (PNP, ano-base 2024) | Razão ÷ numerador da matriz: mediana (mín–máx) | Dentro de ±1% | Dentro de ±3% |
+|---|---|---:|---:|
+| ME presencial, com FIC (definição ALRAPE do guia) | 0,971 (0,942–1,032) | 6 | 21 |
+| ME presencial, sem FIC | 0,949 (0,851–1,019) | 1 | 7 |
+| "Matrículas RAP" do arquivo PNP | 1,066 (1,001–2,567) | 8 | 14 |
+| *Denominador: professor-equivalente PNP ÷ matriz* | *1,002 (1,000–1,005)* | | |
+
+Para o Ifes, a RAP é 17,56 pela definição ALRAPE do guia (26.689 ÷ 1.520), contra 18,148 na matriz (27.539 ÷ 1.517,5) e 20,11 no arquivo RAP da PNP (30.574 ÷ 1.520).
+
+**Leitura:**
+
+- O denominador fecha.
+- A definição do guia é a mais próxima, mas fica sistematicamente cerca de 3% abaixo. É provável que a matriz use outro recorte ou outra versão do cálculo, por exemplo com algum ajuste ou edição distinta. A diferença não parece ruído.
+- **Continua não reconciliado.** A RAP da matriz não deve ser estimada a partir da PNP sem a documentação do cálculo 5.6b.
 
 ### 5.6. Contribuição dos campi (pergunta F)
 
@@ -268,20 +315,32 @@ Nas 41 instituições, os três campi que mais cresceram concentram de 25% (IFPR
 
 ## 6. Insights candidatos (priorizados)
 
-### I-1. Conversão de vaga em matrícula ativa: ingresso × permanência
+### I-1. Conversão de vaga em matrícula ativa: ingresso × trajetória da turma
 *Prioridade 1: alto impacto decisório, solidez média-alta, viável já.*
 
-1. **O que os dados mostram.** De A para B, a Rede41 cresceu 10,4% em matrículas regulares presenciais com 2,3% menos ingressantes (M/I de 3,17 para 3,59). O Ifes ampliou vagas (+9,7%) e ingressantes (+4,6%), mas as matrículas ficaram estáveis (+0,7%) e o M/I caiu de 3,30 para 3,18. A queda é mais forte no técnico concomitante/subsequente (M/I de 2,82 para 2,26) e em Cariacica, Vitória, Piúma e São Mateus. Fonte: `DadosGerais.csv`, T6, T8, T9.
-2. **Por que interessa.** "Abrir mais vagas" é a alavanca mais citada nas metas, mas no Ifes ela não se converteu em estoque. O gestor precisa saber se o problema é evasão precoce, curso mais curto, menos retidos (o que seria bom) ou classificação.
-3. **Relação com metas.** Metas de matrícula e de %CT dependem do estoque, não das vagas. Cada campus contribui de forma diferente, e um pode precisar de permanência mais do que de vagas.
-4. **Uso no simulador.** Premissa de **conversão por oferta e campus**: ingressantes/vaga × M/I, com faixa empírica dos pares e do próprio histórico. Substitui o "1 vaga = 1 matrícula × duração" implícito.
+1. **O que os dados mostram.**
+   - **Rede41:** de A para B, cresceu 10,4% em matrículas regulares presenciais com 2,3% menos ingressantes (M/I de 3,17 para 3,59), enquanto a retenção subiu.
+   - **Ifes:** ampliou vagas (+9,7%) e ingressantes (+4,6%), mas as matrículas ficaram estáveis (+0,7%) e o M/I caiu de 3,30 para 3,18.
+   - **Técnico concomitante/subsequente do Ifes:** as vagas se preenchem (0,93 ingressante por vaga), mas o estoque cai 25% e os concluintes caem.
+   - **Onde:** Cariacica, Vitória, Piúma e São Mateus.
+
+   Fonte: `DadosGerais.csv`, T6, T8, T9.
+2. **Por que interessa.** "Abrir mais vagas" é a alavanca mais citada nas metas, mas no técnico do Ifes ela não se converteu em estoque, e o motivo não é falta de candidatos. O gestor precisa saber se o problema é evasão precoce, curso mais curto, menos retidos (o que seria bom) ou classificação. Cada causa pede uma decisão diferente.
+3. **Relação com metas.** Metas de matrícula e de %CT dependem do estoque, não das vagas. Cada campus contribui de forma diferente: um pode precisar reduzir evasão mais do que abrir vagas.
+4. **Uso no simulador.** A decisão do gestor passa a ser **vagas**, não matrículas. O simulador converte vagas em matrículas ativas por ano com quatro parâmetros separados, cada um com faixa empírica do próprio campus e dos pares:
+   - ingressantes por vaga;
+   - evasão;
+   - **retenção**;
+   - conclusão.
+
+   Um M/I único não serve, porque esconderia a retenção.
 5. **Dados que faltam.** Coortes do qAcadêmico (situação por ano desde o ingresso), duração prevista dos PPCs, histórico de reclassificação concomitante/subsequente e de jubilamentos.
-6. **Confiabilidade.** **Alta** para os fatos agregados. **Média** para a interpretação, pois M/I não é taxa de permanência.
+6. **Confiabilidade.** **Alta** para os fatos agregados. **Média** para a interpretação, pois o M/I não separa progressão regular de retenção.
 
 ### I-2. O denominador da Rede cresce por FIC e EaD; a oferta presencial regular está estável
 *Prioridade 2.*
 
-1. **O que os dados mostram.** De 2021 a 2025, 95% do crescimento da ME da Rede41 veio de FIC e EaD. A presencial regular contribuiu com 5%. O Ifes perdeu 0,15 p.p. de participação, sendo −0,26 p.p. de efeito denominador (T4, T5).
+1. **O que os dados mostram.** De 2021 a 2025, 94,7% do crescimento da ME da Rede41 veio de FIC e EaD, em quatro grupos mutuamente exclusivos: regular EaD 55,1%, FIC presencial 23,0% e FIC EaD 16,7%. A presencial regular contribuiu com 5,3%. O Ifes perdeu 0,15 p.p. de participação, sendo −0,26 p.p. de efeito denominador (T4, T5).
 2. **Por que interessa.** Cenários de matriz que projetam "a Rede cresce X%" de forma uniforme ([RMO-057](../dominio/matriz-orcamentaria.md#rmo-057)) erram o sinal da competição relevante. A disputa ocorre em EaD e FIC, que têm fatores próprios na N3.
 3. **Relação com metas.** Mostra que uma meta institucional de participação pode ser inalcançável só com oferta presencial, e que perder participação não significa piorar.
 4. **Uso no simulador.** Premissa de **crescimento da Rede por modalidade e por tipo**, com tendência 2021–2025 e intervalos, aplicada separadamente a presencial, EaD e MOOC.
@@ -303,11 +362,11 @@ Nas 41 instituições, os três campi que mais cresceram concentram de 25% (IFPR
 
 1. **O que os dados mostram.** Matrículas regulares presenciais semelhantes escondem trajetórias diferentes:
    - **IFPR:** ingresso +13%, professor-equivalente +30% e matrículas +33%. Expansão com capacidade.
-   - **IFMA:** ingresso −1,5%, M/I de 3,23 para 4,15 e matrículas +27%, com 31–46% de retidos entre os matriculados em curso. Crescimento por permanência ou retenção.
+   - **IFMA:** ingresso −1,5%, M/I de 3,23 para 4,15 e matrículas +27%, com 31–46% de retidos entre os matriculados em curso. Crescimento do estoque com retenção elevada. Até prova em contrário, isso é resultado acadêmico indesejável, não estratégia de permanência.
    - **IFPE:** técnico −3.521, graduação +2.732 e ingressantes/vaga em queda. Reconfiguração com ociosidade.
 2. **Por que interessa.** Comparar o Ifes com "quem cresceu mais" levaria a copiar o IFMA, cujo crescimento de matrícula tem pouco efeito na MT e no IEA.
 3. **Relação com metas.** Metas de matrícula precisam vir acompanhadas de metas de ingresso e de conclusão.
-4. **Uso no simulador.** O **parâmetro de comparação** deve ser a trajetória decomposta (ingresso, permanência, composição), não o índice de matrículas.
+4. **Uso no simulador.** O **parâmetro de comparação** deve ser a trajetória decomposta (ingresso, evasão, retenção, conclusão, composição), não o índice de matrículas. Um par só serve de referência para premissas de "crescimento saudável" se o crescimento dele não vier de retenção.
 5. **Dados que faltam.** IEA sem FIC por instituição e por ano; documentos institucionais (PDI, relatórios de gestão).
 6. **Confiabilidade.** **Média.**
 
@@ -324,11 +383,12 @@ Cada caso separa **fato observado**, **associação plausível** e **hipótese a
 | Vagas | 7.451 | 8.171 (+9,7%) | +0,7% |
 | Ingressantes | — | +4,6% | −2,3% |
 | Matrículas | 24.791 | 24.973 (+0,7%) | +10,4% |
-| M/I | 3,30 | 3,18 | 3,17 → 3,59 |
+| M/I (anos de vínculo por ingressante) | 3,30 | 3,18 | 3,17 → 3,59 |
 | Participação na Rede (matrículas) | 3,47% | 3,17% | |
 
 - **Fatos (T6, T8, T9).**
-  - A queda está concentrada no técnico concomitante/subsequente: matrículas de 5.881 para 4.409, com ingressantes −6%.
+  - A queda está concentrada no técnico concomitante/subsequente: matrículas de 5.881 para 4.409, com ingressantes −6%. As vagas seguem preenchidas: 0,99 → 0,93 ingressante por vaga.
+  - A diferença entre vagas e ingressantes vem da graduação, com ingressantes por vaga de 1,03 para 0,92.
   - Os concluintes dessa oferta também caem (Vitória 410 → 231/ano; Serra 152 → 53; Vila Velha 134 → 17).
   - A evasão anual dessa oferta é parecida nos dois períodos (~23–25%).
   - A fatia de retidos entre os matriculados em curso é menor que a da Rede (Ifes 17–27%; Rede 25–30% em B).
@@ -340,14 +400,14 @@ Cada caso separa **fato observado**, **associação plausível** e **hipótese a
   - Evasão nos primeiros meses, não captada pela taxa anual.
 - **Perguntas que exigem documentos ou entrevistas.** Houve redesenho de carga horária dos subsequentes? Houve jubilamentos em lote entre 2019 e 2022? Por que Serra e Vila Velha reduziram concluintes? A Proen/Prodi reclassificou a oferta em 2023?
 
-### Caso 2 — IFMA: crescimento por permanência (contraponto)
+### Caso 2 — IFMA: estoque cresce com retenção elevada (contraponto)
 
 - **Fatos.**
   - Matrículas regulares presenciais +26,6% (A → B) com ingressantes −1,5% e vagas +1,2%. O M/I vai de 3,23 para 4,15.
   - A fatia de retidos entre os matriculados em curso fica entre 31% e 46%, contra 21–30% na Rede.
   - Participação na ME sem FIC: +0,38 p.p. (2021 → 2025), com crescimento também em técnico EaD (1.645 → 3.984) e pós EaD (1.957 → 4.029).
   - %CT de 69,5% para 59,9% (T5, T6, T11).
-- **Associação plausível.** Parte do crescimento do estoque é retenção. Pelas regras documentadas, o retido conta ¼ na MT após o fim previsto e não entra no IEA.
+- **Associação plausível.** Parte do crescimento do estoque é retenção. Pelas regras documentadas, o retido conta ¼ na MT após o fim previsto e não entra no IEA. **Este caso não deve ser apresentado como estratégia de permanência a seguir.** Estudantes retidos por reprovação ou atraso elevam a contagem de matrículas, mas representam piora acadêmica.
 - **Explicações alternativas.** Cursos efetivamente mais longos (bacharelados novos); evasão de fato menor (a evasão anual do IFMA, 6–12%, é baixa); registro tardio de evasão.
 - **Para confirmar.** Fluxo por coorte do IFMA; política de jubilamento; composição por duração.
 
@@ -381,6 +441,8 @@ Cada caso separa **fato observado**, **associação plausível** e **hipótese a
 - **Ler 2020–2022 como desempenho.** A evasão subnotificada e a retenção inflada são artefato.
 - **Tratar programa ou tipo de oferta como série.** Os rótulos mudam (MOOC, PROEJA, concomitante/subsequente).
 - **Confundir ME, MT e participação na matriz** (§ 4).
+- **Ler tempo de vínculo como permanência saudável.** Um M/I maior pode ser retenção. Toda comparação de estoque deve mostrar retidos × em fluxo.
+- **Procurar o problema na ocupação quando ele está na trajetória.** No técnico do Ifes, as vagas se preenchem; a perda ocorre depois do ingresso (§ 5.4).
 - **Ranking implícito.** Tabelas ordenadas por crescimento convidam a comparar instituições de perfis, regiões e estágios de expansão diferentes. Os casos foram escolhidos por trajetória, não por posição.
 - **Atribuir intenção.** A PNP não registra decisões. Toda leitura de "estratégia" é hipótese.
 - **Correlações com n = 41 e janelas curtas.** São instáveis. Nenhuma foi tratada como causal.
@@ -402,7 +464,7 @@ Cada caso separa **fato observado**, **associação plausível** e **hipótese a
 São hipóteses para validar com gestores, não especificações:
 
 - **H-P1 — Premissas com procedência.** Cada premissa do simulador, como conversão vaga → matrícula, M/I por oferta e crescimento da Rede por modalidade, mostraria o valor do próprio campus, a faixa dos comparáveis e a fonte (arquivo, ano-base, fórmula). *Valida-se se o gestor muda a premissa padrão depois de vê-la.*
-- **H-P2 — Comparáveis por trajetória, não por tamanho.** Os comparáveis seriam escolhidos por perfil de oferta e mecanismo de crescimento (ingresso, permanência, composição), com o critério declarado. Evita o "copie quem cresceu mais".
+- **H-P2 — Comparáveis por trajetória, não por tamanho.** Os comparáveis seriam escolhidos por perfil de oferta e mecanismo de crescimento (ingresso, evasão, retenção, composição), com o critério declarado. Evita o "copie quem cresceu mais".
 - **H-P3 — Efeito numerador × denominador.** Toda variação de participação seria explicada como "o que fizemos" e "o que a Rede fez". Isso reduz a leitura de perda relativa como fracasso.
 - **H-P4 — Alerta de pulso e de exercício.** Uma oferta que move um indicador institucional em mais de 1 p.p. mostraria o ano-base e o exercício da matriz afetados.
 - **H-P5 — Antes e depois por campus.** A contribuição de cada campus para a mudança institucional seria mostrada no formato de T8, como insumo para o pacto de metas.
@@ -413,7 +475,9 @@ São hipóteses para validar com gestores, não especificações:
 
 **Estudo de caso para um gestor do Ifes (Proen e diretores de 3–4 campi):**
 
-> *"A oferta técnica concomitante/subsequente do Ifes manteve as vagas, mas perdeu 25% das matrículas e metade dos concluintes em alguns campi, enquanto a Rede aumentou a permanência por ingressante. O que está acontecendo em Vitória, Serra, Cariacica e Vila Velha, e o que isso implica para abrir ou reformular essas vagas?"*
+> *"A oferta técnica concomitante/subsequente do Ifes manteve as vagas preenchidas, mas perdeu 25% das matrículas e metade dos concluintes em alguns campi. O que acontece com as turmas depois do ingresso em Vitória, Serra, Cariacica e Vila Velha, e o que isso implica para abrir ou reformular essas vagas?"*
+
+O foco é a trajetória das turmas, não a ocupação das vagas, que segue alta (§ 5.4).
 
 - **Insumo já existente.** T8 e T9: série 2017–2025 por campus e oferta (vagas, ingressantes, matrículas, concluintes, evasão anual e M/I), com a Rede e os pares como referência (IFSC, IFRN, IFBA, IFPE, IFMA, IFPI, IFPR e IFMT, com porte e número de campi semelhantes; critério em T6).
 - **O que acrescentar, sem módulo novo:**
@@ -440,13 +504,14 @@ Os dados locais bastam para isso. Seriam insuficientes para IEA, RAP da matriz, 
 
 - **Os fatos são de confiabilidade alta.** São contagens oficiais coerentes entre arquivos, por campus e oferta, 2017–2025.
 - **A explicação ainda depende de coortes institucionais** (§ 10).
-- **Um dashboard descritivo não responde a isso.** Ele mostraria "o Ifes cresceu pouco". A decomposição mostra que o Ifes ampliou o ingresso e perdeu conversão, enquanto a Rede cresceu por permanência. São problemas diferentes, com alavancas e efeitos na matriz diferentes.
+- **Um dashboard descritivo não responde a isso.** Ele mostraria "o Ifes cresceu pouco". A decomposição mostra que o Ifes ampliou o ingresso e perdeu conversão depois dele. Já a Rede cresceu com mais tempo de vínculo por ingressante, que inclui retenção. São problemas diferentes, com alavancas e efeitos na matriz diferentes.
 
 ---
 
 ### Fontes metodológicas consultadas
 
-- Guia PNP (versão com Portaria Setec/MEC 11/2026), [espelho público](https://pnp-ccv.github.io/guiapnp/assets/files/Guia_PNP.pdf), consultado em 10/11/2026: definições de ME (M × FECH × FEC; Portaria Setec/MEC 146/2021), evasão anual, ingressantes, vagas, eficiência por ciclo e retirada da Taxa de Ocupação. O endereço oficial `pnp.mec.gov.br/guiapnp` retornou HTTP 403 e não foi lido.
+- Guia PNP (versão com Portaria Setec/MEC 11/2026), [espelho público](https://pnp-ccv.github.io/guiapnp/assets/files/Guia_PNP.pdf), consultado em 10/11/2026: definições de ME (M × FECH × FEC; Portaria Setec/MEC 146/2021), evasão anual, ingressantes, vagas, eficiência por ciclo e retirada da Taxa de Ocupação. O endereço oficial `pnp.mec.gov.br/guiapnp` (versão web, com fichas técnicas) retornou HTTP 403 e não foi lido diretamente. Recomenda-se preservar uma cópia da versão oficial como evidência, como foi feito com a Portaria 243/2026.
+- [Demonstrativo C5 da matriz 2026 (IFMT)](../dominio/evidencias/2026-11-08/ifmt-matriz-2026.xlsx), aba Indicadores: numerador e denominador da RAP por instituição (T13).
 - [Guia de Referência Metodológica da PNP 2018](../dominio/evidencias/2026-11-09/pnp-guia-referencia-metodologica-2018.pdf): definição anterior da ME, com fator de nível de curso e apenas matrículas sem programa associado.
 - [Fonte canônica da Matriz Orçamentária, v1.2.2](../dominio/matriz-orcamentaria.md), incluindo N2, N3, C5 e RMO-003, 021, 028–032, 057, 066–070, 072 e 075.
 - [Portão de dados da prova de conceito](prumo-poc-portao-dados.md): reconciliação de %CT, %FP, %EJA e professor-equivalente com a matriz 2026.

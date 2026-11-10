@@ -2,7 +2,8 @@
 
 Relatório: docs/analises/prumo-pnp-inteligencia-comparativa-exploratoria.md
 
-Somente leitura. Usa apenas a biblioteca padrão (csv, sqlite3 em memória).
+Somente leitura. T1–T12 usam apenas a biblioteca padrão (csv, sqlite3 em memória).
+T13 é opcional e usa openpyxl (já usado em poc/extrair_dados.py) para ler o demonstrativo C5 da matriz 2026.
 Fonte: exportação local dos Indicadores de Gestão da PNP (pasta `indicadores-gestao/`,
 não versionada; 19 CSV, anos-base 2017–2025, 64 instituições).
 
@@ -141,6 +142,15 @@ def main():
         d = v.get("2025", 0) - v.get("2021", 0)
         print(f"{k:34}" + "".join(f"{v.get(a, 0)/1000:9.1f}" for a in ANOS) + f" {d/1000:+8.1f} {d/dt*100:7.1f}%")
     print(f"{'Total':34}" + "".join(f"{tot[a]/1000:9.1f}" for a in ANOS) + f" {dt/1000:+8.1f}")
+    print("\nQuatro grupos mutuamente exclusivos (regular/FIC × presencial/EaD); a soma deve igualar o Δ total:")
+    soma = 0
+    for rot, c in (("Regular presencial", f"{REG} AND {PRES}"), ("Regular EaD", f"{REG} AND {EAD}"),
+                   ("FIC presencial", f"{FIC} AND {PRES}"), ("FIC EaD", f"{FIC} AND {EAD}")):
+        v = dict(con.execute(f"SELECT Ano, SUM(Matricula_Equivalente_Geral) FROM DadosGerais WHERE {R41} AND {c} GROUP BY Ano").fetchall())
+        d = v["2025"] - v["2021"]
+        soma += d
+        print(f"  {rot:20} 2021 {v['2021']:10,.0f}  2025 {v['2025']:10,.0f}  Δ {d:+9,.0f}  ({d/dt*100:5.1f}% do Δ)")
+    print(f"  {'Soma dos grupos':20} Δ {soma:+,.0f}  ×  Δ total {dt:+,.0f}")
     mat = {k: dict(con.execute(f"SELECT Ano, SUM(Numero_de_Matriculas) FROM DadosGerais WHERE {R41} AND {c} GROUP BY Ano").fetchall())
            for k, c in grupos.items()}
     print("\nMatrículas (mil), mesmo recorte:")
@@ -302,6 +312,41 @@ def main():
         rap = con.execute(f"SELECT SUM(RAP_Matriculas_RAP)/SUM(RAP_Professor_Equivalente), SUM(RAP_Professor_Equivalente) FROM RelacaoAlunoProfessorRAP WHERE {R41} AND Ano=?", (a,)).fetchone()
         g = con.execute("SELECT SUM(Gastos_Correntes_Gastos_Correntes)/1e9 FROM IndicadoresGastos WHERE Ano=?", (a,)).fetchone()[0]
         print(f"{a}  RAP {rap[0]:6.2f}  professor-equivalente {rap[1]:8,.0f}  gastos correntes R$ {g:6.2f} bi (nominal)")
+
+    titulo("T13. Numerador da RAP da matriz 2026 (C5, 'MEq-RAP Pres') × candidatos PNP, ano-base 2024")
+    c5 = RAIZ / "docs/dominio/evidencias/2026-11-08/ifmt-matriz-2026.xlsx"
+    try:
+        import openpyxl
+    except ImportError:
+        print("openpyxl ausente: seção opcional não executada.")
+        return
+    norm = lambda s: re.sub(r"\s+", " ", re.sub(r"[^A-Z ]", " ", unicodedata.normalize("NFKD", s.upper())
+                                                .encode("ascii", "ignore").decode())).strip()
+    extra = {"CEFET MG": "CEFET-MG", "CEFET RJ": "CEFET-RJ", "INSTITUTO FEDERAL DE MATO GROSSO DO SUL": "IFMS",
+             "INSTITUTO FEDERAL DE MATO GROSSO": "IFMT", "INSTITUTO FEDERAL DE TOCANTINS": "IFTO", "INSTITUTO FEDERAL DO SUL MINAS GERAIS": "IFSULDEMINAS"}
+    sig = {norm(n): s for n, s in con.execute(f"SELECT DISTINCT Instituicao_Nome, Instituicao FROM DadosGerais WHERE {R41}")}
+    wb = openpyxl.load_workbook(c5, data_only=True, read_only=True)
+    pares = []
+    for r in wb["Indicadores"].iter_rows(min_row=8, max_row=60, values_only=True):
+        if not (r[2] and isinstance(r[12], (int, float))):
+            continue
+        s = sig.get(norm(r[2])) or extra.get(norm(r[2]))
+        if not s:
+            print("sem par:", r[2])
+            continue
+        q = lambda cond: con.execute(f"SELECT SUM(Matricula_Equivalente_Geral) FROM DadosGerais WHERE Instituicao=? AND Ano='2024' AND {cond}", (s,)).fetchone()[0] or 0
+        mr, pe = con.execute("SELECT SUM(RAP_Matriculas_RAP), SUM(RAP_Professor_Equivalente) FROM RelacaoAlunoProfessorRAP WHERE Instituicao=? AND Ano='2024'", (s,)).fetchone()
+        pares.append((s, r[12], r[13], q(PRES), q(f"{PRES} AND {REG}"), mr, pe))
+    print(f"{len(pares)} instituições pareadas. Razão candidato ÷ MEq-RAP da matriz:")
+    for rot, j in (("ME presencial (com FIC) — via ALRAPE do guia", 3), ("ME presencial sem FIC", 4), ("Matrículas RAP (arquivo PNP)", 5)):
+        r = [p[j] / p[1] for p in pares]
+        print(f"  {rot:46} mediana {st.median(r):.3f}  mín {min(r):.3f}  máx {max(r):.3f}  ±1%: {sum(abs(x-1) <= .01 for x in r):2}  ±3%: {sum(abs(x-1) <= .03 for x in r):2}")
+    r = [p[6] / p[2] for p in pares]
+    print(f"  {'Professor-equivalente (PNP ÷ matriz)':46} mediana {st.median(r):.3f}  mín {min(r):.3f}  máx {max(r):.3f}")
+    for p in pares:
+        if p[0] == "IFES":
+            print(f"  Ifes: matriz {p[1]:,.2f} / {p[2]} = {p[1]/p[2]:.3f}; ME presencial {p[3]:,.0f} / {p[6]:,.0f} = {p[3]/p[6]:.2f}; "
+                  f"Matrículas RAP {p[5]:,.0f} / {p[6]:,.0f} = {p[5]/p[6]:.2f}")
 
 
 if __name__ == "__main__":
