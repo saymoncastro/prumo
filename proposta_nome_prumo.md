@@ -1,5 +1,7 @@
 # PRUMO — Proposta de nome e identidade conceitual
 
+> **Situação em 10/11/2026.** O nome continua provisório. O § 5 ("primeiro caso de uso a validar") está superado: a descrição vigente do produto está na [visão de produto](docs/produto/visao-prumo.md).
+
 > **Status:** proposta de naming registrada para avaliação futura. **Não é decisão de marca aprovada.**  
 > **Projeto:** Inteligência e Planejamento Estratégico Educacional — *Da Operação à Decisão*  
 > **Registro:** 8 de novembro de 2026

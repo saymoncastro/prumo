@@ -1,5 +1,7 @@
 # PRUMO — Revisão estratégica independente e oportunidades
 
+> **Situação em 10/11/2026.** Análise preservada como evidência. Os fatos e riscos continuam válidos. A recomendação de reposicionar o produto em torno do "pacto de metas com degraus" (§§ 12–13) passou a ser um caso de uso, não a definição do produto. Ver a [visão de produto](../produto/visao-prumo.md).
+
 > **Data:** 09/11/2026 · **Natureza:** análise crítica de concepção; não é decisão institucional, especificação aprovada nem compromisso de implementação.
 > **Documento irmão:** [Revisão crítica das regras de negócio](../dominio/revisao-critica-regras-prumo.md), que contém a auditoria técnica e as evidências numéricas.
 > **Reprodução dos números:** [`reproduzir_revisao_critica.py`](../dominio/evidencias/2026-11-09/reproduzir_revisao_critica.py) e [resultado JSON](../dominio/evidencias/2026-11-09/resultado-revisao-critica.json).

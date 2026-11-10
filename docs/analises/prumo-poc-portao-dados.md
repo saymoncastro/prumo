@@ -1,5 +1,7 @@
 # Prova de conceito do Prumo — portão de dados (formação técnica e RAP)
 
+> **Situação em 10/11/2026.** Registro preservado como evidência. A conciliação de dados continua válida. A meta de 50% de formação técnica é um caso de uso entre outros. Ver a [visão de produto](../produto/visao-prumo.md).
+
 ## Atualização (09/11/2026): portão aprovado para percentuais legais; protótipo construído
 
 O usuário forneceu a exportação dos **Indicadores de Gestão da PNP** (pasta local `indicadores-gestao/`, 93 MB, todas as instituições, anos-base 2017–2025; não versionada). Com ela:
