@@ -10,4 +10,5 @@ __pycache__/
 /tests/auditoria_matriz/referencias.json
 /dados-pnp/
 /indicadores-gestao/
-/.claude/
+/.claude/*
+!/.claude/skills/

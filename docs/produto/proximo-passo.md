@@ -27,7 +27,7 @@ Os três pull requests não alteram os mesmos arquivos. A integração conjunta 
 
 ## 3. Entrada no Spec Kit
 
-Nada desta seção foi executado. O Spec Kit não foi inicializado no repositório.
+**Situação em 10/11/2026:** os passos 1 e 2 do § 3.6 estão feitos. O Spec Kit está inicializado na raiz e os [princípios do projeto](../../.specify/memory/constitution.md) estão redigidos. Nenhuma especificação foi escrita.
 
 ### 3.1. Referência
 
@@ -88,8 +88,8 @@ A resolver na etapa de esclarecimento da primeira especificação:
 
 ### 3.6. Sequência
 
-1. Inicializar o Spec Kit na raiz do repositório.
-2. Redigir os princípios do projeto a partir do § 3.2.
+1. Inicializar o Spec Kit na raiz do repositório. **Feito.**
+2. Redigir os princípios do projeto a partir do § 3.2. **Feito.**
 3. Especificar a jornada do § 3.3, e só ela.
 4. Esclarecer as decisões do § 3.5, planejar e dividir em tarefas.
 

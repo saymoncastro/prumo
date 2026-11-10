@@ -24,6 +24,7 @@ Se dois documentos divergirem sobre o que o produto é, vale a visão de produto
 |---|---|
 | [docs/produto/visao-prumo.md](docs/produto/visao-prumo.md) | **Vigente.** Tese, capacidades, domínio, diretrizes de SaaS, limites, hipóteses |
 | [docs/produto/proximo-passo.md](docs/produto/proximo-passo.md) | O que vem depois da consolidação |
+| [.specify/memory/constitution.md](.specify/memory/constitution.md) | Princípios do projeto para o Spec Kit. Derivam da visão; se divergirem, vale a visão |
 | [contexto_projeto_…_v1_1.md](contexto_projeto_inteligencia_estrategica_educacional_ifes_v1_1.md) | Documento fundador (08/11/2026). Origem dos princípios |
 | [proposta_nome_prumo.md](proposta_nome_prumo.md) | Proposta de nome. Não oficializada |
 
@@ -102,6 +103,7 @@ Os passos abaixo dependem de arquivos locais não versionados:
 - **Todo número** em documento ou tela indica se é fato, estimativa, premissa ou hipótese, e de onde veio.
 - **Não mover** `poc/`, `tests/` nem `docs/dominio/evidencias/`: os scripts dependem desses caminhos.
 - **Só dados públicos** entram no Git.
+- **Especificações** seguem o Spec Kit: `.specify/` guarda princípios, modelos e scripts; `.claude/skills/speckit-*` guarda os comandos. Uma jornada por vez.
 
 ## Pendências de decisão
 
