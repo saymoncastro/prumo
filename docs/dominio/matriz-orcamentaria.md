@@ -64,7 +64,7 @@ Manter os IDs RMO ao revisar. Registrar nova versão, fonte, exercício e efeito
 
 ### 0.3. Consulta rápida, versão e resultado da auditoria complementar
 
-**Estado ativo: versão 1.2.0.** As versões [1.0.0](evidencias/2026-11-08/matriz-orcamentaria-v1.0.0.md) e [1.1.0](evidencias/2026-11-09/matriz-orcamentaria-v1.1.0.md) integrais foram preservadas para comparação. A v1.2.0 acrescenta blocos **Revisão 1.2.0** nas RMO afetadas, sem apagar o entendimento anterior, cria RMO-066–074, F-28–29, V-12–13 e L-24–27, e atualiza §§ 13.1 e 14 a partir da [revisão crítica](revisao-critica-regras-prumo.md) e da íntegra de N3. A descrição original foi preservada por assunto e ID; correções e variantes estão no catálogo e nos acréscimos identificados. O [relatório complementar](auditoria-complementar-matriz-orcamentaria.md) registra antes/depois, tentativas, limitações e resultado individual das lacunas. A aprovação aritmética de B não prova conformidade de B com N2 nem com N3.
+**Estado ativo: versão 1.2.2** (a 1.2.0 descrita neste parágrafo, acrescida das revisões 1.2.1 e 1.2.2 registradas no campo Versão acima: distribuição interna da PROAD, RMO-075 e L-28). As versões [1.0.0](evidencias/2026-11-08/matriz-orcamentaria-v1.0.0.md) e [1.1.0](evidencias/2026-11-09/matriz-orcamentaria-v1.1.0.md) integrais foram preservadas para comparação. A v1.2.0 acrescenta blocos **Revisão 1.2.0** nas RMO afetadas, sem apagar o entendimento anterior, cria RMO-066–074, F-28–29, V-12–13 e L-24–27, e atualiza §§ 13.1 e 14 a partir da [revisão crítica](revisao-critica-regras-prumo.md) e da íntegra de N3. A descrição original foi preservada por assunto e ID; correções e variantes estão no catálogo e nos acréscimos identificados. O [relatório complementar](auditoria-complementar-matriz-orcamentaria.md) registra antes/depois, tentativas, limitações e resultado individual das lacunas. A aprovação aritmética de B não prova conformidade de B com N2 nem com N3.
 
 | Assunto | RMO | Consulta / situação de implementação |
 |---|---|---|
@@ -3619,6 +3619,8 @@ Esta seção descreve requisitos; não implementa um simulador. Todo resultado f
 Para futura implementação, distinguir cinco níveis de saída: (1) cálculo direto com entradas observadas; (2) resultado relativo dependente da Rede; (3) valor condicionado a orçamento externo; (4) projeção baseada em hipótese; (5) não estimável com as informações presentes. Mudança de oferta pode afetar mais de um nível e mais de um componente com calendários distintos. O resultado deve nomear essas condições na própria saída do cenário.
 
 ### 13.1. Prontidão por capacidade — estado ativo da v1.2.0
+
+> Quadro elaborado na v1.2.0. A versão vigente do documento é a 1.2.2; o título foi mantido para não quebrar referências.
 
 O quadro da v1.1.0 está preservado na [cópia integral](evidencias/2026-11-09/matriz-orcamentaria-v1.1.0.md).
 

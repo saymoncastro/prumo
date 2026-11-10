@@ -1,6 +1,6 @@
 # Referências de auditoria da Matriz Orçamentária
 
-Suíte de auditoria, sem código de produto e sem alteração de planilhas. A fonte canônica é [matriz-orcamentaria.md](../../docs/dominio/matriz-orcamentaria.md), **versão 1.2.0**. Os resultados e limites estão no [relatório complementar](../../docs/dominio/auditoria-complementar-matriz-orcamentaria.md) (v1.1.0) e na [revisão crítica](../../docs/dominio/revisao-critica-regras-prumo.md) (v1.2.0).
+Suíte de auditoria, sem código de produto e sem alteração de planilhas. A fonte canônica é [matriz-orcamentaria.md](../../docs/dominio/matriz-orcamentaria.md), **versão 1.2.2**. A suíte foi escrita para a 1.2.0; as versões 1.2.1 e 1.2.2 acrescentaram a distribuição interna (RMO-075, L-28), sem teste novo. Os resultados e limites estão no [relatório complementar](../../docs/dominio/auditoria-complementar-matriz-orcamentaria.md) (v1.1.0) e na [revisão crítica](../../docs/dominio/revisao-critica-regras-prumo.md) (v1.2.0).
 
 Execute a partir da raiz:
 
