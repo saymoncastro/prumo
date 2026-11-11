@@ -4,7 +4,7 @@
 
 O PRUMO ajuda instituições educacionais multicampi a compreender o comportamento da Rede Federal, descobrir oportunidades estratégicas, simular caminhos futuros e coordenar decisões locais para alcançar objetivos institucionais compartilhados. O Ifes é o primeiro contexto de validação.
 
-**Estágio:** concepção. O repositório contém estudos, regras de domínio e provas de conceito. Não há sistema em produção nem especificação aprovada.
+**Estágio:** concepção. O repositório contém estudos, regras de domínio e provas de conceito. Não há sistema em produção. A primeira especificação está em rascunho.
 
 ## Comece por aqui
 
@@ -25,6 +25,7 @@ Se dois documentos divergirem sobre o que o produto é, vale a visão de produto
 | [docs/produto/visao-prumo.md](docs/produto/visao-prumo.md) | **Vigente.** Tese, capacidades, domínio, diretrizes de SaaS, limites, hipóteses |
 | [docs/produto/proximo-passo.md](docs/produto/proximo-passo.md) | O que vem depois da consolidação |
 | [.specify/memory/constitution.md](.specify/memory/constitution.md) | Princípios do projeto para o Spec Kit. Derivam da visão; se divergirem, vale a visão |
+| [specs/001-jornada-decisao-estrategica/spec.md](specs/001-jornada-decisao-estrategica/spec.md) | Primeira especificação: jornada de decisão estratégica institucional. Rascunho, ainda sem plano |
 | [contexto_projeto_…_v1_1.md](contexto_projeto_inteligencia_estrategica_educacional_ifes_v1_1.md) | Documento fundador (08/11/2026). Origem dos princípios |
 | [proposta_nome_prumo.md](proposta_nome_prumo.md) | Proposta de nome. Não oficializada |
 
