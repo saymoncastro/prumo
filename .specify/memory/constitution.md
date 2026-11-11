@@ -170,4 +170,4 @@ e a concepção se fragmentou. **Origem:** visão §§ 1, 4.1 e 5.
   ou seção é acrescentado ou ampliado; PATCH para ajustes de redação.
 - A cada emenda, as especificações em andamento DEVEM ser conferidas contra a nova versão.
 
-**Versão**: 1.0.0 | **Ratificado**: 2026-11-10 | **Última emenda**: 2026-11-10
+**Versão**: 1.0.0 | **Ratificado**: 2026-11-11 | **Última emenda**: 2026-11-11
