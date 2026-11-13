@@ -52,6 +52,7 @@ Se dois documentos divergirem sobre o que o produto é, vale a visão de produto
 | [Revisão estratégica](docs/analises/prumo-revisao-estrategica-oportunidades.md) | Onde está a alavanca de coordenação na matriz; oito oportunidades; riscos de concepção |
 | [Portão de dados](docs/analises/prumo-poc-portao-dados.md) | A soma dos campi na PNP reproduz os percentuais legais da matriz de 2026 |
 | [Estudo da PNP](docs/analises/prumo-pnp-inteligencia-comparativa-exploratoria.md) | Série longitudinal da Rede: o que é comparável, o que não é, e quatro achados. |
+| [Concepção do produto](docs/analises/concepcao-produto-2026-11/README.md) (12/11, duas rodadas) | Proposta de produto, experiência, arquitetura, mapa de specs e primeiro produto utilizável; estrela-guia na matriz, capacidade e projeção longitudinal; protótipo conceitual com dados reais de dois campi. Proposta, não visão vigente |
 
 ### Provas de conceito
 

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRUMO · Protótipo conceitual</title>
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --ink:#1d2321; --muted:#5d6763; --line:#dedbd2;
+  --accent:#1f5f55; --accent-soft:#e3efec; --warn:#a4501d; --warn-soft:#f8ebe1;
+  --good:#2f6b3a; --bad:#a83232;
+  --fato:#1f5f55; --est:#5b4a9b; --prem:#9a6a12; --hip:#a4501d; --ne:#6c6f6e;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--sans)}
+a{color:var(--accent)}
+.aviso{background:#2b2f2d;color:#f1efe8;font-size:13px;padding:8px 16px;text-align:center}
+.aviso b{color:#ffd79a}
+header.top{display:flex;align-items:center;gap:16px;padding:12px 24px;background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+.logo{font-weight:800;letter-spacing:.08em;font-size:18px;color:var(--accent)}
+.logo small{display:block;font-weight:500;letter-spacing:0;font-size:11px;color:var(--muted)}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-size:14px}
+nav.main a.on{background:var(--accent);color:#fff}
+.ciclo{margin-left:auto;font-size:12px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ciclo span{padding:2px 8px;border-radius:999px;border:1px solid var(--line)}
+.ciclo span.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 80px}
+.tela{display:none}.tela.on{display:block}
+.crumb{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px}
+h2{font-size:18px;margin:0 0 10px}
+h3{font-size:15px;margin:0 0 8px}
+.lead{color:var(--muted);max-width:760px;margin:0 0 20px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card.click{cursor:pointer;transition:border-color .15s}
+.card.click:hover{border-color:var(--accent)}
+.kpi{font:600 28px/1.1 var(--mono)}
+.small{font-size:13px;color:var(--muted)}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;border:1px solid;vertical-align:middle;white-space:nowrap}
+.t-fato{color:var(--fato);border-color:var(--fato)}
+.t-est{color:var(--est);border-color:var(--est)}
+.t-prem{color:var(--prem);border-color:var(--prem)}
+.t-hip{color:var(--hip);border-color:var(--hip);border-style:dashed}
+.t-ne{color:var(--ne);border-color:var(--ne);border-style:dotted}
+.t-il{color:#7a7a7a;border-color:#bbb;background:#f2f2f2}
+.num{font-family:var(--mono);cursor:help;border-bottom:1px dotted var(--muted)}
+/* régua tripla */
+.regua{position:relative;height:46px;margin:10px 0 4px}
+.regua .barra{position:absolute;top:18px;left:0;right:0;height:8px;background:#ebe8df;border-radius:4px}
+.regua .pos{position:absolute;top:12px;width:4px;height:20px;background:var(--ink);border-radius:2px}
+.regua .proj{position:absolute;top:12px;width:4px;height:20px;background:var(--accent);border-radius:2px}
+.regua .faixa{position:absolute;top:18px;height:8px;background:var(--accent-soft)}
+.regua .mk{position:absolute;top:0;font-size:10px;transform:translateX(-50%);white-space:nowrap;color:var(--muted)}
+.regua .mk::after{content:"";position:absolute;left:50%;top:14px;height:20px;border-left:2px solid currentColor}
+.regua .mk.legal{color:var(--bad)}.regua .mk.limiar{color:var(--prem)}.regua .mk.pact{color:var(--accent)}
+.legenda{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+/* tabela */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600}
+td.r,th.r{text-align:right}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.up{color:var(--good)}.down{color:var(--bad)}
+/* ponte */
+.ponte{display:flex;align-items:flex-end;gap:6px;height:180px;padding:10px 0;border-bottom:1px solid var(--line)}
+.ponte .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;position:relative;height:100%}
+.ponte .bar{width:70%;border-radius:3px 3px 0 0;position:absolute}
+.ponte .lbl{position:absolute;bottom:-34px;font-size:11px;text-align:center;color:var(--muted);width:100%}
+.ponte-wrap{padding-bottom:38px;overflow-x:auto}
+/* funis */
+.funil{display:grid;grid-template-columns:1.6fr repeat(4,1fr) 1.2fr;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.funil.h{font-size:11px;color:var(--muted);font-weight:600}
+.fbar{height:16px;background:var(--accent);border-radius:2px;opacity:.85}
+.fcell{display:flex;flex-direction:column;gap:2px}
+.sinal{font-size:12px;color:var(--warn)}
+/* bancada */
+.alts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.alt{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 12px;cursor:pointer;flex:1;min-width:200px}
+.alt.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.alt b{display:block;font-size:14px}
+.alt span{font-size:12px;color:var(--muted)}
+.marcos{position:relative;height:84px;margin:8px 0 0}
+.marcos .linha{position:absolute;top:40px;left:2%;right:2%;height:2px;background:var(--line)}
+.marcos .m{position:absolute;top:0;transform:translateX(-50%);text-align:center;font-size:12px;width:140px}
+.marcos .m .dot{width:14px;height:14px;border-radius:50%;margin:31px auto 6px;background:var(--surface);border:3px solid var(--accent)}
+.marcos .m.pico .dot{border-color:var(--warn)}
+.marcos .m .y{position:absolute;top:8px;left:0;right:0;font:600 13px var(--mono)}
+.prem{display:grid;grid-template-columns:1.2fr 1fr 1.4fr;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+input[type=range]{width:100%}
+.verdade li{margin-bottom:6px}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:8px;padding:9px 14px;font-weight:600;cursor:pointer;font-size:14px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+/* mesa */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:var(--surface);padding:4px 10px;font-size:12px;cursor:pointer;color:var(--ink)}
+.seg button.on{background:var(--accent);color:#fff}
+.conflito{background:var(--warn-soft)}
+body.reuniao header.top,body.reuniao .aviso,body.reuniao .so-tela{display:none}
+body.reuniao main{max-width:1400px;font-size:18px}
+body.reuniao table{font-size:18px}
+body.reuniao .kpi{font-size:40px}
+/* cascata desvio */
+.cascata{display:flex;align-items:flex-end;gap:8px;height:220px;position:relative;margin-top:10px;padding-bottom:40px;overflow-x:auto}
+.cascata .c{flex:1;min-width:70px;position:relative;height:100%}
+.cascata .b{position:absolute;left:12%;right:12%;border-radius:3px}
+.cascata .v{position:absolute;left:0;right:0;font:600 12px var(--mono);text-align:center}
+.cascata .l{position:absolute;bottom:-38px;left:0;right:0;font-size:11px;text-align:center;color:var(--muted)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hz div{border:1px solid var(--line);border-radius:8px;padding:10px;font-size:13px}
+.hz .ok{border-color:var(--good)}.hz .x{border-color:var(--bad);background:#fbeeee}.hz .wait{border-style:dashed;color:var(--muted)}
+/* gaveta */
+#gaveta{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--surface);border-left:1px solid var(--line);box-shadow:-8px 0 24px rgba(0,0,0,.08);transform:translateX(105%);transition:transform .2s;z-index:20;padding:20px;overflow:auto}
+#gaveta.on{transform:none}
+#gaveta dl{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;font-size:13px}
+#gaveta dt{color:var(--muted)}
+#gaveta code{font-family:var(--mono);font-size:12px;background:var(--bg);padding:2px 4px;border-radius:4px}
+.x-close{float:right;border:0;background:none;font-size:22px;cursor:pointer;color:var(--muted)}
+.bandeja{position:fixed;left:16px;bottom:16px;background:var(--ink);color:#fff;border-radius:999px;padding:8px 14px;font-size:13px;z-index:10}
+.nota{font-size:12px;color:var(--muted);margin-top:8px}
+.mudou li{margin-bottom:8px}
+@media (max-width:700px){
+  header.top{position:static;padding:10px 16px}
+  .ciclo{margin-left:0}
+  .funil{grid-template-columns:1.4fr repeat(4,1fr);}
+  .funil .sinal-col{display:none}
+  .prem{grid-template-columns:1fr}
+  .hz{grid-template-columns:1fr}
+  h1{font-size:23px}
+}
+</style>
+</head>
+<body>
+<div class="aviso">Protótipo <b>conceitual</b> do estudo de 12/11/2026. Mostra a experiência, não o produto. Números marcados <span class="tag t-il">ilustr.</span> são inventados; os demais vêm dos estudos do repositório e foram reunidos aqui de horizontes e protótipos diferentes. <b>Não usar para decisão.</b></div>
+
+<header class="top">
+  <div class="logo">PRUMO<small>Ifes · exemplo</small></div>
+  <nav class="main" id="nav">
+    <a href="#agenda">Início</a>
+    <a href="#objetivo">Objetivos</a>
+    <a href="#campus">Campi</a>
+    <a href="#bancada">Bancada</a>
+    <a href="#mesa">Mesa</a>
+    <a href="#pacto">Pacto</a>
+  </nav>
+  <div class="ciclo">Ciclo de oferta 2028:
+    <span>Ler o ano</span><span class="on">Propor</span><span>Pactuar</span><span>Conferir</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ AGENDA ============ -->
+<section class="tela" id="t-agenda">
+  <div class="crumb">Início · Agenda estratégica</div>
+  <h1>Onde estamos e o que pede atenção</h1>
+  <p class="lead">A instituição está na etapa <b>Propor</b> do ciclo. Três de seis unidades convidadas já encaminharam proposta. A reunião de pactuação está marcada para junho <span class="tag t-il">ilustr.</span>.</p>
+
+  <div class="grid g2">
+    <div class="card click" onclick="go('objetivo')">
+      <div class="small">Objetivo · Formação técnica (percentual legal)</div>
+      <div class="kpi"><span class="num" data-c="ct2025">45,05%</span> <span class="tag t-fato">fato</span></div>
+      <div class="small">ano-base 2025 · 2024: 44,03% · meta legal e limiar da matriz: 50%</div>
+      <div class="regua">
+        <div class="barra"></div>
+        <div class="mk limiar" style="left:62.5%">limiar 50% = meta legal</div>
+        <div class="mk pact" style="left:58.75%;top:34px">pactuada 47%</div>
+        <div class="pos" style="left:56.3%"></div>
+      </div>
+      <div class="small">Escala 30–60%. Quem mais mexeu: <b>unidade de EaD (Cefor)</b>. Sem ela, os campi somam ~51% <span class="tag t-fato">fato</span>.</div>
+    </div>
+    <div class="card click" onclick="go('objetivo')">
+      <div class="small">Objetivo · Concluintes técnicos (concomitante e subsequente)</div>
+      <div class="kpi"><span class="num">−57%</span> <span class="tag t-fato">fato</span></div>
+      <div class="small">Vitória 410 → 231 por ano; Serra 152 → 53; Vila Velha 134 → 17 (médias 2017–19 → 2023–25). As vagas continuam preenchidas (0,93 ingressante por vaga).</div>
+      <p class="small" style="margin-top:10px">Soma dos três campi citados: 696 → 301 por ano. Meta pactuada: ainda não definida.</p>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h2>O que mudou na última PNP (ano-base 2025)</h2>
+      <ul class="mudou">
+        <li><b>Formação de professores: 12% → 24,8%.</b> <span class="tag t-hip">provável reclassificação</span> O Cefor passa de 1.132 para 4.463 matrículas equivalentes na categoria enquanto suas especializações caem. Confirmar com a Prodi antes de interpretar como melhora.</li>
+        <li><b>Formação técnica: +1,0 p.p.</b> A maior parte vem da redução de ofertas não técnicas a distância. <span class="tag t-il">ilustr.</span></li>
+        <li><b>EJA: 1,98%</b>, a 0,52 p.p. do primeiro limiar da matriz (2,5%) e a 8 p.p. da meta legal (10%). <span class="tag t-fato">fato</span></li>
+      </ul>
+      <button class="btn ghost" onclick="guardar()">Guardar como evidência</button>
+    </div>
+    <div class="card">
+      <h2>Pauta: Plano de oferta 2028</h2>
+      <table>
+        <tr><th>Unidade</th><th>Situação</th></tr>
+        <tr><td>Vitória</td><td><span class="up">proposta encaminhada</span></td></tr>
+        <tr><td>Serra</td><td><span class="up">proposta encaminhada</span></td></tr>
+        <tr><td>Itapina</td><td><span class="up">proposta encaminhada</span></td></tr>
+        <tr><td>Barra de São Francisco</td><td>em elaboração</td></tr>
+        <tr><td>Cefor (EaD)</td><td>em elaboração</td></tr>
+        <tr><td>Vila Velha</td><td class="small">não iniciou</td></tr>
+      </table>
+      <p style="margin-top:12px"><a class="btn" href="#mesa">Abrir mesa de composição</a></p>
+      <h3 style="margin-top:16px">Compromissos a conferir</h3>
+      <p class="small">1 compromisso do ciclo anterior chegou ao horizonte intermediário e ficou fora da faixa. <a href="#pacto">Ver desvio explicado</a> <span class="tag t-il">ilustr.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OBJETIVO ============ -->
+<section class="tela" id="t-objetivo">
+  <div class="crumb">Objetivos · Formação técnica</div>
+  <h1>Formação técnica: onde estamos e quem explica a mudança</h1>
+  <p class="lead">Percentual de matrículas equivalentes em cursos técnicos. Agregado pela razão das somas dos campi, nunca pela média dos percentuais.</p>
+
+  <div class="card">
+    <h2>Régua tripla</h2>
+    <div class="regua" style="height:58px">
+      <div class="barra"></div>
+      <div class="faixa" style="left:50%;width:12.5%"></div>
+      <div class="mk limiar" style="left:62.5%">limiar da matriz 50% · meta legal 50%</div>
+      <div class="mk limiar" style="left:87.5%">limiar 60%</div>
+      <div class="mk pact" style="left:58.75%;top:40px">meta pactuada 47% (2030)</div>
+      <div class="pos" style="left:56.3%"></div>
+    </div>
+    <div class="legenda" style="margin-top:12px">
+      <span><i style="background:var(--ink)"></i>posição 2025 (45,05%)</span>
+      <span><i style="background:var(--bad)"></i>meta legal</span>
+      <span><i style="background:var(--prem)"></i>limiar da matriz (Portaria 243/2026)</span>
+      <span><i style="background:var(--accent)"></i>meta pactuada <span class="tag t-il">ilustr.</span></span>
+    </div>
+    <p class="nota">No técnico, limiar e meta legal coincidem. Em EJA não: o primeiro limiar (2,5%) é um quarto da meta legal (10%). A régua mostra as três réguas separadas para cada objetivo.</p>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h2>Quem explica a variação 2021 → 2025 <span class="tag t-il">ilustr.</span></h2>
+      <p class="small">Contribuição de cada unidade em pontos percentuais: efeito no numerador menos efeito no denominador. A soma das barras é a variação do Ifes. Ordenado por porte, não por desempenho.</p>
+      <div class="ponte-wrap"><div class="ponte" id="ponte"></div></div>
+      <button class="btn ghost" onclick="guardar()">Guardar como evidência</button>
+    </div>
+    <div class="card">
+      <h2>Objetivos em tensão</h2>
+      <table>
+        <tr><th>Se o Cefor reorientar parte da EaD para técnico…</th><th class="r">efeito</th></tr>
+        <tr><td>Formação técnica</td><td class="r up">+2,28 p.p. <span class="tag t-est">estimado</span></td></tr>
+        <tr><td>Formação de professores</td><td class="r down">cai para 8,3–12,5% <span class="tag t-est">estimado</span></td></tr>
+      </table>
+      <p class="nota">Valores do protótipo v2 (base 2024). A mesma oferta sustenta um objetivo e reduz outro: essa decisão não é de um campus, é da instituição.</p>
+      <h3 style="margin-top:16px">Comparáveis por trajetória</h3>
+      <p class="small">IFPR, IFSC, IFMT: porte e número de campi semelhantes; crescimento sem retenção elevada. Critério declarado; não é ranking. <span class="tag t-il">ilustr.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAMPUS ============ -->
+<section class="tela" id="t-campus">
+  <div class="crumb">Campi · Serra</div>
+  <h1>Campus Serra</h1>
+  <p class="lead">O que acontece com as turmas de cada oferta, e quanto o campus move os objetivos da instituição.</p>
+
+  <div class="grid g3">
+    <div class="card"><div class="small">Contribuição à formação técnica do Ifes</div><div class="kpi">+0,9 p.p. <span class="tag t-il">ilustr.</span></div><div class="small">quanto o percentual do Ifes cairia sem o campus</div></div>
+    <div class="card"><div class="small">Concluintes técnicos não integrados por ano</div><div class="kpi">152 → 53 <span class="tag t-fato">fato</span></div><div class="small">médias 2017–19 → 2023–25</div></div>
+    <div class="card"><div class="small">Pauta aberta para o campus</div><div class="kpi" style="font-size:18px">Plano de oferta 2028</div><div class="small">2 objetivos · proposta encaminhada</div></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>Portfólio como funis (média 2023–25) <span class="tag t-il">ilustr.</span></h2>
+    <div class="funil h"><div>Oferta</div><div>Vagas</div><div>Ingressantes</div><div>Matrículas</div><div>Concluintes</div><div class="sinal-col">Sinal</div></div>
+    <div id="funis"></div>
+    <p class="nota">Informática concomitante: inscritos de 312 para 90 <span class="tag t-fato">fato</span>. Informática para Internet integrado: 1.765 inscritos para 74 vagas <span class="tag t-fato">fato</span>. Inscritos é indicador de baixa confiabilidade na PNP. Os valores dos funis são ilustrativos; os dois fatos citados nesta nota vêm do estudo da PNP.</p>
+    <p style="margin-top:12px"><a class="btn" href="#bancada">Abrir bancada de alternativas</a></p>
+  </div>
+</section>
+
+<!-- ============ BANCADA ============ -->
+<section class="tela" id="t-bancada">
+  <div class="crumb">Campi · Serra · Bancada de alternativas</div>
+  <h1>Qual decisão sobre a Informática faz mais diferença?</h1>
+  <p class="lead">Decisões a partir de 2027 (primeiro ano usado na POC 0.0.2), comparadas com manter a oferta atual. Manter também muda: turmas abertas antes continuam evoluindo. Valores da POC 0.0.2 <span class="tag t-est">estimado</span>.</p>
+
+  <div class="alts" id="alts"></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h2>Lado a lado, em relação a manter</h2>
+      <table id="quadro"></table>
+      <p class="nota">Faixa entre as premissas pessimista e otimista. Em regime: diferença anual depois que todas as turmas afetadas amadurecem.</p>
+      <div id="leitura" style="margin-top:10px;font-size:14px"></div>
+    </div>
+    <div class="card">
+      <h2>Quando cada coisa acontece</h2>
+      <div class="marcos" id="marcos"></div>
+      <p class="nota">Ano da decisão → pico de recursos → ano-base em que o efeito aparece na PNP → exercício da matriz que usa esse ano-base (defasagem de dois anos, RMO-070).</p>
+      <h3 style="margin-top:14px">O que precisa ser verdade</h3>
+      <ul class="verdade" id="verdade"></ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>Premissas com procedência</h2>
+    <div id="premissas"></div>
+  </div>
+
+  <div class="card" style="margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+    <div style="flex:1;min-width:240px"><b>Encaminhar como proposta</b><div class="small">A alternativa selecionada é congelada com premissas, edição da PNP, versão das regras e do motor. Vai para a mesa de composição da pauta.</div></div>
+    <a class="btn" href="#mesa" onclick="toast('Proposta encaminhada (simulação de protótipo).')">Encaminhar</a>
+  </div>
+</section>
+
+<!-- ============ MESA ============ -->
+<section class="tela" id="t-mesa">
+  <div class="crumb so-tela">Objetivos · Mesa de composição · Plano de oferta 2028</div>
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+    <h1 style="flex:1">Como as propostas das unidades se somam</h1>
+    <button class="btn ghost" onclick="reuniao()" id="btn-reuniao">Modo reunião</button>
+  </div>
+  <p class="lead so-tela">Escolha uma alternativa por unidade. A linha do Ifes soma as contribuições. Neste protótipo, os valores de formação técnica e concluintes vêm de três protótipos com horizontes diferentes e são somados só para mostrar a interação; parte dos valores de formação de professores e EJA foi completada para o exemplo.</p>
+
+  <div class="grid g3" id="mesa-kpis"></div>
+
+  <div class="card" style="margin-top:16px;overflow-x:auto">
+    <table id="mesa"></table>
+    <p class="nota so-tela">p.p. = pontos percentuais no objetivo do Ifes. Células em destaque: a escolha melhora um objetivo e piora outro. "n.e." = não estimado nesta demonstração.</p>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h2>O que falta e onde pode estar</h2>
+      <div id="falta"></div>
+    </div>
+    <div class="card so-tela">
+      <h2>Registrar pacto</h2>
+      <p class="small">Registra a decisão tomada pela instância competente: data, instância, propostas pactuadas, responsáveis, indicador e marcos por horizonte. O PRUMO não aprova; registra o que foi aprovado.</p>
+      <a class="btn" href="#pacto">Registrar e ir ao acompanhamento</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PACTO ============ -->
+<section class="tela" id="t-pacto">
+  <div class="crumb">Pacto 2027 · Compromisso de Vitória</div>
+  <h1>Reduzir a evasão no técnico concomitante em 30%</h1>
+  <p class="lead">Compromisso pactuado no ciclo anterior. A PNP com ano-base 2028 foi carregada e o horizonte intermediário pode ser conferido. <b>Todo o conteúdo desta tela é fictício</b> <span class="tag t-il">ilustr.</span>.</p>
+
+  <div class="hz">
+    <div class="ok"><b>Execução</b><br>Vagas ofertadas em 2027 e 2028 conforme o pactuado. Programa de acompanhamento implantado.</div>
+    <div class="x"><b>Resultados intermediários</b><br>Matrículas técnicas não integradas 2028: projetado <span class="num">1.473</span>, observado <span class="num">1.390</span>. Fora da faixa (1.420–1.510).</div>
+    <div class="wait"><b>Longo prazo</b><br>Concluintes e efeito na matriz: ainda não observável. Primeira conferência com o ano-base 2030.</div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>Desvio explicado</h2>
+    <p class="small">O cenário foi reprojetado trocando cada premissa pelo valor observado, uma de cada vez, na ordem abaixo. Cada barra é quanto aquela premissa explica do desvio. "Resto" é o que o modelo não explica.</p>
+    <div class="cascata" id="cascata"></div>
+    <p style="margin-top:12px"><b>Leitura:</b> as vagas foram ofertadas e preenchidas. O desvio vem quase todo da evasão: caiu 12%, não 30%. A premissa de efeito do programa de permanência é usada em mais 2 cenários vigentes.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+      <button class="btn" onclick="toast('Premissa revista: efeito −12% (faixa −5% a −20%). Dois cenários recalculados.')">Revisar a premissa</button>
+      <button class="btn ghost" onclick="toast('Abre registro de revisão da meta com justificativa.')">Revisar a meta pactuada</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<aside id="gaveta">
+  <button class="x-close" onclick="fechar()" aria-label="Fechar">×</button>
+  <div class="crumb">Como calcula</div>
+  <h2 id="g-t"></h2>
+  <dl id="g-dl"></dl>
+</aside>
+<div class="bandeja" id="bandeja">Evidências guardadas: <b id="nev">0</b></div>
+
+<script>
+const CALC = {
+  ct2025:{t:"Formação técnica do Ifes, 2025",d:[
+    ["Natureza","<span class='tag t-fato'>fato</span>"],
+    ["Valor","45,05%"],
+    ["Fórmula","<code>Σ ME técnica dos campi ÷ Σ ME total dos campi</code>"],
+    ["Fonte","PNP, Indicadores de Gestão, PercentuaisLegais.csv"],
+    ["Edição","ano-base 2025"],
+    ["Bloco","ME comparável 2021–2025 (mudança de fórmula em 2021)"],
+    ["Conferência","Ano-base 2024 reproduz a matriz 2026: 0,4403 × 0,44"],
+    ["Usado em","matriz 2027 (provável; defasagem RMO-070)"]]},
+  generico:{t:"Número do protótipo",d:[
+    ["Natureza","ver etiqueta ao lado do número"],
+    ["No produto","fonte e edição, ano-base, regra e versão, fórmula com valores, premissas, erro do modelo"],
+    ["Aqui","protótipo conceitual: só o primeiro número da Agenda tem a gaveta completa"]]}
+};
+function abrir(k){const c=CALC[k]||CALC.generico;document.getElementById('g-t').textContent=c.t;
+  document.getElementById('g-dl').innerHTML=c.d.map(([a,b])=>`<dt>${a}</dt><dd style="margin:0">${b}</dd>`).join('');
+  document.getElementById('gaveta').classList.add('on');}
+function fechar(){document.getElementById('gaveta').classList.remove('on')}
+document.addEventListener('click',e=>{const n=e.target.closest('.num');if(n){e.stopPropagation();abrir(n.dataset.c)}},true);
+let nev=0;function guardar(){nev++;document.getElementById('nev').textContent=nev;toast('Evidência guardada na bandeja.')}
+function toast(m){const t=document.createElement('div');t.textContent=m;Object.assign(t.style,{position:'fixed',left:'50%',bottom:'64px',transform:'translateX(-50%)',background:'#1f5f55',color:'#fff',padding:'10px 16px',borderRadius:'8px',zIndex:30,fontSize:'14px'});document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+function fmt(v,d=2){return (v>0?'+':v<0?'−':'')+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})}
+
+/* ---------- navegação ---------- */
+const TELAS=['agenda','objetivo','campus','bancada','mesa','pacto'];
+function go(t){location.hash=t}
+function rota(){const t=TELAS.includes(location.hash.slice(1))?location.hash.slice(1):'agenda';
+  TELAS.forEach(x=>document.getElementById('t-'+x).classList.toggle('on',x===t));
+  document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+t));
+  window.scrollTo(0,0);}
+window.addEventListener('hashchange',rota);
+
+/* ---------- ponte ---------- */
+(function(){const d=[["Cefor (EaD)",+1.6],["Vitória",-0.4],["Serra",-0.3],["Colatina",+0.5],["Cariacica",-0.2],["Itapina",+0.1],["Demais 16",-0.2]];
+  const el=document.getElementById('ponte');let acc=0;const max=2.0,h=150;
+  const cols=[["2021",0,'base'],...d.map(x=>[x[0],x[1],'d']),["2025",d.reduce((a,b)=>a+b[1],0),'fim']];
+  const scale=v=>v/max*(h/2);
+  cols.forEach(([n,v,k])=>{const c=document.createElement('div');c.className='col';let bottom,height,color;
+    if(k==='d'){const y0=acc,y1=acc+v;bottom=h/2+scale(Math.min(y0,y1));height=Math.max(2,Math.abs(scale(v)));color=v>=0?'var(--good)':'var(--bad)';acc=y1;}
+    else{bottom=h/2;height=Math.max(3,Math.abs(scale(v)));color='var(--ink)';if(v<0)bottom=h/2+scale(v);}
+    c.innerHTML=`<div class="bar" style="bottom:${bottom}px;height:${height}px;background:${color}"></div><div class="lbl">${n}<br><b>${k==='base'?'0':fmt(v,1)}</b></div>`;el.appendChild(c);});
+})();
+
+/* ---------- funis ---------- */
+(function(){const f=[["Informática · concomitante",40,36,72,12,"procura em queda; concluintes −65%"],["Informática p/ Internet · integrado",74,74,280,58,"procura excedente alta"],["Automação · integrado",72,72,262,51,""],["Mecânica · subsequente",36,30,58,14,"conversão baixa"]];
+  document.getElementById('funis').innerHTML=f.map(r=>`<div class="funil"><div><b>${r[0]}</b></div>${[1,2,3,4].map(i=>`<div class="fcell"><span>${r[i]}</span><div class="fbar" style="width:${Math.min(100,r[i]/2.8)}%"></div></div>`).join('')}<div class="sinal sinal-col">${r[5]}</div></div>`).join('');
+})();
+
+/* ---------- bancada ---------- */
+const ALT={
+  A:{n:"A · Ampliar vagas",d:"+40 vagas/ano em Informática concomitante",mat:[30,null,null],con:[17,null,null],reg:5,ct:0.04,prof:4.3,pico:2028,ab:2027,ex:2029,
+     v:["Haver procura para mais 40 vagas (hoje a procura excedente cobre ~11)","Docentes para mais 2 turmas simultâneas"],occ:28},
+  B:{n:"B · Aproveitar melhor",d:"Mesmas vagas; evasão −30% e ocupação até 95% na oferta não integrada",mat:[46,null,null],con:[94,44,151],reg:20,ct:0.07,prof:0,pico:null,ab:2027,ex:2029,
+     v:["Existir um programa capaz de reduzir a evasão em ~30% <span class='tag t-hip'>hipótese</span>","Custo do programa <span class='tag t-ne'>não estimado</span>"]},
+  C:{n:"C · Reorganizar",d:"40 vagas do concomitante passam ao integrado (Informática para Internet)",mat:[44,null,null],con:[55,null,null],reg:20,ct:0.06,prof:2.1,pico:2030,ab:2030,ex:2032,
+     v:["Haver procura no integrado para mais 40 vagas (hoje 23,9 inscritos por vaga) <span class='tag t-fato'>fato</span>","Docentes de núcleo comum para 3 turmas simultâneas","Aceitar reduzir vagas para quem busca o concomitante"]}
+};
+let altSel='C',occA=28;
+function rangeTxt(a){return a.con[1]!=null?`<div class="small">${fmt(a.con[1],0)} a ${fmt(a.con[2],0)}</div>`:''}
+function renderBancada(){
+  document.getElementById('alts').innerHTML=Object.entries(ALT).map(([k,a])=>`<div class="alt ${k===altSel?'on':''}" onclick="altSel='${k}';renderBancada()"><b>${a.n}</b><span>${a.d}</span></div>`).join('');
+  const fa=k=>k==='A'?occA/28:1;
+  const rows=Object.entries(ALT).map(([k,a])=>`<tr ${k===altSel?'style="background:var(--accent-soft)"':''}><td><b>${a.n.split(' · ')[0]}</b></td>
+    <td class="r">${fmt(Math.round(a.mat[0]*fa(k)),0)}</td><td class="r">${fmt(Math.round(a.con[0]*fa(k)),0)}${rangeTxt(a)}</td>
+    <td class="r">${fmt(Math.round(a.reg*fa(k)),0)}</td><td class="r">${fmt(a.ct*fa(k),2)}</td><td class="r">${fmt(a.prof,1)}${k==='B'?' <span class="tag t-ne">+ programa n.e.</span>':''}</td></tr>`).join('');
+  document.getElementById('quadro').innerHTML=`<tr><th></th><th class="r">Matrículas 2032</th><th class="r">Concluintes 2027–32</th><th class="r">Concl./ano em regime</th><th class="r">Técnico Ifes (p.p.)</th><th class="r">Prof.-equiv.</th></tr>`+rows;
+  document.getElementById('leitura').innerHTML=`<b>Leitura.</b> Ampliar o concomitante é fraco: a procura cobre parte das vagas e a turma exige docentes mesmo meio vazia. Reorganizar entrega quatro vezes mais concluintes por ano em regime que ampliar, com metade dos docentes adicionais, mas demora. Aproveitar melhor tem efeito parecido e depende de uma hipótese. <i>O PRUMO não escolhe por você.</i>`;
+  const a=ALT[altSel];const anos=[2027,2028,2029,2030,2031,2032,2033];const pos=y=>((y-2026.5)/(2033.5-2026.5)*96+2)+'%';
+  const raw=[[2027,'Ingresso',''],...(a.pico?[[a.pico,'Pico de turmas','pico']]:[]),[a.ab,'Efeito na PNP',''],[a.ex,'Exercício da matriz','']];
+  const ms=[];raw.forEach(([y,t,c])=>{const f=ms.find(m=>m[0]===y);if(f){f[1]+=' · '+t;if(c)f[2]=c}else ms.push([y,t,c])});
+  document.getElementById('marcos').innerHTML='<div class="linha"></div>'+ms.map(([y,t,c])=>`<div class="m ${c}" style="left:${pos(y)}"><div class="y">${y}</div><div class="dot"></div>${t}</div>`).join('');
+  document.getElementById('verdade').innerHTML=a.v.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('premissas').innerHTML=`
+   <div class="prem"><div><b>Ocupação das vagas novas (A)</b><br><span class="tag t-prem">premissa</span></div>
+     <div><input type="range" min="10" max="100" value="${occA}" oninput="occA=+this.value;renderBancada()"> <b class="num">${occA}%</b></div>
+     <div class="small">Próprio campus: procura excedente 2025 cobre ~28% das vagas novas <span class="tag t-fato">fato</span>. Comparáveis: 60–100% <span class="tag t-il">ilustr.</span>. Fonte: PNP, inscritos − ingressantes (baixa confiabilidade).</div></div>
+   <div class="prem"><div><b>Evasão anual, concomitante</b><br><span class="tag t-fato">fato</span></div><div class="num">média 2023–25</div>
+     <div class="small">PNP, Taxa de Evasão. Usada na linha de base e em A e C.</div></div>
+   <div class="prem"><div><b>Efeito do programa de permanência (B)</b><br><span class="tag t-hip">hipótese</span></div><div class="num">−30% (−15% a −45%)</div>
+     <div class="small">Nenhum dado da PNP sustenta o tamanho do efeito. A alternativa B inteira herda a marca de hipótese.</div></div>
+   <div class="prem"><div><b>Conclusão no prazo, integrado (C)</b><br><span class="tag t-est">estimado</span></div><div class="num">ajustado 2023–25</div>
+     <div class="small">Erro do modelo nesta oferta: 4,7% em matrículas e 11,4% em concluintes, medidos nos anos do ajuste. Falta teste fora da amostra.</div></div>`;
+}
+
+/* ---------- mesa ---------- */
+const UN={
+  "Vitória":{manter:[0,0,0,0,0],A:[0.15,-0.05,-0.005,92,2.9],B:[0.34,-0.152,-0.009,579,0],C:[0.11,-0.04,-0.004,3,4.3],hipB:true},
+  "Serra":{manter:[0,0,0,0,0],A:[0.04,-0.01,-0.001,17,4.3],B:[0.07,-0.02,-0.002,94,0],C:[0.06,-0.027,-0.002,55,2.1],hipB:true},
+  "Itapina":{manter:[0,0,0,null,0],A:[0.15,-0.04,-0.01,null,6],B:[0.02,-0.005,0.11,null,1.5]},
+  "Barra de S. Francisco":{manter:[0,0,0,null,0],A:[0.17,-0.04,-0.01,null,6]},
+  "Cefor (EaD)":{manter:[0,0,0,null,0],A:[2.28,-3.7,0,null,0]}
+};
+const NOMES={A:"A",B:"B",C:"C",manter:"Manter"};
+const DESC={"Itapina":{A:"expansão (Alimentos)",B:"recomposição (PROEJA)"},"Barra de S. Francisco":{A:"expansão (Administração)"},"Cefor (EaD)":{A:"reorientar parte da EaD para técnico; formação de professores no pior caso da faixa"}};
+let esc={"Vitória":"B","Serra":"C","Itapina":"A","Barra de S. Francisco":"A","Cefor (EaD)":"manter"};
+const BASE={ct:44.74,fp:24.8,eja:1.98};
+function renderMesa(){
+  let tot=[0,0,0,0,0],ne=false,hip=0;
+  const rows=Object.entries(UN).map(([u,o])=>{const k=esc[u],v=o[k];v.forEach((x,i)=>{if(x==null)ne=true;else tot[i]+=x});
+    if(k==='B'&&o.hipB)hip++;
+    const conf=v[0]>0&&(v[1]<0||v[2]<0);
+    const opts=Object.keys(o).filter(x=>x!=='hipB').map(x=>`<button class="${x===k?'on':''}" onclick="esc['${u}']='${x}';renderMesa()">${NOMES[x]}</button>`).join('');
+    const d=(DESC[u]&&DESC[u][k])?`<div class="small">${DESC[u][k]}</div>`:(k==='B'&&o.hipB?`<div class="small">depende de hipótese de permanência <span class="tag t-hip">hipótese</span></div>`:'');
+    return `<tr><td><b>${u}</b>${d}</td><td><div class="seg">${opts}</div></td>
+      <td class="r ${conf?'conflito':''}">${fmt(v[0])}</td><td class="r ${conf?'conflito':''}">${fmt(v[1])}</td><td class="r">${fmt(v[2])}</td>
+      <td class="r">${v[3]==null?'<span class="tag t-ne">n.e.</span>':fmt(v[3],0)}</td><td class="r">${fmt(v[4],1)}</td></tr>`}).join('');
+  document.getElementById('mesa').innerHTML=`<tr><th>Unidade</th><th>Alternativa</th><th class="r">Técnico (p.p.)</th><th class="r">Form. prof. (p.p.)</th><th class="r">EJA (p.p.)</th><th class="r">Concluintes técnicos</th><th class="r">Prof.-equiv. pedidos</th></tr>`+rows+
+    `<tr class="total"><td>Ifes</td><td></td><td class="r">${fmt(tot[0])}</td><td class="r">${fmt(tot[1])}</td><td class="r">${fmt(tot[2])}</td><td class="r">${fmt(tot[3],0)}${ne?' + n.e.':''}</td><td class="r">${fmt(tot[4],1)}</td></tr>`;
+  const ct=BASE.ct+tot[0],falta=50-ct;
+  document.getElementById('mesa-kpis').innerHTML=`
+    <div class="card"><div class="small">Formação técnica projetada</div><div class="kpi">${ct.toLocaleString('pt-BR',{maximumFractionDigits:2})}%</div>
+      <div class="regua"><div class="barra"></div><div class="mk limiar" style="left:62.5%">50%</div><div class="mk pact" style="left:58.75%;top:34px">47%</div><div class="pos" style="left:${(BASE.ct-30)/30*100}%"></div><div class="proj" style="left:${Math.min(100,(ct-30)/30*100)}%"></div></div>
+      <div class="small">manter: 44,74% (2032) <span class="tag t-est">estimado</span></div></div>
+    <div class="card"><div class="small">Distância para 50%</div><div class="kpi">${falta>0?falta.toLocaleString('pt-BR',{maximumFractionDigits:2})+' p.p.':'alcançado'}</div><div class="small">${ct>=47?'meta pactuada de 47% alcançada':'abaixo da meta pactuada de 47%'}</div></div>
+    <div class="card"><div class="small">Contribuições que dependem de hipótese</div><div class="kpi">${hip} de 5</div><div class="small">docentes pedidos: ${fmt(tot[4],1)} professores-equivalentes <span class="tag t-prem">premissa</span></div></div>`;
+  document.getElementById('falta').innerHTML= esc["Cefor (EaD)"]==='manter'
+    ? `<p>Faltam <b>${falta.toLocaleString('pt-BR',{maximumFractionDigits:2})} p.p.</b> para 50%. Nenhuma combinação das alternativas dos campi fecha essa distância. A alavanca restante com efeito comparável é a oferta a distância do <b>Cefor</b> (+2,28 p.p.), que reduz a formação de professores.</p><p class="small">Unidades que ainda não propuseram: Vila Velha e mais 16. Isto é uma lista de alavancas, não uma recomendação.</p>`
+    : `<p>Com o Cefor, a formação técnica chega a ${ct.toLocaleString('pt-BR',{maximumFractionDigits:2})}%, mas a formação de professores cai ${fmt(tot[1])} p.p. <b>Conflito entre objetivos:</b> decidir no colegiado qual pesa mais, e se há compensação.</p>`;
+}
+function reuniao(){document.body.classList.toggle('reuniao');document.getElementById('btn-reuniao').textContent=document.body.classList.contains('reuniao')?'Sair do modo reunião':'Modo reunião'}
+
+/* ---------- cascata ---------- */
+(function(){const d=[["Projetado",1473,'t'],["Vagas ofertadas",0],["Ocupação",-12],["Evasão",-58],["Retenção",4],["Conclusão",-9],["Resto",-8],["Observado",1390,'t']];
+  const el=document.getElementById('cascata');const lo=1360,hi=1490,H=170;const y=v=>(v-lo)/(hi-lo)*H;let acc=1473;
+  d.forEach(([n,v,t])=>{let b,h,c,lab;
+    if(t){b=0;h=y(v);c='var(--ink)';lab=v.toLocaleString('pt-BR')}
+    else{const a0=acc,a1=acc+v;b=y(Math.min(a0,a1));h=Math.max(2,Math.abs(y(a1)-y(a0)));c=v<0?'var(--bad)':v>0?'var(--good)':'#bbb';acc=a1;lab=fmt(v,0)}
+    el.insertAdjacentHTML('beforeend',`<div class="c"><div class="b" style="bottom:${b}px;height:${h}px;background:${c}"></div><div class="v" style="bottom:${b+h+4}px">${lab}</div><div class="l">${n}</div></div>`)});
+})();
+
+renderBancada();renderMesa();rota();
+</script>
+</body>
+</html>
