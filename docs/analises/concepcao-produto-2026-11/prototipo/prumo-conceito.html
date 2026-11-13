@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PRUMO · Protótipo conceitual v2</title>
+<title>PRUMO · Protótipo conceitual v3</title>
 <style>
 :root{
   --bg:#f6f5f1; --surface:#ffffff; --ink:#1d2321; --muted:#5d6763; --line:#dedbd2;
@@ -118,6 +118,7 @@ tr.total td{font-weight:700;border-top:2px solid var(--ink)}
 .mini{border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--surface)}
 .mini .tt{font-size:12px;font-weight:600;display:flex;justify-content:space-between;gap:6px}
 .mini .tt span{font-family:var(--mono);font-weight:600}
+.btn.mini{background:var(--accent);border:0}.btn.mini.ghost{background:transparent;border:1px solid var(--accent)}.btn:disabled{cursor:default}
 .verdade li{margin-bottom:5px}
 #presets{display:flex;flex-wrap:wrap;gap:4px;border:0;border-radius:0}
 #presets button{border:1px solid var(--line);border-radius:999px}
@@ -142,6 +143,49 @@ body.reuniao main{max-width:1500px;font-size:18px}
 .hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .hz div{border:1px solid var(--line);border-radius:8px;padding:10px;font-size:13px}
 .hz .ok{border-color:var(--good)}.hz .x{border-color:var(--bad);background:#fbeeee}.hz .wait{border-style:dashed;color:var(--muted)}
+/* 3ª rodada: estados, desafio, pauta, curso */
+.st{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.st-hipotese{border:1px dashed var(--hip);color:var(--hip);background:#fff}
+.st-proposta{border:1px solid var(--accent);color:var(--accent);background:#fff}
+.st-pactuada{border:1px solid var(--accent);background:var(--accent);color:#fff}
+.st-observado{border:1px solid var(--ink);background:var(--ink);color:#fff}
+.passos{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 14px}
+.passos span{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.passos span.on{font-weight:700;color:var(--ink);border-color:var(--ink)}
+.dz-top{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;align-items:start}
+.dz{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px 10px;font-size:13px;margin:10px 0 12px}
+.dz dt{color:var(--muted)}.dz dd{margin:0}
+.dz input[type=number],.dz select,.pf select,.cur select{max-width:100%;min-width:0;padding:3px 5px;font-size:13px;border:1px solid var(--line);border-radius:5px;background:#fff}
+.dz input[type=number]{width:80px}
+.barra-dz{position:relative;height:30px;background:#ebe8df;border-radius:6px;margin:8px 0 4px;overflow:hidden}
+.barra-dz i{position:absolute;top:0;bottom:0;left:0;background:var(--accent);opacity:.85}
+.barra-dz i.il{background:repeating-linear-gradient(45deg,#7d8582,#7d8582 3px,#c9c6bc 3px,#c9c6bc 6px);opacity:.7}
+.barra-dz span{position:absolute;top:6px;font-size:12px;font-weight:600;left:8px}
+.lst{margin:0;padding-left:18px;font-size:13px}.lst li{margin-bottom:5px}
+.pf{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;margin-bottom:8px}
+.pauta{font-size:13px}
+.pi{display:grid;grid-template-columns:22px minmax(0,2.6fr) minmax(0,1.1fr) minmax(0,1.3fr) minmax(0,.6fr) minmax(0,.8fr) minmax(0,1.2fr);gap:8px;align-items:center;padding:6px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.pi:hover{background:#faf9f5}.pi.sel{background:var(--accent-soft)}.pi.fora{opacity:.5}
+.pi.h{font-size:11px;color:var(--muted);font-weight:600;cursor:default;background:none}
+.pi .r{text-align:right}
+.pg{font-size:12px;font-weight:700;padding:10px 4px 4px;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.pg span{font-weight:400;color:var(--muted)}
+.sinal-c{display:inline-block;font-size:11px;padding:1px 6px;border-radius:5px;margin:1px 2px 1px 0;background:var(--warn-soft);color:var(--warn)}
+.sinal-c.x{background:var(--bad-soft);color:var(--bad)}.sinal-c.n{background:#eef2f1;color:var(--muted)}
+.pdet{border-left:3px solid var(--accent);background:#fbfaf7;padding:10px 14px;margin:0 0 8px 26px;font-size:13px}
+.pdet table{font-size:12px}
+.pi .num,td.num{white-space:nowrap}td.num .tiny{white-space:normal}
+td.hz-col,th.hz-col{background:var(--accent-soft)}
+td.fut,th.fut{color:var(--muted)}
+.roteiro{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.roteiro ol{margin:6px 0 0;padding-left:18px;font-size:13px}.roteiro li{margin-bottom:3px}
+.cur-l{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,2fr) minmax(0,1fr) auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+@media (max-width:900px){ .dz-top{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:760px){
+  .pi{grid-template-columns:22px minmax(0,1fr) minmax(0,1fr)}.pi>div:nth-child(n+4){grid-column:2 / -1}.pi.h{display:none}
+  .pdet{margin-left:0}.cur-l{grid-template-columns:minmax(0,1fr)}
+  .pi .r{text-align:left}.pi [data-l]::before{content:attr(data-l) ': ';font-family:var(--sans);font-size:11px;color:var(--muted)}
+}
 @media (max-width:900px){ .bancada{grid-template-columns:minmax(0,1fr)} .arvore{grid-template-columns:1fr} }
 @media (max-width:700px){
   header.top{position:static;padding:10px 16px}.ciclo{margin-left:0}
@@ -151,7 +195,7 @@ body.reuniao main{max-width:1500px;font-size:18px}
 </style>
 </head>
 <body>
-<div class="aviso">Protótipo <b>conceitual v2</b> (2ª rodada, 12/11/2026). Curvas de Vitória e Serra calculadas no navegador com o motor da POC 0.0.2 sobre dados reais da PNP 2017–2025. Capacidade (salas, laboratórios, docentes por área) e unidades marcadas <span class="tag t-il">ilustr.</span> são fictícias. <b>Não usar para decisão.</b></div>
+<div class="aviso">Protótipo <b>conceitual v3</b> (3ª rodada, 13/11/2026). Curvas de Vitória e Serra calculadas no navegador com o motor da POC 0.0.2 sobre dados reais da PNP 2017–2025. O desafio de 3,9%, a capacidade (salas, laboratórios, docentes por área), o código docente, o bloco e as unidades marcadas <span class="tag t-il">ilustr.</span> são fictícios. <b>Não usar para decisão.</b></div>
 
 <header class="top">
   <div class="logo">PRUMO<small>Ifes · exemplo</small></div>
@@ -173,10 +217,20 @@ body.reuniao main{max-width:1500px;font-size:18px}
         <div class="small">Estrela-guia · participação do Ifes no remanescente da matriz 2026 (sem assistência estudantil)</div>
         <div class="kpi"><span class="calc" data-c="part">≈ 3,32%</span> <span class="tag t-est">estimado</span></div>
         <div class="small">≈ R$ 73,2 mi de R$ 2.206 mi: Funcionamento R$ 62,8 mi + Reitoria ≈ R$ 7,7 mi + Qualidade R$ 2,65 mi. Exercício 2026 usa o ano-base 2024.</div>
+        <div id="ag-desafio" style="margin-top:10px"></div>
       </div>
       <div style="flex:1.4;min-width:300px" id="ag-blocos"></div>
     </div>
     <p class="nota">Leitura: em Funcionamento + Reitoria (90% do bolo) o Ifes participa com ≈ 3,56%, a mesma fatia de sua matrícula total ponderada. Em Qualidade (10%) participa com 1,20%: está <b>abaixo de dois degraus que zeram sua parte</b> (técnico e EJA). Se a Qualidade acompanhasse o porte do Ifes, seriam ≈ +R$ 5,2 mi por ano. Isso é dimensão do espaço, não meta.</p>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2>Demonstração: a mesma contribuição por dois caminhos</h2>
+    <p class="small" style="margin:0 0 8px">A permanência no 1º ano de Metalurgia concomitante, em Vitória, pode entrar pela Reitoria ou pelo curso. Os dois caminhos chegam ao mesmo item da pauta e à mesma comparação institucional.</p>
+    <div class="roteiro">
+      <div><b>Pela Reitoria</b><ol><li><a href="#objetivo">Objetivos</a>: registrar o desafio e ver a distância.</li><li>Explorar a hipótese macro de permanência.</li><li>Em "onde a hipótese tem base", convidar Metalurgia concomitante.</li><li>No campus, o curso aparece com o convite; a coordenação ajusta e propõe.</li><li><a href="#mesa">Mesa</a>: o item entra na pauta.</li></ol></div>
+      <div><b>Pelo curso</b><ol><li><a href="#campus" onclick="campus='vitoria'">Campus Vitória</a>, card "Cursos".</li><li><a href="javascript:irCurso('vitoria', idOf('vitoria','Técnico em Metalurgia','Concomitante'))">Metalurgia concomitante</a>: ver o objetivo institucional e propor uma ação local.</li><li>O campus confirma a viabilidade e leva à mesa.</li><li><a href="#mesa">Mesa</a>: o mesmo item, com o mesmo efeito.</li></ol></div>
+      <div><b>Na mesa</b><ol><li>Comparar sem novas decisões, um item e o conjunto, ano a ano.</li><li>Resolver a disputa pelo código docente e escolher a variante do bloco.</li><li>Registrar o pactuado e ver, no <a href="#pacto">Pacto</a>, o que será acompanhado.</li></ol></div>
+    </div>
   </div>
   <div class="grid g2" style="margin-top:16px">
     <div class="card click" onclick="go('objetivo')">
@@ -187,6 +241,7 @@ body.reuniao main{max-width:1500px;font-size:18px}
     <div class="card">
       <h2>Pauta: Plano de oferta 2028</h2>
       <table id="ag-pauta"></table>
+      <p class="nota">Itens por unidade e situação. Hipótese simulada, proposta do campus e contribuição pactuada têm marcas diferentes em todas as telas.</p>
       <p style="margin-top:12px"><a class="btn" href="#mesa">Abrir mesa de composição</a></p>
       <h3 style="margin-top:16px">O que mudou na última PNP (ano-base 2025)</h3>
       <ul class="small" style="padding-left:18px;margin:0">
@@ -203,7 +258,48 @@ body.reuniao main{max-width:1500px;font-size:18px}
   <div class="crumb">Objetivos · Participação na matriz e seus indicadores</div>
   <h1>Da estrela-guia às decisões dos campi</h1>
   <p class="lead">A participação na matriz é o placar. Os indicadores são as engrenagens. As decisões de oferta dos campi são as alavancas. Cada ligação diz o que é calculável, projetável, dependente de dado institucional ou não estimável.</p>
-  <div class="card">
+  <div class="card estrela">
+    <div class="dz-top">
+      <div>
+        <h2>Desafio da Reitoria <span class="tag t-il">exemplo fictício</span></h2>
+        <dl class="dz">
+          <dt>Partida</dt><dd><b class="num">3,32%</b> no exercício 2026 <span class="tag t-est">estimado</span><div class="tiny">último dado observado; lê o ano-base 2024</div></dd>
+          <dt>Meta</dt><dd><input type="number" id="dz-meta" step="0.05" min="3" max="5" onchange="DESAFIO.meta=+this.value/100;renderDesafio()"> % da parcela simulada</dd>
+          <dt>Horizonte</dt><dd><select id="dz-ex" onchange="DESAFIO.ex=+this.value;renderDesafio()"></select><div class="tiny" id="dz-le"></div></dd>
+          <dt>Cenário de referência</dt><dd><select id="dz-rede" onchange="DESAFIO.rede=this.value;renderDesafio()"></select><label class="tiny" style="display:block;margin-top:4px"><input type="checkbox" id="dz-fp" onchange="DESAFIO.fp=this.checked;renderDesafio()"> formação de professores ≥ 20% confirmada a partir de 2027 <span class="tag t-hip">hipótese</span></label></dd>
+        </dl>
+        <button class="btn" onclick="publicarDesafio()" id="dz-pub">Publicar e convidar os campi</button>
+        <p class="nota">O desafio é da instituição e é relativo à Rede. Não vira cota por campus ou curso: cada unidade propõe contribuições conforme portfólio, procura e capacidade, e o colegiado compõe.</p>
+      </div>
+      <div>
+        <div id="dz-graf"></div>
+        <div class="legenda" id="dz-leg"></div>
+        <div id="dz-resumo" style="margin-top:10px"></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h2>Partir da meta: o que fecharia a distância</h2>
+      <div class="tw"><table id="dz-pecas"></table></div>
+      <p class="nota" id="dz-pecas-nota"></p>
+    </div>
+    <div class="card">
+      <h2>Explorar uma hipótese macro</h2>
+      <p class="small" style="margin-top:0">Muda o problema de tamanho, não decide nada. Só vira contribuição quando alguém diz onde, como e com que capacidade.</p>
+      <div class="alav on" style="margin-bottom:6px"><div class="corpo">
+        <div class="ln">Reduzir a evasão nos técnicos não integrados <b class="num" id="dz-red-v"></b></div><input type="range" min="0" max="0.4" step="0.05" id="dz-red" onchange="DESAFIO.macro.red=+this.value;renderDesafio()">
+        <label><input type="checkbox" id="dz-pre" onchange="DESAFIO.macro.preencher=this.checked;renderDesafio()"> Preencher até 95% onde a procura comporta</label>
+        <div class="ln">Ampliar vagas onde há procura excedente <b class="num" id="dz-amp-v"></b></div><input type="range" min="0" max="0.2" step="0.05" id="dz-amp" onchange="DESAFIO.macro.amplia=+this.value;renderDesafio()">
+      </div></div>
+      <div id="dz-macro" class="small"></div>
+      <h3 style="margin-top:12px">Onde a hipótese tem base</h3>
+      <div class="tabs" id="dz-onde-tabs"></div>
+      <div class="tw"><table id="dz-onde"></table></div>
+      <p class="nota">Ofertas de Vitória e Serra em que os dados da PNP sustentam a hipótese, em ordem de campus e nome. Não é ranking de cursos. Convidar cria uma hipótese na pauta; ela só vira proposta quando o curso e o campus a assumem.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
     <h2>Árvore de alavancas</h2>
     <div class="arvore">
       <div class="col"><div class="no raiz"><b>Participação na matriz</b><span class="small">≈ 3,32% · relativa à Rede</span></div></div>
@@ -248,6 +344,7 @@ body.reuniao main{max-width:1500px;font-size:18px}
   <div class="crumb">Campi · <span class="nomeCampus"></span></div>
   <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><h1 style="flex:1">Campus <span class="nomeCampus"></span>: portfólio, capacidade e gargalos</h1><div class="seg" id="seg-campus"></div></div>
   <p class="lead">Oferta técnica presencial. Histórico da PNP 2017–2025 <span class="tag t-fato">fato</span>; projeção "manter a oferta" até 2035 <span class="tag t-est">estimado</span>; capacidade disponível <span class="tag t-il">ilustr.</span>, que o campus cadastraria uma vez e confirmaria todo ano.</p>
+  <div id="cp-desafio" style="margin-bottom:16px"></div>
   <div class="grid g4" id="cp-kpis"></div>
   <div class="card" style="margin-top:16px">
     <h2>Portfólio como funis (2025) e trajetória</h2>
@@ -269,9 +366,48 @@ body.reuniao main{max-width:1500px;font-size:18px}
     </div>
   </div>
   <div class="card" style="margin-top:16px">
+    <h2>Cursos: onde o campus pode contribuir</h2>
+    <p class="small" style="margin-top:0">Cada oferta com o motivo que a faz aparecer, o convite da Reitoria quando houver e a situação da contribuição. A coordenação abre o curso, propõe uma ação local e o campus avalia a viabilidade.</p>
+    <div id="cp-cursos"></div>
+  </div>
+  <div class="card" style="margin-top:16px">
     <h2>Oportunidades e limites</h2>
     <ul id="cp-sinais" class="small" style="padding-left:18px;margin:0"></ul>
     <p style="margin-top:12px"><a class="btn" href="#bancada">Abrir a bancada com este campus</a></p>
+  </div>
+</section>
+
+<!-- ================= CURSO ================= -->
+<section class="tela" id="t-curso">
+  <div class="crumb">Campi · <span class="nomeCampus"></span> · Curso</div>
+  <h1 id="cu-nome"></h1>
+  <p class="lead">Visão da coordenação. O curso não recebe uma parte da meta institucional: propõe uma contribuição que ele e os professores conseguem influenciar e acompanhar, e o campus avalia a viabilidade antes de levar à mesa.</p>
+  <div class="passos" id="cu-passos"></div>
+  <div class="grid g2">
+    <div class="card"><h2>Objetivo institucional relacionado</h2><div id="cu-obj" class="small"></div></div>
+    <div class="card"><h2>Situação do curso</h2><div id="cu-sit"></div></div>
+  </div>
+  <div class="grid" style="margin-top:16px">
+    <div class="card cur">
+      <h2>Contribuição local</h2>
+      <div class="tabs" id="cu-tipos"></div>
+      <div id="cu-param"></div>
+      <h3 style="margin-top:12px">Compromisso que o curso acompanha</h3>
+      <div id="cu-comp" class="small"></div>
+      <div id="cu-outros" class="small" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <h2>Efeito estimado <span class="st st-hipotese">hipótese simulada</span></h2>
+      <div class="tw"><table id="cu-efeito"></table></div>
+      <div id="cu-contrib" class="small" style="margin-top:8px"></div>
+      <p style="margin:10px 0 0"><button class="btn mini ghost" onclick="abrirCadeiaCurso()">Como calcula</button></p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2>Viabilidade (campus)</h2>
+    <div id="cu-viab" class="small"></div>
+    <label class="small" style="display:block;margin:10px 0"><input type="checkbox" id="cu-conf" onchange="CURSO.confirma=this.checked;renderCurso()"> A direção do campus avaliou a viabilidade desta proposta</label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost" onclick="levarMesa('hipotese')">Guardar como hipótese</button><button class="btn" id="cu-levar" onclick="levarMesa('proposta')">Levar à mesa como proposta do campus</button></div>
   </div>
 </section>
 
@@ -322,25 +458,39 @@ body.reuniao main{max-width:1500px;font-size:18px}
 <!-- ================= MESA ================= -->
 <section class="tela" id="t-mesa">
   <div class="crumb so-tela">Objetivos · Mesa de composição · Plano de oferta 2028</div>
-  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><h1 style="flex:1">A trajetória do Ifes com as propostas dos campi</h1><button class="btn ghost" onclick="reuniao()" id="btn-reuniao">Modo reunião</button></div>
-  <p class="lead so-tela">Vitória e Serra são calculadas com o mesmo motor, os mesmos dados e o mesmo horizonte (2026–2035). Itapina, Barra de São Francisco e Cefor são trajetórias <b>ilustrativas</b>: aparecem numa linha separada e nunca se misturam silenciosamente com as calculadas.</p>
-  <div class="grid">
-    <div class="card">
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><h1 style="flex:1">Se aprovarmos esta combinação, como muda a trajetória do Ifes?</h1><button class="btn ghost" onclick="reuniao()" id="btn-reuniao">Modo reunião</button></div>
+  <p class="lead so-tela">Uma linha por decisão. Os itens vêm do desafio da Reitoria, das propostas dos campi e dos cursos, e da bancada. Vitória e Serra são calculadas juntas, com o mesmo motor e o mesmo horizonte; Itapina, Cefor e os itens de teste são <b>ilustrativos</b> e ficam sempre em linha separada.</p>
+  <div class="card estrela" id="mesa-desafio"></div>
+  <div class="card" style="margin-top:16px">
+    <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><h2 style="flex:1;margin:0">Pauta de decisões</h2><span class="small" id="pauta-resumo"></span></div>
+    <div class="pf so-tela" id="pauta-filtros" style="margin-top:8px"></div>
+    <div class="pauta" id="pauta"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px" class="so-tela"><button class="btn" onclick="pactuar()">Registrar o pactuado</button><label class="small" style="align-self:center"><input type="checkbox" id="pauta-teste" onchange="comTeste=this.checked;renderMesa()"> mostrar pauta longa (+27 itens de teste, ilustrativos)</label></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2>Os próximos quatro anos, item e conjunto</h2>
+    <div class="tabs" id="q-tabs"></div>
+    <div class="tw"><table id="q-tab"></table></div>
+    <p class="nota" id="q-nota"></p>
+  </div>
+  <div class="card" style="margin-top:16px">
       <div class="tabs" id="mesa-tabs"></div>
       <div id="mesa-graf"></div>
       <div class="legenda" id="mesa-leg"></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px" class="so-tela"><button class="btn mini ghost" onclick="guardarCombo()">Guardar combinação para comparar</button><button class="btn mini ghost" onclick="combos=[];renderMesa()">Limpar comparações</button></div>
-    </div>
-    <div class="card"><h2>Composição e efeito</h2><div id="mesa-kpis" class="grid g3"></div><div id="mesa-falta" style="margin-top:12px"></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px" class="so-tela"><button class="btn mini ghost" onclick="guardarCombo()">Guardar combinação para comparar</button><button class="btn mini ghost" onclick="combos=[];renderMesa()">Limpar comparações</button><label class="small" id="zoom-l" style="align-self:center"><input type="checkbox" onchange="zoomPart=this.checked;renderMesa()"> aproximar a escala (meta fora do gráfico)</label></div>
   </div>
-  <div class="card" style="margin-top:16px"><div class="tw"><table id="mesa"></table></div>
-    <p class="nota so-tela">Contribuição em p.p. = variação do numerador menos o efeito no denominador do Ifes. Ano-base indicado; o exercício da matriz é dois anos depois. Restrição = primeiro ano em que algum recurso ilustrativo do campus passa de 100%.</p></div>
+  <div class="card" style="margin-top:16px"><h2>O que ainda falta e de que depende</h2><div id="mesa-falta"></div></div>
+  <div class="card" style="margin-top:16px"><h2>Por unidade</h2><div class="tw"><table id="mesa"></table></div>
+    <p class="nota so-tela">Contribuição em p.p. = percentual do Ifes com os itens da unidade menos sem eles, demais constantes. A linha do Ifes é calculada pela razão das somas e não é a soma das linhas. Ano letivo indicado; o exercício da matriz é dois anos depois.</p></div>
 </section>
 
 <!-- ================= PACTO ================= -->
 <section class="tela" id="t-pacto">
-  <div class="crumb">Pacto 2027 · Compromisso de Vitória</div>
-  <h1>Reduzir a evasão no técnico concomitante em 30%</h1>
+  <div class="crumb">Pacto · Ciclo de oferta 2028</div>
+  <h1>O que foi pactuado e o que será acompanhado</h1>
+  <div class="card" id="pacto-novo" style="margin-bottom:24px"></div>
+  <div class="crumb">Pacto 2027 · Compromisso de Vitória · <span class="st st-observado">resultado observado</span></div>
+  <h2 style="font-size:22px">Reduzir a evasão no técnico concomitante em 30%</h2>
   <p class="lead">Compromisso pactuado no ciclo anterior. A PNP com ano-base 2028 foi carregada e o horizonte intermediário pode ser conferido. <b>Todo o conteúdo desta tela é fictício</b> <span class="tag t-il">ilustr.</span>.</p>
   <div class="hz">
     <div class="ok"><b>Execução</b><br>Vagas ofertadas em 2027 e 2028 conforme o pactuado. Programa de acompanhamento implantado.</div>
@@ -517,7 +667,7 @@ const Coortes2 = (() => {
 if (typeof module !== 'undefined') module.exports = Coortes2;
 
 const C = Coortes2;
-/* Simulação do protótipo conceitual (2ª rodada, 12/11/2026). Usa o motor poc/coortes002.js sem alteração.
+/* Simulação do protótipo conceitual (2ª rodada, 12/11/2026; operações e capacidade datada na 3ª rodada, 13/11/2026). Usa o motor poc/coortes002.js sem alteração.
    Reproduz os resultados da POC 0.0.2 (Vitória e Serra, alternativas A, B e C) e acrescenta alavancas combináveis,
    horizonte até 2035, capacidade por turno, laboratório e área docente (ilustrativa) e matrícula total por premissa. */
 const OBS = 2025, FIM = 2035, HIST = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
@@ -597,25 +747,49 @@ function aplicarPreset(cp, letra) {
 const turmasDe = v => v > 0 ? Math.ceil(v / PREM.turma - 0.05) : 0;
 const aulasDe = o => o.of.oferta === 'Integrado' ? PREM.aulas_int : o.of.oferta.includes('PROEJA') ? PREM.aulas_proeja : PREM.aulas_naoint;
 
-/* Simula um campus com um conjunto de alavancas. varr: central | pess | otim (sensibilidade das hipóteses). */
+/* Operações elementares (3ª rodada). As alavancas da bancada viram uma lista de operações; os itens da pauta
+   usam a mesma lista, inclusive no nível do curso. Tipos:
+     ampliar   {oferta, n, desde, ocup, turno, fp, fo}  turmas novas na oferta (fp/fo: fator de ocupação pess./otim.)
+     reduzir   {oferta, n, desde}                       menos vagas (lado "de" da reorganização)
+     pausar    {oferta, desde}                          nenhuma entrada a partir de "desde"; turmas em andamento seguem
+     evasao    {red, desde, ofertas}                    redução da evasão; ofertas null = todos os não integrados
+     preencher {alvo, desde, ofertas}                   ocupação-alvo onde a procura comporta; ofertas null = não integrados */
+function opsDe(alav) {
+  if (!alav) return [];
+  if (Array.isArray(alav)) return alav;
+  const A = alav.ampliar, M = alav.migrar, P = alav.preencher, E = alav.evasao, ops = [];
+  if (A.on) ops.push({ t: 'ampliar', oferta: A.oferta, n: A.n, desde: A.desde, ocup: A.ocup, turno: null, fp: 0.7, fo: 1.2 });
+  if (M.on) { ops.push({ t: 'reduzir', oferta: M.de, n: M.n, desde: M.desde }); ops.push({ t: 'ampliar', oferta: M.para, n: M.n, desde: M.desde, ocup: M.ocup, turno: M.turno, fp: 0.85, fo: 1 }); }
+  if (E.on) ops.push({ t: 'evasao', red: E.red, desde: E.desde, ofertas: null });
+  if (P.on) ops.push({ t: 'preencher', alvo: P.alvo, desde: P.desde, ofertas: null });
+  return ops;
+}
+const alcanca = (op, o) => op.ofertas ? op.ofertas.includes(o.id) : o.naoInt;
+const ofertasDe = op => op.oferta ? [op.oferta] : (op.ofertas || ['*naoInt']);
+
+/* Simula um campus com alavancas (objeto da bancada) ou com uma lista de operações.
+   varr: central | pess | otim (sensibilidade das hipóteses). */
 function simular(cp, alav, varr = 'central') {
   const fator = { central: 1, pess: 0.5, otim: 1.5 }[varr];
+  const ops = opsDe(alav);
   const linhas = [];
   for (const o of cp.lista) {
     const vg = {}, oc = {}, eF = {};
     for (const t of FUT) { vg[t] = o.vagas; oc[t] = o.ocup; }
     let nNovas = 0, ocupN = 0, desdeN = 9999, turnoNovas = null;
-    if (alav) {
-      const A = alav.ampliar, M = alav.migrar, P = alav.preencher, E = alav.evasao;
-      if (A.on && A.oferta === o.id) { nNovas += A.n; ocupN = Math.min(1.05, A.ocup * (varr === 'pess' ? 0.7 : varr === 'otim' ? 1.2 : 1)); desdeN = A.desde; }
-      if (M.on && M.de === o.id) for (const t of FUT) if (t >= M.desde) vg[t] = Math.max(0, vg[t] - M.n);
-      if (M.on && M.para === o.id) { nNovas += M.n; ocupN = Math.min(1.05, M.ocup * (varr === 'pess' ? 0.85 : 1)); desdeN = M.desde; turnoNovas = M.turno; }
-      if (o.naoInt) for (const t of FUT) {
-        if (E.on && t >= E.desde) eF[t] = o.k.e * (1 - Math.min(0.9, E.red * fator));
-        if (P.on && t >= P.desde && o.insc >= o.vagas * P.alvo) oc[t] = Math.max(o.ocup, P.alvo);
-      }
-      if (nNovas) for (const t of FUT) if (t >= desdeN) { oc[t] = (vg[t] * oc[t] + nNovas * ocupN) / Math.max(1, vg[t] + nNovas); vg[t] += nNovas; }
+    const red = {}, alvo = {};
+    for (const op of ops) {
+      if (op.t === 'ampliar' && op.oferta === o.id) { nNovas += op.n; ocupN = Math.min(1.05, op.ocup * (varr === 'pess' ? op.fp : varr === 'otim' ? op.fo : 1)); desdeN = op.desde; if (op.turno) turnoNovas = op.turno; }
+      if (op.t === 'reduzir' && op.oferta === o.id) for (const t of FUT) if (t >= op.desde) vg[t] = Math.max(0, vg[t] - op.n);
+      if (op.t === 'evasao' && alcanca(op, o)) for (const t of FUT) if (t >= op.desde) red[t] = 1 - (1 - (red[t] || 0)) * (1 - Math.min(0.9, op.red * fator));
+      if (op.t === 'preencher' && alcanca(op, o) && o.insc >= o.vagas * op.alvo) for (const t of FUT) if (t >= op.desde) alvo[t] = Math.max(alvo[t] || 0, op.alvo);
     }
+    for (const t of FUT) {
+      if (red[t] != null) eF[t] = o.k.e * (1 - red[t]);
+      if (alvo[t] != null) oc[t] = Math.max(o.ocup, alvo[t]);
+    }
+    if (nNovas) for (const t of FUT) if (t >= desdeN) { oc[t] = (vg[t] * oc[t] + nNovas * ocupN) / Math.max(1, vg[t] + nNovas); vg[t] += nNovas; }
+    for (const op of ops) if (op.t === 'pausar' && op.oferta === o.id) for (const t of FUT) if (t >= op.desde) vg[t] = 0;
     const p = C.projetar({ hist: o.of, D: o.k.D, e: o.k.e, c: o.k.c, meRatio: o.k.meRatio, vagas: vg, ocup: oc, eFut: eF }, FIM);
     for (const t of FUT) {
       let tur = 0, turNovas = 0;
@@ -686,8 +860,15 @@ function capacidadePadrao(base) {
   for (const k of Object.keys(base.anos[OBS].area)) areas[k] = Math.max(1, Math.ceil(mx(a => a.area[k] || 0) / PREM.horas_prof / 0.95));
   return { salas, lab, areas };
 }
-function usoCapacidade(sim, cap, t) {
-  const a = sim.anos[t], r = [];
+/* Acréscimos datados à capacidade: cap.adds = [{ rec: 'lab' | 'salas' | 'area', area, desde, v }]. */
+function capEm(cap, t) {
+  if (!cap.adds || !cap.adds.length) return cap;
+  const c = { salas: cap.salas, lab: cap.lab, areas: { ...cap.areas } };
+  for (const a of cap.adds) if (t >= a.desde) { if (a.rec === 'lab') c.lab += a.v; else if (a.rec === 'salas') c.salas += a.v; else c.areas[a.area] = (c.areas[a.area] || 0) + a.v; }
+  return c;
+}
+function usoCapacidade(sim, capBase, t) {
+  const a = sim.anos[t], r = [], cap = capEm(capBase, t);
   for (const tu of ['M', 'V', 'N']) r.push({ rec: 'Salas · ' + { M: 'matutino', V: 'vespertino', N: 'noturno' }[tu], uso: a.turno[tu] / cap.salas, dem: a.turno[tu], cap: cap.salas, un: 'turmas' });
   const lt = ['M', 'V', 'N'].reduce((m, tu) => a.lab[tu] > a.lab[m] ? tu : m, 'M');
   r.push({ rec: sim.cp.cfg.lab.nome + ' · ' + { M: 'matutino', V: 'vespertino', N: 'noturno' }[lt], uso: a.lab[lt] / cap.lab, dem: a.lab[lt], cap: cap.lab, un: 'aulas/sem' });
@@ -718,6 +899,268 @@ function refQualidade(pct) {
   return out;
 }
 
+/* Pauta de decisões, desafio da Reitoria e participação na matriz (3ª rodada, 13/11/2026).
+   Depende de simulacao.js (simular, capacidade, ifesEm, refQualidade) e dos objetos CP, BASE e CAP.
+   Nada aqui decide: compõe itens, sinaliza conflitos e traduz trajetórias acadêmicas em referência na matriz. */
+
+/* ---------- matriz: partida, total de referência e cenário da Rede ---------- */
+const MATRIZ = {
+  total: 2205.8e6,             // remanescente do exercício 2026 sem assistência estudantil (fato da fonte)
+  ifes0: 73.2e6,               // Funcionamento 62,8 + Reitoria ≈ 7,7 + Qualidade 2,65 (estimado)
+  ex0: 2026,                   // último exercício observado; lê o ano-base 2024
+  fpDegrau: 1.27e6,            // formação de professores ≥ 20% a partir do exercício 2027, se a reclassificação de 2025 se confirmar
+};
+MATRIZ.part0 = MATRIZ.ifes0 / MATRIZ.total;
+const REDE = {
+  junto: { n: 'Rede e Ifes no mesmo ritmo', f: () => 1, nat: 'prem' },
+  cresce: { n: 'Rede cresce 1% a.a. a mais', f: ex => Math.pow(0.99, Math.max(0, ex - MATRIZ.ex0)), nat: 'il' },
+};
+const EXS = []; for (let e = MATRIZ.ex0; e <= FIM; e++) EXS.push(e);
+const ANOS4 = [2028, 2029, 2030, 2031];   // os quatro anos letivos do plano de oferta 2028
+
+const DESAFIO = { meta: 0.039, ex: 2030, rede: 'junto', fp: false, publicado: false, macro: { red: 0.2, preencher: true, amplia: 0 } };
+
+function partBase(ex, cen = DESAFIO) {
+  return (MATRIZ.part0 + (cen.fp && ex >= 2027 ? MATRIZ.fpDegrau / MATRIZ.total : 0)) * REDE[cen.rede].f(ex);
+}
+/* Efeito em reais na parcela simulada para o ano-base t (exercício t + 2), comparado a manter.
+   MT: marginal de 2026 (R$ 1.324 por MT). Qualidade: percentuais legais pela razão das somas, Rede 2026 constante. */
+function dReais(t, sims, extras = []) {
+  if (t <= OBS) return { mt: 0, rmt: 0, rq: 0, r: 0 };
+  let mt = 0;
+  for (const k of Object.keys(sims)) mt += sims[k].anos[t].mt - BASE[k].anos[t].mt;
+  for (const e of extras) mt += e(t).mt || 0;
+  const pS = ifesEm(t, Object.values(sims), extras).pct, pB = ifesEm(t, Object.keys(sims).map(k => BASE[k])).pct;
+  const qS = refQualidade(pS), qB = refQualidade(pB);
+  const rq = (qS.ct - qB.ct) + (qS.fp - qB.fp) + (qS.eja - qB.eja);
+  return { mt, rmt: mt * PREM.rs_mt, rq, r: mt * PREM.rs_mt + rq };
+}
+function participacao(ex, sims, extras = [], cen = DESAFIO) {
+  return partBase(ex, cen) + dReais(ex - 2, sims, extras).r / MATRIZ.total * REDE[cen.rede].f(ex);
+}
+
+/* ---------- itens da pauta ---------- */
+const UNID = { vitoria: 'Vitória', serra: 'Serra', itapina: 'Itapina', barra: 'Barra de São Francisco', cefor: 'Cefor (EaD)', reitoria: 'Reitoria' };
+const TIPOS = { pausa: 'Pausa de entradas', expansao: 'Expansão', reorganizacao: 'Reorganização', permanencia: 'Permanência', ocupacao: 'Ocupação de vagas', recurso: 'Recurso', proposta: 'Proposta combinada' };
+const ESTADOS = { hipotese: 'hipótese simulada', proposta: 'proposta do campus', pactuada: 'contribuição pactuada', observado: 'resultado observado' };
+const rampa = (t, de, ate, v) => t < de ? 0 : t >= ate ? v : v * (t - de + 1) / (ate - de + 1);
+
+function idOf(k, curso, oferta) { const o = achar(CP[k], curso, oferta); return o ? o.id : null; }
+function nomeOf(k, id) { const o = CP[k].lista.find(x => x.id === id); return o ? o.nome : '?'; }
+
+function criarPauta() {
+  const V = (c, o) => idOf('vitoria', c, o), S = (c, o) => idOf('serra', c, o);
+  const mecC = V('Técnico em Mecânica', 'Concomitante'), edS = V('Técnico em Edificações', 'Subsequente');
+  const elC = V('Técnico em Eletrotécnica', 'Concomitante'), elI = V('Técnico em Eletrotécnica', 'Integrado');
+  const estC = V('Técnico em Estradas', 'Concomitante');
+  const infI = S('Técnico em Informática para Internet', 'Integrado'), autC = S('Técnico em Automação Industrial', 'Concomitante');
+  const amp = (oferta, n, desde, ocup, turno) => ({ t: 'ampliar', oferta, n, desde, ocup, turno, fp: 0.7, fo: 1.2 });
+  return [
+    { id: 'pausa-edif', un: 'vitoria', curso: edS, tipo: 'pausa', origem: 'Campus', estado: 'proposta', incluir: true,
+      titulo: 'Pausar novas entradas em Edificações subsequente (turmas em andamento seguem)',
+      motivo: 'Ocupação de 85% e evasão anual de 33% na média 2023–2025; o campus quer rever o projeto do curso antes de reabrir.',
+      vars: { base: { n: 'Pausa em 2028', ops: [{ t: 'pausar', oferta: edS, desde: 2028 }] } }, var: 'base',
+      acompanhar: { ind: 'Turmas de 2026 e 2027 concluindo no prazo; proposta de novo projeto de curso', resp: 'Direção de ensino de Vitória' } },
+    { id: 'exp-mec', un: 'vitoria', curso: mecC, tipo: 'expansao', origem: 'Campus', estado: 'proposta', incluir: true,
+      titulo: 'Abrir mais uma turma de Mecânica concomitante (+36 vagas por ano)',
+      motivo: '461 inscritos para 144 vagas em 2025. A procura é noturna, e as oficinas já estão em 91% de uso à noite.',
+      vars: {
+        noturno: { n: 'Noturno, sem obra', ops: [amp(mecC, 36, 2028, 1, 'N')], nota: 'Turno da procura. Oficinas passam de 100% à noite em 2029.' },
+        tarde: { n: 'Vespertino, sem obra', ops: [amp(mecC, 36, 2028, 0.7, 'V')], nota: 'Oficinas livres à tarde. Ocupação das novas vagas de 70% (premissa): o público do concomitante estuda de manhã ou trabalha.' },
+        bloco: { n: 'Noturno, com bloco de oficinas', ops: [amp(mecC, 36, 2030, 1, 'N')], adds: [{ rec: 'lab', desde: 2030, v: 40 }], nota: 'Bloco pronto para o ano letivo de 2030 (premissa: obra em 2027–2029). Turma nova só entra em 2030.' },
+      }, var: 'noturno',
+      acompanhar: { ind: 'Vagas ofertadas e ocupação da turma nova', resp: 'Coordenação de Mecânica' } },
+    { id: 'reorg-eletro', un: 'vitoria', curso: elI, tipo: 'reorganizacao', origem: 'Campus', estado: 'proposta', incluir: true, requer: 'cod1',
+      titulo: 'Transferir 32 vagas de Eletrotécnica concomitante para Eletrotécnica integrado',
+      motivo: '600 inscritos para 64 vagas no integrado; evasão de 32% no concomitante. O integrado amplia o núcleo comum.',
+      vars: { base: { n: 'A partir de 2028', ops: [{ t: 'reduzir', oferta: elC, n: 32, desde: 2028 }, { ...amp(elI, 32, 2028, 1, null), fp: 0.85, fo: 1 }] } }, var: 'base',
+      acompanhar: { ind: 'Ocupação e permanência no 1º ano do integrado', resp: 'Coordenação de Eletrotécnica' } },
+    { id: 'exp-info', un: 'serra', curso: infI, tipo: 'expansao', origem: 'Campus', estado: 'proposta', incluir: true, requer: 'cod1',
+      titulo: 'Abrir mais uma turma de Informática para Internet integrado (+36 vagas por ano)',
+      motivo: '1.765 inscritos para 74 vagas em 2025, a maior procura por vaga entre as ofertas dos dois campi.',
+      vars: {
+        manha: { n: 'Matutino', ops: [{ ...amp(infI, 36, 2028, 1, null), fp: 0.85, fo: 1 }], nota: 'Turno atual do curso. Laboratório de informática passa de 100% de manhã em 2029.' },
+        tarde: { n: 'Vespertino', ops: [{ ...amp(infI, 36, 2028, 1, 'V'), fp: 0.85, fo: 1 }], nota: 'Laboratório livre à tarde. Procura igual (premissa: integrado atrai nos dois turnos).' },
+      }, var: 'tarde',
+      acompanhar: { ind: 'Ocupação da turma nova e docentes em exercício', resp: 'Direção de ensino de Serra' } },
+    { id: 'cod1', un: 'reitoria', tipo: 'recurso', origem: 'Reitoria', estado: 'proposta', incluir: true,
+      titulo: 'Código de vaga docente liberado por aposentadoria (um código, dois pedidos)',
+      motivo: 'Vitória e Serra contam com o mesmo código para viabilizar seus itens. Só um campus pode recebê-lo.',
+      opcoes: { '': 'A decidir', vitoria: 'Vitória · núcleo comum', serra: 'Serra · Informática', nenhum: 'Não alocar agora' }, escolha: '',
+      add: { vitoria: { rec: 'area', area: 'Núcleo comum', desde: 2028, v: 1 }, serra: { rec: 'area', area: 'Informática', desde: 2028, v: 1 } },
+      tempo: 'Concurso e nomeação em ≈ 12 a 18 meses (premissa): docente em sala no ano letivo de 2028.',
+      acompanhar: { ind: 'Nomeação e entrada em exercício', resp: 'Pró-reitoria de gestão de pessoas' } },
+    { id: 'ocup-estradas', un: 'vitoria', curso: estC, tipo: 'ocupacao', origem: 'Curso', estado: 'proposta', incluir: true,
+      titulo: 'Preencher as vagas de Estradas concomitante antes de abrir turma nova',
+      motivo: '633 inscritos, mas só 75% das vagas ocupadas: as chamadas terminam antes de esgotar a lista.',
+      vars: { base: { n: 'Ocupação de 75% para 95%', ops: [{ t: 'preencher', alvo: 0.95, desde: 2028, ofertas: [estC] }] } }, var: 'base',
+      acompanhar: { ind: 'Ocupação das vagas no início do semestre', resp: 'Coordenação de Estradas e registro acadêmico' } },
+    { id: 'perm-autom', un: 'serra', curso: autC, tipo: 'permanencia', origem: 'Curso', estado: 'hipotese', incluir: true,
+      titulo: 'Ação de permanência no 1º ano de Automação Industrial concomitante',
+      motivo: 'Evasão anual de 38%, a maior entre as ofertas de Serra. A coordenação ainda está desenhando a ação.',
+      vars: { base: { n: 'Evasão −25%', ops: [{ t: 'evasao', red: 0.25, desde: 2028, ofertas: [autC] }] } }, var: 'base',
+      acompanhar: { ind: 'Evasão no 1º ano (sistema acadêmico)', resp: 'Coordenação de Automação Industrial' } },
+    { id: 'il-itapina', un: 'itapina', tipo: 'expansao', origem: 'Campus', estado: 'proposta', incluir: true, ilus: true,
+      titulo: 'Expansão em Alimentos', motivo: 'Trajetória inventada para mostrar uma unidade sem simulação.',
+      delta: t => ({ ct: rampa(t, 2028, 2031, 100), meq: rampa(t, 2028, 2031, 100), mat: rampa(t, 2028, 2031, 110), conc: t >= 2031 ? 22 : 0, prof: rampa(t, 2028, 2031, 6), mt: rampa(t, 2028, 2031, 140) }),
+      rest: 2030, acompanhar: { ind: 'Vagas ofertadas e ocupação', resp: 'Direção de Itapina' } },
+    { id: 'il-cefor', un: 'cefor', tipo: 'reorganizacao', origem: 'Reitoria', estado: 'hipotese', incluir: false, ilus: true,
+      titulo: 'Reorientar parte da EaD de formação de professores para técnico', motivo: 'Maior alavanca isolada para o degrau de 50% em técnico, ao custo de formação de professores.',
+      delta: t => ({ ct: rampa(t, 2028, 2030, 860), meq: 0, fp: -rampa(t, 2028, 2030, 860), mat: 0, conc: 0, prof: 0, mt: 0 }),
+      rest: null, acompanhar: { ind: 'Matrículas técnicas EaD e formação de professores', resp: 'Direção do Cefor' } },
+  ];
+}
+
+/* Item de curso criado pela coordenação ou pelo convite do desafio. O mesmo id converge os dois caminhos. */
+function itemCurso(k, ofId, tipo, p, origem, estado) {
+  const o = CP[k].lista.find(x => x.id === ofId), id = `cur-${tipo}-${ofId}`;
+  const ops = tipo === 'permanencia' ? [{ t: 'evasao', red: p.red, desde: 2028, ofertas: [ofId] }]
+    : tipo === 'ocupacao' ? [{ t: 'preencher', alvo: p.alvo, desde: 2028, ofertas: [ofId] }]
+    : tipo === 'pausa' ? [{ t: 'pausar', oferta: ofId, desde: 2028 }]
+    : [{ t: 'ampliar', oferta: ofId, n: p.n, desde: 2028, ocup: ocupNovas(o, p.n), turno: null, fp: 0.7, fo: 1.2 }];
+  const titulo = { permanencia: `Ação de permanência no 1º ano de ${o.nome}`, ocupacao: `Preencher as vagas de ${o.nome}`, pausa: `Pausar novas entradas em ${o.nome}`, expansao: `Ampliar ${o.nome} (+${p.n} vagas)` }[tipo];
+  const n = { permanencia: `Evasão −${Math.round(p.red * 100)}%`, ocupacao: `Ocupação até ${Math.round(p.alvo * 100)}%`, pausa: 'Pausa em 2028', expansao: `+${p.n} vagas` }[tipo];
+  return { id, un: k, curso: ofId, tipo, origem, estado, incluir: true, titulo, motivo: p.motivo || '', vars: { base: { n, ops } }, var: 'base',
+    acompanhar: { ind: { permanencia: 'Evasão no 1º ano (sistema acadêmico)', ocupacao: 'Ocupação das vagas no início do semestre', pausa: 'Conclusão das turmas em andamento', expansao: 'Ocupação da turma nova' }[tipo], resp: 'Coordenação do curso' }, p };
+}
+
+/* ---------- pauta de teste de legibilidade (36 itens, todos ilustrativos) ---------- */
+function itensTeste() {
+  const un = ['Alegre', 'Aracruz', 'Cachoeiro', 'Cariacica', 'Colatina', 'Guarapari', 'Linhares', 'Montanha', 'Nova Venécia', 'Santa Teresa', 'São Mateus', 'Venda Nova'];
+  const mod = [['expansao', 'Ampliar vagas em curso com procura', 1], ['permanencia', 'Ação de permanência no 1º ano', 0.4], ['pausa', 'Pausar entradas em curso com baixa procura', -0.8], ['ocupacao', 'Preencher vagas ociosas', 0.3]];
+  const r = [];
+  for (let i = 0; i < 27; i++) {
+    const u = un[i % un.length], [tipo, t, s] = mod[i % mod.length], v = Math.round((20 + (i * 37) % 60) * s);
+    r.push({ id: 'teste-' + i, un: 'teste', unNome: u, tipo, origem: i % 3 ? 'Campus' : 'Curso', estado: i % 5 ? 'proposta' : 'hipotese', incluir: true, ilus: true, teste: true,
+      titulo: t, motivo: 'Item gerado para testar a leitura de uma pauta longa. Não representa o campus.',
+      delta: tt => ({ ct: rampa(tt, 2028, 2030, v), meq: rampa(tt, 2028, 2030, v), mat: rampa(tt, 2028, 2030, v), conc: tt >= 2031 ? Math.round(v / 4) : 0, prof: rampa(tt, 2028, 2030, v / 30), mt: rampa(tt, 2028, 2030, v * 1.3) }),
+      rest: i % 7 === 0 ? 2030 : null, acompanhar: { ind: '—', resp: u } });
+  }
+  return r;
+}
+
+/* ---------- composição ---------- */
+const varDe = it => it.vars ? it.vars[it.var] : null;
+const tocadas = it => { const v = varDe(it); if (!v) return []; const ni = CP[it.un].lista.filter(o => o.naoInt).map(o => o.id); return [...new Set(v.ops.flatMap(op => ofertasDe(op).flatMap(x => x === '*naoInt' ? ni : [x])))]; };
+function addsPara(k, itens, cod) {
+  const a = [];
+  for (const it of itens) { const v = varDe(it); if (it.un === k && v && v.adds) a.push(...v.adds); }
+  if (cod && cod.escolha === k) a.push(cod.add[k]);
+  return a;
+}
+/* Sinais de cada item: sobreposição (mesma oferta em dois itens incluídos: o segundo não é somado),
+   disputa (dois campi contam com o mesmo código) e falta do recurso (o código foi para o outro campus). */
+function sinais(itens) {
+  const cod = itens.find(i => i.id === 'cod1'), out = {}, vistos = {};
+  const ativos = itens.filter(i => i.incluir && !i.ilus && i.vars);
+  for (const it of ativos) {
+    out[it.id] = [];
+    const ofs = tocadas(it), v = vistos[it.un] || (vistos[it.un] = []);
+    const choque = v.find(([, o]) => o.some(x => ofs.includes(x)));
+    if (choque) out[it.id].push({ k: 'sobreposto', t: `Mexe na mesma oferta que "${choque[0].titulo}". Não é somado ao conjunto para não contar o mesmo efeito duas vezes.` });
+    else v.push([it, ofs]);
+  }
+  const pedem = ativos.filter(i => i.requer === 'cod1');
+  if (cod && cod.incluir) {
+    if (!cod.escolha && new Set(pedem.map(i => i.un)).size > 1) for (const i of pedem) out[i.id].push({ k: 'disputa', t: 'Conta com o mesmo código de vaga docente que outro campus. Escolha o destino do código.' });
+    if (cod.escolha) for (const i of pedem) if (cod.escolha !== i.un) out[i.id].push({ k: 'semrecurso', t: `O código foi para ${cod.escolha === 'nenhum' ? 'nenhum campus' : UNID[cod.escolha]}. Sem ele, ver a restrição de docentes.` });
+  } else for (const i of pedem) out[i.id].push({ k: 'semrecurso', t: 'Depende de um código de vaga docente que não está na pauta.' });
+  return out;
+}
+const CACHE = new Map();
+function simCache(k, ops, varr) {
+  const key = k + '|' + varr + '|' + JSON.stringify(ops);
+  if (!CACHE.has(key)) CACHE.set(key, simular(CP[k], ops, varr));
+  return CACHE.get(key);
+}
+/* Compõe os itens incluídos. Unidades calculadas: um único motor por campus com todas as operações juntas.
+   Unidades ilustrativas: deltas declarados, sempre em linha separada. */
+function compor(itens, varr = 'central', soCalc = false) {
+  const sg = sinais(itens), cod = itens.find(i => i.id === 'cod1');
+  const sims = {}, caps = {}, restr = {};
+  for (const k of Object.keys(CP)) {
+    const its = itens.filter(i => i.incluir && i.un === k && i.vars && !(sg[i.id] || []).some(s => s.k === 'sobreposto'));
+    const ops = its.flatMap(i => varDe(i).ops);
+    sims[k] = ops.length ? simCache(k, ops, varr) : BASE[k];
+    caps[k] = { ...CAP[k], adds: addsPara(k, its, cod && cod.incluir ? cod : null) };
+    restr[k] = primeiraRestricao(sims[k], caps[k]);
+  }
+  const ilus = soCalc ? [] : itens.filter(i => i.incluir && i.ilus).map(i => i.delta);
+  return { sims, caps, restr, extras: ilus, sinais: sg };
+}
+/* Efeito de um item sozinho, comparado a manter. */
+function efeitoItem(it, itens, varKey) {
+  const cod = itens.find(i => i.id === 'cod1');
+  if (it.ilus) {
+    const d = {}; for (const t of [OBS, ...FUT]) { const x = it.delta(t); d[t] = { ing: 0, mat: x.mat || 0, conc: x.conc || 0, mt: x.mt || 0, prof: x.prof || 0, ct: x.ct || 0, meq: x.meq || 0 }; }
+    return { d, rest: it.rest ? { ano: it.rest, rec: [{ rec: 'capacidade (ilustr.)', uso: 1.1 }] } : null, sims: null, extras: [it.delta] };
+  }
+  if (!it.vars) return null;
+  const v = it.vars[varKey || it.var], k = it.un;
+  const s = simCache(k, v.ops, 'central'), b = BASE[k];
+  const cap = { ...CAP[k], adds: [...(v.adds || []), ...(cod && cod.incluir && cod.escolha === k && it.requer === 'cod1' ? [cod.add[k]] : [])] };
+  const d = {};
+  for (const t of [OBS, ...FUT]) d[t] = { ing: s.anos[t].ing - b.anos[t].ing, mat: s.anos[t].mat - b.anos[t].mat, conc: s.anos[t].conc - b.anos[t].conc, mt: s.anos[t].mt - b.anos[t].mt, prof: (s.anos[t].prof || 0) - (b.anos[t].prof || 0), ct: s.anos[t].ct - b.anos[t].ct, meq: s.anos[t].me - b.anos[t].me };
+  const sims = { ...BASE }; sims[k] = s;
+  return { d, rest: primeiraRestricao(s, cap), sims, extras: [], cap };
+}
+/* Quando o efeito aparece: primeiro ano com efeito visível em matrículas ou concluintes, e ano em que estabiliza. */
+function quando(d) {
+  const anos = FUT.filter(t => t >= 2027), fim = d[FIM].mat, mx = Math.max(...anos.map(t => Math.abs(d[t].mat)), 1);
+  const aparece = anos.find(t => Math.abs(d[t].mat) >= 3 || Math.abs(d[t].conc) >= 3);
+  const conc = anos.find(t => Math.abs(d[t].conc) >= 3);
+  const pleno = aparece ? anos.find(t => t >= aparece && Math.abs(d[t].mat - fim) <= 0.05 * mx) : null;
+  return { aparece, conc, pleno };
+}
+
+/* ---------- hipóteses macro (exploração a partir do desafio) ---------- */
+function macroOps(cp, h) {
+  const ops = [];
+  if (h.red) ops.push({ t: 'evasao', red: h.red, desde: 2028, ofertas: null });
+  if (h.preencher) ops.push({ t: 'preencher', alvo: 0.95, desde: 2028, ofertas: null });
+  if (h.amplia) for (const o of cp.lista) { const n = Math.round(o.vagas * h.amplia / 4) * 4; if (n > 0 && o.demandaExtra >= n) ops.push({ t: 'ampliar', oferta: o.id, n, desde: 2028, ocup: ocupNovas(o, n), turno: null, fp: 0.7, fo: 1.2 }); }
+  return ops;
+}
+/* Extrapolação para o Ifes: efeito em Vitória e Serra multiplicado pela razão entre a matrícula equivalente técnica
+   do Ifes e a dos dois campi (2025). Hipótese exploratória, não contribuição de ninguém. */
+function escalaIfes() { return D.ifes[OBS].ct / (BASE.vitoria.anos[OBS].ct + BASE.serra.anos[OBS].ct); }
+function macroExtra(h, varr = 'central') {
+  const f = escalaIfes(), s = {};
+  for (const k of Object.keys(CP)) s[k] = simCache(k, macroOps(CP[k], h), varr);
+  const extra = t => {
+    if (t <= OBS) return {};
+    let mt = 0, ct = 0, meq = 0, eja = 0, mat = 0, conc = 0;
+    for (const k of Object.keys(CP)) { const a = s[k].anos[t], b = BASE[k].anos[t]; mt += a.mt - b.mt; ct += a.ct - b.ct; meq += a.me - b.me; eja += a.eja - b.eja; mat += a.mat - b.mat; conc += a.conc - b.conc; }
+    return { mt: mt * f, ct: ct * f, meq: meq * f, eja: eja * f, mat: mat * f, conc: conc * f };
+  };
+  return extra;
+}
+/* Ofertas onde uma hipótese macro tem base nos dados. Ordem: campus e nome. Não é ranking. */
+function ondeTemBase(h) {
+  const r = [];
+  for (const k of Object.keys(CP)) for (const o of CP[k].lista) {
+    if (h === 'red' && o.naoInt && o.k.e >= 0.25 && o.mat >= 60) r.push({ k, o, tipo: 'permanencia', porque: `evasão anual de ${Math.round(o.k.e * 100)}% com ${o.mat} matrículas` });
+    if (h === 'preencher' && o.naoInt && o.ocup < 0.9 && o.insc >= o.vagas * 0.95 && o.vagas > 0) r.push({ k, o, tipo: 'ocupacao', porque: `ocupação de ${Math.round(o.ocup * 100)}% com ${o.insc} inscritos para ${o.vagas} vagas` });
+    if (h === 'amplia' && o.demandaExtra >= Math.max(36, o.vagas * 0.5)) r.push({ k, o, tipo: 'expansao', porque: `${o.insc} inscritos para ${o.vagas} vagas` });
+  }
+  return r.sort((a, b) => a.k.localeCompare(b.k) || a.o.nome.localeCompare(b.o.nome));
+}
+
+/* ---------- peças para fechar a distância (partir da meta) ---------- */
+function pecas() {
+  const I = D.ifes[OBS], p0 = { ct: I.ct / I.meq, fp: I.fp / I.meq, eja: I.eja / I.meq }, q0 = refQualidade(p0);
+  const q50 = refQualidade({ ...p0, ct: 0.5 }).ct - q0.ct, q60 = refQualidade({ ...p0, ct: 0.6 }).ct - q0.ct, qe = refQualidade({ ...p0, eja: 0.025 }).eja - q0.eja;
+  return [
+    { n: 'Formação de professores ≥ 20%', v: MATRIZ.fpDegrau, ex: 2027, nat: 'hip', obs: 'Já no ano-base 2025, se a reclassificação se confirmar. Entra no cenário de referência, não é decisão.' },
+    { n: 'Formação técnica ≥ 50%', v: q50, ex: null, nat: 'est', obs: '≈ +3.800 matrículas equivalentes técnicas. Fora do alcance de decisões de oferta até o ano letivo de 2028.' },
+    { n: 'Formação técnica ≥ 60%', v: q60, ex: null, nat: 'est', obs: 'Inclui o degrau de 50%. Prazo longo.' },
+    { n: 'RAP de 18,15 para 20', v: 0.85e6, ex: 2029, nat: 'est', obs: '≈ +2.800 matrículas equivalentes presenciais com o mesmo quadro. Indicador de guarda: não perseguir à custa de qualidade.' },
+    { n: 'IEA: próximo degrau', v: 0.51e6, ex: 2030, nat: 'est', obs: 'Permanência e conclusão. Valor da matriz não reproduzível pela PNP.' },
+    { n: 'EJA ≥ 2,5%', v: qe, ex: 2029, nat: 'est', obs: 'Oferta PROEJA. Hoje 1,98%.' },
+    { n: 'Cada +1.000 MT presenciais', v: 1000 * PREM.rs_mt, ex: null, nat: 'est', obs: '≈ 2% da MT do Ifes. Vem de vagas ocupadas e de estudantes que permanecem.' },
+  ];
+}
+
 
 /* ================= utilidades ================= */
 const $ = s => document.querySelector(s);
@@ -738,15 +1181,19 @@ function fechar() { $('#gaveta').classList.remove('on'); }
 document.addEventListener('click', e => { const n = e.target.closest('.calc'); if (n) { e.stopPropagation(); abrir(n.dataset.c); } }, true);
 
 /* ================= navegação ================= */
-const TELAS = ['agenda', 'objetivo', 'campus', 'bancada', 'mesa', 'pacto'];
+const TELAS = ['agenda', 'objetivo', 'campus', 'curso', 'bancada', 'mesa', 'pacto'];
 function go(t) { location.hash = t; }
 function rota() {
   const t = TELAS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'agenda';
   TELAS.forEach(x => $('#t-' + x).classList.toggle('on', x === t));
-  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + t));
-  if (t === 'campus') renderCampus(); if (t === 'bancada') renderBancada(); if (t === 'mesa') renderMesa();
+  document.querySelectorAll('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + (t === 'curso' ? 'campus' : t)));
+  if (t === 'agenda') renderAgenda(); if (t === 'objetivo') renderDesafio(); if (t === 'campus') renderCampus(); if (t === 'curso') renderCurso(); if (t === 'bancada') renderBancada(); if (t === 'mesa') renderMesa(); if (t === 'pacto') renderPacto();
   window.scrollTo(0, 0);
+  if (t === 'mesa' && rolar) { rolar = false; document.querySelector('.pi.sel')?.scrollIntoView({ block: 'center' }); }
+  const pac = ITENS.some(i => i.estado === 'pactuada');
+  document.querySelectorAll('.ciclo span').forEach((x, k) => x.classList.toggle('on', k === (pac ? 2 : 1)));
 }
+let rolar = false;
 window.addEventListener('hashchange', rota);
 
 /* ================= estado ================= */
@@ -756,18 +1203,17 @@ const CAP = { vitoria: capacidadePadrao(BASE.vitoria), serra: capacidadePadrao(B
 let campus = 'serra';
 const ALAV = { vitoria: aplicarPreset(CP.vitoria, 'R'), serra: aplicarPreset(CP.serra, 'R') };
 let presetAtivo = { vitoria: 'R', serra: 'R' };
-const PROPOSTAS = {};
 let indicador = 'mat';
 
 /* ================= gráfico de linhas ================= */
-function grafico({ series, bandas = [], hlines = [], x0 = 2017, x1 = FIM, w = 760, h = 260, fmtY = v => fmt(v), yMin = null, yMax = null, marcas = [], quebras = [] }) {
+function grafico({ series, bandas = [], hlines = [], x0 = 2017, x1 = FIM, w = 760, h = 260, fmtY = v => fmt(v), yMin = null, yMax = null, marcas = [], quebras = [], proj = OBS + 0.5 }) {
   const pts = series.flatMap(s => s.pts.map(p => p[1])).concat(bandas.flatMap(b => b.pts.flatMap(p => [p[1], p[2]]))).concat(hlines.map(l => l.y)).filter(v => v != null && isFinite(v));
   let lo = yMin ?? Math.min(...pts), hi = yMax ?? Math.max(...pts);
   if (yMin == null) lo = lo - (hi - lo) * 0.08; if (yMax == null) hi = hi + (hi - lo) * 0.08; if (hi - lo < 1e-9) { hi += 1; lo -= 1; }
   const L = 54, R = 14, T = 12, B = 26, X = x => L + (x - x0) / (x1 - x0) * (w - L - R), Y = y => T + (1 - (y - lo) / (hi - lo)) * (h - T - B);
   let s = `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" style="max-width:100%">`;
-  s += `<rect x="${X(2019.5)}" y="${T}" width="${X(2022.5) - X(2019.5)}" height="${h - T - B}" fill="#eeeae0" opacity=".6"/><text x="${X(2021)}" y="${T + 11}" font-size="10" fill="#8a8a80" text-anchor="middle">pandemia</text>`;
-  s += `<line x1="${X(OBS + .5)}" x2="${X(OBS + .5)}" y1="${T}" y2="${h - B}" stroke="#bbb" stroke-dasharray="3 3"/><text x="${X(OBS + .5) + 4}" y="${h - B - 4}" font-size="10" fill="#8a8a80">projeção →</text>`;
+  if (x0 <= 2020) s += `<rect x="${X(Math.max(x0, 2019.5))}" y="${T}" width="${X(2022.5) - X(Math.max(x0, 2019.5))}" height="${h - T - B}" fill="#eeeae0" opacity=".6"/><text x="${X(2021)}" y="${T + 11}" font-size="10" fill="#8a8a80" text-anchor="middle">pandemia</text>`;
+  s += `<line x1="${X(proj)}" x2="${X(proj)}" y1="${T}" y2="${h - B}" stroke="#bbb" stroke-dasharray="3 3"/><text x="${X(proj) + 4}" y="${h - B - 4}" font-size="10" fill="#8a8a80">projeção →</text>`;
   for (const q of quebras) s += `<line x1="${X(q.x)}" x2="${X(q.x)}" y1="${T}" y2="${h - B}" stroke="${'#a4501d'}" stroke-dasharray="2 2"/><text x="${X(q.x) + 3}" y="${T + 24}" font-size="10" fill="#a4501d">${q.t}</text>`;
   for (let i = 0; i <= 4; i++) { const v = lo + (hi - lo) * i / 4; s += `<line x1="${L}" x2="${w - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#eee"/><text x="${L - 6}" y="${Y(v) + 4}" font-size="10" text-anchor="end" fill="#888">${fmtY(v)}</text>`; }
   for (let x = x0; x <= x1; x++) if ((x - x0) % 2 === 0 || x === x1) s += `<text x="${X(x)}" y="${h - 8}" font-size="10" text-anchor="middle" fill="#888">${x}</text>`;
@@ -790,8 +1236,10 @@ function renderAgenda() {
   $('#ag-blocos').innerHTML = `<table><tr><th>Bloco</th><th class="r">Ifes</th><th class="r">Bloco da Rede</th><th class="r">Fatia</th></tr>${bl.map(([n, v, t]) => `<tr><td>${n}</td><td class="r num">R$ ${fmt(v, 2)} mi</td><td class="r num">R$ ${fmt(t, 1)} mi</td><td class="r num">${pct(v / t, 2)}</td></tr>`).join('')}</table>`;
   const dg = [['Técnico 44% → 50%', '+2,06 mi', 'Portfólio dos campi e do Cefor', 'est'], ['Técnico → 60%', '+4,76 mi', 'Idem, prazo longo', 'est'], ['Formação de professores → 20%', '+1,27 mi', 'Confirmar reclassificação de 2025', 'hip'], ['RAP 18,15 → 20', '+0,85 mi', '≈ +2.800 MEq presenciais com o mesmo quadro docente', 'est'], ['RAP abaixo de 18', '−0,73 mi', 'Margem: 224 MEq presenciais (0,8%)', 'est'], ['IEA: próximo degrau (+1,7 p.p.)', '+0,51 mi', 'Permanência e conclusão', 'est'], ['EJA → 2,5%', '+0,31 mi', 'Oferta PROEJA', 'est']];
   $('#ag-degraus').innerHTML = `<tr><th>Degrau</th><th class="r">Exercício</th><th>Alavanca</th></tr>` + dg.map(d => `<tr><td>${d[0]} ${tag(d[3])}</td><td class="r num ${d[1][0] === '−' ? 'down' : 'up'}">${d[1]}</td><td class="small">${d[2]}</td></tr>`).join('');
-  const pa = [['Vitória', 'em elaboração'], ['Serra', 'em elaboração'], ['Itapina', 'proposta encaminhada ' + tag('il')], ['Barra de São Francisco', 'proposta encaminhada ' + tag('il')], ['Cefor (EaD)', 'em elaboração ' + tag('il')]];
-  $('#ag-pauta').innerHTML = `<tr><th>Unidade</th><th>Situação</th></tr>` + pa.map(([u, s]) => `<tr><td>${u}</td><td>${PROPOSTAS[u === 'Vitória' ? 'vitoria' : u === 'Serra' ? 'serra' : ''] ? '<span class="up">proposta encaminhada</span>' : s}</td></tr>`).join('');
+  const its = ITENS.filter(i => !i.teste), uns = [...new Set(its.map(i => i.un))];
+  $('#ag-pauta').innerHTML = `<tr><th>Unidade</th><th class="r">Itens</th><th>Situação</th></tr>` + uns.map(u => { const g = its.filter(i => i.un === u); return `<tr><td>${UNID[u]} ${g.every(i => i.ilus) ? tag('il') : ''}</td><td class="r num">${g.length}</td><td>${Object.keys(ESTADOS).filter(e => g.some(i => i.estado === e)).map(e => chipE(e) + ' <span class="tiny">' + g.filter(i => i.estado === e).length + '</span>').join(' ')}</td></tr>`; }).join('');
+  const comp = compor(ITENS.filter(i => !i.teste)), r = resumoDesafio(comp);
+  $('#ag-desafio').innerHTML = `<div class="small"><b>Desafio da Reitoria</b> ${tag('il', 'fictício')}: ${pct(MATRIZ.part0, 2)} → ${pct(DESAFIO.meta, 2)} no exercício ${DESAFIO.ex}. Com a pauta atual, ${pct(r.c, 2)}: faltam ${ppx(r.falta)} (≈ ${brl(r.fR)}). <a href="#objetivo">Ver o desafio</a> · <a href="#mesa">abrir a mesa</a></div>`;
 }
 
 /* ================= campus ================= */
@@ -841,6 +1289,17 @@ function renderCampus() {
   const oc = usoCapacidade(b, cap, FIM).filter(r => r.uso < 0.6);
   if (oc.length) sinais.push(`<b>Ociosidade projetada em 2035</b> mantendo a oferta: ${oc.map(r => r.rec + ' (' + pct(r.uso, 0) + ')').join(', ')} ${tag('il')}.`);
   $('#cp-sinais').innerHTML = sinais.map(x => `<li style="margin-bottom:6px">${x}</li>`).join('');
+  const conv = ITENS.filter(i => i.un === campus && i.p && i.origem.startsWith('Reitoria'));
+  $('#cp-desafio').innerHTML = `<div class="resposta"><b>Desafio da Reitoria${DESAFIO.publicado ? '' : ' (em discussão)'}</b> ${tag('il', 'fictício')}: participação na matriz de ${pct(MATRIZ.part0, 2)} para ${pct(DESAFIO.meta, 2)} no exercício ${DESAFIO.ex}. Não há cota por campus: ${CAMPI[campus]} propõe contribuições conforme seu portfólio, a procura e a capacidade que tem ou precisa obter. ${conv.length ? `<b>${conv.length} convite${conv.length > 1 ? 's' : ''} da Reitoria</b> nos cursos abaixo.` : ''}</div>`;
+  $('#cp-cursos').innerHTML = cp.lista.map(o => {
+    const s = o.of.serie[OBS], pq = [];
+    if (o.k.e >= 0.25) pq.push(`evasão anual de ${pct(o.k.e, 0)}`);
+    if (o.ocup < 0.9 && o.insc >= o.vagas * 0.95 && o.vagas) pq.push(`ocupação de ${pct(o.ocup, 0)} com ${fmt(o.insc)} inscritos`);
+    if (o.demandaExtra >= Math.max(36, o.vagas * 0.5)) pq.push(`${fmt(o.insc)} inscritos para ${fmt(o.vagas)} vagas`);
+    if (o.naoInt && o.insc < o.vagas) pq.push('procura abaixo das vagas');
+    const its = ITENS.filter(i => i.curso === o.id);
+    return `<div class="cur-l"><div><b>${o.nome}</b><div class="tiny">${{ M: 'matutino', V: 'vespertino', N: 'noturno' }[o.turno]} · ${fmt(s[3])} matrículas</div></div><div class="small">${pq.length ? pq.join('; ') + ' ' + tag('fato') : '<span class="tiny">sem sinal nos dados de 2025</span>'}</div><div>${its.map(i => `${chipE(i.estado)}${i.origem.startsWith('Reitoria') ? ' <span class="tiny">convite da Reitoria</span>' : ''}`).join('<br>') || '<span class="tiny">—</span>'}</div><div><button class="btn mini ${its.some(i => i.p) ? '' : 'ghost'}" onclick="irCurso('${campus}','${o.id}')">Abrir o curso</button></div></div>`;
+  }).join('');
 }
 function calor(sim, cap) {
   const anos = [OBS, ...FUT], rec = usoCapacidade(sim, cap, OBS).map(r => r.rec);
@@ -967,84 +1426,392 @@ function renderPlacar(s, b, sp, so, r) {
   $('#placar-nota').innerHTML = `Formação técnica do Ifes em 2035 com este cenário: <b>${pct(ifS(FIM).pct.ct, 2)}</b> (manter: ${pct(ifB(FIM).pct.ct, 2)}). ${cr ? 'Cruza 50%: ver referência de Qualidade na mesa.' : 'Não cruza o degrau de 50% sozinho: a referência de Qualidade só aparece na composição institucional.'} MT e referência em reais usam premissas de carga horária (${PREM.ch_int} h/ano integrado, ${PREM.ch_naoint} h/ano não integrado) e peso (${fmt(PREM.peso_int, 1)}) ${tag('prem')}, preço marginal de 2026 e demais instituições constantes.`;
 }
 function encaminhar() {
-  PROPOSTAS[campus] = { alav: JSON.parse(JSON.stringify(ALAV[campus])), nome: PRESETS[presetAtivo[campus]]?.nome || 'combinação própria' };
-  ESC[campus] = 'P'; toast('Proposta de ' + CAMPI[campus] + ' encaminhada à mesa de composição.'); go('mesa');
+  const nome = PRESETS[presetAtivo[campus]]?.nome || 'combinação própria', id = 'banc-' + campus;
+  const it = { id, un: campus, tipo: 'proposta', origem: 'Campus (bancada)', estado: 'proposta', incluir: true, titulo: `Proposta combinada da bancada: ${nome}`,
+    motivo: 'Encaminhada da bancada com alavancas, premissas, edição da PNP e versão do motor congeladas. Se mexer nas mesmas ofertas de outros itens, aparece como sobreposta.',
+    vars: { base: { n: nome, ops: JSON.parse(JSON.stringify(opsDe(ALAV[campus]).map(o => ({ ...o, desde: Math.max(o.desde, 2028) })))) } }, var: 'base',
+    acompanhar: { ind: 'Vagas ofertadas, ocupação e evasão nas ofertas alteradas', resp: 'Direção de ensino de ' + CAMPI[campus] } };
+  const i = ITENS.findIndex(x => x.id === id); if (i >= 0) ITENS[i] = it; else ITENS.push(it);
+  itemSel = id; abertos.add(id); rolar = true; toast('Proposta de ' + CAMPI[campus] + ' encaminhada à pauta da mesa de composição.'); go('mesa');
 }
 
-/* ================= mesa ================= */
-const ESC = { vitoria: 'M', serra: 'M', itapina: 'M', barra: 'M', cefor: 'M' };
-const ramp = (t, de, ate, v) => t < de ? 0 : t >= ate ? v : v * (t - de + 1) / (ate - de + 1);
-const ILUS = {
-  itapina: { nome: 'Itapina', opc: { M: 'Manter', X: 'Expansão (Alimentos)' }, f: { X: t => ({ ct: ramp(t, 2027, 2030, 100), meq: ramp(t, 2027, 2030, 100), conc: t >= 2030 ? 22 : 0, prof: ramp(t, 2027, 2030, 6), mt: ramp(t, 2027, 2030, 140), rest: 2029 }) } },
-  barra: { nome: 'Barra de São Francisco', opc: { M: 'Manter', X: 'Expansão (Administração)' }, f: { X: t => ({ ct: ramp(t, 2027, 2029, 120), meq: ramp(t, 2027, 2029, 120), conc: t >= 2029 ? 30 : 0, prof: ramp(t, 2027, 2029, 6), mt: ramp(t, 2027, 2029, 150), rest: 2029 }) } },
-  cefor: { nome: 'Cefor (EaD)', opc: { M: 'Manter', X: 'Reorientar parte da EaD para técnico' }, f: { X: t => ({ ct: ramp(t, 2027, 2029, 860), meq: 0, fp: -ramp(t, 2027, 2029, 860), conc: 0, prof: 0, mt: 0, rest: null }) } },
-};
-let combos = [], mesaInd = 'ct';
+/* ================= pauta, desafio, curso e mesa (3ª rodada) ================= */
+let ITENS = [...criarPauta(), ...itensTeste()], itemSel = 'exp-mec', comTeste = false, zoomPart = false, mesaInd = 'part', qInd = 'part', ondeH = 'red', combos = [];
+const abertos = new Set(['exp-mec']);
+const FILTRO = { un: '', tipo: '', estado: '', so: false };
 const CORC = ['#b5651d', '#5b4a9b', '#8a3b6b'];
-function simCampusEsc(k) { const e = ESC[k]; if (e === 'M') return BASE[k]; if (e === 'P') return simular(CP[k], PROPOSTAS[k].alav); return simular(CP[k], aplicarPreset(CP[k], e)); }
-function extrasAtivos() { return Object.entries(ILUS).filter(([k]) => ESC[k] !== 'M').map(([k, u]) => u.f[ESC[k]]); }
-function trajetoria(sims, extras) { return [OBS, ...FUT].map(t => [t, ifesEm(t, sims, extras)]); }
-function renderMesa() {
-  const sims = ['vitoria', 'serra'].map(simCampusEsc), base = [BASE.vitoria, BASE.serra], ex = extrasAtivos();
-  const tB = trajetoria(base, []), tC = trajetoria(sims, []), tI = trajetoria(sims, ex);
-  const MI = { ct: { n: 'Formação técnica do Ifes', f: o => o.pct.ct, y: v => pct(v, 1) }, fp: { n: 'Formação de professores', f: o => o.pct.fp, y: v => pct(v, 1) }, conc: { n: 'Concluintes técnicos (Vitória + Serra)', y: v => fmt(v) }, prof: { n: 'Prof.-eq. adicionais', y: v => fmt(v, 1) } };
-  $('#mesa-tabs').innerHTML = Object.entries(MI).map(([k, v]) => `<button class="${k === mesaInd ? 'on' : ''}" onclick="mesaInd='${k}';renderMesa()">${v.n}</button>`).join('');
-  let series = [], hl = [], quebras = [], x0 = 2017;
-  if (mesaInd === 'ct' || mesaInd === 'fp') {
-    const k = mesaInd, obs = HIST.filter(t => t >= 2021).map(t => [t, D.ifes[t][k] / D.ifes[t].meq]);
-    x0 = 2021;
-    series.push({ pts: obs, cor: '#1d2321', w: 2.2, dots: true });
-    series.push({ pts: tB.map(([t, o]) => [t, o.pct[k]]), cor: '#7d8582', dash: '6 4' });
-    combos.forEach((c, i) => series.push({ pts: c.pts.map(p => [p[0], p[1][k]]), cor: CORC[i], w: 1.6 }));
-    series.push({ pts: tC.map(([t, o]) => [t, o.pct[k]]), cor: '#1f5f55', w: 3 });
-    if (ex.length) series.push({ pts: tI.map(([t, o]) => [t, o.pct[k]]), cor: '#1f5f55', w: 2, dash: '2 3' });
-    if (k === 'ct') hl = [{ y: .5, cor: '#9a6a12', t: 'degrau 50% = meta legal' }, { y: .47, cor: '#1f5f55', t: 'meta pactuada 47% (ilustr.)' }];
-    else hl = [{ y: .2, cor: '#9a6a12', t: 'degrau 20% = meta legal' }, { y: .15, cor: '#9a6a12', t: 'degrau 15%' }];
-  } else {
-    x0 = OBS;
-    const f = mesaInd === 'conc' ? (s, t) => s.anos[t].conc : (s, t) => s.anos[t].prof - (t === OBS ? s.anos[t].prof : 0);
-    if (mesaInd === 'conc') { series.push({ pts: [OBS, ...FUT].map(t => [t, base[0].anos[t].conc + base[1].anos[t].conc]), cor: '#7d8582', dash: '6 4', rot: 'manter' }); series.push({ pts: [OBS, ...FUT].map(t => [t, sims[0].anos[t].conc + sims[1].anos[t].conc]), cor: '#1f5f55', w: 3, rot: 'calculadas' }); }
-    else { series.push({ pts: [OBS, ...FUT].map(t => [t, sims[0].anos[t].prof - base[0].anos[t].prof + sims[1].anos[t].prof - base[1].anos[t].prof]), cor: '#1f5f55', w: 3, rot: 'calculadas' }); if (ex.length) series.push({ pts: [OBS, ...FUT].map(t => [t, sims[0].anos[t].prof - base[0].anos[t].prof + sims[1].anos[t].prof - base[1].anos[t].prof + ex.reduce((s, e) => s + (e(t).prof || 0), 0)]), cor: '#1f5f55', w: 2, dash: '2 3', rot: '+ ilustrativas' }); }
+const itensVis = () => ITENS.filter(i => comTeste || !i.teste);
+const nomeUn = i => i.unNome || UNID[i.un];
+const chaveUn = i => i.unNome || i.un;
+const chipE = e => `<span class="st st-${e}">${ESTADOS[e]}</span>`;
+const sbrl = v => Math.abs(v) < 500 ? 'R$ 0' : (v < 0 ? '−' : '+') + brl(Math.abs(v));
+const ppx = (v, d = 2) => sn(100 * v, d) + ' p.p.';
+const MT_IFES = 62.8e6 / 1220.40;   // MT ponderada do Ifes implícita em Funcionamento 2026 (estimado)
+const somaK = (sims, f, t) => Object.keys(sims).reduce((s, k) => s + sims[k].anos[t][f], 0);
+const somaX = (extras, f, t) => extras.reduce((s, e) => s + (e(t)[f] || 0), 0);
+function barras(vals, w = 110, h = 26) {
+  const mx = Math.max(1, ...vals.map(v => Math.abs(v[1]))), bw = w / vals.length;
+  let s = `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true"><line x1="0" x2="${w}" y1="${h / 2}" y2="${h / 2}" stroke="#ccc"/>`;
+  vals.forEach(([t, v], i) => { const hh = Math.abs(v) / mx * (h / 2 - 1), d = ANOS4.includes(t); s += `<rect x="${i * bw + 1}" y="${v >= 0 ? h / 2 - hh : h / 2}" width="${bw - 2}" height="${Math.max(hh, 0.6)}" fill="${v >= 0 ? (d ? '#1f5f55' : '#9fc3bb') : (d ? '#a83232' : '#e0a4a4')}"><title>${t}: ${sn(v)}</title></rect>`; });
+  return s + '</svg>';
+}
+function restrItem(it, com) {
+  const v = varDe(it), cod = ITENS.find(i => i.id === 'cod1');
+  const cap = { ...CAP[it.un], adds: [...(v.adds || []), ...(com && cod ? [cod.add[it.un]] : [])] };
+  return primeiraRestricao(simCache(it.un, v.ops, 'central'), cap);
+}
+const txtRest = r => r ? `${r.ano} · ${r.rec.map(x => x.rec.replace('Docentes · ', 'docentes de ').replace(' · ', ' no turno ')).join(', ')}` : 'nenhuma até 2035';
+function refItem(e, t) { return e ? dReais(t, e.sims || { ...BASE }, e.extras).r : 0; }
+
+/* ---------- desafio ---------- */
+function exLe(ex) {
+  const t = ex - 2;
+  if (t <= 2027) return `lê o ano letivo de ${t}: nenhuma decisão do plano de oferta 2028 chega a tempo.`;
+  if (t === 2028) return `lê o ano letivo de 2028: só conta o primeiro ano das decisões do ciclo 2028. Permanência e ocupação pesam mais que abrir ou pausar cursos.`;
+  return `lê o ano letivo de ${t}: ${t - 2027} ano(s) das decisões do ciclo 2028.`;
+}
+function resumoDesafio(comp) {
+  const ex = DESAFIO.ex, b = partBase(ex), c = participacao(ex, comp.sims), ci = participacao(ex, comp.sims, comp.extras);
+  const falta = DESAFIO.meta - c, fR = falta * MATRIZ.total / REDE[DESAFIO.rede].f(ex), dist = DESAFIO.meta - MATRIZ.part0;
+  return { ex, b, c, ci, falta, fR, mt: fR / PREM.rs_mt, fec: dist > 0 ? (c - b) / (DESAFIO.meta - b) : 0, feci: dist > 0 ? (ci - b) / (DESAFIO.meta - b) : 0 };
+}
+function htmlDesafioBar(comp) {
+  const r = resumoDesafio(comp), w = v => Math.max(0, Math.min(100, 100 * v));
+  return `<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:baseline"><h2 style="flex:1;margin:0">Desafio da Reitoria: ${pct(MATRIZ.part0, 2)} → ${pct(DESAFIO.meta, 2)} no exercício ${r.ex} ${tag('il', 'fictício')}</h2>${DESAFIO.publicado ? chipE('proposta').replace('proposta do campus', 'publicado aos campi') : '<span class="tiny">em discussão</span>'}</div>
+  <div class="barra-dz" title="Fração da distância entre sem novas decisões e a meta"><i class="il" style="width:${w(r.feci)}%"></i><i style="width:${w(r.fec)}%"></i><span>${fmt(100 * r.fec, 1)}% da distância com as unidades calculadas · ${fmt(100 * r.feci, 1)}% com as ilustrativas</span></div>
+  <div class="grid g4" style="margin-top:8px">
+    <div><div class="small">Sem novas decisões · exerc. ${r.ex}</div><div class="kpi s">${pct(r.b, 2)}</div><div class="tiny">${REDE[DESAFIO.rede].n}${DESAFIO.fp ? '; FP ≥ 20%' : ''}</div></div>
+    <div><div class="small">Com a pauta · calculadas</div><div class="kpi s">${pct(r.c, 2)} ${tag('est')}</div><div class="tiny">${sbrl((r.c - r.b) * MATRIZ.total)} na parcela simulada</div></div>
+    <div><div class="small">Ainda falta</div><div class="kpi s">${ppx(r.falta)}</div><div class="tiny">≈ ${brl(r.fR)} ≈ ${fmt(r.mt)} MT (${fmt(100 * r.mt / MT_IFES, 0)}% da MT do Ifes)</div></div>
+    <div><div class="small">Quando os efeitos chegam</div><div class="small">O exercício ${r.ex} ${exLe(r.ex)}</div></div>
+  </div>`;
+}
+function renderDesafio() {
+  $('#dz-meta').value = fmt(100 * DESAFIO.meta, 2).replace(',', '.');
+  $('#dz-ex').innerHTML = [2028, 2029, 2030, 2031, 2032, 2033].map(e => `<option value="${e}" ${e === DESAFIO.ex ? 'selected' : ''}>exercício ${e}${e === 2030 ? ' (quatro anos)' : ''}</option>`).join('');
+  $('#dz-le').textContent = 'O exercício ' + DESAFIO.ex + ' ' + exLe(DESAFIO.ex);
+  $('#dz-rede').innerHTML = Object.entries(REDE).map(([k, r]) => `<option value="${k}" ${k === DESAFIO.rede ? 'selected' : ''}>${r.n}</option>`).join('');
+  $('#dz-fp').checked = DESAFIO.fp; $('#dz-pub').textContent = DESAFIO.publicado ? 'Publicado aos campi ✓' : 'Publicar e convidar os campi';
+  const comp = compor(itensVis()), m = macroExtra(DESAFIO.macro);
+  const pts = f => EXS.map(e => [e, f(e)]);
+  const series = [
+    { pts: pts(e => partBase(e)), cor: '#7d8582', dash: '6 4', w: 2 },
+    { pts: pts(e => participacao(e, BASE, [m])), cor: '#b5651d', dash: '3 3', w: 2 },
+    { pts: pts(e => participacao(e, comp.sims)), cor: '#1f5f55', w: 3 },
+    { pts: [[MATRIZ.ex0, MATRIZ.part0]], cor: '#1d2321', dots: true },
+  ];
+  $('#dz-graf').innerHTML = grafico({ series, x0: MATRIZ.ex0, x1: FIM, proj: MATRIZ.ex0 + 0.5, h: 240, fmtY: v => pct(v, 2), hlines: [{ y: DESAFIO.meta, cor: '#a4501d', t: 'meta ' + pct(DESAFIO.meta, 2) }], marcas: [{ x: DESAFIO.ex, t: 'horizonte', cor: '#a4501d' }] });
+  $('#dz-leg').innerHTML = `<span><i style="background:#1d2321"></i>observado 2026 ${tag('est')}</span><span><i style="background:#7d8582"></i>sem novas decisões ${tag(REDE[DESAFIO.rede].nat)}</span><span><i style="background:#1f5f55;height:4px"></i>pauta atual, unidades calculadas ${tag('est')}</span><span><i style="background:#b5651d"></i>hipótese macro ${tag('hip')}</span>`;
+  const r = resumoDesafio(comp), mm = participacao(DESAFIO.ex, BASE, [m]);
+  $('#dz-resumo').innerHTML = `<ul class="lst"><li><b>Distância:</b> ${ppx(DESAFIO.meta - partBase(DESAFIO.ex))} no exercício ${DESAFIO.ex}, ≈ ${brl((DESAFIO.meta - partBase(DESAFIO.ex)) * MATRIZ.total)} ou ≈ ${fmt((DESAFIO.meta - partBase(DESAFIO.ex)) * MATRIZ.total / PREM.rs_mt)} MT a mais (${fmt(100 * (DESAFIO.meta - partBase(DESAFIO.ex)) * MATRIZ.total / PREM.rs_mt / MT_IFES, 0)}% da MT do Ifes).</li><li><b>Pauta atual</b> (${itensVis().filter(i => i.incluir).length} itens): ${pct(r.c, 2)}, ${fmt(100 * r.fec, 1)}% da distância. As propostas aproximam, mas não alcançam.</li><li><b>Hipótese macro</b> aplicada a todo o Ifes: ${pct(mm, 2)}.</li><li>O exercício ${DESAFIO.ex} ${exLe(DESAFIO.ex)}</li></ul>`;
+  // peças
+  const pc = pecas(), dist = (DESAFIO.meta - partBase(DESAFIO.ex)) * MATRIZ.total;
+  $('#dz-pecas').innerHTML = `<tr><th>Peça</th><th class="r">Por exercício</th><th>Primeiro exercício possível</th><th>Observação</th></tr>` + pc.map(x => `<tr><td>${x.n} ${tag(x.nat)}</td><td class="r num">${sbrl(x.v)}</td><td class="small">${x.ex ? x.ex + (x.ex > DESAFIO.ex ? ' <span class="down">depois do horizonte</span>' : '') : '—'}</td><td class="small">${x.obs}</td></tr>`).join('');
+  const soma = pc.filter(x => !['Formação técnica ≥ 50%', 'Cada +1.000 MT presenciais'].includes(x.n)).reduce((s, x) => s + x.v, 0);
+  $('#dz-pecas-nota').innerHTML = `Todos os degraus de Qualidade juntos (técnico até 60%, formação de professores, RAP, IEA, EJA) valem ≈ ${brl(soma)} por exercício. A distância é ≈ ${brl(dist)}: ${dist > soma ? `mesmo com todos, faltariam ≈ ${brl(dist - soma)}, ≈ ${fmt((dist - soma) / PREM.rs_mt)} MT a mais` : 'os degraus cobririam a distância, se alcançados a tempo'}. Valores marginais, regime de 2026, demais instituições constantes. A meta pode ser mantida como direção, recalibrada ou ter o horizonte alongado: decisão do colegiado.`;
+  // macro
+  $('#dz-red').value = DESAFIO.macro.red; $('#dz-red-v').textContent = pct(DESAFIO.macro.red, 0); $('#dz-pre').checked = DESAFIO.macro.preencher; $('#dz-amp').value = DESAFIO.macro.amplia; $('#dz-amp-v').textContent = '+' + pct(DESAFIO.macro.amplia, 0);
+  const tz = [DESAFIO.ex - 2, 2031];
+  $('#dz-macro').innerHTML = `Se todo o técnico presencial do Ifes reagisse como Vitória e Serra (efeito dos dois campi × ${fmt(escalaIfes(), 1)}, razão da matrícula equivalente técnica de 2025) ${tag('hip')}: ${tz.map(t => `ano letivo ${t}: ${sn(m(t).mat || 0)} matrículas, ${sn(m(t).mt || 0)} MT, participação ${pct(participacao(t + 2, BASE, [m]), 2)} no exercício ${t + 2}`).join('; ')}. Distância restante no horizonte: ${ppx(DESAFIO.meta - participacao(DESAFIO.ex, BASE, [m]))}.`;
+  $('#dz-onde-tabs').innerHTML = [['red', 'Permanência'], ['preencher', 'Ocupação'], ['amplia', 'Ampliação']].map(([k, n]) => `<button class="${k === ondeH ? 'on' : ''}" onclick="ondeH='${k}';renderDesafio()">${n}</button>`).join('');
+  const ond = ondeTemBase(ondeH);
+  $('#dz-onde').innerHTML = `<tr><th>Campus · oferta</th><th>Por que aparece</th><th>Situação</th><th></th></tr>` + ond.map(r => {
+    const ex = ITENS.find(i => i.curso === r.o.id && i.tipo === r.tipo);
+    return `<tr><td>${CAMPI[r.k]} · ${r.o.nome}</td><td class="small">${r.porque} ${tag('fato')}</td><td>${ex ? chipE(ex.estado) : '<span class="tiny">—</span>'}</td><td>${ex ? `<button class="btn mini ghost" onclick="irCurso('${r.k}','${r.o.id}')">Abrir o curso</button>` : `<button class="btn mini" onclick="convidar('${r.k}','${r.o.id}','${r.tipo}')">Convidar o curso</button>`}</td></tr>`;
+  }).join('');
+}
+function publicarDesafio() { DESAFIO.publicado = true; renderDesafio(); toast('Desafio publicado. Os campi veem o convite na ficha do campus.'); }
+function convidar(k, of, tipo) {
+  const o = CP[k].lista.find(x => x.id === of);
+  const it = itemCurso(k, of, tipo, { red: 0.25, alvo: 0.95, n: 36, motivo: `o desafio encontrou base nos dados: ${ondeTemBase(ondeH).find(r => r.o.id === of)?.porque || ''}.` }, 'Reitoria', 'hipotese');
+  if (!ITENS.find(i => i.id === it.id)) ITENS.push(it);
+  DESAFIO.publicado = true; renderDesafio(); toast(`Convite enviado a ${o.nome} (${CAMPI[k]}). Entra na pauta como hipótese.`);
+}
+
+/* ---------- curso ---------- */
+let CURSO = { k: 'vitoria', of: null, tipo: 'permanencia', red: 0.25, alvo: 0.95, n: 36, confirma: false };
+function tipoSugerido(o) { if (o.k.e >= 0.25) return 'permanencia'; if (o.ocup < 0.9 && o.insc >= o.vagas * 0.95) return 'ocupacao'; if (o.demandaExtra >= 36) return 'expansao'; return 'permanencia'; }
+const itemDoCurso = (of, tipo) => ITENS.find(i => i.curso === of && i.p && (!tipo || i.tipo === tipo));
+function irCurso(k, of) {
+  campus = k; const o = CP[k].lista.find(x => x.id === of), ex = itemDoCurso(of);
+  CURSO = { k, of, tipo: ex ? ex.tipo : tipoSugerido(o), red: ex?.p.red ?? 0.25, alvo: ex?.p.alvo ?? 0.95, n: ex?.p.n ?? 36, confirma: false };
+  if (location.hash === '#curso') rota(); else go('curso');
+}
+function itemRascunho() { return itemCurso(CURSO.k, CURSO.of, CURSO.tipo, { red: CURSO.red, alvo: CURSO.alvo, n: CURSO.n }, 'Curso', 'hipotese'); }
+function renderCurso() {
+  if (!CURSO.of) { const o = CP[campus].lista.find(x => x.naoInt && x.k.e >= 0.25) || CP[campus].lista[0]; CURSO = { ...CURSO, k: campus, of: o.id, tipo: tipoSugerido(o) }; }
+  const k = CURSO.k, cp = CP[k], o = cp.lista.find(x => x.id === CURSO.of), atual = itemDoCurso(o.id, CURSO.tipo);
+  document.querySelectorAll('.nomeCampus').forEach(e => e.textContent = CAMPI[k]);
+  $('#cu-nome').textContent = o.nome.replace(' · ', ' ') + ' · ' + CAMPI[k];
+  const est = atual ? atual.estado : null;
+  $('#cu-passos').innerHTML = Object.entries(ESTADOS).map(([e, n]) => `<span class="${e === (est || 'hipotese') ? 'on' : ''}">${n}</span>`).join('<span style="border:0;padding:3px 0">→</span>') + (atual ? `<span style="border:0" class="tiny">origem: ${atual.origem}</span>` : '<span style="border:0" class="tiny">rascunho, ainda fora da pauta</span>');
+  $('#cu-obj').innerHTML = `<p style="margin-top:0"><b>Desafio da Reitoria</b> ${tag('il', 'fictício')}: participação na matriz de ${pct(MATRIZ.part0, 2)} para ${pct(DESAFIO.meta, 2)} no exercício ${DESAFIO.ex}${DESAFIO.publicado ? ', publicado aos campi' : ', em discussão'}.</p>${atual && atual.origem.startsWith('Reitoria') ? `<p class="resposta" style="margin:8px 0">Convite da Reitoria: ${atual.motivo}</p>` : ''}<p>O curso não recebe uma parte desse percentual, que é relativo à Rede e não depende só do Ifes. O que o curso influencia, e acompanha com os professores, é o caminho até ele:</p><ul class="lst"><li>ocupação das vagas no ingresso;</li><li>permanência, sobretudo no 1º ano;</li><li>conclusão no prazo.</li></ul><p class="tiny">Essas três coisas movem a matrícula total e a conclusão, que entram na matriz pela contribuição do campus à composição institucional.</p>`;
+  const s = o.of.serie[OBS];
+  $('#cu-sit').innerHTML = `<table><tr><th>PNP 2025</th><th class="r">Valor</th></tr><tr><td>Vagas · inscritos</td><td class="r num">${fmt(s[0])} · ${fmt(s[1])}</td></tr><tr><td>Ingressantes · ocupação</td><td class="r num">${fmt(s[2])} · ${pct(o.ocup, 0)}</td></tr><tr><td>Matrículas · concluintes</td><td class="r num">${fmt(s[3])} · ${fmt(s[4])}</td></tr><tr><td>Evasão anual (média 2023–2025) ${tag('fato')}</td><td class="r num">${pct(o.k.e, 0)}</td></tr><tr><td>Evasão no 1º ano</td><td class="r">${tag('ne', 'dado do sistema acadêmico')}</td></tr><tr><td>Matrículas 2017–2025</td><td class="r">${spark(HIST.map(t => o.of.serie[t] ? o.of.serie[t][3] : null))}</td></tr></table><p class="nota">A PNP não separa a evasão por ano do curso. O campus traria esse número do sistema acadêmico; o motor representa a ação no 1º ano como redução da evasão anual da oferta ${tag('prem')}.</p>`;
+  const T = { permanencia: 'Permanência no 1º ano', ocupacao: 'Preencher as vagas', pausa: 'Pausar entradas', expansao: 'Ampliar vagas' };
+  $('#cu-tipos').innerHTML = Object.entries(T).map(([t, n]) => `<button class="${t === CURSO.tipo ? 'on' : ''}" onclick="CURSO.tipo='${t}';renderCurso()">${n}</button>`).join('');
+  const P = {
+    permanencia: `<div class="alav on"><div class="corpo"><div class="ln">Redução esperada da evasão <b class="num">${pct(CURSO.red, 0)}</b></div><input type="range" min="0.05" max="0.5" step="0.05" value="${CURSO.red}" onchange="CURSO.red=+this.value;renderCurso()"><div class="tiny">${tag('hip')} Nenhum dado da PNP sustenta o tamanho do efeito. Ação: acolhimento, monitoria, acompanhamento de faltas no 1º semestre (a definir pela coordenação).</div></div></div>`,
+    ocupacao: `<div class="alav on"><div class="corpo"><div class="ln">Ocupação-alvo <b class="num">${pct(CURSO.alvo, 0)}</b></div><input type="range" min="0.8" max="1" step="0.05" value="${CURSO.alvo}" onchange="CURSO.alvo=+this.value;renderCurso()"><div class="tiny">${o.insc >= o.vagas * CURSO.alvo ? `${fmt(o.insc)} inscritos para ${fmt(o.vagas)} vagas: a procura comporta ${tag('fato')}.` : `<span class="down">A procura de 2025 (${fmt(o.insc)} inscritos) não comporta o alvo: o motor não muda nada.</span>`} Ação: mais chamadas e lista de espera até o fim do prazo de matrícula.</div></div></div>`,
+    pausa: `<div class="alav on"><div class="corpo"><div>Nenhuma entrada em 2028. Turmas de 2026 e 2027 seguem até concluir.</div><div class="tiny">Libera salas e docentes à medida que as turmas saem. A oferta volta quando houver novo projeto de curso.</div></div></div>`,
+    expansao: `<div class="alav on"><div class="corpo"><div class="ln">Vagas a mais por ano <input type="number" step="4" value="${CURSO.n}" onchange="CURSO.n=+this.value;renderCurso()"></div><div class="tiny">Ocupação das novas limitada pela procura excedente de 2025: ≈ ${fmt(o.demandaExtra)} ${tag('fato')}.</div></div></div>`,
+  };
+  $('#cu-param').innerHTML = P[CURSO.tipo];
+  $('#cu-comp').innerHTML = {
+    permanencia: `Evasão no 1º ano, semestre a semestre, no sistema acadêmico. Na PNP, a evasão anual da oferta iria de ${pct(o.k.e, 0)} para ≈ ${pct(o.k.e * (1 - CURSO.red), 0)}.`,
+    ocupacao: `Ocupação das vagas no fim do prazo de matrícula de cada semestre: de ${pct(o.ocup, 0)} para ${pct(Math.max(o.ocup, CURSO.alvo), 0)}.`,
+    pausa: 'Conclusão no prazo das turmas em andamento; entrega do novo projeto de curso.',
+    expansao: 'Ocupação da turma nova e permanência no 1º ano.',
+  }[CURSO.tipo] + ' Não é a participação na matriz: é o que o curso consegue mover.';
+  const outros = ITENS.filter(i => i.curso === o.id && !i.p);
+  $('#cu-outros').innerHTML = outros.length ? `<b>Itens do campus nesta oferta:</b> ${outros.map(i => `${i.titulo} ${chipE(i.estado)}`).join('; ')}. Se os dois entrarem no conjunto, o segundo aparece como sobreposto e não é somado.` : '';
+  const it = itemRascunho(), e = efeitoItem(it, ITENS), cols = [...ANOS4, 2033];
+  const L = (n, f, d = 0) => `<tr><td>${n}</td>${cols.map(t => `<td class="r num ${t === 2033 ? 'fut' : ''}">${f(t)}</td>`).join('')}</tr>`;
+  $('#cu-efeito').innerHTML = `<tr><th>Diferença em relação a manter</th>${cols.map(t => `<th class="r ${t === 2033 ? 'fut' : ''}">${t}</th>`).join('')}</tr>` + L('Ingressantes', t => sn(e.d[t].ing)) + L('Matrículas', t => sn(e.d[t].mat)) + L('Concluintes', t => sn(e.d[t].conc)) + L('MT estimada ' + tag('prem'), t => sn(e.d[t].mt)) + `<tr><td>Referência na parcela simulada ${tag('est')}</td>${cols.map(t => `<td class="r num ${t === 2033 ? 'fut' : ''}">${sbrl(refItem(e, t))}<div class="tiny">exerc. ${t + 2}</div></td>`).join('')}</tr>`;
+  const q = quando(e.d);
+  $('#cu-contrib').innerHTML = `<b>Como isso contribui para o pacto do campus:</b> o efeito aparece em ${q.aparece || '—'}${q.conc ? `, chega aos concluintes em ${q.conc}` : ''} e estabiliza em ${q.pleno || '—'}. ${sn(e.d[2031].mat)} matrículas em 2031 e ${sn(ANOS4.reduce((s, t) => s + e.d[t].conc, 0))} concluintes de 2028 a 2031. Na matriz, ≈ ${sbrl(refItem(e, 2031))} na parcela simulada a partir do exercício 2033: evidência para a mesa, não meta do curso.`;
+  const dp = Math.max(...ANOS4.map(t => e.d[t].prof));
+  $('#cu-viab').innerHTML = `<p style="margin-top:0">${e.rest ? `<b class="down">Restrição em ${e.rest.ano}</b>: ${txtRest(e.rest)} ${tag('il')}.` : `Cabe na capacidade informada até 2035 ${tag('il')}.`} ${dp > 0.1 ? `Pede até ${fmt(dp, 1)} professores-equivalentes a mais.` : dp < -0.1 ? `Libera até ${fmt(-dp, 1)} professores-equivalentes.` : 'Não pede sala nem docente adicional; pede tempo da equipe (custo não estimado).'}</p><p class="tiny">O campus confere com a ficha de capacidade e com as outras propostas da unidade. A mesa verifica de novo com o conjunto.</p>`;
+  $('#cu-conf').checked = CURSO.confirma; $('#cu-levar').disabled = !CURSO.confirma; $('#cu-levar').style.opacity = CURSO.confirma ? 1 : 0.5;
+}
+function levarMesa(estado) {
+  const atual = itemDoCurso(CURSO.of, CURSO.tipo), novo = itemRascunho();
+  novo.estado = estado;
+  if (atual) { novo.id = atual.id; novo.origem = atual.origem === 'Reitoria' ? 'Reitoria → curso' : atual.origem; novo.motivo = atual.motivo || novo.motivo; ITENS[ITENS.indexOf(atual)] = novo; }
+  else { novo.motivo = 'Proposta da coordenação, avaliada pelo campus.'; ITENS.push(novo); }
+  itemSel = novo.id; abertos.add(novo.id); rolar = true;
+  if (estado === 'proposta') { toast('Proposta levada à mesa de composição.'); go('mesa'); } else { toast('Guardada como hipótese na pauta.'); renderCurso(); }
+}
+function abrirCadeiaCurso() { const it = itemRascunho(); abrirCadeia(it); }
+
+/* ---------- gaveta: decisão → trajetória → indicadores → matriz ---------- */
+function opsTexto(it) {
+  if (it.ilus) return 'Trajetória declarada pela unidade, não calculada pelo motor.';
+  const nm = id => nomeOf(it.un, id);
+  return varDe(it).ops.map(op => ({ ampliar: `+${op.n} vagas por ano em ${nm(op.oferta)} desde ${op.desde}${op.turno ? ', turno ' + { M: 'matutino', V: 'vespertino', N: 'noturno' }[op.turno] : ''}`, reduzir: `−${op.n} vagas em ${nm(op.oferta)} desde ${op.desde}`, pausar: `nenhuma entrada em ${nm(op.oferta)} desde ${op.desde}`, evasao: `evasão −${Math.round(op.red * 100)}% em ${op.ofertas ? op.ofertas.map(nm).join(', ') : 'todos os não integrados'} desde ${op.desde}`, preencher: `ocupação até ${Math.round(op.alvo * 100)}% em ${op.ofertas ? op.ofertas.map(nm).join(', ') : 'todos os não integrados'} desde ${op.desde}` }[op.t])).join('; ') + '.';
+}
+function abrirCadeia(itOuId) {
+  const it = typeof itOuId === 'string' ? ITENS.find(i => i.id === itOuId) : itOuId; if (!it) return;
+  const e = efeitoItem(it, ITENS), cols = [...ANOS4, 2033];
+  const mini = f => `<table><tr>${cols.map(t => `<th class="r">${t}</th>`).join('')}</tr><tr>${cols.map(t => `<td class="r num">${sn(e.d[t][f])}</td>`).join('')}</tr></table>`;
+  const nat = it.ilus ? tag('il') : tag('est');
+  CALC._ = { t: it.titulo, d: [
+    ['1 · Decisão', `${opsTexto(it)} ${it.vars && Object.keys(it.vars).length > 1 ? `Variante: ${varDe(it).n}.` : ''} ${chipE(it.estado)}`],
+    ['2 · Trajetória acadêmica', `${it.ilus ? '' : 'Coortes ano a ano: cada turma entra, progride por D anos, evade ou conclui no prazo; retidos ficam um ano a mais (motor da POC 0.0.2, calibrado em 2023–2025).'} Diferença em relação a manter, por ano letivo:<br><b>Matrículas</b>${mini('mat')}<b>Concluintes</b>${mini('conc')}`],
+    ['3 · Indicadores', `<b>Entram no cálculo da matriz:</b> MT (ativos × horas ÷ 800 × peso, retidos ¼) ${tag('prem')}; percentuais de formação técnica, de professores e EJA do Ifes, pela razão das somas ${tag('est')}.<br><b>Explicam o resultado:</b> ocupação, evasão, concluintes, retidos.<br><b>Avaliam a viabilidade:</b> salas por turno, laboratório crítico, docentes por área, recursos (código, bloco) ${tag('il')}. Restrição: ${e ? txtRest(e.rest) : '—'}.<br><b>Não estimados:</b> IEA e RAP da matriz ${tag('ne')}.`],
+    ['4 · Efeito na matriz', `ΔMT do ano letivo × R$ ${fmt(PREM.rs_mt)} (preço marginal de 2026) + mudança de degrau de Qualidade, no exercício dois anos depois. Exercício 2033: ${sbrl(refItem(e, 2031))} ${nat}, ${ppx(refItem(e, 2031) / MATRIZ.total, 3)} de participação.`],
+    ['Total da Rede', `R$ 2.205,8 mi do exercício 2026, mantido. Cenário: ${REDE[DESAFIO.rede].n} ${tag(REDE[DESAFIO.rede].nat)}. É estimativa da parcela simulada, não previsão do orçamento do Ifes.`],
+    ['Composição', 'Na mesa, os itens de um campus rodam juntos no mesmo motor e o percentual do Ifes é recalculado pela razão das somas. Percentuais locais nunca são somados.'],
+  ] };
+  abrir('_');
+}
+
+/* ---------- mesa ---------- */
+function selItem(id) { if (itemSel === id && abertos.has(id)) abertos.delete(id); else { itemSel = id; abertos.add(id); } renderMesa(); }
+function incluir(id, v) { ITENS.find(i => i.id === id).incluir = v; renderMesa(); }
+function setVar(id, v) { ITENS.find(i => i.id === id).var = v; renderMesa(); }
+function destino(v) { ITENS.find(i => i.id === 'cod1').escolha = v; renderMesa(); }
+function setEstado(id, e) { ITENS.find(i => i.id === id).estado = e; renderMesa(); }
+function sinaisHtml(i, comp, e) {
+  const sg = comp.sinais[i.id] || [], h = [];
+  for (const s of sg) h.push(`<span class="sinal-c ${s.k === 'sobreposto' ? 'n' : 'x'}" title="${s.t}">${{ sobreposto: 'sobreposto, não somado', disputa: 'disputa pelo código', semrecurso: 'sem o código' }[s.k]}</span>`);
+  if (i.requer === 'cod1') h.push(`<span class="sinal-c n">requer código docente</span>`);
+  if (i.vars && varDe(i).adds) h.push(`<span class="sinal-c n">requer bloco (2030)</span>`);
+  if (e && e.rest) h.push(`<span class="sinal-c" title="${txtRest(e.rest)}">restrição ${e.rest.ano}</span>`);
+  return h.join('') || '<span class="tiny">—</span>';
+}
+function linhaItem(i, comp) {
+  if (i.tipo === 'recurso') {
+    const pedem = ITENS.filter(x => x.requer === i.id && x.incluir);
+    return `<div class="pi ${i.incluir ? '' : 'fora'} ${itemSel === i.id ? 'sel' : ''}" onclick="selItem('${i.id}')"><div onclick="event.stopPropagation()"><input type="checkbox" ${i.incluir ? 'checked' : ''} onchange="incluir('${i.id}',this.checked)" aria-label="Incluir"></div><div><b>${i.titulo}</b><div class="tiny">${nomeUn(i)} · ${TIPOS[i.tipo]}</div></div><div>${i.estado === 'pactuada' ? chipE('pactuada') : '<span class="st st-proposta">recurso em decisão</span>'}<div class="tiny">origem: ${i.origem}</div></div><div onclick="event.stopPropagation()" style="grid-column:span 3"><select onchange="destino(this.value)" aria-label="Destino do código">${Object.entries(i.opcoes).map(([k, n]) => `<option value="${k}" ${k === i.escolha ? 'selected' : ''}>${n}</option>`).join('')}</select><div class="tiny">pedido por ${pedem.map(x => UNID[x.un]).join(' e ') || 'ninguém'}</div></div><div>${!i.escolha && new Set(pedem.map(x => x.un)).size > 1 ? '<span class="sinal-c x">dois pedidos, um código</span>' : '<span class="tiny">—</span>'}</div></div>` + (abertos.has(i.id) ? detalheRecurso(i) : '');
   }
-  $('#mesa-graf').innerHTML = grafico({ series, hlines: hl, quebras, x0, fmtY: MI[mesaInd].y, h: 280 });
-  $('#mesa-leg').innerHTML = `<span><i style="background:#1d2321"></i>observado ${tag('fato')}${mesaInd === 'ct' || mesaInd === 'fp' ? ' 2021–2025: antes de 2021 a fórmula da ME era outra e a série não é comparável; 2023 inclui uma especialização EaD em pulso em Colatina' : ''}</span><span><i style="background:#7d8582"></i>manter</span><span><i style="background:#1f5f55;height:4px"></i>só unidades calculadas ${tag('est')}</span>${ex.length ? `<span><i style="background:#1f5f55"></i>tracejado: com unidades ilustrativas ${tag('il')}</span>` : ''}${combos.map((c, i) => `<span><i style="background:${CORC[i]}"></i>${c.nome}</span>`).join('')}`;
-  // KPIs e cruzamento de degrau
-  const fimC = tC[tC.length - 1][1], fimI = tI[tI.length - 1][1];
-  const cruza = traj => traj.find(([t, o]) => o.pct.ct >= 0.5);
-  const cz = cruza(ex.length ? tI : tC);
-  const ref = cz ? refQualidade(cz[1].pct) : null;
-  $('#mesa-kpis').innerHTML = [
-    ['Formação técnica 2035 · calculadas', pct(fimC.pct.ct, 2), 'est', `manter: ${pct(tB[tB.length - 1][1].pct.ct, 2)}`],
-    ['Com unidades ilustrativas', ex.length ? pct(fimI.pct.ct, 2) : '—', 'il', ex.length ? 'linha separada no gráfico' : 'nenhuma escolhida'],
-    ['Degrau de 50%', cz ? `cruza em ${cz[0]}` : 'não cruza até 2035', cz ? 'est' : 'est', cz ? `exercício ${cz[0] + 2}: ≈ ${brl(ref.ct)} em Qualidade (Rede 2026 constante)` : `faltam ${pp(0.5 - (ex.length ? fimI : fimC).pct.ct)}`],
-  ].map(([t, v, n, s]) => `<div><div class="small">${t}</div><div class="kpi s">${v} ${tag(n)}</div><div class="tiny">${s}</div></div>`).join('');
-  const fpF = (ex.length ? fimI : fimC).pct.fp;
-  $('#mesa-falta').innerHTML = `<p class="small"><b>Conflito entre objetivos:</b> formação de professores do Ifes vai a ${pct(fpF, 1)} em 2035 (2025: ${pct(D.ifes[OBS].fp / D.ifes[OBS].meq, 1)}). ${fpF < 0.2 ? '<b style="color:var(--bad)">Abaixo do degrau de 20%</b>: o ganho em técnico pode custar a faixa de formação de professores.' : 'Continua acima do degrau de 20% (se a reclassificação de 2025 for confirmada).'}</p><p class="small">${cz ? 'A composição cruza o degrau; verificar a restrição de capacidade de cada campus antes de pactuar.' : 'Nenhuma combinação dos campi calculados cruza 50% sozinha. A alavanca de maior efeito é a oferta a distância do Cefor, que reduz formação de professores.'} Lista de alavancas, não recomendação.</p>`;
-  // tabela
-  const linhas = ['vitoria', 'serra'].map((k, i) => {
-    const s = sims[i], b = base[i], otro = i ? sims[0] : sims[1], ob = i ? base[0] : base[1];
-    const c30 = ifesEm(2030, [s, ob]).pct.ct - ifesEm(2030, [b, ob]).pct.ct, c35 = ifesEm(FIM, [s, ob]).pct.ct - ifesEm(FIM, [b, ob]).pct.ct;
-    const r = primeiraRestricao(s, CAP[k]);
-    const op = ['M', 'A', 'B', 'C', 'R'].map(x => `<button class="${ESC[k] === x ? 'on' : ''}" onclick="ESC['${k}']='${x}';renderMesa()">${x === 'M' ? 'Manter' : x === 'R' ? 'Comb.' : x}</button>`).join('') + `<button class="${ESC[k] === 'P' ? 'on' : ''}" ${PROPOSTAS[k] ? '' : 'disabled'} onclick="ESC['${k}']='P';renderMesa()">Proposta</button>`;
-    return `<tr><td><b>${CAMPI[k]}</b> ${tag('est', 'calculado')}<div class="tiny">${ESC[k] === 'P' ? PROPOSTAS[k].nome : PRESETS[ESC[k]].nome}</div></td><td><div class="seg">${op}</div></td><td class="r num">${pp(c30)}</td><td class="r num">${pp(c35)}</td><td class="r num">${sn(acum(s, 'conc') - acum(b, 'conc'))}</td><td class="r num">${sn(Math.max(...FUT.map(t => s.anos[t].prof - b.anos[t].prof)), 1)}</td><td class="r num">${sn(s.anos[2030].mt - b.anos[2030].mt)}</td><td>${r ? `<span class="down">${r.ano}</span> <span class="tiny">${r.rec[0].rec}</span>` : '—'}</td></tr>`;
+  const e = efeitoItem(i, ITENS), q = quando(e.d);
+  return `<div class="pi ${i.incluir ? '' : 'fora'} ${itemSel === i.id ? 'sel' : ''}" onclick="selItem('${i.id}')"><div onclick="event.stopPropagation()"><input type="checkbox" ${i.incluir ? 'checked' : ''} onchange="incluir('${i.id}',this.checked)" aria-label="Incluir no conjunto"></div><div><b>${i.titulo}</b><div class="tiny">${nomeUn(i)} · ${TIPOS[i.tipo]}${i.vars && Object.keys(i.vars).length > 1 ? ' · ' + varDe(i).n : ''} ${i.ilus ? tag('il') : ''}</div></div><div>${chipE(i.estado)}<div class="tiny">origem: ${i.origem}</div></div><div>${barras(FUT.filter(t => t >= 2027).map(t => [t, e.d[t].mat]))}<div class="tiny">aparece ${q.aparece || '—'} · pleno ${q.pleno || '—'}</div></div><div class="r num" data-l="Δ concluintes 2028–31">${sn(ANOS4.reduce((s, t) => s + e.d[t].conc, 0))}</div><div class="r num" data-l="Exercício 2033">${sbrl(refItem(e, 2031))}</div><div>${sinaisHtml(i, comp, e)}</div></div>` + (abertos.has(i.id) ? detalheItem(i, e) : '');
+}
+function detalheItem(i, e) {
+  const cols = [...ANOS4, 2033];
+  let h = `<div class="pdet"><p style="margin-top:0"><b>Por que está na pauta:</b> ${i.motivo}</p>`;
+  if (i.vars && Object.keys(i.vars).length > 1) {
+    const ef = Object.fromEntries(Object.keys(i.vars).map(k => [k, efeitoItem(i, ITENS, k)]));
+    h += `<div class="seg" style="margin-bottom:6px">${Object.entries(i.vars).map(([k, v]) => `<button class="${k === i.var ? 'on' : ''}" onclick="event.stopPropagation();setVar('${i.id}','${k}')">${v.n}</button>`).join('')}</div>`;
+    h += `<div class="tw"><table><tr><th>Variante</th>${cols.map(t => `<th class="r ${t === 2033 ? 'fut' : ''}">Matr. ${t}</th>`).join('')}<th class="r">Concl. 2028–31</th><th class="r">Exerc. 2033</th><th>Restrição</th></tr>${Object.entries(i.vars).map(([k, v]) => `<tr ${k === i.var ? 'style="font-weight:600"' : ''}><td>${v.n}<div class="tiny" style="font-weight:400">${v.nota || ''}</div></td>${cols.map(t => `<td class="r num ${t === 2033 ? 'fut' : ''}">${sn(ef[k].d[t].mat)}</td>`).join('')}<td class="r num">${sn(ANOS4.reduce((s, t) => s + ef[k].d[t].conc, 0))}</td><td class="r num">${sbrl(refItem(ef[k], 2031))}</td><td class="small">${txtRest(ef[k].rest)}</td></tr>`).join('')}</table></div>`;
+    const comR = Object.keys(i.vars).find(k => i.vars[k].adds), semR = Object.keys(i.vars).find(k => !i.vars[k].adds && !ef[k].rest), inv = Object.keys(i.vars).find(k => !i.vars[k].adds && ef[k].rest);
+    if (comR && semR) {
+      const d = t => ef[comR].d[t].mat - ef[semR].d[t].mat, ganho = ANOS4.reduce((s, t) => s + d(t), 0);
+      const prim = FUT.find(t => t >= 2028 && d(t) > 0.5);
+      h += `<p class="small"><b>O que o recurso de fato viabiliza:</b> comparado a "${i.vars[semR].n}", o bloco muda as matrículas em ${cols.map(t => `${t}: ${sn(d(t))}`).join(', ')}. ${ganho <= 0 ? 'Nos quatro anos do plano, o bloco não aumenta o atendimento: a turma só entra quando a obra fica pronta.' : ''} O ganho aparece ${prim ? 'a partir de ' + prim : 'depois do horizonte'} e depende de a procura noturna se manter. ${inv ? `Sem obra e no turno da procura ("${i.vars[inv].n}"), a restrição chega em ${ef[inv].rest.ano}.` : ''} O bloco pode ter outros usos que esta comparação não mede.</p>`;
+    }
+  }
+  h += `<div class="tw"><table><tr><th>${varDe(i)?.n || 'Efeito'} · diferença em relação a manter</th>${cols.map(t => `<th class="r ${t === 2033 ? 'fut' : ''}">${t}</th>`).join('')}</tr>${[['Ingressantes', 'ing'], ['Matrículas', 'mat'], ['Concluintes', 'conc'], ['MT estimada', 'mt'], ['Prof.-eq.', 'prof']].map(([n, f]) => `<tr><td>${n}</td>${cols.map(t => `<td class="r num ${t === 2033 ? 'fut' : ''}">${sn(e.d[t][f], f === 'prof' ? 1 : 0)}</td>`).join('')}</tr>`).join('')}</table></div>`;
+  h += `<p class="small"><b>Acompanhamento, se pactuado:</b> ${i.acompanhar.ind} · ${i.acompanhar.resp}.</p>`;
+  h += `<div style="display:flex;gap:8px;flex-wrap:wrap" onclick="event.stopPropagation()"><button class="btn mini ghost" onclick="abrirCadeia('${i.id}')">Como calcula</button>${i.curso && i.p ? `<button class="btn mini ghost" onclick="irCurso('${i.un}','${i.curso}')">Abrir a visão do curso</button>` : ''}${i.estado === 'hipotese' && !i.ilus ? `<button class="btn mini" onclick="setEstado('${i.id}','proposta')">O campus assume como proposta</button>` : ''}</div></div>`;
+  return h;
+}
+function detalheRecurso(r) {
+  const pedem = ITENS.filter(x => x.requer === r.id);
+  const MOT = { vitoria: 'Integrado com núcleo comum consolidado; prioridade do plano de desenvolvimento do campus', serra: 'Polo de tecnologia da região; curso integrado com fila de espera' };
+  const linhas = pedem.map(i => {
+    const o = CP[i.un].lista.find(x => x.id === i.curso), e = efeitoItem(i, ITENS), sem = restrItem(i, false), com = restrItem(i, true);
+    const necess = ANOS4.map(t => `${t}: ${fmt(Math.max(0, e.d[t].prof), 1)}`).join(', ');
+    return `<tr><td><b>${UNID[i.un]}</b><div class="tiny">${i.titulo}</div></td><td class="small">${fmt(o.insc)} inscritos para ${fmt(o.vagas)} vagas ${tag('fato')}</td><td class="small">${txtRest(sem)}</td><td class="small">${txtRest(com)}</td><td class="small">${necess}</td><td class="r num">${sn(e.d[2031].mat)}<div class="tiny">concl. ${sn(ANOS4.reduce((s, t) => s + e.d[t].conc, 0))}</div></td><td class="small">${MOT[i.un]} ${tag('il')}</td></tr>`;
+  }).join('');
+  return `<div class="pdet" onclick="event.stopPropagation()"><p style="margin-top:0"><b>${r.motivo}</b> ${r.tempo}</p><div class="tw"><table><tr><th>Pedido</th><th>Procura</th><th>Restrição sem o código</th><th>Com o código</th><th>Prof.-eq. que o item pede</th><th class="r">Matr. 2031</th><th>Motivo acadêmico ou territorial</th></tr>${linhas}</table></div><p class="small"><b>O que o código viabiliza:</b> ${pedem.map(i => { const s = restrItem(i, false), c = restrItem(i, true); return `em ${UNID[i.un]}, a restrição de docentes passa de ${s ? s.ano : '—'} para ${c ? c.ano : 'nenhuma'}`; }).join('; ')}. Um código é um docente: nenhum dos dois pedidos fica resolvido só com ele, porque os dois cursos pedem mais professores nos anos seguintes. A capacidade é ilustrativa ${tag('il')}. O PRUMO mostra o que cada destino viabiliza e não escolhe.</p><p class="small"><b>Acompanhamento, se pactuado:</b> ${r.acompanhar.ind} · ${r.acompanhar.resp}.</p></div>`;
+}
+function renderPauta(its, comp) {
+  const uks = [...new Set(its.map(chaveUn))];
+  const opt = (v, lista) => lista.map(([k, n]) => `<option value="${k}" ${k === v ? 'selected' : ''}>${n}</option>`).join('');
+  $('#pauta-filtros').innerHTML = `<select onchange="FILTRO.un=this.value;renderMesa()" aria-label="Unidade">${opt(FILTRO.un, [['', 'Todas as unidades'], ...uks.map(k => [k, UNID[k] || k])])}</select><select onchange="FILTRO.tipo=this.value;renderMesa()" aria-label="Tipo">${opt(FILTRO.tipo, [['', 'Todos os tipos'], ...Object.entries(TIPOS)])}</select><select onchange="FILTRO.estado=this.value;renderMesa()" aria-label="Situação">${opt(FILTRO.estado, [['', 'Todas as situações'], ...Object.entries(ESTADOS).slice(0, 3)])}</select><label><input type="checkbox" ${FILTRO.so ? 'checked' : ''} onchange="FILTRO.so=this.checked;renderMesa()"> só com conflito ou restrição</label>`;
+  const temSinal = i => (comp.sinais[i.id] || []).length || (i.tipo === 'recurso' && !i.escolha) || (i.vars && efeitoItem(i, ITENS).rest) || (i.ilus && i.rest);
+  const vis = its.filter(i => (!FILTRO.un || chaveUn(i) === FILTRO.un) && (!FILTRO.tipo || i.tipo === FILTRO.tipo) && (!FILTRO.estado || i.estado === FILTRO.estado) && (!FILTRO.so || temSinal(i)));
+  const nS = its.filter(i => i.incluir && temSinal(i)).length;
+  $('#pauta-resumo').innerHTML = `${its.length} itens · ${its.filter(i => i.incluir).length} no conjunto · ${nS} com conflito ou restrição · ${its.filter(i => i.estado === 'pactuada').length} pactuados`;
+  const ordem = ['reitoria', 'vitoria', 'serra', 'itapina', 'barra', 'cefor'];
+  const grupos = [...new Set(vis.map(chaveUn))].sort((a, b) => (ordem.indexOf(a) + 1 || 99) - (ordem.indexOf(b) + 1 || 99) || a.localeCompare(b));
+  let h = `<div class="pi h"><div></div><div>Decisão</div><div>Situação</div><div>Quando aparece · Δ matrículas 2027–2035</div><div class="r">Δ concl. 2028–31</div><div class="r">Exerc. 2033</div><div>Sinais</div></div>`;
+  for (const g of grupos) {
+    const gi = vis.filter(i => chaveUn(i) === g);
+    const calc = CP[g] ? 'calculado' : g === 'reitoria' ? '' : 'ilustrativo';
+    h += `<div class="pg">${UNID[g] || g} <span>${gi.length} ${gi.length > 1 ? 'itens' : 'item'}${calc ? ' · ' + calc : ''}${CP[g] && comp.restr[g] ? ` · conjunto da unidade com restrição em ${comp.restr[g].ano}` : ''}</span></div>` + gi.map(i => linhaItem(i, comp)).join('');
+  }
+  $('#pauta').innerHTML = h || '<p class="small">Nenhum item com estes filtros.</p>';
+}
+function renderQuatro(its, comp, compP, compO) {
+  const sel = its.find(i => i.id === itemSel && i.tipo !== 'recurso'), es = sel ? efeitoItem(sel, ITENS) : null;
+  const M = { part: 'Participação na matriz', mat: 'Matrículas técnicas', conc: 'Concluintes', mt: 'MT estimada', ct: 'Formação técnica do Ifes' };
+  $('#q-tabs').innerHTML = Object.entries(M).map(([k, n]) => `<button class="${k === qInd ? 'on' : ''}" onclick="qInd='${k}';renderMesa()">${n}</button>`).join('');
+  const cols = [...ANOS4, 2033], hz = t => qInd === 'part' && t + 2 === DESAFIO.ex ? 'hz-col' : t === 2033 ? 'fut' : '';
+  const ext = (sims, extras) => ({ sims, extras });
+  const base = ext({ ...BASE }, []), cj = ext(comp.sims, []), cjP = ext(compP.sims, []), cjO = ext(compO.sims, []);
+  const nivel = {
+    part: (x, t) => participacao(t + 2, x.sims, x.extras), mat: (x, t) => somaK(x.sims, 'mat', t) + somaX(x.extras, 'mat', t), conc: (x, t) => somaK(x.sims, 'conc', t) + somaX(x.extras, 'conc', t),
+    mt: (x, t) => somaK(x.sims, 'mt', t) + somaX(x.extras, 'mt', t), ct: (x, t) => ifesEm(t, Object.values(x.sims), x.extras).pct.ct,
+  }[qInd];
+  const fN = qInd === 'part' ? v => pct(v, 3) : qInd === 'ct' ? v => pct(v, 2) : v => fmt(v);
+  const fD = (a, b, t) => qInd === 'part' ? `${sbrl(dReais(t, a.sims, a.extras).r - dReais(t, b.sims, b.extras).r)}<div class="tiny">${ppx(nivel(a, t) - nivel(b, t), 3)}</div>` : qInd === 'ct' ? ppx(nivel(a, t) - nivel(b, t)) : sn(nivel(a, t) - nivel(b, t));
+  const row = (n, f, cls = '') => `<tr class="${cls}"><td>${n}</td>${cols.map(t => `<td class="r num ${hz(t)}">${f(t)}</td>`).join('')}</tr>`;
+  let h = `<tr><th>${qInd === 'part' ? 'Ano letivo · exercício' : 'Ano letivo'}</th>${cols.map(t => `<th class="r ${hz(t)}">${t}${qInd === 'part' ? `<div class="tiny">exerc. ${t + 2}</div>` : ''}${t === 2033 ? '<div class="tiny">depois do plano</div>' : ''}</th>`).join('')}</tr>`;
+  h += row(`Sem novas decisões ${tag('est')}<div class="tiny">${qInd === 'part' ? REDE[DESAFIO.rede].n : 'Vitória + Serra mantendo a oferta'}</div>`, t => fN(nivel(base, t)));
+  if (es) { const xi = ext(es.sims || { ...BASE }, es.extras); h += row(`Item selecionado ${sel.ilus ? tag('il') : tag('est')}<div class="tiny">${sel.titulo}</div>`, t => fD(xi, base, t)); }
+  else h += `<tr><td colspan="${cols.length + 1}" class="small">Selecione uma linha da pauta para ver o efeito de um item.</td></tr>`;
+  h += row(`<b>Conjunto escolhido</b> · unidades calculadas ${tag('est')}<div class="tiny">faixa: hipóteses ×0,5 a 1,5</div>`, t => `<b>${fD(cj, base, t)}</b><div class="tiny">${qInd === 'part' ? `${sbrl(dReais(t, cjP.sims, []).r)} a ${sbrl(dReais(t, cjO.sims, []).r)}` : `${(qInd === 'ct' ? ppx : sn)(nivel(cjP, t) - nivel(base, t))} a ${(qInd === 'ct' ? ppx : sn)(nivel(cjO, t) - nivel(base, t))}`}</div>`);
+  if (comp.extras.length) h += row(`Unidades ilustrativas, à parte ${tag('il')}`, t => fD(ext({ ...BASE }, comp.extras), base, t));
+  if (qInd === 'part') h += row(`<b>Falta para o desafio</b> (meta ${pct(DESAFIO.meta, 2)})<div class="tiny">só unidades calculadas</div>`, t => `${ppx(DESAFIO.meta - nivel(cj, t))}<div class="tiny">≈ ${brl((DESAFIO.meta - nivel(cj, t)) * MATRIZ.total)}</div>`, 'total');
+  $('#q-tab').innerHTML = h;
+  $('#q-nota').innerHTML = `Ano letivo; a matriz de cada exercício lê o ano-base dois anos antes. ${qInd === 'part' ? `Coluna destacada: horizonte do desafio (exercício ${DESAFIO.ex}). Valores em reais são referência na parcela simulada (MT × R$ ${fmt(PREM.rs_mt)} + degraus de Qualidade, total da Rede de 2026), não previsão do orçamento. ` : ''}O conjunto roda todos os itens de cada campus no mesmo motor e recompõe o Ifes pela razão das somas: não é a soma dos itens isolados nem a soma de percentuais locais. Itens sobrepostos ficam fora.`;
+}
+function renderTrajMesa(its, comp, compP, compO) {
+  const sel = its.find(i => i.id === itemSel && i.tipo !== 'recurso'), es = sel ? efeitoItem(sel, ITENS) : null;
+  const MI = { part: 'Participação na matriz', ct: 'Formação técnica do Ifes', fp: 'Formação de professores', conc: 'Concluintes (Vitória + Serra)', prof: 'Prof.-eq. adicionais' };
+  $('#mesa-tabs').innerHTML = Object.entries(MI).map(([k, v]) => `<button class="${k === mesaInd ? 'on' : ''}" onclick="mesaInd='${k}';renderMesa()">${v}</button>`).join('');
+  let series = [], hl = [], x0 = OBS, bandas = [], proj = OBS + 0.5, fy = v => fmt(v), leg = '', marcas = [];
+  if (mesaInd === 'part') {
+    x0 = MATRIZ.ex0; proj = MATRIZ.ex0 + 0.5; fy = v => pct(v, 2);
+    const P = (s, x = []) => EXS.map(e => [e, participacao(e, s, x)]);
+    series.push({ pts: EXS.map(e => [e, partBase(e)]), cor: '#7d8582', dash: '6 4' });
+    combos.forEach((c, i) => series.push({ pts: c.part, cor: CORC[i], w: 1.6 }));
+    if (es) series.push({ pts: P(es.sims || BASE, es.extras), cor: '#5b4a9b', w: 1.4, dash: '4 2' });
+    series.push({ pts: P(comp.sims), cor: '#1f5f55', w: 3 });
+    if (comp.extras.length) series.push({ pts: P(comp.sims, comp.extras), cor: '#1f5f55', w: 2, dash: '2 3' });
+    series.push({ pts: [[MATRIZ.ex0, MATRIZ.part0]], cor: '#1d2321', dots: true });
+    bandas.push({ pts: EXS.map(e => { const a = participacao(e, compP.sims), b = participacao(e, compO.sims); return [e, Math.min(a, b), Math.max(a, b)]; }), cor: '#1f5f55' });
+    hl = zoomPart ? [] : [{ y: DESAFIO.meta, cor: '#a4501d', t: 'desafio ' + pct(DESAFIO.meta, 2) }]; marcas = [{ x: DESAFIO.ex, t: zoomPart ? 'horizonte · meta ' + pct(DESAFIO.meta, 2) + ' fora da escala' : 'horizonte', cor: '#a4501d' }];
+    leg = `<span><i style="background:#1d2321"></i>observado 2026</span><span><i style="background:#7d8582"></i>sem novas decisões</span><span><i style="background:#1f5f55;height:4px"></i>conjunto, calculadas ${tag('est')}</span>${comp.extras.length ? `<span><i style="background:#1f5f55"></i>pontilhado: com ilustrativas ${tag('il')}</span>` : ''}${es ? `<span><i style="background:#5b4a9b"></i>item selecionado</span>` : ''}<span>eixo: exercício da matriz</span>`;
+  } else if (mesaInd === 'ct' || mesaInd === 'fp') {
+    const k = mesaInd, obs = HIST.filter(t => t >= 2021).map(t => [t, D.ifes[t][k] / D.ifes[t].meq]);
+    x0 = 2021; fy = v => pct(v, 1);
+    const tr = (s, x = []) => [OBS, ...FUT].map(t => [t, ifesEm(t, Object.values(s), x).pct[k]]);
+    series.push({ pts: obs, cor: '#1d2321', w: 2.2, dots: true });
+    series.push({ pts: tr(BASE), cor: '#7d8582', dash: '6 4' });
+    combos.forEach((c, i) => series.push({ pts: c.pct.map(p => [p[0], p[1][k]]), cor: CORC[i], w: 1.6 }));
+    series.push({ pts: tr(comp.sims), cor: '#1f5f55', w: 3 });
+    if (comp.extras.length) series.push({ pts: tr(comp.sims, comp.extras), cor: '#1f5f55', w: 2, dash: '2 3' });
+    hl = k === 'ct' ? [{ y: .5, cor: '#9a6a12', t: 'degrau 50% = meta legal' }] : [{ y: .2, cor: '#9a6a12', t: 'degrau 20% = meta legal' }, { y: .15, cor: '#9a6a12', t: 'degrau 15%' }];
+    leg = `<span><i style="background:#1d2321"></i>observado 2021–2025 ${tag('fato')}: antes de 2021 a fórmula da ME era outra</span><span><i style="background:#7d8582"></i>manter</span><span><i style="background:#1f5f55;height:4px"></i>conjunto ${tag('est')}</span>${comp.extras.length ? `<span>pontilhado: com ilustrativas ${tag('il')}</span>` : ''}<span>eixo: ano letivo (ano-base)</span>`;
+  } else {
+    const f = mesaInd === 'conc' ? (s, t) => somaK(s, 'conc', t) : (s, t) => somaK(s, 'prof', t) - somaK(BASE, 'prof', t);
+    series.push({ pts: [OBS, ...FUT].map(t => [t, f(BASE, t)]), cor: '#7d8582', dash: '6 4' });
+    series.push({ pts: [OBS, ...FUT].map(t => [t, f(comp.sims, t)]), cor: '#1f5f55', w: 3 });
+    if (comp.extras.length) series.push({ pts: [OBS, ...FUT].map(t => [t, f(comp.sims, t) + somaX(comp.extras, mesaInd, t)]), cor: '#1f5f55', w: 2, dash: '2 3' });
+    leg = `<span><i style="background:#7d8582"></i>manter</span><span><i style="background:#1f5f55;height:4px"></i>conjunto ${tag('est')}</span>${comp.extras.length ? `<span>pontilhado: com ilustrativas ${tag('il')}</span>` : ''}`;
+  }
+  $('#zoom-l').style.display = mesaInd === 'part' ? '' : 'none';
+  $('#mesa-graf').innerHTML = grafico({ series, bandas, hlines: hl, x0, proj, marcas, fmtY: fy, h: 280 });
+  $('#mesa-leg').innerHTML = leg + combos.map((c, i) => `<span><i style="background:${CORC[i]}"></i>${c.nome}</span>`).join('');
+}
+function renderFalta(its, comp) {
+  const r = resumoDesafio(comp), cod = its.find(i => i.id === 'cod1'), out = [];
+  out.push(`<li><b>Distância ao desafio no exercício ${r.ex}:</b> ${ppx(r.falta)}, ≈ ${brl(r.fR)} ou ≈ ${fmt(r.mt)} MT. A pauta fecha ${fmt(100 * r.fec, 1)}% (${fmt(100 * r.feci, 1)}% com as ilustrativas).</li>`);
+  const conf = its.filter(i => i.incluir && (comp.sinais[i.id] || []).length);
+  if (conf.length) out.push(`<li><b>Incompatibilidades:</b> ${conf.map(i => `${i.titulo} (${comp.sinais[i.id].map(s => ({ sobreposto: 'sobreposto, fora da soma', disputa: 'disputa pelo código docente', semrecurso: 'sem o código' })[s.k]).join(', ')})`).join('; ')}.</li>`);
+  if (cod && cod.incluir) out.push(`<li><b>Código de vaga docente:</b> ${cod.escolha ? cod.opcoes[cod.escolha] : '<span class="down">destino a decidir</span>'}. ${cod.tempo}</li>`);
+  const bloco = its.find(i => i.incluir && i.vars && varDe(i).adds);
+  if (bloco) out.push(`<li><b>Bloco de oficinas</b> ${tag('il')}: obra pronta para 2030. ${bloco.titulo} só começa em 2030.</li>`);
+  const dp = Math.max(...ANOS4.map(t => somaK(comp.sims, 'prof', t) - somaK(BASE, 'prof', t)));
+  out.push(`<li><b>Docentes:</b> o conjunto calculado pede até ${sn(dp, 1)} professores-equivalentes em relação a manter (saldo entre o que as pausas liberam e o que as expansões pedem; áreas diferentes não se compensam).</li>`);
+  for (const k of Object.keys(CP)) if (comp.restr[k]) out.push(`<li><b>${CAMPI[k]}:</b> restrição em ${txtRest(comp.restr[k])} ${tag('il')}.</li>`);
+  const fp = ifesEm(2031, Object.values(comp.sims), comp.extras).pct;
+  out.push(`<li><b>Objetivos em tensão:</b> formação técnica do Ifes ${pct(fp.ct, 2)} e formação de professores ${pct(fp.fp, 1)} em 2031. ${fp.fp < 0.2 ? '<span class="down">Abaixo do degrau de 20% de formação de professores.</span>' : 'Formação de professores segue acima de 20% (se a reclassificação de 2025 se confirmar).'} ${fp.ct >= 0.5 ? 'Cruza o degrau de 50% em técnico.' : 'Técnico não cruza 50% com esta pauta.'}</li>`);
+  $('#mesa-falta').innerHTML = `<ul class="lst">${out.join('')}</ul><p class="nota">Lista de evidências para o colegiado, não recomendação. Uma oferta necessária pode continuar sendo a decisão certa mesmo rendendo menos no indicador.</p>`;
+}
+function renderUnidades(its, comp) {
+  const outB = k => Object.keys(CP).filter(x => x !== k).map(x => BASE[x]);
+  const cols = `<tr><th>Unidade</th><th class="r">Itens no conjunto</th><th class="r">Técnico Ifes 2031</th><th class="r">Concl. 2028–31</th><th class="r">Prof.-eq. (pico)</th><th class="r">MT 2031</th><th class="r">Exerc. 2033</th><th>Restrição</th></tr>`;
+  const linhas = Object.keys(CP).map(k => {
+    const s = comp.sims[k], b = BASE[k], n = its.filter(i => i.incluir && i.un === k).length;
+    const c31 = ifesEm(2031, [s, ...outB(k)]).pct.ct - ifesEm(2031, [b, ...outB(k)]).pct.ct;
+    const so = { ...BASE }; so[k] = s;
+    return `<tr><td><b>${CAMPI[k]}</b> ${tag('est', 'calculado')}</td><td class="r num">${n}</td><td class="r num">${ppx(c31)}</td><td class="r num">${sn(ANOS4.reduce((x, t) => x + s.anos[t].conc - b.anos[t].conc, 0))}</td><td class="r num">${sn(Math.max(...ANOS4.map(t => s.anos[t].prof - b.anos[t].prof)), 1)}</td><td class="r num">${sn(s.anos[2031].mt - b.anos[2031].mt)}</td><td class="r num">${sbrl(dReais(2031, so).r)}</td><td>${comp.restr[k] ? `<span class="down">${comp.restr[k].ano}</span> <span class="tiny">${comp.restr[k].rec[0].rec}</span>` : '—'}</td></tr>`;
   });
-  const I25 = D.ifes[OBS];
-  const li = Object.entries(ILUS).map(([k, u]) => {
-    const f = ESC[k] === 'M' ? (() => ({})) : u.f[ESC[k]];
-    const cpp = t => { const d = f(t); return (I25.ct + (d.ct || 0)) / (I25.meq + (d.meq || 0)) - I25.ct / I25.meq; };
-    const op = Object.entries(u.opc).map(([x, n]) => `<button class="${ESC[k] === x ? 'on' : ''}" onclick="ESC['${k}']='${x}';renderMesa()">${x === 'M' ? 'Manter' : 'X'}</button>`).join('');
-    const d35 = f(FIM);
-    return `<tr><td><b>${u.nome}</b> ${tag('il')}<div class="tiny">${u.opc[ESC[k]]}</div></td><td><div class="seg">${op}</div></td><td class="r num">${pp(cpp(2030))}</td><td class="r num">${pp(cpp(FIM))}</td><td class="r num">${d35.conc ? sn(d35.conc * 6) : '—'}</td><td class="r num">${d35.prof ? sn(d35.prof, 1) : '—'}</td><td class="r num">${d35.mt ? sn(f(2030).mt) : '—'}</td><td>${d35.rest ? `<span class="down">${d35.rest}</span>` : '—'}</td></tr>`;
+  const I = D.ifes[OBS];
+  const gk = i => i.teste ? 'Outras unidades (itens de teste)' : chaveUn(i);
+  const gIl = [...new Set(its.filter(i => i.ilus && i.incluir).map(gk))].map(g => {
+    const gi = its.filter(i => i.ilus && i.incluir && gk(i) === g), x = gi.map(i => i.delta), sum = (f, t) => somaX(x, f, t);
+    const c31 = (I.ct + sum('ct', 2031)) / (I.meq + sum('meq', 2031)) - I.ct / I.meq;
+    return `<tr><td><b>${UNID[g] || g}</b> ${tag('il')}</td><td class="r num">${gi.length}</td><td class="r num">${ppx(c31)}</td><td class="r num">${sn(ANOS4.reduce((s, t) => s + sum('conc', t), 0))}</td><td class="r num">${sn(Math.max(...ANOS4.map(t => sum('prof', t))), 1)}</td><td class="r num">${sn(sum('mt', 2031))}</td><td class="r num">${sbrl(dReais(2031, { ...BASE }, x).r)}</td><td>${gi.some(i => i.rest) ? `<span class="down">${Math.min(...gi.filter(i => i.rest).map(i => i.rest))}</span>` : '—'}</td></tr>`;
   });
-  $('#mesa').innerHTML = `<tr><th>Unidade</th><th>Alternativa</th><th class="r">Técnico Ifes 2030</th><th class="r">Técnico Ifes 2035</th><th class="r">Concluintes 2027–35</th><th class="r">Prof.-eq. (pico)</th><th class="r">MT 2030</th><th>Restrição</th></tr>${linhas.join('')}${li.join('')}`;
+  const tot = ifesEm(2031, Object.values(comp.sims), comp.extras).pct.ct - ifesEm(2031, Object.values(BASE)).pct.ct;
+  $('#mesa').innerHTML = cols + linhas.join('') + gIl.join('') + `<tr class="total"><td>Ifes, composição pela razão das somas</td><td class="r num">${its.filter(i => i.incluir).length}</td><td class="r num">${ppx(tot)}</td><td colspan="3" class="small">não é a soma das linhas</td><td class="r num">${sbrl(dReais(2031, comp.sims, comp.extras).r)}</td><td></td></tr>`;
+}
+function renderMesa() {
+  $('#pauta-teste').checked = comTeste;
+  const its = itensVis(), comp = compor(its), compP = compor(its, 'pess', true), compO = compor(its, 'otim', true);
+  $('#mesa-desafio').innerHTML = htmlDesafioBar(comp);
+  renderPauta(its, comp); renderQuatro(its, comp, compP, compO); renderTrajMesa(its, comp, compP, compO); renderFalta(its, comp); renderUnidades(its, comp);
 }
 function guardarCombo() {
   if (combos.length >= 3) combos.shift();
-  const sims = ['vitoria', 'serra'].map(simCampusEsc), ex = extrasAtivos();
-  const nome = 'V' + ESC.vitoria + '·S' + ESC.serra + (ex.length ? '+il.' : '');
-  combos.push({ nome, pts: trajetoria(sims, ex).map(([t, o]) => [t, o.pct]) }); renderMesa(); toast('Combinação guardada: ' + nome);
+  const its = itensVis(), comp = compor(its), cod = its.find(i => i.id === 'cod1');
+  const nome = `${its.filter(i => i.incluir).length} itens${cod && cod.escolha ? ' · código → ' + (UNID[cod.escolha] || cod.escolha) : ''}`;
+  combos.push({ nome, part: EXS.map(e => [e, participacao(e, comp.sims)]), pct: [OBS, ...FUT].map(t => [t, ifesEm(t, Object.values(comp.sims), comp.extras).pct]) });
+  renderMesa(); toast('Combinação guardada: ' + nome);
+}
+function pactuar() {
+  const its = itensVis(), comp = compor(its), ok = [], bloq = [];
+  for (const i of its) {
+    if (!i.incluir || i.teste || i.estado === 'pactuada') continue;
+    const sg = comp.sinais[i.id] || [];
+    if (sg.length || (i.tipo === 'recurso' && !i.escolha)) bloq.push(i); else { i.estado = 'pactuada'; ok.push(i); }
+  }
+  toast(`${ok.length} contribuições pactuadas${bloq.length ? `; ${bloq.length} aguardam decisão: ${bloq.map(i => i.titulo.split(' ').slice(0, 4).join(' ') + '…').join('; ')}` : ''}.`);
+  go('pacto');
 }
 function reuniao() { document.body.classList.toggle('reuniao'); $('#btn-reuniao').textContent = document.body.classList.contains('reuniao') ? 'Sair do modo reunião' : 'Modo reunião'; }
+
+/* ---------- pacto do ciclo 2028 ---------- */
+function renderPacto() {
+  const p = ITENS.filter(i => i.estado === 'pactuada');
+  if (!p.length) { $('#pacto-novo').innerHTML = `<p class="small" style="margin:0">Nada pactuado ainda nesta demonstração. Na <a href="#mesa">mesa</a>, escolha o conjunto, resolva as disputas e use "Registrar o pactuado".</p>`; return; }
+  const comp = compor(itensVis(), 'central', true);
+  $('#pacto-novo').innerHTML = `<p class="small" style="margin-top:0"><b>Desafio institucional</b> ${tag('il', 'fictício')}: ${pct(MATRIZ.part0, 2)} → ${pct(DESAFIO.meta, 2)} no exercício ${DESAFIO.ex}. Acompanhado pela participação na matriz de cada exercício, decomposta em "o que fizemos × o que a Rede fez". Não foi dividido entre unidades.</p>
+  <div class="tw"><table><tr><th>Contribuição</th><th>Situação</th><th>O que será acompanhado</th><th>Responsável</th><th>Primeira conferência</th><th class="r">Efeito estimado 2031</th><th>Ressalva</th></tr>${p.map(i => {
+    const e = i.tipo === 'recurso' ? null : efeitoItem(i, ITENS);
+    const ress = e && e.rest ? `restrição ${txtRest(e.rest)} ${tag('il')}` : i.requer ? 'depende do código docente alocado' : '—';
+    const conf = i.tipo === 'recurso' ? 'entrada em exercício em 2028' : i.tipo === 'permanencia' ? 'semestral no sistema acadêmico; PNP com ano-base 2028 (publicada em 2029)' : 'matrícula de 2028; PNP com ano-base 2028 (publicada em 2029)';
+    return `<tr><td><b>${i.titulo}</b><div class="tiny">${nomeUn(i)}${i.ilus ? ' ' + tag('il') : ''}${i.tipo === 'recurso' ? ' · ' + i.opcoes[i.escolha] : ''}</div></td><td>${chipE(i.estado)}</td><td class="small">${i.acompanhar.ind}</td><td class="small">${i.acompanhar.resp}</td><td class="small">${conf}</td><td class="r num">${e ? sn(e.d[2031].mat) + ' matr.' : '—'}<div class="tiny">${e ? 'projeção ' + (i.ilus ? 'ilustrativa' : 'na data do pacto') : ''}</div></td><td class="small">${ress}</td></tr>`;
+  }).join('')}</table></div>
+  ${ITENS.some(i => i.incluir && !i.teste && i.estado !== 'pactuada' && !i.ilus) ? `<p class="small"><b>Aguardam decisão:</b> ${ITENS.filter(i => i.incluir && !i.teste && i.estado !== 'pactuada' && !i.ilus).map(i => i.titulo).join('; ')}.</p>` : ''}
+  <p class="nota">Pactuado não é observado: a coluna de efeito é a projeção congelada no pacto, com motor, edição da PNP e premissas registrados. Quando a PNP de ano-base 2028 chegar, cada linha ganha o resultado observado e o desvio explicado, como no compromisso de 2027 abaixo. ${comp.restr.vitoria || comp.restr.serra ? 'Restrições de capacidade ainda abertas no conjunto: ' + Object.keys(CP).filter(k => comp.restr[k]).map(k => `${CAMPI[k]} ${comp.restr[k].ano}`).join(', ') + '.' : ''}</p>`;
+}
 
 /* ================= pacto (fictício) ================= */
 (function () {
@@ -1056,7 +1823,7 @@ function reuniao() { document.body.classList.toggle('reuniao'); $('#btn-reuniao'
 })();
 
 document.addEventListener('change', e => { if (e.target.id === 'cmp-presets') desenharBancada(); });
-renderAgenda(); rota();
+rota();
 </script>
 </body>
 </html>

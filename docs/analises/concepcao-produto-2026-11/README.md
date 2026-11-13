@@ -1,9 +1,22 @@
-# PRUMO — Estudo de concepção do produto (12/11/2026)
+# PRUMO — Estudo de concepção do produto (12 e 13/11/2026)
 
 > **Natureza:** estudo de concepção, proposta para discussão. Não altera a [visão de produto](../../produto/visao-prumo.md), que continua a referência canônica, nem os [princípios do projeto](../../../.specify/memory/constitution.md). O que for aceito daqui entra na visão por edição, como manda a convenção do repositório.
 > **Pergunta:** como o PRUMO deveria existir como produto digital utilizável: o que é, como se usa, que telas tem, como se constrói e por onde começa.
 > **Base:** todo o repositório até o commit `f98a7b7`. Nenhum material existente fora desta pasta foi alterado.
-> **Duas rodadas no mesmo dia.** A primeira definiu identidade, experiência, arquitetura, specs e MVP. A segunda ([síntese](09-segunda-rodada.md)) recuperou capacidade de execução, projeção longitudinal e impacto na matriz, e adotou a **participação na matriz orçamentária como estrela-guia**. As mudanças estão marcadas com "[2ª rodada]" em cada documento.
+> **Três rodadas.** A primeira definiu identidade, experiência, arquitetura, specs e MVP. A segunda ([síntese](09-segunda-rodada.md)) recuperou capacidade de execução, projeção longitudinal e impacto na matriz, e adotou a **participação na matriz orçamentária como estrela-guia**. A terceira ([síntese](10-terceira-rodada.md), 13/11) fez a **mesa funcionar nos dois sentidos**: desafio da Reitoria, contribuição do curso e pauta de decisões. As mudanças estão marcadas com "[2ª rodada]" e "[3ª rodada]" em cada documento.
+
+## Terceira rodada em uma página
+
+- **Desafio da Reitoria:** partida observada (≈ 3,32%, exercício 2026), meta, horizonte em exercício e cenário da Rede. Ficam separados o observado, a trajetória sem novas decisões e a da pauta. O desafio é institucional e não vira cota por campus ou curso.
+- **Do curso de volta à mesa:** a coordenação vê o objetivo institucional relacionado, propõe uma ação local e acompanha algo que consegue mover, como a evasão no 1º ano. O campus avalia a viabilidade e leva à mesa. A mesma contribuição pode entrar por convite da Reitoria ou por proposta do curso, e os dois caminhos convergem no mesmo item.
+- **Pauta de decisões:** uma linha por decisão (pausa, expansão, reorganização, permanência, ocupação, recurso), com situação (hipótese simulada, proposta, pactuada), quando o efeito aparece, conflitos e restrições. Continua legível com 36 itens.
+- **Comparação em quatro anos:** sem novas decisões × item × conjunto × falta para o desafio, ano a ano, com o exercício da matriz que cada ano letivo alimenta.
+- **Nada contado duas vezes:** recurso com destino único, oferta repetida fora da soma, Ifes recomposto pela razão das somas.
+- **O que o protótipo revela:**
+  - O exemplo de 3,9% no exercício 2030 pede ≈ R$ 12,8 mi, mais que todos os degraus de Qualidade juntos (≈ R$ 7,7 mi).
+  - O exercício 2030 só recebe o primeiro ano das decisões de 2028.
+  - O código docente em disputa adia, mas não resolve, a restrição de qualquer dos dois campi.
+  - O bloco de oficinas não aumenta o atendimento nos quatro anos do plano.
 
 ## Segunda rodada em uma página
 
@@ -99,7 +112,7 @@ Detalhadas no [documento 6, § 6](06-avaliacao-critica.md#6-decisões-estratégi
 8. **Responsável anual pelos dados.**
 9. **Critério de aceite do motor** por tipo de oferta.
 10. **Meta de uso:** o ciclo real de vagas de 2028.
-11. **[2ª rodada] Papel da participação na matriz:** placar com indicadores de guarda, ou meta institucional formal (esta exige emendar o princípio VI).
+11. **[2ª rodada, revista na 3ª] Papel da participação na matriz:** pode ser meta institucional, sem cota por unidade. Continua aberto se ela entra formalmente no PDI (o que exige emendar o princípio VI), com que horizonte e valor, e quem publica o desafio.
 12. **[2ª rodada] Planilha da matriz como insumo** opcional da primeira jornada, para os parâmetros por oferta.
 
 ## Documentos
@@ -115,11 +128,23 @@ Detalhadas no [documento 6, § 6](06-avaliacao-critica.md#6-decisões-estratégi
 | 7 | [Estrela-guia e indicadores](07-estrela-guia-e-indicadores.md) [2ª rodada] | Participação na matriz, árvore de alavancas, mapa de degraus, taxa de câmbio, decisões → consequências, classificação dos indicadores |
 | 8 | [Capacidade e projeção](08-capacidade-e-projecao.md) [2ª rodada] | Modelo mínimo de capacidade, projeção longitudinal, incerteza, resposta da bancada |
 | 9 | [Síntese da segunda rodada](09-segunda-rodada.md) | O que estava certo, subdimensionado ou faltando; mudanças; novo MVP; riscos |
-| — | [Protótipo conceitual v2](prototipo/prumo-conceito.html) | Seis telas; Vitória e Serra calculadas com dados reais; capacidade e outras unidades ilustrativas |
+| 10 | [Síntese da terceira rodada](10-terceira-rodada.md) | A mesa nos dois sentidos: desafio, curso, pauta, comparação em quatro anos; o mesmo caso por dois caminhos; o que continua ilustrativo |
+| — | [Protótipo conceitual v3](prototipo/prumo-conceito.html) | Desafio da Reitoria, visão do curso, pauta de decisões e pacto; Vitória e Serra calculadas com dados reais; capacidade, recursos e outras unidades ilustrativas |
+| — | [Protótipo conceitual v2](prototipo/prumo-conceito-v2.html) | Segunda rodada, preservado |
 | — | [Protótipo conceitual v1](prototipo/prumo-conceito-v1.html) | Primeira rodada, preservado |
 
 **Abrir o protótipo:** direto no navegador, ou `python3 -m http.server 8766 --directory docs/analises/concepcao-produto-2026-11/prototipo` e `http://localhost:8766/prumo-conceito.html`.
 
-**Remontar o protótipo v2:** `python3 docs/analises/concepcao-produto-2026-11/prototipo/montar.py`. Junta o template, [`simulacao.js`](prototipo/simulacao.js), o motor `poc/coortes002.js` (sem alteração) e um recorte só com dados públicos de `poc/dados-poc002.json`.
+**Remontar o protótipo:** `python3 docs/analises/concepcao-produto-2026-11/prototipo/montar.py`. Junta o template, [`simulacao.js`](prototipo/simulacao.js), [`pauta.js`](prototipo/pauta.js), o motor `poc/coortes002.js` (sem alteração) e um recorte só com dados públicos de `poc/dados-poc002.json`.
+
+**Verificar:** `node docs/analises/concepcao-produto-2026-11/prototipo/testar_prototipo.cjs` confere:
+
+- que as alavancas da bancada e as operações da pauta dão o mesmo resultado;
+- o tempo das coortes e o atraso da matriz;
+- a disputa pelo código;
+- a sobreposição;
+- a convergência dos dois caminhos;
+- o bloco;
+- a razão das somas.
 
 **Sobre os números do protótipo e dos exemplos:** os que vêm dos estudos (portão de dados, estudo da PNP, POC 0.0.2, recomposição) estão indicados; os inventados levam a marca "ilustr.". Valores de protótipos com horizontes diferentes foram reunidos na mesa de composição apenas para mostrar a interação. Nada aqui serve para decisão.

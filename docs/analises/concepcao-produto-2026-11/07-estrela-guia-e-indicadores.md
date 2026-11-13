@@ -35,6 +35,20 @@ Este estudo aceita a estrela-guia, mas não a frase "todo o restante vai chegar 
 
 **Consequência para o produto:** a estrela-guia organiza a Agenda e a Mesa, mas o PRUMO **não otimiza** a participação e **não recomenda** alternativas por ela. Mostra quanto cada alternativa a move, por qual bloco, em qual exercício e com qual custo nos indicadores de guarda.
 
+### 1.2a. Estrela-guia como desafio institucional [3ª rodada]
+
+O idealizador aceitou a qualificação acima com uma precisão: a participação **pode ser meta institucional**, mas **não vira meta de cada campus ou curso**. Na experiência, isso tem quatro consequências:
+
+- **O desafio é registrado pela Reitoria:** partida observada, meta, horizonte em exercício e cenário da Rede.
+- **As unidades não recebem fatia da meta.** Elas propõem contribuições, e a mesa as compõe pela razão das somas.
+- **Cada nível acompanha o que consegue mover:**
+  - o curso, a evasão no 1º ano ou a ocupação;
+  - o campus, vagas, matrículas e capacidade;
+  - a instituição, a participação.
+- **Na alocação de docentes e de obras,** o ganho orçamentário é uma evidência ao lado da demanda, do tempo de execução, das restrições e da missão da oferta, nunca o juiz.
+
+O protótipo v3 mostra o tamanho do exemplo: ir de 3,32% para 3,9% no exercício 2030 pede ≈ R$ 12,8 mi, mais que todos os degraus de Qualidade juntos. Por causa do atraso, o exercício 2030 recebe só o primeiro ano das decisões de 2028 ([documento 10, § 5](10-terceira-rodada.md#5-o-que-o-protótipo-mostra)).
+
 ### 1.3. Onde está o espaço
 
 A leitura mais importante da tabela do § 1: **em Qualidade, o Ifes participa com 1,20%, um terço da sua fatia de porte (3,56%)**. Se a Qualidade acompanhasse o porte, seriam ≈ +R$ 5,2 mi por exercício. Isso não é meta; é a dimensão do espaço, e mostra que os maiores saltos estão em degraus institucionais, que só se cruzam com contribuições de vários campi. É a ponte entre a estrela-guia e a governança distribuída.
