@@ -198,7 +198,7 @@ A governança é a finalidade e aparece já no primeiro produto, na mesa de comp
 
 ### 7.2. Como iniciar o repositório definitivo
 
-1. **Antes:** tomar as decisões D1 a D5 e D10; fazer as três conversas; editar a [visão de produto](../../produto/visao-prumo.md) com o que for aceito deste estudo (ciclo anual, dois objetivos, forma da inteligência), e emendar os princípios se necessário.
+1. **Antes:** tomar as decisões D1 a D5 e D10; fazer as três conversas; editar a [visão de produto](../../produto/visao-prumo.md) com o que for aceito deste estudo (ciclo anual, dois objetivos, forma da inteligência), e emendar os princípios se necessário. **[13/11]** A visão foi editada com o que é consenso (ver o [README](README.md)). Dois objetivos e forma da inteligência continuam em aberto.
 2. **Criar o repositório** com: `prumo_motor/` (pacote puro, com testes), aplicação Django com os módulos do documento 3, `.specify/` com os princípios trazidos deste repositório, e um diretório de dados de referência públicos (percentuais legais 2024, faixas 2026, casos de teste dos motores).
 3. **Trazer deste repositório:** princípios, visão, valores de referência e casos de teste; o comportamento dos motores como especificação. **Não trazer:** código dos protótipos, a fonte canônica inteira (fica aqui como dossiê, citada por RMO), dados não públicos.
 4. **Especificar a SPEC-001** com `/speckit-specify`, usando o documento 5 como insumo e o § 3.5 do próximo passo para a etapa de esclarecimento.
