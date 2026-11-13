@@ -1,6 +1,7 @@
 # 6 · Avaliação crítica e recomendação
 
 > **Estudo de concepção de 12/11/2026, revisado na segunda rodada no mesmo dia.** Posição deste estudo sobre a visão vigente, com os pontos de discordância e a recomendação de como iniciar o repositório definitivo.
+> **Terceira rodada (13/11):** D11 revista. A participação pode ser meta institucional, sem cota por unidade. A formalização, o horizonte e o valor continuam abertos ([documento 10, § 10](10-terceira-rodada.md#10-decisões-que-esta-rodada-ajusta)).
 > **Segunda rodada:** os §§ 3.5 e 3.6 foram revistos (a primeira versão subdimensionou a matriz e a capacidade); o § 3.8 e a decisão D11 são novos. A conclusão original desses parágrafos é citada na própria revisão.
 > **Método:** leitura da visão, do diagnóstico, do próximo passo, dos princípios, do documento fundador, das cinco análises, da fonte canônica da matriz (por resumo dirigido) e das capturas e documentos dos protótipos. Nenhum dado foi recalculado.
 
@@ -178,7 +179,7 @@ O que depende do Ifes hoje: nomes e exceções fixos no código dos protótipos 
 | D8 | **Responsável pelos dados** | Curador no Ifes × equipe do produto | Nomear antes do piloto (H10) |
 | D9 | **Critério de aceite do motor** | Erro fora da amostra aceitável por tipo de oferta | Fixar na SPEC-001: proposta inicial ≤ 5% em matrículas de técnicos integrados; faixa obrigatória acima de 10% |
 | D10 | **Meta de uso** | Demonstração × uso no ciclo real de vagas de 2028 | Uso no ciclo real |
-| D11 | **[2ª rodada] Papel da participação na matriz** | Placar (estrela-guia exibida, sem meta formal) × meta institucional formal | Placar com indicadores de guarda; meta formal só por decisão explícita, com emenda do princípio VI |
+| D11 | **[2ª rodada, revista na 3ª] Papel da participação na matriz** | Placar × meta institucional formal × meta distribuída por unidade | **Meta institucional, nunca cota por unidade** (orientação do idealizador, 13/11). Abertos: formalização no PDI, com emenda do princípio VI; horizonte e valor (o exemplo de 3,9% no exercício 2030 está fora do alcance mostrado pelo protótipo); quem publica o desafio. Indicadores de guarda continuam |
 | D12 | **[2ª rodada] Planilha da matriz como insumo** | Só premissas por oferta × importar a planilha que a instituição recebe | Aceitar importação opcional já na SPEC-001 para parâmetros por oferta; reprodução exata na SPEC-005 |
 
 ---

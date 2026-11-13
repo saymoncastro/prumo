@@ -1,4 +1,4 @@
-/* Simulação do protótipo conceitual (2ª rodada, 12/11/2026). Usa o motor poc/coortes002.js sem alteração.
+/* Simulação do protótipo conceitual (2ª rodada, 12/11/2026; operações e capacidade datada na 3ª rodada, 13/11/2026). Usa o motor poc/coortes002.js sem alteração.
    Reproduz os resultados da POC 0.0.2 (Vitória e Serra, alternativas A, B e C) e acrescenta alavancas combináveis,
    horizonte até 2035, capacidade por turno, laboratório e área docente (ilustrativa) e matrícula total por premissa. */
 const OBS = 2025, FIM = 2035, HIST = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
@@ -78,25 +78,49 @@ function aplicarPreset(cp, letra) {
 const turmasDe = v => v > 0 ? Math.ceil(v / PREM.turma - 0.05) : 0;
 const aulasDe = o => o.of.oferta === 'Integrado' ? PREM.aulas_int : o.of.oferta.includes('PROEJA') ? PREM.aulas_proeja : PREM.aulas_naoint;
 
-/* Simula um campus com um conjunto de alavancas. varr: central | pess | otim (sensibilidade das hipóteses). */
+/* Operações elementares (3ª rodada). As alavancas da bancada viram uma lista de operações; os itens da pauta
+   usam a mesma lista, inclusive no nível do curso. Tipos:
+     ampliar   {oferta, n, desde, ocup, turno, fp, fo}  turmas novas na oferta (fp/fo: fator de ocupação pess./otim.)
+     reduzir   {oferta, n, desde}                       menos vagas (lado "de" da reorganização)
+     pausar    {oferta, desde}                          nenhuma entrada a partir de "desde"; turmas em andamento seguem
+     evasao    {red, desde, ofertas}                    redução da evasão; ofertas null = todos os não integrados
+     preencher {alvo, desde, ofertas}                   ocupação-alvo onde a procura comporta; ofertas null = não integrados */
+function opsDe(alav) {
+  if (!alav) return [];
+  if (Array.isArray(alav)) return alav;
+  const A = alav.ampliar, M = alav.migrar, P = alav.preencher, E = alav.evasao, ops = [];
+  if (A.on) ops.push({ t: 'ampliar', oferta: A.oferta, n: A.n, desde: A.desde, ocup: A.ocup, turno: null, fp: 0.7, fo: 1.2 });
+  if (M.on) { ops.push({ t: 'reduzir', oferta: M.de, n: M.n, desde: M.desde }); ops.push({ t: 'ampliar', oferta: M.para, n: M.n, desde: M.desde, ocup: M.ocup, turno: M.turno, fp: 0.85, fo: 1 }); }
+  if (E.on) ops.push({ t: 'evasao', red: E.red, desde: E.desde, ofertas: null });
+  if (P.on) ops.push({ t: 'preencher', alvo: P.alvo, desde: P.desde, ofertas: null });
+  return ops;
+}
+const alcanca = (op, o) => op.ofertas ? op.ofertas.includes(o.id) : o.naoInt;
+const ofertasDe = op => op.oferta ? [op.oferta] : (op.ofertas || ['*naoInt']);
+
+/* Simula um campus com alavancas (objeto da bancada) ou com uma lista de operações.
+   varr: central | pess | otim (sensibilidade das hipóteses). */
 function simular(cp, alav, varr = 'central') {
   const fator = { central: 1, pess: 0.5, otim: 1.5 }[varr];
+  const ops = opsDe(alav);
   const linhas = [];
   for (const o of cp.lista) {
     const vg = {}, oc = {}, eF = {};
     for (const t of FUT) { vg[t] = o.vagas; oc[t] = o.ocup; }
     let nNovas = 0, ocupN = 0, desdeN = 9999, turnoNovas = null;
-    if (alav) {
-      const A = alav.ampliar, M = alav.migrar, P = alav.preencher, E = alav.evasao;
-      if (A.on && A.oferta === o.id) { nNovas += A.n; ocupN = Math.min(1.05, A.ocup * (varr === 'pess' ? 0.7 : varr === 'otim' ? 1.2 : 1)); desdeN = A.desde; }
-      if (M.on && M.de === o.id) for (const t of FUT) if (t >= M.desde) vg[t] = Math.max(0, vg[t] - M.n);
-      if (M.on && M.para === o.id) { nNovas += M.n; ocupN = Math.min(1.05, M.ocup * (varr === 'pess' ? 0.85 : 1)); desdeN = M.desde; turnoNovas = M.turno; }
-      if (o.naoInt) for (const t of FUT) {
-        if (E.on && t >= E.desde) eF[t] = o.k.e * (1 - Math.min(0.9, E.red * fator));
-        if (P.on && t >= P.desde && o.insc >= o.vagas * P.alvo) oc[t] = Math.max(o.ocup, P.alvo);
-      }
-      if (nNovas) for (const t of FUT) if (t >= desdeN) { oc[t] = (vg[t] * oc[t] + nNovas * ocupN) / Math.max(1, vg[t] + nNovas); vg[t] += nNovas; }
+    const red = {}, alvo = {};
+    for (const op of ops) {
+      if (op.t === 'ampliar' && op.oferta === o.id) { nNovas += op.n; ocupN = Math.min(1.05, op.ocup * (varr === 'pess' ? op.fp : varr === 'otim' ? op.fo : 1)); desdeN = op.desde; if (op.turno) turnoNovas = op.turno; }
+      if (op.t === 'reduzir' && op.oferta === o.id) for (const t of FUT) if (t >= op.desde) vg[t] = Math.max(0, vg[t] - op.n);
+      if (op.t === 'evasao' && alcanca(op, o)) for (const t of FUT) if (t >= op.desde) red[t] = 1 - (1 - (red[t] || 0)) * (1 - Math.min(0.9, op.red * fator));
+      if (op.t === 'preencher' && alcanca(op, o) && o.insc >= o.vagas * op.alvo) for (const t of FUT) if (t >= op.desde) alvo[t] = Math.max(alvo[t] || 0, op.alvo);
     }
+    for (const t of FUT) {
+      if (red[t] != null) eF[t] = o.k.e * (1 - red[t]);
+      if (alvo[t] != null) oc[t] = Math.max(o.ocup, alvo[t]);
+    }
+    if (nNovas) for (const t of FUT) if (t >= desdeN) { oc[t] = (vg[t] * oc[t] + nNovas * ocupN) / Math.max(1, vg[t] + nNovas); vg[t] += nNovas; }
+    for (const op of ops) if (op.t === 'pausar' && op.oferta === o.id) for (const t of FUT) if (t >= op.desde) vg[t] = 0;
     const p = C.projetar({ hist: o.of, D: o.k.D, e: o.k.e, c: o.k.c, meRatio: o.k.meRatio, vagas: vg, ocup: oc, eFut: eF }, FIM);
     for (const t of FUT) {
       let tur = 0, turNovas = 0;
@@ -167,8 +191,15 @@ function capacidadePadrao(base) {
   for (const k of Object.keys(base.anos[OBS].area)) areas[k] = Math.max(1, Math.ceil(mx(a => a.area[k] || 0) / PREM.horas_prof / 0.95));
   return { salas, lab, areas };
 }
-function usoCapacidade(sim, cap, t) {
-  const a = sim.anos[t], r = [];
+/* Acréscimos datados à capacidade: cap.adds = [{ rec: 'lab' | 'salas' | 'area', area, desde, v }]. */
+function capEm(cap, t) {
+  if (!cap.adds || !cap.adds.length) return cap;
+  const c = { salas: cap.salas, lab: cap.lab, areas: { ...cap.areas } };
+  for (const a of cap.adds) if (t >= a.desde) { if (a.rec === 'lab') c.lab += a.v; else if (a.rec === 'salas') c.salas += a.v; else c.areas[a.area] = (c.areas[a.area] || 0) + a.v; }
+  return c;
+}
+function usoCapacidade(sim, capBase, t) {
+  const a = sim.anos[t], r = [], cap = capEm(capBase, t);
   for (const tu of ['M', 'V', 'N']) r.push({ rec: 'Salas · ' + { M: 'matutino', V: 'vespertino', N: 'noturno' }[tu], uso: a.turno[tu] / cap.salas, dem: a.turno[tu], cap: cap.salas, un: 'turmas' });
   const lt = ['M', 'V', 'N'].reduce((m, tu) => a.lab[tu] > a.lab[m] ? tu : m, 'M');
   r.push({ rec: sim.cp.cfg.lab.nome + ' · ' + { M: 'matutino', V: 'vespertino', N: 'noturno' }[lt], uso: a.lab[lt] / cap.lab, dem: a.lab[lt], cap: cap.lab, un: 'aulas/sem' });

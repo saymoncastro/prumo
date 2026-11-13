@@ -9,6 +9,14 @@
 
 > **O primeiro produto do PRUMO é o plano de oferta do próximo ciclo orientado pela estrela-guia: a instituição vê sua participação na matriz e os degraus ao alcance; cada campus constrói alternativas combinando alavancas, vê as curvas até 2035, a capacidade que elas exigem e quando esbarram, e o efeito nos objetivos e na matriz; a reitoria compõe as propostas, compara trajetórias institucionais e registra o pactuado.**
 
+**[3ª rodada]** A definição não muda; muda a profundidade da mesa:
+
+- a mesa compõe **decisões** (uma linha por item), e não só campi;
+- a Reitoria pode abrir a conversa com um **desafio**;
+- o **curso** propõe e acompanha a contribuição local.
+
+A meta de uso continua o ciclo real de 2028, cuja reunião pode ter 30 a 40 itens ([documento 10](10-terceira-rodada.md)).
+
 Continua com uma instituição (Ifes), quatro a seis unidades, sem integrações e sem modelo de linguagem. O que cresceu foi a profundidade da bancada e da ficha do campus, não o número de módulos. O que foi deliberadamente deixado de fora está no § 2.7 e no [documento 4, § 6](04-funcionalidades-e-specs.md#6-essencial--sofisticação-segunda-rodada).
 
 O critério de sucesso da segunda rodada passa a ser o critério central de aceite do MVP: um diretor de campus consegue responder, para o próprio campus, *"se reorganizarmos a oferta, preenchermos melhor as vagas e reduzirmos a evasão, quantos estudantes a mais atenderemos e formaremos nos próximos anos, que indicadores podem melhorar, de quais recursos precisaremos e como isso contribui para os objetivos institucionais?"*. O [protótipo v2](prototipo/prumo-conceito.html) mostra essa resposta para Vitória e Serra.

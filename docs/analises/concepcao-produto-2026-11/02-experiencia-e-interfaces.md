@@ -3,6 +3,7 @@
 > **Estudo de concepção de 12/11/2026, revisado na segunda rodada no mesmo dia.** Proposta para discussão, não telas aprovadas.
 > **Protótipo navegável v2:** [prototipo/prumo-conceito.html](prototipo/prumo-conceito.html). Curvas de Vitória e Serra calculadas com o motor da POC 0.0.2 sobre dados reais da PNP; capacidade e unidades marcadas como ilustrativas. A primeira versão está preservada em [prototipo/prumo-conceito-v1.html](prototipo/prumo-conceito-v1.html).
 > **Segunda rodada:** novo § 8 com o enriquecimento da Agenda, da Ficha do campus, da Bancada e da Mesa. As descrições do § 4 continuam válidas onde o § 8 não as substitui.
+> **Terceira rodada (13/11):** novo § 9, a mesa nos dois sentidos. O protótipo atual é a [v3](prototipo/prumo-conceito.html); a v2 está em [prototipo/prumo-conceito-v2.html](prototipo/prumo-conceito-v2.html).
 
 ---
 
@@ -330,3 +331,56 @@ Nenhuma tela nova. Quatro telas ganham profundidade. Todas aparecem no [protóti
 - **Cruzamento de degrau:** ano-base em que a composição cruza 50% (se cruzar), o exercício correspondente e a referência condicional de Qualidade.
 - **Tabela por unidade:** contribuição em 2030 e 2035, concluintes 2027–2035, pico de docentes, MT, primeira restrição de capacidade, natureza (calculado ou ilustrativo).
 - **Conflito de objetivos:** a formação de professores projetada e sua posição em relação ao degrau de 20%.
+
+---
+
+## 9. Terceira rodada: a mesa nos dois sentidos [3ª rodada]
+
+Detalhe e números no [documento 10](10-terceira-rodada.md). Resumo do que muda na experiência:
+
+### 9.1. Objetivos: desafio da Reitoria
+
+- **O que se registra:** partida observada, meta, horizonte em exercício (com o ano letivo que ele lê), cenário da Rede e hipóteses de referência.
+- **Três trajetórias, nunca fundidas:** observado, sem novas decisões e pauta atual.
+- **Partir da meta:** as peças que fecham a distância, com valor e primeiro exercício possível.
+- **Variar uma hipótese macro:** a hipótese muda o tamanho do problema, mas não é contribuição. Ao lado, a lista de ofertas onde ela tem base nos dados, em ordem de campus e nome (não é ranking), com o convite ao curso.
+
+### 9.2. Campus e curso
+
+- **Na ficha do campus,** a faixa do desafio diz que não há cota. O card "Cursos" mostra o motivo de cada oferta aparecer, os convites e a situação.
+- **A visão do curso** é da coordenação e tem cinco partes:
+  1. o objetivo institucional relacionado;
+  2. a situação pela PNP, com a evasão no 1º ano como dado do sistema acadêmico;
+  3. a contribuição local: permanência, ocupação, pausa ou ampliação;
+  4. o compromisso que o curso consegue acompanhar;
+  5. o efeito estimado e a viabilidade, confirmada pelo campus antes de levar à mesa.
+
+### 9.3. Mesa: pauta de decisões
+
+- **Uma linha por decisão,** agrupada por unidade, com filtros e um filtro "só com conflito ou restrição".
+- **Em cada linha:**
+  - situação e origem;
+  - barras de quando o efeito aparece, com os quatro anos do plano destacados;
+  - concluintes no período e referência na matriz;
+  - sinais: disputa, sobreposição, falta de recurso, restrição.
+- **Ao abrir a linha:** motivo, variantes comparadas (com e sem o recurso), tabela ano a ano, acompanhamento e "Como calcula".
+- **Recurso compartilhado:** o código docente é um item com um único destino. O detalhe compara os destinos por procura, restrição com e sem o código, docentes que cada pedido exige no tempo e motivos acadêmicos ou territoriais.
+- **Comparação em quatro anos:** sem novas decisões, item selecionado, conjunto (com faixa), ilustrativas à parte e falta para o desafio. A coluna do horizonte fica destacada.
+- **"O que ainda falta e de que depende"** e **"Registrar o pactuado"**. O registro deixa de fora o que está em disputa e diz o que aguarda decisão.
+
+### 9.4. Pacto
+
+O pacto mostra, para cada contribuição:
+
+- o indicador que será acompanhado;
+- o responsável;
+- a primeira conferência;
+- o efeito projetado na data do pacto;
+- as ressalvas.
+
+O desafio aparece como compromisso institucional, não dividido. A conferência do ciclo anterior continua abaixo, marcada como resultado observado.
+
+### 9.5. Três situações, três marcas
+
+Hipótese simulada (contorno tracejado), proposta do campus (contorno contínuo), contribuição pactuada (preenchida) e resultado observado (escuro). A marca é a mesma em todas as telas.
+

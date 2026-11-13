@@ -1,6 +1,7 @@
 # 4 · Mapa de funcionalidades e de especificações
 
 > **Estudo de concepção de 12/11/2026, revisado na segunda rodada no mesmo dia.** Proposta de organização funcional e de sequência de especificações para o Spec Kit.
+> **Terceira rodada (13/11):** a SPEC-001 ganha desafio institucional, pauta de decisões, nível do curso e recurso compartilhado; a SPEC-002 ganha o acompanhamento por item ([documento 10](10-terceira-rodada.md)). Nenhuma especificação nova; OKR e workflow de aprovação continuam fora (§ 1).
 > **Mudanças da segunda rodada:** estrela-guia na Leitura (M2); capacidade mínima e projeção longitudinal na Bancada (M3) e na SPEC-001; SPEC-004 e SPEC-005 redefinidas como aprofundamento; novo § 6 com o equilíbrio entre o essencial e a sofisticação. Justificativas no [documento 9](09-segunda-rodada.md). Respeita as regras de fluxo dos [princípios do projeto](../../../.specify/memory/constitution.md#fluxo-de-trabalho): uma jornada por vez, a primeira partindo da finalidade, nenhuma organizada em torno de um protótipo.
 
 ---
@@ -155,6 +156,19 @@ Sete especificações, cada uma uma jornada com valor demonstrável. As três pr
 | **Critérios de aceite** | (1) O planejamento vê a participação na matriz por bloco, o mapa de degraus e quem explica a variação de cada objetivo. (2) Um diretor responde, para o próprio campus, à pergunta do critério de sucesso da segunda rodada: quantos estudantes a mais atende e forma, que indicadores melhoram, de que recursos precisa, quando esbarra na capacidade e como contribui para os objetivos. (3) A mesa compõe propostas de pelo menos quatro unidades, mostra a trajetória institucional até 2035, conflitos e cruzamento de degrau. (4) Todo número abre "como calcula". (5) Os valores de referência do portão de dados, da POC 0.0.2 e de V-13, e os testes fora da amostra, passam |
 | **Valor demonstrável** | Preparar com fundamento a reunião de pactuação do ciclo de vagas, com a estrela-guia à vista |
 
+**[3ª rodada] Acréscimos à SPEC-001:**
+
+- **Desafio institucional:** partida, meta, horizonte em exercício e cenário da Rede, sem cota por unidade.
+- **Pauta como unidade de composição:**
+  - cada item tem origem, situação, operações, variantes e recurso exigido;
+  - itens de um campus rodam juntos no motor;
+  - oferta repetida fica fora da soma;
+  - recurso compartilhado tem um único destino.
+- **Contribuição no nível do curso,** com operações por oferta.
+- **Comparação em quatro anos:** sem novas decisões × item × conjunto × falta.
+
+**Critério de aceite (6):** a mesa responde, para uma pauta de pelo menos 30 itens, *"se aprovarmos esta combinação, como muda a trajetória da instituição nos próximos quatro anos, o que ainda falta para a meta e de que recursos isso depende?"*. A resposta tem de chegar igual entrando pelo desafio da Reitoria ou pela proposta de um curso.
+
 Corresponde ao § 3.3 do [próximo passo](../../produto/proximo-passo.md#33-primeira-especificação-jornada-de-decisão-estratégica-institucional), com quatro mudanças propostas: dois objetivos em tensão em vez de um; a ficha do campus como entrada do diretor (documento 6, §§ 3.1 e 3.3); **[2ª rodada]** capacidade mínima e projeção longitudinal; **[2ª rodada]** estrela-guia e efeito na matriz.
 
 ### SPEC-002 · Pacto e conferência
@@ -166,7 +180,7 @@ Corresponde ao § 3.3 do [próximo passo](../../produto/proximo-passo.md#33-prim
 | **Escopo funcional** | Pauta do ciclo; pareceres; registro do pacto; compromissos com responsável, indicador e três horizontes; carga de nova edição com conferência automática; desvio explicado; revisão de premissa e de meta; exportação do pacto |
 | **Requisitos principais** | Governança como registro de eventos; versões imutáveis de cenário; compromisso avaliado só no horizonte observável |
 | **Dependências** | SPEC-001 |
-| **Critérios de aceite** | (1) Um pacto registrado em 2023 com dados até o ano-base 2022 é conferido com as edições 2023–2025 (**conferência retroativa**), com desvios explicados. (2) Revisar uma premissa mostra os cenários afetados. (3) **[2ª rodada]** A participação observada na matriz do exercício seguinte é decomposta em "o que fizemos" e "o que a Rede fez" |
+| **Critérios de aceite** | (1) Um pacto registrado em 2023 com dados até o ano-base 2022 é conferido com as edições 2023–2025 (**conferência retroativa**), com desvios explicados. (2) Revisar uma premissa mostra os cenários afetados. (3) **[2ª rodada]** A participação observada na matriz do exercício seguinte é decomposta em "o que fizemos" e "o que a Rede fez". (4) **[3ª rodada]** Cada item pactuado tem indicador acompanhado, responsável e primeira conferência; nada em disputa ou sobreposto é pactuado |
 | **Valor demonstrável** | A primeira vez que a instituição vê uma decisão passada conferida e explicada |
 
 ### SPEC-003 · Leitura da Rede
