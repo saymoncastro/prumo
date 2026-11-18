@@ -3,6 +3,7 @@
 > **Situação:** referência canônica da concepção do PRUMO a partir de 10/11/2026. É visão e hipótese de produto. Não é especificação aprovada, decisão institucional do Ifes nem compromisso de implementação.
 > **O que este documento substitui:** como descrição *vigente* do produto, substitui o § 5 da [proposta de nome](../../proposta_nome_prumo.md) e as recomendações de "primeiro caso de uso" das análises de 09 e 10/11/2026. O [documento fundador](../../contexto_projeto_inteligencia_estrategica_educacional_ifes_v1_1.md) continua válido como origem dos princípios; onde houver diferença de escopo, vale este.
 > **Revisão de 13/11/2026:** incorpora o que é consenso do [estudo de concepção do produto](../analises/concepcao-produto-2026-11/README.md) (12 e 13/11/2026): a mesa de decisão do ciclo anual de oferta, a participação na matriz como estrela-guia e meta institucional sem cota, a capacidade mínima por campus, a projeção plurianual e a mesa nos dois sentidos (Reitoria, campus e curso). Das decisões que o estudo lista para antes do novo repositório ([documento 6, § 6](../analises/concepcao-produto-2026-11/06-avaliacao-critica.md#6-decisões-estratégicas-antes-do-novo-repositório)), entram a âncora no ciclo anual (D1), com o rito como hipótese, e a parte decidida da D11. As demais continuam em aberto.
+> **Revisão de 18/11/2026:** incorpora o [registro sobre acompanhamento da execução e governança do pacto](../analises/prumo-acompanhamento-governanca-pacto.md): o ciclo depois do pacto, três ritmos de governança (monitoramento semestral, avaliação anual, revisão bienal como hipótese), a separação entre execução e resultado, a diretriz de não reotimizar continuamente e o pacto versionado (§ 4.5). Os princípios do projeto não foram alterados.
 > **De onde vem cada afirmação:** [diagnóstico do estado atual](diagnostico-2026-11.md). **O que fazer em seguida:** [próximo passo](proximo-passo.md).
 
 Marcadores usados no texto:
@@ -11,7 +12,7 @@ Marcadores usados no texto:
 |---|---|
 | **[PRINCÍPIO]** | Restrição herdada do documento fundador ou confirmada pelos estudos. Não se negocia sem nova evidência. |
 | **[EVIDÊNCIA]** | Sustentado por estudo ou protótipo do repositório, com referência no diagnóstico. |
-| **[DIREÇÃO]** | Escolha de produto feita pelo idealizador em 10/11/2026 ou nas rodadas do estudo de concepção (12 e 13/11/2026). Avaliada por ele; ainda não testada com gestores. |
+| **[DIREÇÃO]** | Escolha de produto feita pelo idealizador em 10/11/2026 ou nas rodadas do estudo de concepção (12 e 13/11/2026) ou no registro sobre o acompanhamento do pacto (18/11/2026). Avaliada por ele; ainda não testada com gestores. |
 | **[HIPÓTESE]** | Suposição a testar. Lista completa no § 10. |
 
 ---
@@ -54,7 +55,7 @@ A participação pode ser **meta institucional**, publicada como desafio, mas nu
 
 **Não há ordem obrigatória.** O gestor pode começar por uma meta institucional, por uma dúvida sobre a oferta do campus ou por uma descoberta na série histórica. A plataforma o ajuda a circular entre as três perspectivas sem perder o contexto nem a origem de cada número. Isso é requisito de concepção, não de navegação: não exige interface complexa agora.
 
-**O que o PRUMO não é.** Calculadora da Matriz CONIF, cadastro de cursos, painel de indicadores da PNP, ferramenta de ranking entre institutos, simulador financeiro de campus, sistema de metas genérico ou de metas individuais, fluxo de aprovação por alçadas ou sistema acadêmico. Cada um desses pode fornecer insumo ou aparecer como parte da solução. Nenhum deles define o produto. A matriz é o placar, não o objeto: o PRUMO calcula decisões acadêmicas e mostra o efeito delas no placar.
+**O que o PRUMO não é.** Calculadora da Matriz CONIF, cadastro de cursos, painel de indicadores da PNP, ferramenta de ranking entre institutos, simulador financeiro de campus, sistema de metas genérico ou de metas individuais, sistema genérico de gestão de tarefas, fluxo de aprovação por alçadas ou sistema acadêmico. Cada um desses pode fornecer insumo ou aparecer como parte da solução. Nenhum deles define o produto. A matriz é o placar, não o objeto: o PRUMO calcula decisões acadêmicas e mostra o efeito delas no placar.
 
 **Perguntas que o gestor deve conseguir responder:**
 
@@ -66,6 +67,7 @@ A participação pode ser **meta institucional**, publicada como desafio, mas nu
 6. Como decisões locais diferentes se combinam num objetivo comum?
 7. Se aprovarmos esta combinação de decisões, como muda a trajetória da instituição nos próximos anos, o que ainda falta para a meta e de que recursos isso depende?
 8. O que de fato aconteceu depois do que decidimos?
+9. O que do pactuado já foi implementado, e o que ainda não teve tempo de aparecer nos indicadores?
 
 ---
 
@@ -240,6 +242,44 @@ Cada compromisso é avaliado no horizonte que já pôde ser observado. Uma estra
 
 **Incentivos fazem parte do desenho.** **[EVIDÊNCIA]** Quando um ganho é institucional e o custo é local, o pacto precisa dizer como o benefício retorna a quem contribuiu.
 
+### 4.5. Depois do pacto: execução, acompanhamento e revisão
+
+**[DIREÇÃO]** O PRUMO não termina quando a Reitoria e os campi pactuam. O ciclo completo é **planejar → simular → pactuar → executar → acompanhar → avaliar → revisar quando necessário.** Detalhe no [registro de 18/11/2026](../analises/prumo-acompanhamento-governanca-pacto.md).
+
+**Princípio orientador.** **[DIREÇÃO]** O PRUMO fortalece a capacidade de executar a estratégia pactuada. Não estimula sua reformulação contínua antes que haja tempo para ela produzir resultados. A Rede Federal muda de direção devagar: decisões colegiadas, tramitação de projetos de curso, dependência de pessoal e infraestrutura e a defasagem entre a decisão acadêmica e o indicador. Depois do pacto, a prioridade é executar, não produzir novas estratégias.
+
+**Três ritmos de governança.** **[DIREÇÃO]**
+
+| Ritmo | O que se olha | O que pode resultar | O que não resulta |
+|---|---|---|---|
+| **Monitoramento semestral** | Execução dos compromissos (providências, responsáveis, prazos, dependências, situação, impedimentos) e evolução dos resultados (projetado × observado, desvios, defasagens esperadas) | Registro da situação | Alteração do pacto |
+| **Avaliação anual** | Evolução acumulada e gargalos | Ações corretivas que preservam a estratégia | Obrigação de novos cenários ou nova otimização |
+| **Revisão estratégica** **[HIPÓTESE]** cerca de dois anos num pacto de quatro (H16) | Execução, resultados já observáveis, mudanças nas condições, validade das premissas | Ajustes estratégicos deliberados | Obrigação de repactuar |
+
+Os ritmos não substituem os três horizontes do § 4.4. Os horizontes dizem **quando** cada efeito pode ser observado; os ritmos dizem **quando** a instituição olha.
+
+**Execução não é resultado.** **[DIREÇÃO]** O cumprimento de um compromisso e a evolução do indicador são registrados separadamente. Um campus que pactua ampliar um curso de 32 para 36 vagas pode passar meses em aprovações colegiadas e ajustes acadêmicos com o indicador parado, e a execução estar em dia. Cada compromisso guarda três datas:
+
+1. quando a decisão foi pactuada;
+2. quando a intervenção foi implementada;
+3. quando o efeito começou a aparecer no indicador.
+
+A defasagem esperada entre a segunda e a terceira segue as regras de cada indicador. Não há intervalo universal.
+
+**Simular de novo só com motivo.** **[DIREÇÃO]** Simulação contínua depois do pacto alimenta discussão de estratégia nova antes que a pactuada tenha sido executada. Primeiro executar e acompanhar. Simulação extraordinária cabe diante de mudança relevante: orçamento, norma, perda de recurso essencial, inviabilidade comprovada de um compromisso, mudança nas condições da instituição. Mesmo então, simular uma alternativa não altera o pacto.
+
+**O pacto não se reescreve.** **[DIREÇÃO]** O pacto aprovado é uma referência versionada: cenários escolhidos, premissas, condições de execução, indicadores e projeções originais. Uma revisão formal gera nova versão e registra o que mudou, por quê e por qual deliberação. A execução é sempre avaliada contra o que foi pactuado na época.
+
+**Dados do acompanhamento.** **[DIREÇÃO]** Quando for tecnicamente viável, o acompanhamento aproveita as bases institucionais, para não duplicar trabalho. Cada valor distingue projeção original, resultado observado, fonte e data de referência, diferença e grau de confiabilidade. A execução dos compromissos pode exigir registros complementares, mas o PRUMO não vira sistema genérico de gestão de tarefas. A integração com sistemas institucionais continua fora do escopo atual (§ 9).
+
+**Primeira entrega.** **[DIREÇÃO]** O registro dos compromissos e a comparação entre a trajetória projetada e a observada. Revisão avançada, reotimização e análise contrafactual não são requisitos imediatos.
+
+**Em aberto:**
+
+- **Ciclo anual × pacto plurianual.** O produto se ancora na definição anual de vagas (§ 5); o pacto tem horizonte de quatro anos e a avaliação anual não deve gerar novos cenários. A leitura que concilia os dois é que a definição anual de vagas seja o momento de **executar** o pacto, e não de redecidir a estratégia. Não está decidido.
+- **Monitoramento semestral × dado anual.** A PNP é anual e defasada. A execução pode ser acompanhada por semestre desde já; os resultados, só nos indicadores que tiverem dado institucional confiável (H14).
+- As demais questões do registro estão nas hipóteses H14 a H19 (§ 10).
+
 ---
 
 ## 5. Como as capacidades se conectam
@@ -253,7 +293,7 @@ O ciclo proposto (observar, explorar, formular hipóteses, simular, comparar, pa
 | **Pactuar** | Quem contribui com o quê? | Governança | Propostas e compromissos |
 | **Acompanhar** | O que aconteceu depois? | Governança + Inteligência | Resultado observado e premissas revistas |
 
-A execução acontece fora do PRUMO, nos sistemas e processos que a instituição já tem.
+A execução acontece fora do PRUMO, nos sistemas e processos que a instituição já tem. O PRUMO registra a situação de cada compromisso e a confronta com o resultado, nos ritmos do § 4.5, e só volta a simular quando há motivo para revisar.
 
 **O ciclo tem uma estação.** **[DIREÇÃO]** Os quatro momentos se ancoram num calendário que as 41 instituições da Matriz CONIF já vivem:
 
@@ -315,6 +355,13 @@ Jornadas conceituais, não telas aprovadas.
 5. Identifica o que falta e com quem negociar.
 6. Registra o pactuado. No ciclo seguinte, confere com o observado.
 
+**Planejamento e colegiado: "estamos executando o que pactuamos?"**
+
+1. A cada semestre, vê a situação de cada compromisso (implementado, em andamento, impedido) separada da evolução dos indicadores.
+2. Distingue o compromisso atrasado do compromisso em dia cujo efeito ainda não apareceu.
+3. Na avaliação anual, identifica gargalos e registra ações corretivas sem mexer no pacto.
+4. Na revisão estratégica, confere premissas e condições; se houver ajuste, registra nova versão do pacto, com motivo e deliberação.
+
 **Planejamento e orçamento: "o cálculo é confiável?"**
 
 Confere fonte, ano-base, versão da regra e premissas de qualquer número; vê onde o modelo erra ao reproduzir o passado; separa efeito acadêmico de referência financeira.
@@ -345,10 +392,11 @@ Lista conceitual, sem compromisso com esquema de banco.
 | | Premissa | Valor, natureza e origem (histórico próprio, empréstimo, julgamento) |
 | **Governança** | Proposta | Cenário escolhido por uma unidade ou curso, contribuição por objetivo, recursos e contrapartidas |
 | | Item de pauta | Uma decisão sobre uma oferta ou um recurso, com origem, situação (hipótese simulada, proposta, pactuada) e variantes. O convite da Reitoria e a proposta do curso sobre a mesma ação são o mesmo item |
-| | Compromisso | Proposta pactuada, com responsável e indicador de acompanhamento |
+| | Pacto | Conjunto de compromissos aprovado numa deliberação, com cenários, premissas, condições de execução e projeções originais. É versionado: uma revisão formal gera nova versão com motivo e deliberação, sem apagar a anterior |
+| | Compromisso | Proposta pactuada, com responsável, providências, prazos, indicador de acompanhamento e situação de execução. Guarda três datas: pactuação, implementação e primeiro efeito no indicador |
 | | Resultado observado | Série posterior confrontada com o compromisso |
 
-**Como se relacionam.** Uma instituição tem unidades; uma unidade tem ofertas; uma oferta gera turmas. Um cenário pertence a uma unidade e altera ofertas a partir de um ano. Uma proposta escolhe um cenário e declara sua contribuição a um ou mais objetivos. A composição institucional soma numeradores e denominadores das propostas. Um compromisso é uma proposta pactuada. O resultado observado é a série dos anos seguintes, lida contra o compromisso. Um desafio fixa uma meta para um objetivo sem dividi-la. A pauta reúne itens de várias unidades: os de uma mesma unidade são simulados juntos, e a composição recalcula o agregado. Um recurso compartilhado tem no máximo um destino.
+**Como se relacionam.** Uma instituição tem unidades; uma unidade tem ofertas; uma oferta gera turmas. Um cenário pertence a uma unidade e altera ofertas a partir de um ano. Uma proposta escolhe um cenário e declara sua contribuição a um ou mais objetivos. A composição institucional soma numeradores e denominadores das propostas. Um compromisso é uma proposta pactuada e pertence a uma versão do pacto. O resultado observado é a série dos anos seguintes, lida contra o compromisso. Um desafio fixa uma meta para um objetivo sem dividi-la. A pauta reúne itens de várias unidades: os de uma mesma unidade são simulados juntos, e a composição recalcula o agregado. Um recurso compartilhado tem no máximo um destino.
 
 ### 7.2. Regras que valem desde já
 
@@ -402,7 +450,7 @@ Não se constrói infraestrutura de SaaS agora. O que importa nesta fase é não
 - infraestrutura multi-instituição, autenticação e perfis de acesso;
 - fluxo formal de aprovação com alçadas;
 - metas individuais por pessoa e cadastro genérico de metas;
-- integração com sistemas acadêmicos, de pessoal ou de patrimônio;
+- integração com sistemas acadêmicos, de pessoal ou de patrimônio (o acompanhamento deve aproveitá-la quando for viável, § 4.5);
 - inventário completo de salas, laboratórios e docentes;
 - grade horária e alocação fina de espaços;
 - reprodução integral da matriz (assistência estudantil, fechamento nacional);
@@ -423,7 +471,7 @@ Não se constrói infraestrutura de SaaS agora. O que importa nesta fase é não
 | Retorno ao campus | Regra interna de distribuição, hoje hipótese |
 | Demanda territorial | Fontes externas |
 
-**Onde há risco de superengenharia:** unificar os três motores de coortes antes de saber qual pergunta o gestor faz; modelar infraestrutura em detalhe; construir um explorador de dados genérico; desenhar o rito de governança antes de ver uma negociação real; transformar a pauta em fluxo de aprovação; continuar a auditoria forense da planilha da matriz.
+**Onde há risco de superengenharia:** unificar os três motores de coortes antes de saber qual pergunta o gestor faz; modelar infraestrutura em detalhe; construir um explorador de dados genérico; desenhar o rito de governança antes de ver uma negociação real; transformar a pauta em fluxo de aprovação; transformar o acompanhamento em gestão de tarefas; construir revisão, reotimização ou análise contrafactual antes do registro e da conferência do pacto; continuar a auditoria forense da planilha da matriz.
 
 ---
 
@@ -444,6 +492,12 @@ Não se constrói infraestrutura de SaaS agora. O que importa nesta fase é não
 | H11 | O ciclo anual de definição de vagas é um momento real de decisão, com participação dos campi | Conversa com planejamento e ensino |
 | H12 | Sabe-se onde nasce a pauta de decisões: quem a monta hoje, com que antecedência, e quais itens chegam sem dono | Acompanhar a preparação de uma reunião real |
 | H13 | A coordenação de curso aceita propor e acompanhar um indicador local sem receber parte da meta institucional | Uso do produto navegável por coordenações |
+| H14 | Há indicadores com dado institucional semestral confiável o bastante para o monitoramento | Levantamento com planejamento e registro acadêmico |
+| H15 | Sabe-se quais encaminhamentos precisam de acompanhamento próprio e como registrar a dependência entre compromissos | Exercitar o registro com um pacto real ou retroativo |
+| H16 | Uma janela de revisão de cerca de dois anos é adequada a um pacto de quatro | Conversa com planejamento; conferência retroativa |
+| H17 | É possível definir de antemão o que justifica uma revisão extraordinária | Conversa com planejamento e colegiado |
+| H18 | O acompanhamento cabe nos ritos que a instituição já tem, sem criar rito novo | Conversa com planejamento |
+| H19 | Registro do pacto versionado, situação de execução e trajetória projetada × observada bastam para validar a capacidade de acompanhamento | Uso do produto navegável; conferência retroativa da SPEC-002 |
 
 ---
 

@@ -53,6 +53,7 @@ Se dois documentos divergirem sobre o que o produto é, vale a visão de produto
 | [Portão de dados](docs/analises/prumo-poc-portao-dados.md) | A soma dos campi na PNP reproduz os percentuais legais da matriz de 2026 |
 | [Estudo da PNP](docs/analises/prumo-pnp-inteligencia-comparativa-exploratoria.md) | Série longitudinal da Rede: o que é comparável, o que não é, e quatro achados. |
 | [Concepção do produto](docs/analises/concepcao-produto-2026-11/README.md) (12 e 13/11, três rodadas) | Proposta de produto, experiência, arquitetura, mapa de specs e primeiro produto utilizável; estrela-guia na matriz, capacidade e projeção longitudinal; mesa nos dois sentidos, com desafio da Reitoria, contribuição do curso e pauta de decisões; protótipo conceitual com dados reais de dois campi. Proposta, não visão vigente |
+| [Acompanhamento e governança do pacto](docs/analises/prumo-acompanhamento-governanca-pacto.md) (18/11) | O PRUMO continua depois do pacto: três ritmos de governança, execução separada de resultado, simular de novo só com motivo, pacto versionado. Incorporado à visão (§ 4.5) |
 
 ### Provas de conceito
 
