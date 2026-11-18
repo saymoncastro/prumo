@@ -27,7 +27,7 @@ Os três pull requests não alteram os mesmos arquivos. A integração conjunta 
 
 ## 3. Entrada no Spec Kit
 
-**Situação em 10/11/2026:** os passos 1 e 2 do § 3.6 estão feitos. O Spec Kit está inicializado na raiz e os [princípios do projeto](../../.specify/memory/constitution.md) estão redigidos. Nenhuma especificação foi escrita.
+**Situação em 10/11/2026:** os passos 1 e 2 do § 3.6 estão feitos. O Spec Kit está inicializado na raiz e os [princípios do projeto](../../.specify/memory/constitution.md) estão redigidos. A primeira especificação está escrita (passo 3).
 
 ### 3.1. Referência
 
@@ -90,7 +90,7 @@ A resolver na etapa de esclarecimento da primeira especificação:
 
 1. Inicializar o Spec Kit na raiz do repositório. **Feito.**
 2. Redigir os princípios do projeto a partir do § 3.2. **Feito.**
-3. Especificar a jornada do § 3.3, e só ela.
+3. Especificar a jornada do § 3.3, e só ela. **Feito em 11/11/2026:** [especificação](../../specs/001-jornada-decisao-estrategica/spec.md).
 4. Esclarecer as decisões do § 3.5, planejar e dividir em tarefas.
 
 Novas especificações só depois de a primeira jornada estar navegável.
