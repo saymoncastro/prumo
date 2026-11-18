@@ -1,0 +1,114 @@
+{
+ "fonte": "https://proad.ifes.edu.br/orcamento-2026",
+ "consulta": "2026-11-09",
+ "publicado": "2026-04-01 13:19",
+ "atualizado": "2026-08-05 10:52",
+ "arquivo_html": "proad-orcamento-2026.html",
+ "observacao": "Valores transcritos do HTML; alguns valores de assistência aparecem sem separador de milhar na origem (ex.: Cefor 193627,13).",
+ "unidades": {
+  "Reitoria": {
+   "custeio": 11705437.42,
+   "assistencia": null
+  },
+  "Alegre": {
+   "custeio": 4573651.36,
+   "assistencia": 1631875.82
+  },
+  "Aracruz": {
+   "custeio": 2481866.9,
+   "assistencia": 672644.49
+  },
+  "Barra de São Francisco": {
+   "custeio": 1365756.98,
+   "assistencia": 407196.21
+  },
+  "Cachoeiro de Itapemirim": {
+   "custeio": 2816353.1,
+   "assistencia": 979162.5
+  },
+  "Cariacica": {
+   "custeio": 2862301.84,
+   "assistencia": 1100288.53
+  },
+  "Cefor": {
+   "custeio": 1581820.45,
+   "assistencia": 193627.13
+  },
+  "Centro Serrano": {
+   "custeio": 1367433.43,
+   "assistencia": 368814.46
+  },
+  "Colatina": {
+   "custeio": 2424063.25,
+   "assistencia": 743117.35
+  },
+  "Guarapari": {
+   "custeio": 2573153.15,
+   "assistencia": 541993.53
+  },
+  "Ibatiba": {
+   "custeio": 2105121.5,
+   "assistencia": 565456.47
+  },
+  "Itapina": {
+   "custeio": 4792317.85,
+   "assistencia": 2102540.27
+  },
+  "Laranja da Terra": {
+   "custeio": 848891.15,
+   "assistencia": null
+  },
+  "Linhares": {
+   "custeio": 2276545.69,
+   "assistencia": 712481.21
+  },
+  "Montanha": {
+   "custeio": 1998479.05,
+   "assistencia": 605926.63
+  },
+  "Nova Venécia": {
+   "custeio": 1857586.89,
+   "assistencia": 598560.15
+  },
+  "Pedro Canário": {
+   "custeio": 848891.15,
+   "assistencia": null
+  },
+  "Piúma": {
+   "custeio": 2847223.44,
+   "assistencia": 650631.48
+  },
+  "Presidente Kennedy": {
+   "custeio": 848891.15,
+   "assistencia": null
+  },
+  "Santa Teresa": {
+   "custeio": 3877028.52,
+   "assistencia": 2291103.92
+  },
+  "São Mateus": {
+   "custeio": 2126226.75,
+   "assistencia": 559494.06
+  },
+  "Serra": {
+   "custeio": 2925332.91,
+   "assistencia": 844610.88
+  },
+  "Venda Nova do Imigrante": {
+   "custeio": 2532520.68,
+   "assistencia": 703103.82
+  },
+  "Viana": {
+   "custeio": 1302815.17,
+   "assistencia": 242589.21
+  },
+  "Vila Velha": {
+   "custeio": 3031383.86,
+   "assistencia": 822259.26
+  },
+  "Vitoria": {
+   "custeio": 9541906.36,
+   "assistencia": 2472964.46
+  }
+ }
+}

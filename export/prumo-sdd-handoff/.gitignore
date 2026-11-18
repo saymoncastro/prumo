@@ -1,0 +1,34 @@
+# Sistema e editores
+.DS_Store
+Thumbs.db
+~$*
+*.swp
+.idea/
+.vscode/
+
+# Python e Node
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+
+# Segredos e configuração local
+.env
+.env.*
+!.env.example
+
+# Dados externos: só o README e as amostras documentadas são versionados
+/data/*
+!/data/README.md
+!/data/samples/
+
+# Fontes não públicas (nunca versionar)
+*matriz*ifes*.xlsx
+*6ª Fase*.xlsx
+LIVRO-MATRIZ*.pdf
+
+# Estado local do Spec Kit e de agentes (ajustar conforme a versão instalada)
+.specify/feature.json
+.claude/settings.local.json
+.claude/worktrees/
